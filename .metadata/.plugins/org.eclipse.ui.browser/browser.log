@@ -1,0 +1,4 @@
+
+11월 14, 2023 16:41:19.943 NEW SESSION
+11월 14, 2023 16:41:19.943 [6924:6360:1114/164119.942:ERROR:sharing_service.cc(250)] Device un-registration failed with fatal error
+11월 14, 2023 16:41:20.731 [6924:6360:1114/164120.731:ERROR:device_event_log_impl.cc(192)] [16:41:20.731] Bluetooth: bluetooth_adapter_winrt.cc:1058 Getting Default Adapter failed.
