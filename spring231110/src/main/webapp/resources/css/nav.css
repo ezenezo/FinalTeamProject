@@ -1,0 +1,30 @@
+
+
+.nav_header {
+	background-color: white;
+	height: 10%;
+/* 	border-bottom: 1px solid black; */
+
+	color: rgb(19, 151, 213);
+	padding: 10px;
+	position: fixed;
+	width: 100%;
+	z-index: 999;
+	
+}
+
+
+.c_logo {
+  display: flex; 
+  justify-content: flex-end; 
+  align-items: center;  
+  text-align: right; 
+}
+
+.c_logo > img {
+  width: 3%;
+  height: 3%;
+  margin-right: 3%;
+  margin-top: 1%;
+ 
+}
