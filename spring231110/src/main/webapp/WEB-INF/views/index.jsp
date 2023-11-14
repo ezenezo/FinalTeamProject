@@ -31,6 +31,7 @@
 
 
 <body>
+
 <jsp:include page="common/l_side.jsp" />
 
 <jsp:include page="common/nav.jsp" />

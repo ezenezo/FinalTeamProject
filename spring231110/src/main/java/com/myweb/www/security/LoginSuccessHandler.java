@@ -51,7 +51,7 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler {
 		// TODO Auto-generated method stub
 		
 		setAuthEmail(authentication.getName()); //여기오면 이미 로그인 성공했다는뜻
-		setAuthUrl("/board/list");
+		setAuthUrl("/member/index");
 		
 		//쭈욱 메퍼.xml까지 갔따옴
 		boolean isOk = msv.updateLastLogin(getAuthEmail()); //내 이메일의 마지막로그인정보
