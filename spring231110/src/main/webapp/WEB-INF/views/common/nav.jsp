@@ -22,7 +22,6 @@
 		<div class="c_logo">
 			 <img alt="회사로고 없음"
 				src="../../resources/img/회사로고.jpg">
-		
 		</div>
 	</a>
 	</nav>
