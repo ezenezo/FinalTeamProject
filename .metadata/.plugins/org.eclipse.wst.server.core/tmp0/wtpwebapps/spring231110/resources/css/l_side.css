@@ -1,0 +1,70 @@
+/* 사이드 메뉴바(왼쪽) */
+.pro_img {
+	display: flex;
+	border: 1px solid #bcbcbc;
+	width: 100px;
+	height: 100px;
+}
+
+.pro_img>img {
+	border-radius: 50%;
+}
+
+.left_sidemenu_div {
+	width: 12%;
+	min-height: 100vh;
+	background: linear-gradient(to bottom, rgb(19, 151, 213), #1674a1);
+	z-index: 1000;
+	position: fixed;
+	/* 	top: 5%; */
+}
+
+.left_sidemenu {
+	overflow: hidden;
+	list-style: none;
+	padding: 0;
+}
+
+.left_sidemenu>li {
+	text-decoration: none;
+	width: 100%;
+	text-align: center;
+	line-height: 40px;
+	transition: background-color 0.5s ease;
+}
+
+.left_sidemenu a {
+	text-decoration: none;
+	color: #fff;
+	display: block;
+}
+
+/* .left_sidemenu .submenu a {
+  color: #fff;
+  display: block;
+  color: rgb(19, 151, 213)
+} */
+.submenu>li {
+	line-height: 50px;
+	background-color: rgb(22, 116, 161);
+}
+
+.left_sidemenu>li:hover {
+	overflow: hidden;
+}
+
+.left_sidemenu>li:hover .submenu {
+	height: auto;
+}
+
+.submenu a>li:hover .submenu {
+	height: auto;
+	background-color:
+}
+
+.submenu {
+	height: 0;
+	overflow: hidden;
+	padding: 0;
+	transition: height 0.5s ease;
+}
