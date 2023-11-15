@@ -15,9 +15,14 @@
 	integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
 	crossorigin="anonymous"></script>
 <link href="../resources/css/register.css" rel="stylesheet">
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+<link href="<c:url value='/resources/css/nav.css'/>" rel="stylesheet"
+	type="text/css">
 </head>
 <body>
 
+<!-- 사원 등록 폼 -->
 	<div class="jb-container">
 		<form action="/member/register" method="post" enctype="multipart/form-data">
 			<div id="test">
@@ -33,39 +38,31 @@
 						placeholder="Name">
 				</div>
 			</div>
-
 			<div class="mb-3 input-group-lg">
 				<input type="text" class="inputCss" name="id" placeholder="Id">
 			</div>
-
 			<div class="mb-3 input-group-lg">
 				<input type="text" class="inputCss" name="pw" placeholder="Password">
 			</div>
-
 			<div class="mb-3 input-group-lg">
 				<input type="text" class="inputCss" name="addr"
 					placeholder="Address">
 			</div>
-
 			<div class="mb-3 input-group-lg">
 				<input type="text" class="inputCss" name="phone" placeholder="Phone">
 			</div>
-
 			<div class="mb-3 input-group-lg">
 				<input type="text" class="inputCss" name="empBirth"
 					placeholder="birth(6자리)">
 			</div>
-
-
 			<div class="mb-3">
 				<label for="f" class="form-label">프로필 이미지</label> <input
 					class="form-control" type="file" id="f" name="profiles">
 			</div>
-
+			
 			<div class="btnContainer">
 				<button type="submit" class="joinBtn">사원 등록</button>
 			</div>
-
 		</form>
 
 	</div>
