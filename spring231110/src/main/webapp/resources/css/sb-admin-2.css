@@ -11279,3 +11279,37 @@ footer.sticky-footer .copyright {
 body.sidebar-toggled footer.sticky-footer {
   width: 100%;
 }
+.box{
+	height:100%;
+	padding:10px;
+	display: flex;
+	justify-content: center;
+	align-content: center;
+}
+.box2{
+	
+	width: 630px;
+}
+.btn {
+	margin: 10px;
+}
+
+.box {
+	display: flex;
+	justify-content: center;
+}
+
+.box2 {
+	width: 700px;
+}
+
+#checkBox {
+	border-top-left-radius:;
+	border-top-right-radius:;
+	border-bottom-right-radius:;
+	border-bottom-left-radius:;
+}
+.btnContainer{
+	display: flex;
+	justify-content: center;
+}
