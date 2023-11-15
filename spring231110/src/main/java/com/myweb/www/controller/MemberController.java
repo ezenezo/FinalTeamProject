@@ -164,6 +164,11 @@ public class MemberController {
 		
 	}
 	
+	@GetMapping("/index")
+	public String index() {
+		return "index";
+	}
+	
 	
 	private void logout(HttpServletRequest req, HttpServletResponse res) {
 		Authentication authentication = SecurityContextHolder
