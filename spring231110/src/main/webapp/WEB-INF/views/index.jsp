@@ -29,12 +29,7 @@
 
 
 <body>
-<<<<<<< HEAD
-
-<jsp:include page="common/l_side.jsp" />
-=======
 	<jsp:include page="common/l_side.jsp" />
->>>>>>> origin/main
 
 	<jsp:include page="common/nav.jsp" />
 	<div class="total">

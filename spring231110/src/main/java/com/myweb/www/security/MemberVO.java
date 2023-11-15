@@ -14,20 +14,14 @@ import lombok.ToString;
 @Setter
 @Getter
 public class MemberVO {
-
-//	create table
-//	member(
-//	email varchar(100) not null,
-//	pwd varchar(1000) not null,
-//	nick_name varchar(100) not null,
-//	reg_at datetime default now(),
-//	last_login datetime default null,
-//	primary key(email));
-
+	private long empNo;
 	private String id;
 	private String pw;
-	private String nickName;
-	private String regAt;
+	private String addr;
+	private String phone;
+	private String depCd;
+	private String empNm;
+	private String empBirth;
 	private String lastLogin;
 	private List<AuthVO> authVOList;
 	

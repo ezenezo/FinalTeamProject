@@ -11279,14 +11279,3 @@ footer.sticky-footer .copyright {
 body.sidebar-toggled footer.sticky-footer {
   width: 100%;
 }
-.box{
-	height:100%;
-	padding:10px;
-	display: flex;
-	justify-content: center;
-	align-content: center;
-}
-.box2{
-	
-	width: 630px;
-}
