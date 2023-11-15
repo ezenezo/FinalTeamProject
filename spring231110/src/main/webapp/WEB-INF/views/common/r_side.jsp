@@ -1,34 +1,17 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
-<%@ taglib uri="http://www.springframework.org/security/tags"
-	prefix="sec"%>
-
+@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-
 <head>
 <meta charset="UTF-8">
-<title>페이지 제목</title>
-<link href="<c:url value='/resources/css/l_side.css'/>" rel="stylesheet"
-	type="text/css">
+<title>Insert title here</title>
 </head>
-
 <body>
-
-	<!-- 왼쪽 사이드 메뉴 -->
-
-	<div class="left_sidemenu_div">
-		<ul class="left_sidemenu">
-			<li>
-				<div class="pro_img">
-					<img alt="프로필 사진 없음" src="../../../resources/img/profile.jpg">
-				</div>
-
-			</li>
+<!--오른쪽 사이드 메뉴  -->
+	<div class="right_sidemenu_div">
+		<ul class="right_sidemenu">
 			<li><a href="#" class="">예약</a>
-		
+				<div class="toggle-btn">&#9776; Open</div>
 
 				<ul class="submenu">
 					<li><a href="#">주차등록</a></li>
@@ -51,7 +34,7 @@
 				</ul></li>
 			<li><a href="#">승인</a>
 				<ul class="submenu">
-					<li><a href="/approval/clubApproval">동호회 등록</a></li>
+					<li><a href="#">동호회 등록</a></li>
 					<li><a href="#">차량 등록</a></li>
 					<li><a href="#">사원 등록</a></li>
 					<li><a href="#">사원 목록</a></li>
@@ -59,7 +42,7 @@
 				</ul></li>
 			<li><a href="#">MENU5</a>
 				<ul class="submenu">
-					<li><a href="/member/register">회원가입</a></li>
+					<li><a href="#">submenu01</a></li>
 					<li><a href="#">submenu02</a></li>
 					<li><a href="#">submenu03</a></li>
 					<li><a href="#">submenu04</a></li>
@@ -74,8 +57,5 @@
 
 
 
-
-
 </body>
-
 </html>
