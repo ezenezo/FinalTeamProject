@@ -1,5 +1,7 @@
 @charset "UTF-8";
 
+@charset "UTF-8";
+
 body {
 	font-size: .8rem;
 	box-sizing: border-box;
@@ -10,45 +12,38 @@ body {
 	height: 100vh;
 	background-color: Rgb(19, 151, 213);
 	display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
 }
 
 .jb-container form {
+	width: 500px;
 	background-color: white;
-	padding: 20px;
+	padding: 30px;
 	border-top-left-radius: 0.35rem;
 	border-top-right-radius: 0.35rem;
 	border-bottom-right-radius: 0.35rem;
 	border-bottom-left-radius: 0.35rem;
+	display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
-input {
-	font-size: .8rem;
-}
-
-.inputCss, .selectInput {
+.inputCss{
 	font-size: .8rem;
 	border-radius: 10rem;
 	display: block;
-	width: 100%;
-	height: calc(1.5em + 0.75rem + 2px);
+	width: 90%;
+	height: 3px;
 	font-weight: 400;
 	line-height: 1.5;
 	color: #6e707e;
 	background-color: #fff;
 	background-clip: padding-box;
 	border: 1px solid #d1d3e2;
-}
-
-.inputCss {
 	padding: 1.5rem 1rem;
-}
-
-.selectInput {
-	height: 50px;
-	padding: 0 1rem;
+	margin: 10px;
 }
 
 form div {
@@ -58,15 +53,16 @@ form div {
 	border-bottom-left-radius: 10rem;
 }
 
-.joinBtn {
-	font-size: .8rem;
+.loginBtn {
+	font-size: 1rem;
 	border-radius: 10rem;
-	padding: 0.75rem 1rem;
+	padding: 1rem 1rem;
 	display: block;
-	width: 100%;
+	width: 500px;
 	color: #fff;
 	background-color: Rgb(19, 151, 213);
 	border: none;
+	margin: 40px 0 5px;
 }
 
 #test {
@@ -84,6 +80,16 @@ form div {
 	color: #000; /* 혹은 다른 원하는 색상으로 변경하세요 */
 }
 
+h4{
+	color: white;
+	font-size: 30px;
+}
+
+.mb-3{
+	width: 500px;
+	margin-top: 10px;
+}
+
 a{
 	margin-top: 20px;
 	color: white;	
@@ -96,7 +102,7 @@ a{
     color: #ffffff;
     margin: 10px;
     position: absolute;
-    bottom: 10%;
+    bottom: 23%;
     display: none;
 }
 
