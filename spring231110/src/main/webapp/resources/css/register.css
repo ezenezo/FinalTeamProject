@@ -10,9 +10,9 @@ body {
 	height: 100vh;
 	background-color: Rgb(19, 151, 213);
 	display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
 }
 
 .jb-container form {
@@ -87,26 +87,74 @@ form div {
 	color: #000; /* 혹은 다른 원하는 색상으로 변경하세요 */
 }
 
-a{
+a {
 	margin-top: 20px;
-	color: white;	
+	color: white;
 }
 
-.explanation{
+.explanation {
 	padding: 15px 20px;
-    background-color: #444444bf;
-    border-radius: 5px;
-    color: #ffffff;
-    margin: 10px;
-    position: absolute;
-    bottom: 5%;
-    display: none;
+	background-color: #444444bf;
+	border-radius: 5px;
+	color: #ffffff;
+	margin: 10px;
+	position: absolute;
+	bottom: 5%;
+	display: none;
 }
 
-.explanation > p{
+.explanation>p, .explanationModify>p {
 	margin: 0;
 }
 
-a:hover + .explanation{
+a:hover+.explanation {
+	display: block;
+}
+
+.explanationModify {
+	padding: 15px 20px;
+	background-color: #444444bf;
+	border-radius: 5px;
+	color: #ffffff;
+	margin: 10px;
+	position: absolute;
+	bottom: 20%;
+	display: none;
+}
+
+a:hover+.explanationModify {
+	display: block;
+}
+
+.idInputBox {
+	display: flex;
+}
+
+#checkId{
+	font-size: .8rem;
+	border-radius: 10rem;
+	padding: 0.75rem 1rem;
+	display: block;
+	width: 40%;
+	color: #fff;
+	background-color: Rgb(19, 151, 213);
+	border: none;
+}
+
+.passwordCheck, .birthCheck, .phoneCheck, .passwordCheck2{
+	margin: 10px;
+    color: red;
+    display: none;
+    font-size: 11px;
+}
+
+.passwordCheckOk, .passwordCheckOk2{
+	margin: 10px;
+    color: green;
+    display: none;
+    font-size: 11px;
+}
+
+.block{
 	display: block;
 }
