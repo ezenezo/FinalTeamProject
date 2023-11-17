@@ -1,35 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>	
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<<<<<<< HEAD
-<title>Insert title here</title>
-</head>
-<body>
-<jsp:include page="../common/header.jsp"/>
-<jsp:include page="../common/nav.jsp"/>
-<!-- email, pwd, nick_name 받기 -->
-<div class="container">
-<form action="/member/register" method="post">
-	<h4 class="mb-3">Input your Information</h4>
-	<div class="mb-3">
-	  <label for="e" class="form-label">ID</label>
-	  <input type="text" class="form-control" name="id" id="e">
-	</div>
-	<div class="mb-3">
-	  <label for="p" class="form-label">PASSWORD</label>
-	  <input type="password" class="form-control"  name="pw" id="p">
-	</div>
-	<button class="w-100 btn btn-primary btn-lg my-5" type="submit">가입입력</button>
-</form>
-</div>
-
-<jsp:include page="../common/footer.jsp"></jsp:include>
-=======
 <title>Join Page</title>
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css"
@@ -96,6 +70,5 @@
 		</div>
 	</div>
 
->>>>>>> origin/main
 </body>
 </html>
