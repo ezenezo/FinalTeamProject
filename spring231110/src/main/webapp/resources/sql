@@ -76,4 +76,21 @@ CREATE TABLE `file` (
   `total_bno` bigint(20) DEFAULT NULL,
   `car_no` varchar(40) DEFAULT NULL,
   PRIMARY KEY (`uuid`)
+  
+  
+  
+  
+  --club 테이블--
+  
+  CREATE TABLE club (
+    club_cd VARCHAR(100) PRIMARY KEY,
+    club_nm VARCHAR(100),
+    emp_no BIGINT,
+    club_intro VARCHAR(300),
+    club_man BOOLEAN,
+    emp_nm VARCHAR(100),
+    club_type VARCHAR(100)
+
+);
+  
 ) 
