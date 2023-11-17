@@ -11,11 +11,18 @@ body {
 }
 
 .total {
+<<<<<<< HEAD
+	border: 1px solid black;
+ 	height: 82%; 
+	margin-top:5%;
+/* 	margin-bottom:40%; */
+=======
 
  	border: 1px solid black;
 	height: 82%;
 	margin-top: 5%;
 	/*    margin-bottom:40%; */
+>>>>>>> f85194c3fe7857f86f836dd185060ea98573ffea
 	width: 83%;
 	position: absolute;
 	top: 40%;
@@ -41,6 +48,14 @@ body {
  /*    padding-bottom: 5%; */
    	padding-left: 40px;
 	padding-right: 40px;
+<<<<<<< HEAD
+}
+
+@media screen and (max-width: 1200px) {
+  .total {
+	height: 95%; 
+  }
+=======
 	position: relative;
 	
 }
@@ -50,4 +65,5 @@ body {
 		height: 99%;
 	}
 
+>>>>>>> f85194c3fe7857f86f836dd185060ea98573ffea
 }
