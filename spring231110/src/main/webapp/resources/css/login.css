@@ -1,7 +1,5 @@
 @charset "UTF-8";
 
-@charset "UTF-8";
-
 body {
 	font-size: .8rem;
 	box-sizing: border-box;
@@ -72,9 +70,6 @@ form div {
 /* .t1{
    width: 150px;
 } */
-.form-select:hover {none;
-	
-}
 
 .inputCss option {
 	color: #000; /* 혹은 다른 원하는 색상으로 변경하세요 */
@@ -90,26 +85,28 @@ h4{
 	margin-top: 10px;
 }
 
-a{
-	margin-top: 20px;
-	color: white;	
-}
-
 .explanation{
-	padding: 15px 20px;
+	padding: 10px 15px;
     background-color: #444444bf;
     border-radius: 5px;
     color: #ffffff;
     margin: 10px;
     position: absolute;
-    bottom: 23%;
-    display: none;
+    bottom: 20%;
+    display: none; 
 }
 
-.explanation > p{
-	margin: 0;
+.aTagDiv{
+	margin-top: 20px;
+	display: flex;
+    justify-content: space-evenly;
+    width: 500px;
 }
 
-a:hover + .explanation{
+.aTag{
+	color: white;
+}
+
+.view{
 	display: block;
 }
