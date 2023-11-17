@@ -14,15 +14,15 @@ import lombok.ToString;
 @Setter
 @Getter
 public class MemberVO {
-	private long empNo;
-	private String id;
-	private String pw;
-	private String addr;
-	private String phone;
-	private String depCd;
-	private String empNm;
-	private String empBirth;
-	private String lastLogin;
+	private long empNo; //사원번호
+	private String id; //아이디
+	private String pw; //비밀번호
+	private String addr; //주소
+	private String phone; //전화번호
+	private String depCd; //부서코드
+	private String empNm; //사원명
+	private String empBirth; //생년월일
+	private String lastLogin; //마지막 로그인
 	private List<AuthVO> authVOList;
 	
 }
