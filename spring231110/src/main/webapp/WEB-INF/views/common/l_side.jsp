@@ -28,7 +28,7 @@
 
 			</li>
 			<li><a href="#" class="">예약</a>
-		
+
 
 				<ul class="submenu">
 					<li><a href="#">주차등록</a></li>
@@ -46,6 +46,8 @@
 			<li><a href="#">동호회</a>
 				<ul class="submenu">
 					<li><a href="#">동호회신청</a></li>
+
+					<li><a class="nav-link" href="/club/list">Board List</a></li>
 					<li><a href="#">동호회게시판</a></li>
 
 				</ul></li>
@@ -60,7 +62,7 @@
 			<li><a href="#">MENU5</a>
 				<ul class="submenu">
 					<li><a href="/member/register">회원가입</a></li>
-					<li><a href="#">submenu02</a></li>
+					<li><a href="#">동호회 설정</a></li>
 					<li><a href="#">submenu03</a></li>
 					<li><a href="#">submenu04</a></li>
 					<li><a href="#">submenu05</a></li>
