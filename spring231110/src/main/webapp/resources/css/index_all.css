@@ -12,8 +12,10 @@ body {
 
 .total {
 	border: 1px solid black;
-	height: 50%;
-	width: 80%;
+ 	height: 82%; 
+	margin-top:5%;
+/* 	margin-bottom:40%; */
+	width: 83%;
 	position: absolute;
 	top: 40%;
 	left: 56%;
@@ -36,4 +38,10 @@ body {
 	padding-bottom: 5%;
 	padding-left: 40px;
 	padding-right: 40px;
+}
+
+@media screen and (max-width: 1200px) {
+  .total {
+	height: 95%; 
+  }
 }

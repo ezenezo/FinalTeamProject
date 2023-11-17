@@ -32,6 +32,8 @@ console.log("chat.js진입");
 //     });
 //     $('#chatContent').val('');
 // }
+// 현재 로그인한 사용자 ID를 전역 변수로 저장
+let currentUserID = document.getElementById("chatName").value;
 
 //호출해서 등록
 document.getElementById("chatSubmitBtn").addEventListener("click", () => {
@@ -50,7 +52,7 @@ document.getElementById("chatSubmitBtn").addEventListener("click", () => {
     postComment(chatData).then((result) => {
         // console.log("8 " , result);
         if (result > 0) {
-            alert("채팅글 insert 완료");
+            //alert("채팅글 insert 완료");
         } else {
             alert("댓글 insert 실패");
         }
@@ -116,7 +118,7 @@ function printChatList() {
                 // <div class="col-lg-12">
                 //     <div class="media">
                 //         <a class="pull-left" href="#">
-                //             <img class="media-object img-circle" style="width: 30px; height:30px;" src="/resources/img/icon.png" alt="">
+                //             <img class="media-object img-circle" style="width: 30px; height:30px;" src="/resources/img/anoyicon.png" alt="">
                 //         </a>
                 //     <div class="media-body">
                 //         <h4 class="media-heading">
@@ -127,21 +129,47 @@ function printChatList() {
                 //     </div>
                 // </div>
                 // </div>
+                let name1;
+                if (chatdto.fromID == currentUserID) {
+                    name1 = "나";
+                } else {
+                    name1 = chatdto.fromID;
+                }
+
                 str += `<div class="row">`;
                 str += `<div class="col-lg-12">`;
-                str += `<div class="media">`;
-                str += `<a class="pull-left" href="#">`;
-                str += `<img class="media-object img-circle" style="width: 30px; height:30px;" src="/resources/img/icon.png" alt="">`;
-                str += `</a>`;
-                str += `<div class="media-body">`;
-                str += `<h4 class="media-heading">`;
-                str += `${chatdto.fromID}<span class="small pull-rigth">${chatdto.chatTime}</span>`;
-                str += `</h4>`;
-                str += `<p style="text-align: left;">${chatdto.chatContent}</p>`;
+                str += `<div class="media" >`;
+                str += `<div><a class="pull-left" href="#">`;
+                str += `<img class="media-object img-circle" style="width: 30px; height:30px;" src="/resources/img/anoyicon.png" alt="">`;
+
+                str += `<span class="media-heading">`;
+                str += `${name1}  <span class="small pull-rigth style="left-right: 30px;">  ${chatdto.chatTime}</span>`;
+                str += `</span>`;
+
+                str += `</a></div>`;
+                str += `<div class="media-body" style="float: center">`;
+
+                str += `<div style="text-align: left;">${chatdto.chatContent}</div>`;
                 str += `</div>`;
                 str += `</div>`;
                 str += `</div>`;
                 str += `</div>`;
+
+                // str += `<div class="row">`;
+                // str += `<div class="col-lg-12">`;
+                // str += `<div class="media">`;
+                // str += `<a class="pull-left" href="#">`;
+                // str += `<img class="media-object img-circle" style="width: 30px; height:30px;" src="/resources/img/anoyicon.png" alt="">`;
+                // str += `</a>`;
+                // str += `<div class="media-body" style="float: left; margin-left: 10px;">`; // 여기에 스타일을 추가
+                // str += `<div class="media-heading">`;
+                // str += `${chatdto.fromID}<span class="small pull-rigth" style="margin-left: 10px;">${chatdto.chatTime}</span>`;
+                // str += `</>`;
+                // str += `<div>${chatdto.chatContent}</div>`;
+                // str += `</div>`;
+                // str += `</div>`;
+                // str += `</div>`;
+                // str += `</div>`;
             }
             ul.innerHTML += str;
 
