@@ -2,6 +2,7 @@ package com.myweb.www.service;
 
 import java.util.List;
 
+import com.myweb.www.domain.FileVO;
 import com.myweb.www.domain.PagingVO;
 import com.myweb.www.security.AuthMember;
 import com.myweb.www.security.MemberVO;
@@ -25,5 +26,15 @@ public interface MemberService {
 	MemberVO detail2(String email);
 
 	int getTotalCount(PagingVO pagingVO);
+
+	MemberVO getMemberDetail(String id);
+
+	int updatePw(String id, String password);
+
+	int checkId(String id);
+
+	int insert(long empNo, List<FileVO> flist);
+
+	long getMaxEmpNo();
 	
 }

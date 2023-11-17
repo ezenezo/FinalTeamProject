@@ -44,7 +44,7 @@ public class BoardController {
 	// 목적지 => /board/register
 
 	private BoardService bsv;
-
+ 
 	private FileHandler fh;
 	
 	private CommentService csv;
