@@ -14,6 +14,7 @@ import org.springframework.http.ResponseEntity;
 
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -39,8 +40,10 @@ import com.myweb.www.domain.PagingVO;
 import com.myweb.www.handler.FileHandler;
 import com.myweb.www.handler.PagingHandler;
 
+
 import com.myweb.www.security.AuthMember;
 import com.myweb.www.security.MemberVO;
+
 
 import com.myweb.www.service.BoardService;
 import com.myweb.www.service.ChatService;
@@ -71,7 +74,6 @@ public class ChatController {
 		this.chatsv = chatsv;
 //		this.fh = fh;
 	}
-
 
 	// 익명 채팅글쓰기 jsp로 이동
 	@GetMapping("/chat")
