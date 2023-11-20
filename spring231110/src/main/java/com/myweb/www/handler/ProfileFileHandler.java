@@ -19,8 +19,8 @@ import lombok.extern.slf4j.Slf4j;
 @Setter
 @Slf4j
 public class ProfileFileHandler {
-//	private final String UP_DIR = "/aj2002/tomcat/webapps/_javaweb/_java/ProfileFileUpload";
-	private final String UP_DIR = "D:\\_myweb\\_java\\fileupload";
+//	private final String UP_DIR = "/aj2002/tomcat/webapps/_javaweb/_java/fileUpload/Profile";//231120전경환
+	private final String UP_DIR = "D:\\_myweb\\_java\\fileupload";//231120전경환
 	
 	public FileVO uploadFiles(MultipartFile pfile, long empNo) {
 		String empNumber = Long.toString(empNo);
@@ -29,9 +29,8 @@ public class ProfileFileHandler {
 		if (!folders.exists()) {
 			folders.mkdir(); 
 		}
-		log.info(Long.toString(empNo));
 		FileVO fvo = new FileVO();
-		fvo.setSaveDir(Long.toString(empNo)); // 2023\11\05
+		fvo.setSaveDir(empNumber); // 2023\11\05
 		fvo.setFileSize(pfile.getSize());
 
 		// 실제 파일이름(ex:이벤트.jpg)
