@@ -85,21 +85,30 @@ h4{
 	margin-top: 10px;
 }
 
-form{
-	position: relative;
-}
-
 .explanation{
-	padding: 15px 20px;
+	padding: 10px 15px;
     background-color: #444444bf;
     border-radius: 5px;
     color: #ffffff;
     margin: 10px;
     position: absolute;
-    bottom: 23%;
+
+    bottom: 20%;
+    display: none; 
+}
+
+.aTagDiv{
+	margin-top: 20px;
+	display: flex;
+    justify-content: space-evenly;
+    width: 500px;
 }
 
 .aTag{
-	position: absolute;
-	bottom: 31%;
+	color: white;
 }
+
+.view{
+	display: block;
+}
+

@@ -45,8 +45,11 @@
 			</div>
 		</form>
 		<!-- 회원가입 창으로 넘어가기 -->
-		<a href="/member/register" class="aTag" id="registerATag">가입된 아이디가 없으신가요?</a> <p>/</p>
-		<a href="/member/register" class="aTag" id="modifyPwdATag">비밀번호가 기억나지 않으신가요?</a>
+
+		<div class="aTagDiv">
+			<a href="/member/register" class="aTag" id="registerATag">가입된 아이디가 없으신가요?</a> <a
+				href="/member/checkMemberInfo" class="aTag" id="modifyPwdATag">비밀번호가 기억나지 않으신가요?</a>
+		</div>
 
 		<div class="explanation" id="registerEx">
 			<p>회원가입 페이지로 넘어가기</p>
@@ -55,5 +58,6 @@
 			<p>비밀번호 변경 페이지로 넘어가기</p>
 		</div>
 	</div>
+	<script type="text/javascript" src="../resources/js/login.js"></script>
 </body>
 </html>

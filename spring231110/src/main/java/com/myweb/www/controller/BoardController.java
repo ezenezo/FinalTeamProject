@@ -45,7 +45,9 @@ public class BoardController {
 
 	private BoardService bsv;
 
-//	private FileHandler fh;
+ 
+	private FileHandler fh;
+
 	
 //	private CommentService csv;
 	
@@ -59,6 +61,7 @@ public class BoardController {
 	public String register() {// jsp에서 온 매핑이랑 뷰로 들어가는 매핑이 같아서(이름이 같아서) void로 하면 왔던 곳으로 가라고 할 수 있음
 		return "/board/register"; // 이렇게 해도 됨(뷰로 들어가는 매핑)
 	}
+
 	
 	// 게시글 등록
 	@PostMapping("/register")
@@ -123,5 +126,42 @@ public class BoardController {
 		return "/board/detail";
 	}
 	
+	
+	// 삭제
+	@GetMapping("/remove")
+	public String remove(
+			              @RequestParam("bno") long bno,
+			              RedirectAttributes red 
+							, Principal principal) {
+		
+		log.info("컨트롤러 겟방식 /remove진입");
+		
+		log.info("프린시펄"+principal);
+		log.info(">>>> remove bno >> " + bno);
+//		log.info("bvo.getWriter()는 "+principal.getName() +"       bvo.getWriter()는"+ bvo.getWriter() );
+		
+		BoardVO bvo = bsv.SelectOneForModify(bno);
+		 
+		if(Objects.equals(principal.getName(), bvo.getWriter())) {
+		int reisOk = bsv.remove(bno);
+		
+		red.addFlashAttribute("reisOk", reisOk);
+		}else {
+		 red.addFlashAttribute("errorMessage", "현재접속자와 글 작성자가 일치하지 않습니다. 글 삭제 불가, 억지로 지우려마세요!");
+		}
+		return "redirect:/board/list";
+		
+	}
+	
+	@DeleteMapping(value="/file/{uuid}", produces = MediaType.TEXT_PLAIN_VALUE)
+	public ResponseEntity<String> removeFile(@PathVariable("uuid")String uuid ){
+		log.info(">>> uuid >>" + uuid);
+		int isOk = -99;
+			isOk = bsv.removefile(uuid);
+			log.info("isOk는 "+ isOk);
+		return isOk > 0 ? new ResponseEntity<String>("1", HttpStatus.OK): 
+			new ResponseEntity<String>("0",HttpStatus.INTERNAL_SERVER_ERROR);  //아니면 스트링값을 0 주고 서버에러값 넣어줌
+	
+	}
 	
 }

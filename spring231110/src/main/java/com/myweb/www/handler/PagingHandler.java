@@ -2,6 +2,7 @@ package com.myweb.www.handler;
 
 import java.util.List;
 
+import com.myweb.www.domain.ClubVO;
 import com.myweb.www.domain.CommentVO;
 import com.myweb.www.domain.PagingVO;
 

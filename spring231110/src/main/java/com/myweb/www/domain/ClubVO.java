@@ -12,9 +12,14 @@ import lombok.ToString;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ClubVO {
-	  private String clubCd;
-      private String clubNm;
-      private String clubIntro;
-      private int memberCnt;
-      
+
+	private String clubCd;
+	private String clubNm;
+
+	private String clubIntro;
+
+	private int memberCnt;
+	private int memberLimitCnt;
+
+
 }

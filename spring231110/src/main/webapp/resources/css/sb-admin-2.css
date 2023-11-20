@@ -11275,6 +11275,7 @@ footer.sticky-footer .copyright {
 body.sidebar-toggled footer.sticky-footer {
   width: 100%;
 }
+
 .box{
 	height:100%;
 	padding:10px;
@@ -11350,3 +11351,4 @@ justify-content: space-between;
 .dddddd{
 justify-content: flex-end;
 }
+

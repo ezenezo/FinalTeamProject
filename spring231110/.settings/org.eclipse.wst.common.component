@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
+<<<<<<< HEAD
+    <wb-module deploy-name="www-1.0.0-BUILD-SNAPSHOT">
+        <wb-resource deploy-path="/" source-path="/target/m2e-wtp/web-resources"/>
+        <wb-resource deploy-path="/" source-path="/src/main/webapp" tag="defaultRootSource"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/java"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/resources"/>
+        <property name="context-root" value="www"/>
+        <property name="java-output-path" value="/spring231110/target/classes"/>
+    </wb-module>
+=======
+                    
+    
+    
+    
+    <wb-module deploy-name="www-1.0.0-BUILD-SNAPSHOT">
+                                
+        
+        
+        <wb-resource deploy-path="/" source-path="/target/m2e-wtp/web-resources"/>
+                                        
+        
+        
+        
+        <wb-resource deploy-path="/" source-path="/src/main/webapp" tag="defaultRootSource"/>
+                                        
+        
+        
+        
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/java"/>
+                                        
+        
+        
+        
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/resources"/>
+                                
+        
+        
+        <property name="context-root" value="www"/>
+                
+        <property name="java-output-path" value="/spring231110/target/classes"/>
+                                    
+    
+    
+    
+    </wb-module>
+                
+
+
+
+>>>>>>> 17b09a3a30a87b7db5d4de2d8925f6b504bb4637
+</project-modules>

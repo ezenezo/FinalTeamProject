@@ -2,6 +2,8 @@ package com.myweb.www.repository;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.myweb.www.domain.PagingVO;
 import com.myweb.www.security.AuthVO;
 import com.myweb.www.security.MemberVO;
@@ -20,7 +22,7 @@ public interface MemberDAO {
 
 	List<MemberVO> selectAll(PagingVO pagingVO);
 
-	MemberVO selectOne(String email);
+	MemberVO selectOne(String id);
 
 	
 	int modify(MemberVO mvo);
@@ -37,8 +39,15 @@ public interface MemberDAO {
 
 	int getMemberNo(String id);
 
+
 	String selectDepCd(String id);
 
 	String selecClubCd(String id);
+
+	int updatePw(@Param("id") String id, @Param("pw") String password);
+
+	String checkId(String id);
+
+	long getMaxEmpNo();
 
 }

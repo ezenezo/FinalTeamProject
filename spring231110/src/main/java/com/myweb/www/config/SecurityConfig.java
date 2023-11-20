@@ -66,7 +66,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		//승인요청
 		http.authorizeRequests()
 		.antMatchers("/member/list").hasRole("ADMIN")
-		.antMatchers("/","/board/**","/resources/**","/upload/**","/comment/**","/member/**").permitAll()
+
+
+
+		.antMatchers("/","/board/list","/board/detail","/resources/**","/upload/**","/comment/**",
+				"/member/**","/clud/**").permitAll()
+
+
 		.anyRequest().authenticated(); //나머지 리퀘스트는 인증된 사용자만 사용할수 있게           //비회원도 되는것이 PermitAll()   //나중에 comment/**할때는 퍼미션으로 가면 됨 post modify등
 		// '맴버의 리스트'는 ADMIN만 보이게...
 		

@@ -12,6 +12,7 @@ import com.myweb.www.domain.BoardDTO;
 import com.myweb.www.domain.BoardVO;
 import com.myweb.www.domain.FileVO;
 import com.myweb.www.domain.PagingVO;
+import com.myweb.www.repository.FileDAO;
 import com.myweb.www.repository.MemberDAO;
 import com.myweb.www.security.AuthMember;
 import com.myweb.www.security.AuthVO;
@@ -23,6 +24,9 @@ import lombok.extern.slf4j.Slf4j;
 public class MemberServiceImpl implements MemberService {
 	@Inject 
 	private MemberDAO mdao;
+	
+	@Inject 
+	private FileDAO fdao;
 
 	@Transactional
 	@Override
@@ -48,14 +52,16 @@ public class MemberServiceImpl implements MemberService {
 
 	@Transactional
 	@Override
-	public AuthMember detail(String email) {
+	public AuthMember detail(String id) {
 		// TODO Auto-generated method stub
 		List<AuthVO> testAutVoList = new ArrayList<>();
 		AuthVO initialAuth = new AuthVO("temptest.test.test", "tempadminauth"); // 임시이메일 주소와 권한을 설정
 		testAutVoList.add(initialAuth);
-		MemberVO mvo = new MemberVO(0, email, email, email, email, email, email, email, email, email, testAutVoList ); //여기까지 임시로 지나칠려는 의도
+
+		MemberVO mvo = new MemberVO(0, id, id, id, id, id, id, id, id,id, testAutVoList ); //여기까지 임시로 지나칠려는 의도
+
 		AuthMember amdto = new AuthMember(mvo); //새로 넣어줄려는 의도
-		amdto.setMvo(mdao.selectOne(email));	//bdao bvo호출 select * from board where bno=#{bno}
+		amdto.setMvo(mdao.selectOne(id));	//bdao bvo호출 select * from board where bno=#{bno}
 		log.info(">>>>> amdto >> "+amdto.toString());
 		return amdto;
 	}
@@ -108,6 +114,36 @@ public class MemberServiceImpl implements MemberService {
 	public int getTotalCount(PagingVO pagingVO) {
 		// TODO Auto-generated method stub
 		return mdao.getTotalCount(pagingVO);
+	}
+
+	@Override
+	public MemberVO getMemberDetail(String id) {
+		return mdao.selectOne(id);	
+	}
+
+	@Override
+	public int updatePw(String id, String password) {
+		return mdao.updatePw(id, password);
+	}
+
+	@Override
+	public int checkId(String id) {
+		String registerId = mdao.checkId(id);
+		if(registerId == null) {
+			return 1;
+		}else {
+			return 0;			
+		}
+	}
+
+	@Override
+	public int insert(long empNo, List<FileVO> flist) {
+		return fdao.insertProfile(empNo, flist.get(0));
+	}
+
+	@Override
+	public long getMaxEmpNo() {
+		return mdao.getMaxEmpNo();
 	}
 
 	
