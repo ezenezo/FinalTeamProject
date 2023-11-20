@@ -2,38 +2,36 @@ package com.myweb.www.service;
 
 import java.util.List;
 
-import com.myweb.www.domain.BoardDTO;
 import com.myweb.www.domain.BoardVO;
-import com.myweb.www.domain.FileVO;
 import com.myweb.www.domain.PagingVO;
-
 
 public interface BoardService {
 
-//	int write(BoardVO bvo);
+	void write(BoardVO bvo);
 
-	List<BoardVO> getList();
+	String getUserDepCd(String id);
 
-//	BoardVO detail(long bno);
+	List<BoardVO> getDepartList(String depCd, PagingVO pgvo);
 
-//	int modify(BoardVO bvo);
+	String getUserDepNm(String depCd);
+	
+	
 
-	BoardVO SelectOneForModify(long bno);
+	String getUserClubCd(String id);
 
-	int remove(long bno);
+	String getUserClubNm(String clubCd);
 
-	List<BoardVO> getList(PagingVO pagingVO);
+	List<BoardVO> getClubList(String clubCd, PagingVO pgvo);
 
-	int getTotalCount(PagingVO pagingVO);
+	List<BoardVO> getAnonyList();
 
-	int write(BoardDTO boardDTO);
+	BoardVO getBoardDetail(long bno);
 
-	List<FileVO> getFileList(long bno);
+	int getDepartTotalCount(String depCd, PagingVO pgvo);
 
-	BoardDTO detail2(long bno);
+	int getClubTotalCount(String clubCd, PagingVO pgvo);
 
-	int removefile(String uuid);
 
-	int modifyFile(BoardDTO bdto);
+
 
 }

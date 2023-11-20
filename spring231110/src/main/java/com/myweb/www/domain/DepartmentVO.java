@@ -9,17 +9,11 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-@AllArgsConstructor
 @NoArgsConstructor
-public class ClubVO {
-
-	private String clubCd;
-	private String clubNm;
-
-	private String clubIntro;
-
-	private int memberCnt;
-	private int memberLimitCnt;
-
-
+@AllArgsConstructor
+public class DepartmentVO {
+ private String depCd; //부서코드
+ private String depNm; //부서명
+ private String depPhone; //부서전화번호
+ private String depLoca; //부서위치
 }
