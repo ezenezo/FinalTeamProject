@@ -1,14 +1,14 @@
 --2023-11-13--
 --board 테이블--
 CREATE TABLE `board` (
-  `bno` bigint(20) NOT NULL AUTO_INCREMENT,
+  `dep_bno` bigint(20) NOT NULL AUTO_INCREMENT,
   `emp_no` bigint(20) NOT NULL,
   `emp_nm` varchar(50) NOT NULL,
   `title` varchar(500) NOT NULL,
   `content` text NOT NULL,
   `reg_date` datetime DEFAULT CURRENT_TIMESTAMP,
   `mod_date` datetime DEFAULT CURRENT_TIMESTAMP,
-  `board_type` varchar(20) NOT NULL,
+  `type` varchar(20) NOT NULL,
   `club_cd` varchar(100) DEFAULT NULL,
   `dep_cd` varchar(100) DEFAULT NULL,
   `cmt_cnt` int(11) DEFAULT '0',
@@ -77,7 +77,7 @@ CREATE TABLE `file` (
   `car_no` varchar(40) DEFAULT NULL,
   PRIMARY KEY (`uuid`)
   
-  )
+  
   
   
   --club 테이블--
@@ -93,13 +93,4 @@ CREATE TABLE `file` (
 
 );
   
-  
-  --approval 테이블--
-  
-  CREATE TABLE approval (
-    appr_no BIGINT PRIMARY KEY,
-    vaca_no BIGINT,
-    car_no VARCHAR(40),
-    emp_no BIGINT,
-    read_or_not BOOLEAN
-);
+) 

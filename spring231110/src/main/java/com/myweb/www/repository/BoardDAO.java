@@ -2,7 +2,6 @@ package com.myweb.www.repository;
 
 import java.util.List;
 
-import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import com.myweb.www.domain.BoardDTO;
@@ -11,24 +10,34 @@ import com.myweb.www.domain.PagingVO;
 
 public interface BoardDAO {
 
-	void insert(BoardVO bvo);
+	int insert(BoardVO bvo);
 
-	List<BoardVO> selectAllDepartBoard(@Param("depCd") String depCd,@Param("pgvo") PagingVO pgvo);
-
-	String getUserDepNm(String depCd);
-
-	String getUserClubNm(String clubCd);
-
-	List<BoardVO> selectAllClubBoard(@Param("clubCd") String clubCd,@Param("pgvo") PagingVO pgvo);
-
-	List<BoardVO> selectAllAnonyBoard();
+	List<BoardVO> selectAll();
 
 	BoardVO selectOne(long bno);
 
-	int departTotalCount(@Param("depCd") String depCd,@Param("pgvo") PagingVO pgvo);
+	int update(BoardVO bvo);
 
-	int clubTotalCount(@Param("clubCd") String clubCd,@Param("pgvo") PagingVO pgvo);
+	BoardVO SelectOneForModify(long bno);
 
+	int delete(long bno);
 
+	void readCount(long bno);
 
+	List<BoardVO> getList(PagingVO pagingVO);
+
+	int getTotalCount(PagingVO pagingVO);
+
+	long selectOneBno();
+
+	int updateCommentCount();
+	int updateFileCount();
+	
+	int deleteCommentAll(long bno);
+
+	void minusReadCount(long bno);
+
+	
+
+//	int removefile(String uuid);
 }

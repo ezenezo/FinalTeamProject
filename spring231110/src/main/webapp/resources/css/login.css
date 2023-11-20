@@ -92,7 +92,6 @@ h4{
     color: #ffffff;
     margin: 10px;
     position: absolute;
-
     bottom: 20%;
     display: none; 
 }
@@ -111,4 +110,3 @@ h4{
 .view{
 	display: block;
 }
-

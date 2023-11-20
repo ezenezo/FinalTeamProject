@@ -12,7 +12,6 @@ import lombok.ToString;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ClubVO {
-
 	private String clubCd;
 	private String clubNm;
 
@@ -20,6 +19,5 @@ public class ClubVO {
 
 	private int memberCnt;
 	private int memberLimitCnt;
-
 
 }

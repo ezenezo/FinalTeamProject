@@ -12,11 +12,10 @@ import lombok.ToString;
 @Setter
 @Getter
 public class CommentVO {
-	private long cmtNo; //댓글번호
-	private long bno; //글번호
-	private int empNo; //사번 
-	private String empNm; //댓글쓴이
-	private String content; //댓글내용
-	private String regDate;
-	private String modDate;
+	private long cno;
+	private long bno;
+	private String writer; 
+	private String content;
+	private String regAt;
+	private String modAt;
 }

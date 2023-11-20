@@ -6,7 +6,6 @@ import java.util.List;
 import com.myweb.www.domain.ChatDTO;
 import com.myweb.www.security.MemberVO;
 
-
 public interface ChatService {
 
 	int submit(ChatDTO chatDTO);
@@ -15,6 +14,15 @@ public interface ChatService {
 
 	List<MemberVO> list(ChatDTO chatdto);
 
-	List<MemberVO> list2(ChatDTO chatdto);
+//	List<MemberVO> list2(ChatDTO chatdto);
 
-	int submitEmp2(ChatDTO chatdto);}
+	int submitEmp2(ChatDTO chatdto);
+
+	List<ChatDTO> getList2(ChatDTO chatdto);
+
+	int getAllUnreadChat(ChatDTO chatdto);
+
+//	Object getIntAllUnreadChat(ChatDTO chatdto);
+
+	List<ChatDTO> getBox(ChatDTO chatdto);
+}

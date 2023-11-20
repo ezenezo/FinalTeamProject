@@ -10,7 +10,6 @@
 		#{empBirth});
 	</insert>
 
-
 	<!-- 기본아이디는 '롤_유저'로 등록 -->
 	<insert id="insertAuthInit">
 		insert into auth_member values('ROLE_USER', #{id})
@@ -77,36 +76,28 @@
 		select count(*) from member
 		<include refid="search"></include>
 	</select>
-
-	<select id="selectDepCd" resultType="String">
-	select dep_cd from member where id=#{id}
-	</select>
-	<select id="selecClubCd" resultType="String">
-	select club_cd from member where id=#{id}
-	</select>	
-
-  <sql id="search">
-     <if test="type != null">
-        <trim prefix="where" prefixOverrides="or">
-           <foreach collection="typeToArray" item="typed">
-              <trim prefix="or">
-                 <choose>
-                    <when test="typed =='e'.toString()">
-                       id like concat('%',#{keyword},'%')
-                    </when>
-                    <when test="typed =='n'.toString()">
-                       nick_name like concat('%',#{keyword},'%')
-                    </when>
-                 </choose>
-              </trim>
-           </foreach>
-        </trim>
-     </if>
-  </sql>
-
 	
 	<select id="getMaxEmpNo" resultType="long">
 		select max(emp_no) from member
 	</select>
+
+	<sql id="search">
+		<if test="type != null">
+			<trim prefix="where" prefixOverrides="or">
+				<foreach collection="typeToArray" item="typed">
+					<trim prefix="or">
+						<choose>
+							<when test="typed =='e'.toString()">
+								id like concat('%',#{keyword},'%')
+							</when>
+							<when test="typed =='n'.toString()">
+								nick_name like concat('%',#{keyword},'%')
+							</when>
+						</choose>
+					</trim>
+				</foreach>
+			</trim>
+		</if>
+	</sql>
 
 </mapper>

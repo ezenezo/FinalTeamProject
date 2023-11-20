@@ -24,7 +24,8 @@ import net.coobird.thumbnailator.Thumbnails;
 @Setter
 @Slf4j
 public class ProfileFileHandler {
-	private final String UP_DIR = "/aj2002/tomcat/webapps/_javaweb/_java/ProfileFileUpload";
+//	private final String UP_DIR = "/aj2002/tomcat/webapps/_javaweb/_java/ProfileFileUpload";//카페24용 231118
+	private final String UP_DIR = "D:\\_myweb\\_java\\fileupload"; //로컬용 231118
 
 	public ProfileVO uploadFiles(MultipartFile pfile, String empNo) {
 

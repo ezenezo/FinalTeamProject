@@ -94,7 +94,6 @@ a {
 
 .explanation {
 	padding: 15px 20px;
-
 	background-color: #444444bf;
 	border-radius: 5px;
 	color: #ffffff;
@@ -102,7 +101,6 @@ a {
 	position: absolute;
 	bottom: 5%;
 	display: none;
-
 }
 
 .explanation>p, .explanationModify>p {
