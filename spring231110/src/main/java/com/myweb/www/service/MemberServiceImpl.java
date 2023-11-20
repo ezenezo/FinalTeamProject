@@ -44,10 +44,7 @@ public class MemberServiceImpl implements MemberService {
 
 	@Override
 	public List<MemberVO> getList(PagingVO pagingVO) {
-		// TODO Auto-generated method stub
-
 		return mdao.selectAll(pagingVO);
-		
 	}
 
 	@Transactional
@@ -57,31 +54,14 @@ public class MemberServiceImpl implements MemberService {
 		List<AuthVO> testAutVoList = new ArrayList<>();
 		AuthVO initialAuth = new AuthVO("temptest.test.test", "tempadminauth"); // 임시이메일 주소와 권한을 설정
 		testAutVoList.add(initialAuth);
-		MemberVO mvo = new MemberVO(0, id, id, id, id, id, id, id, id, testAutVoList ); //여기까지 임시로 지나칠려는 의도
+
+		MemberVO mvo = new MemberVO(0, id, id, id, id, id, id, id, id,id, testAutVoList ); //여기까지 임시로 지나칠려는 의도
+
 		AuthMember amdto = new AuthMember(mvo); //새로 넣어줄려는 의도
 		amdto.setMvo(mdao.selectOne(id));	//bdao bvo호출 select * from board where bno=#{bno}
 		log.info(">>>>> amdto >> "+amdto.toString());
 		return amdto;
 	}
-//	@Transactional
-//	@Override
-//	public BoardDTO detail2(long bno) {
-//		bdao.readCount(bno);
-//		BoardDTO bdto = new BoardDTO();
-//		bdto.setBvo(bdao.selectOne(bno));	//bdao bvo호출 select * from board where bno=#{bno}
-//		
-//		bdto.setFlist(fdao.getFileList(bno));	//bdao bvo호출
-//
-////      DTO클래스는 아래와 같음
-////		public class BoardDTO {
-////			private BoardVO bvo;
-////			private List<FileVO> flist;
-////			
-////		}
-//
-//		return bdto;
-//	}
-
 
 	@Override
 	public int modify(MemberVO mvo) {
@@ -103,9 +83,8 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public MemberVO detail2(String email) {
-		// TODO Auto-generated method stub
-		return mdao.selectOne2(email);
+	public MemberVO memberDetail(String id) {
+		return mdao.selectOne(id);
 	}
 
 	@Override
@@ -135,8 +114,8 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public int insert(long empNo, List<FileVO> flist) {
-		return fdao.insertProfile(empNo, flist.get(0));
+	public int insert(long empNo, FileVO fvo) {
+		return fdao.insertProfile(empNo, fvo);
 	}
 
 	@Override
