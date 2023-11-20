@@ -11,7 +11,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -36,8 +39,12 @@ import com.myweb.www.domain.PagingVO;
 
 import com.myweb.www.handler.FileHandler;
 import com.myweb.www.handler.PagingHandler;
+
+
 import com.myweb.www.security.AuthMember;
 import com.myweb.www.security.MemberVO;
+
+
 import com.myweb.www.service.BoardService;
 import com.myweb.www.service.ChatService;
 import com.myweb.www.service.CommentService;
@@ -76,6 +83,7 @@ public class ChatController {
 	    String username = principal.getName();
 	    // Model 객체에 사용자 이름(ID) 추가
 	    model.addAttribute("username", username);
+
 		return "/chatfolder/chat"; // 이렇게 해도 됨(뷰로 들어가는 매핑)
 	}
 	
@@ -155,6 +163,7 @@ public class ChatController {
 
 
 	
+
 	// 채팅글쓰기 jsp로 이동
 	@GetMapping("/find")
 	public String finduser(Model model, Principal principal) {// jsp에서 온 매핑이랑 뷰로 들어가는 매핑이 같아서(이름이 같아서) void로 하면 왔던 곳으로 가라고 할 수 있음

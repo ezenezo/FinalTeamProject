@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
      pageEncoding="UTF-8"%> 
  <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> 
- 
+
 <!-- <html> -->
 <!-- <head> -->
 <!-- 	<title>Index Page</title> -->
@@ -63,6 +63,7 @@
 /* 추가적인 스타일링 필요 */
 
 </style>
+
 <head>
 
     <meta charset="utf-8">
@@ -70,9 +71,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
 
+
+
     <title>실시간 채팅 메신저 서비스</title>
 
     <!-- Custom fonts for this template-->
+
+
 <%--     <link href="<c:url value='../resources/vendor/fontawesome-free/css/all.min.css'/>" rel="stylesheet" type="text/css"> --%>
 <!--     <link -->
 <!--         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" -->
@@ -89,6 +94,7 @@
 <link href="<c:url value='/resources/css/index_all.css'/>" rel="stylesheet"
 	type="text/css">
 </head>
+
 
 <body >
 <%-- <jsp:include page="../common/header.jsp"/> --%>
@@ -139,6 +145,7 @@
 								<p>chatContent</p>
 							</div>
 							
+
 						</div>
 					</div>
 					
@@ -146,6 +153,7 @@
 						<div class="col-lg-12">
 							<div class="media">
 								<a class="pull-left" href="#">
+
 									<img class="media-object img-circle" style="width: 30px; height:30px;" src="/resources/img/anoyicon.png" alt="">
 								</a>
 							<div class="media-body">

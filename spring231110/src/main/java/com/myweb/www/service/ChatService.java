@@ -6,6 +6,7 @@ import java.util.List;
 import com.myweb.www.domain.ChatDTO;
 import com.myweb.www.security.MemberVO;
 
+
 public interface ChatService {
 
 	int submit(ChatDTO chatDTO);
@@ -16,5 +17,4 @@ public interface ChatService {
 
 	List<MemberVO> list2(ChatDTO chatdto);
 
-	int submitEmp2(ChatDTO chatdto);
-}
+	int submitEmp2(ChatDTO chatdto);}
