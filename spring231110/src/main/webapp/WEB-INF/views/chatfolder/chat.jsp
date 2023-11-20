@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
      pageEncoding="UTF-8"%> 
  <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> 
-
+ 
 <!-- <html> -->
 <!-- <head> -->
 <!-- 	<title>Index Page</title> -->
@@ -63,7 +63,6 @@
 /* 추가적인 스타일링 필요 */
 
 </style>
-
 <head>
 
     <meta charset="utf-8">
@@ -71,13 +70,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
 
-
-
     <title>실시간 채팅 메신저 서비스</title>
 
     <!-- Custom fonts for this template-->
-
-
 <%--     <link href="<c:url value='../resources/vendor/fontawesome-free/css/all.min.css'/>" rel="stylesheet" type="text/css"> --%>
 <!--     <link -->
 <!--         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" -->
@@ -86,15 +81,14 @@
     <!-- Custom styles for this template-->
 <%--     <link href="<c:url value='../resources/css/sb-admin-2.min.css'/>" rel="stylesheet" type="text/css"> --%>
 <%--     <link href="<c:url value='../resources/css/bootstrap.min.css'/>" rel="stylesheet" type="text/css"> --%>
-    <link href="<c:url value='../resources/css/custom.css'/>" rel="stylesheet" type="text/css">
-	<link href="<c:url value='../resources/css/bootstrap.css'/>" rel="stylesheet" type="text/css">
-	<link href="<c:url value='/resources/css/r_side.css'/>" rel="stylesheet"
+    <link href="<c:url value='../resources/bootstrap337/css/custom.css'/>" rel="stylesheet" type="text/css">
+	<link href="<c:url value='../resources/bootstrap337/css/bootstrap.css'/>" rel="stylesheet" type="text/css">
+	<link href="<c:url value='../resources/css/r_side.css'/>" rel="stylesheet"
 	type="text/css">
 
-<link href="<c:url value='/resources/css/index_all.css'/>" rel="stylesheet"
+<link href="<c:url value='../resources/css/index_all.css'/>" rel="stylesheet"
 	type="text/css">
 </head>
-
 
 <body >
 <%-- <jsp:include page="../common/header.jsp"/> --%>
@@ -110,10 +104,16 @@
 
 <div class="total">
 <!-- <div class="subject">채딩페이지</div> -->
-<div class="subject">
-    <span>채팅 페이지</span>
+
+<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    
 <%--     <input type="hidden" style="height: 40px; width: 20%;" type="text" id="chatName" class="form-control" value="${username}"  maxlength="8" readonly="readonly"> --%>
-    <a href="/chaturl/find" class="find-link">사원찾기</a> <!-- 컨트롤러가 잡게 함 -->
+    <ul class="nav navbar-nav">
+   		<li><a href="/chaturl/chat">채팅메신저페이지</a> </li>
+	    <li class="active"><a href="/member/index">메인</a></li>
+	    <li><a href="/chaturl/find" class="find-link">사원찾기</a></li> <!-- 컨트롤러가 잡게 함 -->
+	    <li><a href="/chaturl/box">메시지함<span id="unread" class="label label-info"></span></a></li> <!-- 컨트롤러가 잡게 함 -->
+    </ul>
 </div>
 
 <div ><!-- 231111_1전경환 채팅창관련해서 뭐 넣기 S -------------------------------------> <!-- class="content" -->
@@ -145,7 +145,6 @@
 								<p>chatContent</p>
 							</div>
 							
-
 						</div>
 					</div>
 					
@@ -153,7 +152,6 @@
 						<div class="col-lg-12">
 							<div class="media">
 								<a class="pull-left" href="#">
-
 									<img class="media-object img-circle" style="width: 30px; height:30px;" src="/resources/img/anoyicon.png" alt="">
 								</a>
 							<div class="media-body">

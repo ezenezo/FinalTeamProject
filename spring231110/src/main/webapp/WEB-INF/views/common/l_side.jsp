@@ -30,29 +30,24 @@
 			<li><a href="#" class="">예약</a>
 
 
-
-
 				<ul class="submenu">
 					<li><a href="#">주차등록</a></li>
 					<li><a href="#">회의실예약</a></li>
 					<li><a href="#">휴가신청</a></li>
-					<li><a href="/board/register">게시판등록</a></li>
 
 				</ul></li>
 			<li><a href="#">게시판</a>
 				<ul class="submenu">
 					<li><a href="#">공지사항</a></li>
-					<li><a href="/board/departBoardList">부서게시판</a></li>
-					<li><a href="/board/anonymousBoardList">익명게시판</a></li>
-
+					<li><a href="#">부서게시판</a></li>
+					<li><a href="#">익명게시판</a></li>
+					<li><a href="/chaturl/chat">채팅게시판</a></li>
 				</ul></li>
 			<li><a href="#">동호회</a>
 				<ul class="submenu">
-					
-					<li><a class="nav-link" href="/club/list">동호회 신청하기</a></li>
+					<li><a href="#">동호회신청</a></li>
 
-
-					
+					<li><a class="nav-link" href="/club/list">Board List</a></li>
 					<li><a href="#">동호회게시판</a></li>
 
 				</ul></li>
@@ -68,6 +63,7 @@
 				<ul class="submenu">
 					<li><a href="/member/register">회원가입</a></li>
 
+					<li><a href="#">동호회 설정</a></li>
 
 		
 					<li><a href="/member/login">로그인</a></li>

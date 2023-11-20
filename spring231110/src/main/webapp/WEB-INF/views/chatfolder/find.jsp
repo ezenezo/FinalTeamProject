@@ -1,5 +1,4 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-
      pageEncoding="UTF-8"%> 
  <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> 
  
@@ -81,6 +80,14 @@
 
 <div class="total">
 
+	<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+	    <ul class="nav navbar-nav">
+	   		<li><a href="/chaturl/chat">채팅메신저페이지</a> </li>
+		    <li class="active"><a href="/member/index">메인</a></li>
+		    <li><a href="/chaturl/find" class="find-link">사원찾기</a></li> <!-- 컨트롤러가 잡게 함 -->
+		    <li><a href="/chaturl/box">메시지함<span id="unread" class="label label-info"></span></a></li> <!-- 컨트롤러가 잡게 함 -->
+	    </ul>
+	</div>
 
 
 	<div class="container">
@@ -179,6 +186,7 @@
 <script type="text/javascript" src="/resources/js/find.js"></script>
 
 <!-- <script type="text/javascript" src="/resources/js/chat.js"></script> -->
+
 <script type="text/javascript">
 	printChatList();
 </script>

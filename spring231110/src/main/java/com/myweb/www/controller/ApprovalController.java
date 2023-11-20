@@ -13,7 +13,7 @@ import lombok.extern.slf4j.Slf4j;
 @Controller
 public class ApprovalController {
 	private ApprovalService asv;
-	@GetMapping("/")
+	
 	@GetMapping("/clubApproval")
 	public void clubApproval() {}
 	

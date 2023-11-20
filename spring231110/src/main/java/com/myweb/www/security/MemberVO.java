@@ -23,10 +23,6 @@ public class MemberVO {
 	private String empNm; //사원명
 	private String empBirth; //생년월일
 	private String lastLogin; //마지막 로그인
-
-	private String clubCd;// 동호회 코드
-
-
 	private List<AuthVO> authVOList;
 	
 }

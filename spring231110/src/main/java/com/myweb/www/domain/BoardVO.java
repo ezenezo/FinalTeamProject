@@ -12,16 +12,13 @@ import lombok.ToString;
 @AllArgsConstructor
 @NoArgsConstructor
 public class BoardVO {
-	private long bno;//글번호 
-	private long empNo;//사번 
-	private String id;//작성자 //
-	private String title;//제목 //
-	private String content;//내용 //
-	private String regDate;//등록일 //
-	private String modDate;//수정일
-	private String boardType;//게시판 종류(익명,보드,동호회)
-	private String clubCd;//동호회 코드
-	private String depCd;//부서코드
-	private int commentCnt;//댓글개수
-	private int readCnt;//조회수
+	private long bno;
+	private String title; 
+	private String content;
+	private String writer;
+	private String regAt; //db에서는 reg_at
+	private String modAt;
+	private int readCount;
+	private int cmtQty; //231013추가
+	private int hasFile; //231013추가
 }

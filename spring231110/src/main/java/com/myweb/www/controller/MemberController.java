@@ -37,7 +37,7 @@ import com.myweb.www.service.MemberService;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
-@RequestMapping("/member/**")
+@RequestMapping("/member/*")
 @Controller
 public class MemberController {
 
@@ -176,11 +176,9 @@ public class MemberController {
 		return "index";
 	}
 
-
 	// 비밀번호 변경 전 본인 인증 페이지로 이동
 	@GetMapping("/checkMemberInfo")
 	public void checkMemberInfo() {
-
 	}
 
 	@PostMapping("/checkMemberInfo")
