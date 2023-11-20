@@ -48,10 +48,12 @@
 				</ul></li>
 			<li><a href="#">동호회</a>
 				<ul class="submenu">
-					<li><a href="#">동호회신청</a></li>
+					
+					<li><a class="nav-link" href="/club/list">동호회 신청하기</a></li>
 
-					<li><a href="/board/clubBoardList">동호회게시판</a></li>
 
+					
+					<li><a href="#">동호회게시판</a></li>
 
 				</ul></li>
 			<li><a href="#">승인</a>
@@ -66,7 +68,6 @@
 				<ul class="submenu">
 					<li><a href="/member/register">회원가입</a></li>
 
-					<li><a href="#">동호회 설정</a></li>
 
 		
 					<li><a href="/member/login">로그인</a></li>
