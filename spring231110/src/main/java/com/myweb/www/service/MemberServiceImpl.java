@@ -57,7 +57,9 @@ public class MemberServiceImpl implements MemberService {
 		List<AuthVO> testAutVoList = new ArrayList<>();
 		AuthVO initialAuth = new AuthVO("temptest.test.test", "tempadminauth"); // 임시이메일 주소와 권한을 설정
 		testAutVoList.add(initialAuth);
-		MemberVO mvo = new MemberVO(0, id, id, id, id, id, id, id, id, testAutVoList ); //여기까지 임시로 지나칠려는 의도
+
+		MemberVO mvo = new MemberVO(0, id, id, id, id, id, id, id, id,id, testAutVoList ); //여기까지 임시로 지나칠려는 의도
+
 		AuthMember amdto = new AuthMember(mvo); //새로 넣어줄려는 의도
 		amdto.setMvo(mdao.selectOne(id));	//bdao bvo호출 select * from board where bno=#{bno}
 		log.info(">>>>> amdto >> "+amdto.toString());

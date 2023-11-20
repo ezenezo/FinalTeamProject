@@ -39,6 +39,11 @@ public interface MemberDAO {
 
 	int getMemberNo(String id);
 
+
+	String selectDepCd(String id);
+
+	String selecClubCd(String id);
+
 	int updatePw(@Param("id") String id, @Param("pw") String password);
 
 	String checkId(String id);
