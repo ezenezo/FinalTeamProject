@@ -21,9 +21,12 @@ public class BoardTest {
 	public void insertBoard() {
 		for (int i = 0; i < 300; i++) {
 			BoardVO bvo = new BoardVO();
+			bvo.setEmpNo(1);
+			bvo.setId("1");
 			bvo.setTitle("test title" + i);
-			bvo.setWriter("tester" + (int) ((Math.random() * 30) + 1));
 			bvo.setContent("test content" + i);
+			bvo.setBoardType("club");
+			bvo.setClubCd("cl001");
 			bdao.insert(bvo);
 		}
 	}

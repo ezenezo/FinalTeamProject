@@ -14,7 +14,9 @@ import com.myweb.www.repository.BoardDAO;
 import com.myweb.www.repository.ChatDAO;
 import com.myweb.www.repository.CommentDAO;
 import com.myweb.www.repository.FileDAO;
+
 import com.myweb.www.security.MemberVO;
+
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -34,7 +36,11 @@ public class ChatServiceImpl implements ChatService {
 	@Override
 	public int submit(ChatDTO chatDTO) {
 		// TODO Auto-generated method stub
+
+		log.info("ChatServiceImpl의 chatDTO>>> " + chatDTO);
+
 		log.info("ChatServiceImpl의 submit() chatDTO>>> " + chatDTO);
+
 		int isUp = chatdao.submit(chatDTO);
 		return isUp;
 	}
@@ -45,6 +51,7 @@ public class ChatServiceImpl implements ChatService {
 		// TODO Auto-generated method stub
 		return chatdao.selectAll();
 	}
+
 
 
 	@Override
@@ -68,6 +75,7 @@ public class ChatServiceImpl implements ChatService {
 		int isUp = chatdao.submitEmp2(chatDTO);
 		return isUp;
 	}
+
 
 //	@Transactional
 //	@Override
