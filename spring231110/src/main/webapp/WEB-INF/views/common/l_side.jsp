@@ -41,7 +41,7 @@
 					<li><a href="#">공지사항</a></li>
 					<li><a href="#">부서게시판</a></li>
 					<li><a href="#">익명게시판</a></li>
-
+					<li><a href="/chaturl/chat">채팅게시판</a></li>
 				</ul></li>
 			<li><a href="#">동호회</a>
 				<ul class="submenu">

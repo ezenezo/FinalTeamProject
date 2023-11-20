@@ -47,6 +47,12 @@
 	<select id = "getBox" resultType="com.myweb.www.domain.ChatDTO">
 		select * from chat where chatID IN (SELECT MAX(chatID) FROM chat where toID = #{toID}  OR fromID= #{toID} 
 		group by fromID, toID) order by chatID DESC
+<!-- 		SELECT * FROM chat  -->
+<!-- 		WHERE chatID IN ( -->
+<!-- 		    SELECT MAX(chatID)  -->
+<!-- 		    FROM chat  -->
+<!-- 		    WHERE (toID = #{toID} OR fromID = #{toID}) OR (toID = #{toID} OR fromID = #{toID}) -->
+<!-- 		); -->
 	</select>
 	
 	
