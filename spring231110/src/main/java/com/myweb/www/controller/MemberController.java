@@ -27,7 +27,7 @@ import lombok.extern.slf4j.Slf4j;
 
 
 @Slf4j
-@RequestMapping("/member/*")
+@RequestMapping("/member/**")
 @Controller
 public class MemberController {
     
@@ -39,10 +39,6 @@ public class MemberController {
 	
 	@GetMapping("/register")
 	public void register() {
-	}
-	@GetMapping("/index")
-	public String index() {
-		return "index";
 	}
 	
 	@PostMapping("/register")
@@ -169,6 +165,10 @@ public class MemberController {
 		return "index";
 	}
 	
+	@GetMapping("/password")
+	public String changePwd() {
+		return "modifyPwd";
+	}
 	
 	private void logout(HttpServletRequest req, HttpServletResponse res) {
 		Authentication authentication = SecurityContextHolder

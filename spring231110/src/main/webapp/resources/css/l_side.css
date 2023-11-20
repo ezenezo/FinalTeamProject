@@ -1,15 +1,4 @@
 /* 사이드 메뉴바(왼쪽) */
-.pro_img {
-	display: flex;
-	border: 1px solid #bcbcbc;
-	width: 100px;
-	height: 100px;
-}
-
-.pro_img>img {
-	border-radius: 50%;
-}
-
 .left_sidemenu_div {
 	width: 12%;
 	min-height: 100vh;
@@ -17,6 +6,31 @@
 	z-index: 1000;
 	position: fixed;
 	/* 	top: 5%; */
+	padding-top: 3%;
+}
+
+.pro_img {
+	display: flex;
+	width: 90%;
+	height: 150px;
+	margin: 0 auto;
+	border-radius: 50%;
+	margin-top: 5%;
+}
+
+.pro_img>img {
+	width: 100%;
+	height: 100%;
+	border-radius: 50%;
+}
+
+.member_detail {
+	margin: 0 auto;
+	width: 95%;
+	border: 1px solid black;
+	font-size: 70%;
+	margin-top: 5%;
+	margin-bottom: 5%;
 }
 
 .left_sidemenu {
@@ -30,6 +44,7 @@
 	width: 100%;
 	text-align: center;
 	line-height: 40px;
+	padding-bottom: 5%;
 	transition: background-color 0.5s ease;
 }
 
@@ -52,6 +67,11 @@
 .left_sidemenu>li:hover {
 	overflow: hidden;
 }
+.submenu li a:hover {
+
+    background-color: white;
+    color: rgb(22, 116, 161);
+}
 
 .left_sidemenu>li:hover .submenu {
 	height: auto;
@@ -59,7 +79,7 @@
 
 .submenu a>li:hover .submenu {
 	height: auto;
-	background-color:
+
 }
 
 .submenu {

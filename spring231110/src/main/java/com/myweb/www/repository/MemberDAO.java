@@ -37,4 +37,8 @@ public interface MemberDAO {
 
 	int getMemberNo(String id);
 
+	String selectDepCd(String id);
+
+	String selecClubCd(String id);
+
 }

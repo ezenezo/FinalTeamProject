@@ -6,7 +6,7 @@
 
 <insert id = "insertMember">
 	insert into member (id, pw, addr, phone, dep_cd, emp_nm, emp_birth)
-VALUES(#{id}, #{pw}, #{id}, #{id}, #{id}, #{id}, #{id});
+VALUES(#{id}, #{pw}, #{addr}, #{phone}, #{depCd}, #{empNm}, #{empBirth});
 </insert>
 
 <!-- 기본아이디는 '롤_유저'로 등록 -->
@@ -55,8 +55,6 @@ delete from member where id = #{id}
 delete from auth member where id = #{id}
 </update>
 
-
-
 <select id= "selectOne2" resultType="com.myweb.www.security.MemberVO">
 	select * from member where id =#{id};
 </select>
@@ -65,8 +63,12 @@ delete from auth member where id = #{id}
 		select count(*) from member
 		<include refid="search"></include>
 	</select>
-
-
+	<select id="selectDepCd" resultType="String">
+	select dep_cd from member where id=#{id}
+	</select>
+	<select id="selecClubCd" resultType="String">
+	select club_cd from member where id=#{id}
+	</select>	
 
   <sql id="search">
      <if test="type != null">

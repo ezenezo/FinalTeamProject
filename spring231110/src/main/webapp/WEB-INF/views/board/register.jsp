@@ -41,51 +41,33 @@
                             <h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6>
                         </div>
                         <div class="card-body">
-			<form action="/board/register" method="post"
-				enctype="multipart/form-data">
+			<form action="/board/register" method="post">
 
-				<input type="hidden" name="bno">
+				  <sec:authorize access="isAuthenticated()">
+					<sec:authentication property="principal.mvo.empNo" var="authEmpNo"/> 
+					<sec:authentication property="principal.mvo.id" var="authId"/> 
+					<sec:authentication property="principal.mvo.depCd" var="authDepCd"/>
+					<sec:authentication property="principal.mvo.clubCd" var="authClubCd"/>
 
-				<%-- <sec:authorize access="isAuthenticated()">
-					<sec:authentication property="principal.mvo.emp_no" var="authEmpNo" />
-					<sec:authentication property="principal.mvo.nickName" var="authNick" />
-					<sec:authentication property="principal.mvo.authList" var="auths" />
-				</sec:authorize> --%>
+				<input type="hidden" name="empNo" value="${authEmpNo}">
+				<input type="hidden" name="id" value="${authId}">
 
-
-				<div class="input-group mb-3">
-					<select class="form-select" id="inputGroupSelect03"
+				 <div class="input-group mb-3">
+					<select name="boardType" class="form-select" id="inputGroupSelect03"
 						aria-label="Example select with button addon">
 						<option selected>게시판을 선택해주세요.</option>
-						<option value="1">익명</option>
-						<option value="2">부서</option>
-						<!-- principar로 부서,동호회정보 가져오기 -->
-						<option value="3">동호회</option>
+						<option value="anony">익명</option>
+						<option value="depart">부서</option>
+						<option value="club">동호회</option>
 					</select>
-				</div>
-
-
-				<div class="mb-3">
-					<input type="text" class="form-control" name="writer"
-						placeholder="작성자(이거는 나중에 지울거임)">
-				</div>
+				</div> 
+				</sec:authorize> 
+				
 				<div class="mb-3">
 					<input type="text" class="form-control" name="title"
 						placeholder="제목을 입력해 주세요.">
 				</div>
-				<!-- <div class="mb-3">
-					<textarea class="form-control" rows="5" name="content"
-						placeholder="내용을 입력하세요."></textarea>
-				</div>
-
-				<div class="mb-3">
-					<label for="f" class="form-label">FILE_UPLOAD</label> <input
-						class="form-control" type="file" id="files" name="files"
-						multiple="multiple">
-				</div>
-				<div id="fileZone">
-					파일 출력하는 부분
-				</div>  -->
+				
 
 <!-- 썸머노트 시작 -->
 <div class="container">
@@ -96,8 +78,8 @@ $('.summernote').summernote({
 
 	placeholder:'글 내용을 입력해 주세요.',
 	height: 450,
-	  lang: "ko-KR",
-	  onImageUpload : function(files, editor,welEditable){
+	  lang: "ko-KR"
+	/*   onImageUpload : function(files, editor,welEditable){
 		  console.log(files);
 		  console.log(files[0]);
 		  
@@ -117,7 +99,7 @@ $('.summernote').summernote({
 				$note.summernote('insertImage',url);
 			}
 		  });
-	  }
+	  } */
 	});
 </script>
 <!-- 썸머노트 끝 -->

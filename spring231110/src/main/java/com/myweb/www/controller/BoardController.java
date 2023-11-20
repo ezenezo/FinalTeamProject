@@ -45,25 +45,83 @@ public class BoardController {
 
 	private BoardService bsv;
 
-	private FileHandler fh;
+//	private FileHandler fh;
 	
-	private CommentService csv;
+//	private CommentService csv;
 	
 	@Autowired
-	public BoardController(BoardService bsv,FileHandler fh) {
+	public BoardController(BoardService bsv) {
 		this.bsv = bsv;
-		this.fh = fh;
 	}
 
-	// 글쓰기 jsp로 이동
+	// board/register jsp로 이동
 	@GetMapping("/register")
 	public String register() {// jsp에서 온 매핑이랑 뷰로 들어가는 매핑이 같아서(이름이 같아서) void로 하면 왔던 곳으로 가라고 할 수 있음
 		return "/board/register"; // 이렇게 해도 됨(뷰로 들어가는 매핑)
 	}
-	@GetMapping("/list")
-	public void list() {}
-	@GetMapping("/test")
-	public void test() {}
-
+	
+	// 게시글 등록
+	@PostMapping("/register")
+	public String postRegister(BoardVO bvo) {
+		log.info("작성한 bvo >>{} ",bvo);
+		bsv.write(bvo);
+		return "/index";
+	}
+	
+	//부서 게시판 리스트
+	@GetMapping("departBoardList")
+	public String getDepartList(Principal principal,Model model,PagingVO pgvo) {
+		String id = principal.getName().toString();
+		String depCd = bsv.getUserDepCd(id); //로그인한 id로 부서코드 가져오기
+		String depNm = bsv.getUserDepNm(depCd); //부서명 가져오기
+		
+		List<BoardVO> departBoardList = bsv.getDepartList(depCd,pgvo); //가져온 부서의 게시판 가져오기
+		int totalCount = bsv.getDepartTotalCount(depCd,pgvo);		
+		PagingHandler ph = new PagingHandler(totalCount,pgvo);
+		
+		model.addAttribute("departBoardList", departBoardList);
+		model.addAttribute("depNm", depNm);
+		model.addAttribute("ph",ph);
+		return "/board/departBoardList";
+	}
+	//동호회 게시판 리스트
+	@GetMapping("clubBoardList")
+	public String getClubList(Principal principal,Model model,PagingVO pgvo) {
+		String id = principal.getName().toString();
+		String clubCd = bsv.getUserClubCd(id); //로그인한 id로 동호회코드 가져오기
+		String clubNm = bsv.getUserClubNm(clubCd); //동호회명 가져오기		
+		log.info("clubCd>> {}",clubCd);
+		
+		List<BoardVO> clubBoardList = bsv.getClubList(clubCd,pgvo); //가져온 동호회의 게시판 가져오기
+		log.info("clubBoardList>> {}",clubBoardList);
+		for(BoardVO bvo : clubBoardList) {
+			log.info(bvo.getClubCd());
+		}
+		int totalCount = bsv.getClubTotalCount(clubCd,pgvo);
+		log.info("totalCount>> {}",totalCount);
+		PagingHandler ph = new PagingHandler(totalCount,pgvo);
+		log.info("ph>> {}",ph);
+		
+		model.addAttribute("clubBoardList", clubBoardList);
+		model.addAttribute("clubNm", clubNm);
+		model.addAttribute("ph", ph);
+		return "/board/clubBoardList";
+	}
+		
+	//익명 게시판 리스트(나중에...)
+	@GetMapping("anonymousBoardList")
+	public String getAnonyList(Model model) {
+		List<BoardVO> anonyBoardList = bsv.getAnonyList();
+		return "/board/anonymousBoardList";
+	}
+	
+	@GetMapping("boardDetail")
+	public String getDetail(@RequestParam("bno") long bno,Model model) {
+		BoardVO bvo = bsv.getBoardDetail(bno);
+		model.addAttribute("bvo",bvo);
+		
+		return "/board/detail";
+	}
+	
 	
 }

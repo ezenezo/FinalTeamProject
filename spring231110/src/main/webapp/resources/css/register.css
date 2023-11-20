@@ -16,8 +16,9 @@ body {
 }
 
 .jb-container form {
+	width: 500px;
 	background-color: white;
-	padding: 20px;
+	padding: 40px;
 	border-top-left-radius: 0.35rem;
 	border-top-right-radius: 0.35rem;
 	border-bottom-right-radius: 0.35rem;
@@ -67,11 +68,13 @@ form div {
 	color: #fff;
 	background-color: Rgb(19, 151, 213);
 	border: none;
+	margin-top: 40px;
 }
 
 #test {
 	display: flex;
 	justify-content: space-between;
+	margin-bottom: 10px;
 }
 /* .t1{
    width: 150px;
@@ -96,7 +99,7 @@ a{
     color: #ffffff;
     margin: 10px;
     position: absolute;
-    bottom: 10%;
+    bottom: 5%;
     display: none;
 }
 
