@@ -31,7 +31,6 @@ public class MemberServiceImpl implements MemberService {
 	@Transactional
 	@Override
 	public int register(MemberVO mvo) {
-		//기존 메서드 활용
 		int isOk = mdao.insertMember(mvo); //bno 등록
 		return mdao.insertAuthInit(mvo.getId());
 	}

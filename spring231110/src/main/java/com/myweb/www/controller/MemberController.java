@@ -60,7 +60,7 @@ public class MemberController {
 		isOk *= msv.register(mvo);
 		long empNo = msv.getMaxEmpNo();
 		FileVO fvo = null;
-		if(files[0].getSize()>0) {
+		if(files[0] != null) {
 			fvo = pfh.uploadFiles(files[0], empNo);
 		}
 		isOk *= msv.insert(empNo, fvo);
@@ -84,14 +84,11 @@ public class MemberController {
 	@GetMapping("/list")
 	public String list(Model model, PagingVO pagingVO) {
 		model.addAttribute("list", msv.getList(pagingVO));
-//		log.info("페이지정보"+ph);
-		/* 페이징 처리 */
 		// 총 페이지 갯수
 		int totalCount = msv.getTotalCount(pagingVO);
 		PagingHandler ph = new PagingHandler(totalCount, pagingVO);
 		model.addAttribute("ph", ph);
 		log.info("페이지정보" + ph);
-		log.info("겟메핑 /list 탐");
 		return "/member/list";
 
 	}
@@ -104,32 +101,22 @@ public class MemberController {
 
 	@GetMapping("/modify")
 	public void modify(@RequestParam("id") String id, Model m) {
-		log.info(">>>> 겟메핑 modify>>> email >>> " + id);
-		log.info(">>>> modify>>> email >>> " + id);
 		m.addAttribute("mvo", msv.memberDetail(id));
-		log.info("m " + m);
-		log.info("모디파이 겟메핑 끝");
 	}
 	
 	//회원 수정(확인)
 	@PostMapping({ "/modify" })
 	public void modify(MemberVO mvo, Model m, HttpServletRequest req, HttpServletResponse res) {
-		log.info(">>>> 포스트 메핑 modify>>> mvo >>> " + mvo);
-		log.info("2222222222222222222222");
 		int isOk = 3;
 		if (mvo.getPw() == null || mvo.getPw().isEmpty()) {
-			log.info("if(mvo.getPwd().isEmpty())" + "진입");
 			isOk = msv.modifyPwdEmpty(mvo);
 		} else {
-			log.info("mvo.getPwd().isEmpty()의 else{}" + "진입");
 			mvo.setPw(bcEncoder.encode(mvo.getPw()));
 			isOk = msv.modify(mvo);
 		}
-		log.info("if문 지난 위치");
 		logout(req, res);
 
 		m.addAttribute("isOk", isOk);
-		log.info(">>>> 포스트 메핑 modify 끝");
 	}
 	
 	//회원 탈퇴(확인)
