@@ -94,7 +94,7 @@ public class MemberController {
 		/* 페이징 처리 */
 		// 총 페이지 갯수
 		int totalCount = msv.getTotalCount(pagingVO);
-		PagingHandler ph = new PagingHandler(pagingVO, totalCount);
+		PagingHandler ph = new PagingHandler(totalCount, pagingVO);
 		model.addAttribute("ph", ph);
 		log.info("페이지정보" + ph);
 		log.info("겟메핑 /list 탐");

@@ -4,18 +4,6 @@ html, body {
 }
 
 body {
-
-	display: flex;
-	flex-direction: column;
-	min-height: 100vh;
-	margin: 0;
-}
-
-.total {
-	border: 1px solid black;
-	height: 50%;
-	width: 80%;
-
    display: flex;
    flex-direction: column;
    min-height: 100vh;
@@ -25,22 +13,20 @@ body {
 .total {
 
 
- 	border: 1px solid black;
-	height: 82%;
-	margin-top: 5%;
-	/*    margin-bottom:40%; */
-	width: 83%;
-	position: absolute;
-	top: 40%;
-	left: 56%;
-	transform: translate(-50%, -50%);
-	border-radius: calc(0.35rem - 1px) calc(0.35rem - 1px) 0 0;
-	box-shadow: 0 6px 6px rgba(0, 0, 0, 0.23);
-	border: 1px solid #e3e6f0;
+    border: 1px solid black;
+   height: 82%;
+   margin-top: 5%;
+
+   width: 83%;
+   position: absolute;
+   top: 40%;
+   left: 56%;
+   transform: translate(-50%, -50%);
+   border-radius: calc(0.35rem - 1px) calc(0.35rem - 1px) 0 0;
+   box-shadow: 0 6px 6px rgba(0, 0, 0, 0.23);
+   border: 1px solid #e3e6f0;
 
 }
-
-
 
 .subject {
    padding: 0.75rem 1.25rem;
@@ -51,27 +37,25 @@ body {
 
 .content {
 
-	width: 100%;
-	height: 100%;
+   width: 100%;
+   height: 100%;
 
-   	padding-left: 40px;
-	padding-right: 40px;
+      padding-left: 40px;
+   padding-right: 40px;
 
 }
 
 @media screen and (max-width: 1200px) {
   .total {
-	height: 95%; 
-	
+   height: 95%; 
   }
 
-	
+   
 }
 
 @media screen and (max-width: 600px) {
-	.total {
-		height: 99%;
-	}
-
+   .total {
+      height: 99%;
+   }
 
 }
