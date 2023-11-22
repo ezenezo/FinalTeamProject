@@ -19,6 +19,7 @@ html, body {
 	top: 40%;
 	left: 56%;
 	transform: translate(-50%, -50%);
+
 }
 
 .subject {
@@ -45,4 +46,5 @@ html, body {
 	.total {
 		height: 99%;
 	}
+
 }
