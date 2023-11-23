@@ -26,6 +26,7 @@ import com.myweb.www.domain.PagingVO;
 import com.myweb.www.handler.FileHandler;
 import com.myweb.www.handler.PagingHandler;
 import com.myweb.www.handler.ProfileFileHandler;
+import com.myweb.www.security.MemberDTO;
 import com.myweb.www.security.MemberVO;
 import com.myweb.www.service.MemberService;
 
@@ -83,7 +84,11 @@ public class MemberController {
 	//회원 리스트(확인)
 	@GetMapping("/list")
 	public String list(Model model, PagingVO pagingVO) {
-		model.addAttribute("list", msv.getList(pagingVO));
+		MemberDTO mdto = new MemberDTO();
+		mdto.setMlist(msv.getMList(pagingVO));
+		mdto.setClist(msv.getCList(pagingVO));
+		mdto.setDlist(msv.getDList(pagingVO));
+		model.addAttribute("list", mdto);
 		// 총 페이지 갯수
 		int totalCount = msv.getTotalCount(pagingVO);
 		PagingHandler ph = new PagingHandler(totalCount, pagingVO);

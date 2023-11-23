@@ -63,15 +63,15 @@
 					</thead>
 
 					<tbody>
-						<c:forEach items="${list}" var="mvo">
+						<c:forEach items="${list}" var="dto">
 							<tr>
 								<td id="left"></td>
 								<td><img alt="사진 없음" src="../resources/img/profile.jpg"
-									class="profileImg">${mvo.empNm }</td>
+									class="profileImg">${dto.mvo.empNm }</td>
 								<td>${mvo.id }</td>
 								<td>${mvo.phone }</td>
 								<td>${mvo.addr }</td>
-								<td>${mvo.depCd }</td>
+								<td>${mvo.depNm }</td>
 								<td>${mvo.clubCd }</td>
 								<td><button class="detailBtn">상세조회</button></td>
 								<td id="right"></td>

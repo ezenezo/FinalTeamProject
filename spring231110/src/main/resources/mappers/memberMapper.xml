@@ -39,6 +39,10 @@
 		<include refid="search"></include>
 		limit #{pageStart}, #{qty}
 	</select>
+	
+	<!-- select m.emp_nm, m.id, m.addr, m.phone, c.club_nm, d.dep_nm from club c 
+		right join member m on m.club_cd = c.club_cd
+		left join department d on m.dep_cd = d.dep_cd -->
 
 	<select id="selectOne"
 		resultType="com.myweb.www.security.MemberVO">
