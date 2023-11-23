@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
+
      pageEncoding="UTF-8"%> 
  <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> 
  
@@ -154,7 +155,6 @@
 
 
 
-
 <div class="total">
    
         	<!-- 패널 내용 S-->
@@ -169,6 +169,7 @@
 	
 <div class="split-container">
     <div class="left-panel">
+
 
 	<div class="find-container">
 		<table class="table table-bordered table-hover" style="margin-bottom:1px; text-align: center; border: 1px solid #dddddd;">
@@ -349,7 +350,6 @@
 <script type="text/javascript" src="/resources/js/find.js"></script>
 
 <!-- <script type="text/javascript" src="/resources/js/chat.js"></script> -->
-
 <script type="text/javascript">
 	printChatList();
 </script>
@@ -375,5 +375,6 @@
 <jsp:include page="../common/footer.jsp"/>
 
 </body>
+
 
 </html>

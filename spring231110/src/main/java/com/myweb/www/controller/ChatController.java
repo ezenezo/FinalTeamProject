@@ -2,7 +2,6 @@ package com.myweb.www.controller;
 
 import java.lang.ProcessBuilder.Redirect;
 import java.security.Principal;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -12,7 +11,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -38,8 +39,10 @@ import com.myweb.www.domain.PagingVO;
 
 import com.myweb.www.handler.FileHandler;
 import com.myweb.www.handler.PagingHandler;
+
 import com.myweb.www.security.AuthMember;
 import com.myweb.www.security.MemberVO;
+
 import com.myweb.www.service.BoardService;
 import com.myweb.www.service.ChatService;
 import com.myweb.www.service.CommentService;
@@ -70,6 +73,7 @@ public class ChatController {
 //		this.fh = fh;
 	}
 
+
 	// 익명 채팅글쓰기 jsp로 이동
 	@GetMapping("/chat")
 	public String register(Model model, Principal principal) {// jsp에서 온 매핑이랑 뷰로 들어가는 매핑이 같아서(이름이 같아서) void로 하면 왔던 곳으로 가라고 할 수 있음
@@ -78,13 +82,9 @@ public class ChatController {
 	    String username = principal.getName();
 	    // Model 객체에 사용자 이름(ID) 추가
 	    model.addAttribute("username", username);
+
 		return "/chatfolder/chat"; // 이렇게 해도 됨(뷰로 들어가는 매핑)
 	}
-	
-	
-	
-	
-
 
 	@PostMapping(value ="/chat" , consumes = "application/json", produces = MediaType.TEXT_PLAIN_VALUE)
 	@ResponseBody
@@ -154,9 +154,6 @@ public class ChatController {
 //		return "/board/list";
 //	}
 
-
-
-	
 	// 채팅글쓰기 jsp로 이동
 	@GetMapping("/find")
 	public String finduser(Model model, Principal principal) {// jsp에서 온 매핑이랑 뷰로 들어가는 매핑이 같아서(이름이 같아서) void로 하면 왔던 곳으로 가라고 할 수 있음
@@ -183,9 +180,7 @@ public class ChatController {
 		} else {
 		    log.info("Principal 객체가 UsernamePasswordAuthenticationToken 타입이 아닙니다.");
 		}
-		
 
-	    
 	    log.info("username는 "+username);
 	    // Model 객체에 사용자 이름(ID) 추가
 	    model.addAttribute("username", username);
@@ -195,8 +190,6 @@ public class ChatController {
 	    
 		return "/chatfolder/find"; // 이렇게 해도 됨(뷰로 들어가는 매핑)
 	}
-	
-	
 	
 	@PostMapping(value ="/find" , consumes = "application/json", produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
@@ -230,15 +223,6 @@ public class ChatController {
 	}
 	
 
-	
-	
-	
-	
-	
-	
-	
-	
-
 	// 서로 2명만 채팅글쓰기 jsp로 이동
 	@GetMapping("/chat2")
 	public String register2(Model model, Principal principal) {// jsp에서 온 매핑이랑 뷰로 들어가는 매핑이 같아서(이름이 같아서) void로 하면 왔던 곳으로 가라고 할 수 있음
@@ -247,24 +231,19 @@ public class ChatController {
 	    String username = principal.getName();
 	    // Model 객체에 사용자 이름(ID) 추가
 	    model.addAttribute("username", username);
-	    log.info("/chatfolder/chat2로 넘겨주기 직전");
 		return "/chatfolder/chat2"; // 이렇게 해도 됨(뷰로 들어가는 매핑)
 	}
-	
-	
 	
 	@PostMapping(value ="/chat2" , consumes = "application/json", produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
 	public ResponseEntity<String> write2(@RequestBody ChatDTO chatdto) 
 	{
-		log.info(">>>>>포스트/chat2   chatdto>> "+chatdto.toString());
+		log.info(">>>>>>chatdto>> "+chatdto.toString());
 		int isOk = -777;	
 		int isOk2 = -666;
 		if(chatdto.getFromID() == null || chatdto.getFromID().equals("") 
 //				|| chatdto.getToID() == null ||	chatdto.getToID().equals("")
 				||chatdto.getChatContent().equals("")){
-			log.info("1:1채팅 실행중 뭔가 이상해서 0 리턴");
-			
 			isOk = 0;
 		}else {
 			isOk = chatsv.submitEmp2(chatdto);
@@ -275,49 +254,28 @@ public class ChatController {
 						: new ResponseEntity<String>("0", HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 	
-	
-	
-	
-	
-	//1:1 채팅 리스트 출력
-//	@GetMapping(value = "/list2", produces = MediaType.APPLICATION_JSON_VALUE)
-//	@ResponseBody
-//	public ResponseEntity<List<ChatDTO>> list2_test1(@RequestBody ChatDTO chatdto) { // Model 파라미터 제거, @ResponseBody 사용시 필요 없음
-//		
-//		log.info(">>>> 겟Mapping >>> /chat/list_test1 진입 >>> ");
-//		log.info(">>>>>>chatdto>> "+chatdto.toString());
-//		List<ChatDTO> chatList2 = chatsv.getList2(chatdto); // List<ChatDTO> 반환하는지 확인
-//	    log.info("chatList2의 값 " + chatList2);
-//	    
-//	    return new ResponseEntity<>(chatList2, HttpStatus.OK); // 제네릭 파라미터 간소화
-//	}
-	
-	
-
-	
-	
 	//1:1 용 채팅 리스트만 출력하려고 함
 	@PostMapping(value ="/list2" , consumes = "application/json", produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
-	public ResponseEntity<List<ChatDTO>> list2_test1(@RequestBody ChatDTO chatdto) 
+	public ResponseEntity<List<MemberVO>> list2(@RequestBody ChatDTO chatdto) 
 	{
 		log.info("포스트 list2 진입");
 		log.info(">>>>>>chatdto>> "+chatdto.toString());
 		int isOk = -777;	
 		int isOk2 = -555;
 		log.info("list2 초기화 직전");
-		List<ChatDTO> list2;
+		List<MemberVO> list2;
 		log.info("if문 직전");
 		if(chatdto.getToID() == null || chatdto.getToID().equals("") )
 		{
 			log.info("chatdto가 이상함");
 			isOk = 0;
-			list2 = chatsv.getList2(chatdto); // 뭐 에러 날것 같기 한데 일단 진행...
+			list2 = chatsv.list2(chatdto); // 뭐 에러 날것 같기 한데 일단 진행...
 		}else {
 			log.info("chatdto가 멀쩡함");
 			isOk = 1;
 			
-			list2 = chatsv.getList2(chatdto);
+			list2 = chatsv.list(chatdto);
 			log.info("list2는^^ "+ list2);
 		}
 
@@ -327,8 +285,6 @@ public class ChatController {
 		return isOk > 0 ? new ResponseEntity<>(list2, HttpStatus.OK)
 						: new ResponseEntity<>(list2, HttpStatus.INTERNAL_SERVER_ERROR);
 	}
-	
-
 	
 	
 	
@@ -531,4 +487,5 @@ public class ChatController {
 	
 	
 	
+
 }

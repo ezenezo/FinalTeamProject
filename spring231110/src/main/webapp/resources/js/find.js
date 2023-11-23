@@ -149,6 +149,7 @@ async function spreadChatListFromServer(chatData) {
 //     getInfiniteChat();
 // });
 
+
 function getInfiniteChat() {
     setInterval(function () {
         printChatList();
@@ -331,3 +332,4 @@ function adjustEmpListHeight() {
 }
 // 검색 버튼 이벤트 리스너 추가
 // document.getElementById('findFcBtn').addEventListener('click', adjustEmpListHeight);
+

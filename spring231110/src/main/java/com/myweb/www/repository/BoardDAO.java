@@ -2,6 +2,7 @@ package com.myweb.www.repository;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import com.myweb.www.domain.BoardDTO;
@@ -10,34 +11,39 @@ import com.myweb.www.domain.PagingVO;
 
 public interface BoardDAO {
 
-	int insert(BoardVO bvo);
+	void insert(BoardVO bvo);
 
-	List<BoardVO> selectAll();
+	List<BoardVO> selectAllDepartBoard(@Param("depCd") String depCd,@Param("pgvo") PagingVO pgvo);
+
+	String getUserDepNm(String depCd);
+
+	String getUserClubNm(String clubCd);
+
+	List<BoardVO> selectAllClubBoard(@Param("clubCd") String clubCd,@Param("pgvo") PagingVO pgvo);
+
+	List<BoardVO> selectAllAnonyBoard();
 
 	BoardVO selectOne(long bno);
 
-	int update(BoardVO bvo);
+	int departTotalCount(@Param("depCd") String depCd,@Param("pgvo") PagingVO pgvo);
 
-	BoardVO SelectOneForModify(long bno);
+	int clubTotalCount(@Param("clubCd") String clubCd,@Param("pgvo") PagingVO pgvo);
 
-	int delete(long bno);
+	void updateCmtCount();
 
-	void readCount(long bno);
+	void updateReadQty(long bno);
 
-	List<BoardVO> getList(PagingVO pagingVO);
+	int boardLikeCheck(@Param("bno") long bno,@Param("id") String id);
 
-	int getTotalCount(PagingVO pagingVO);
+	void deleteBoardLike(@Param("bno") long bno,@Param("id") String id);
 
-	long selectOneBno();
+	void addBoardLike(@Param("bno") long bno,@Param("id") String id);
 
-	int updateCommentCount();
-	int updateFileCount();
-	
-	int deleteCommentAll(long bno);
+	void updateLikeQty(@Param("bno") long bno,@Param("num") int num);
 
-	void minusReadCount(long bno);
 
-	
 
-//	int removefile(String uuid);
+
+
+
 }

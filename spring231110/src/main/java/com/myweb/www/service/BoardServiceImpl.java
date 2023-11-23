@@ -1,5 +1,7 @@
 package com.myweb.www.service;
 
+import java.security.Principal;
+
 //import static org.hamcrest.CoreMatchers.nullValue;
 
 import java.util.List;
@@ -17,162 +19,160 @@ import com.myweb.www.domain.PagingVO;
 import com.myweb.www.repository.BoardDAO;
 import com.myweb.www.repository.CommentDAO;
 import com.myweb.www.repository.FileDAO;
+import com.myweb.www.repository.MemberDAO;
 
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Service
-public class BoardServiceImpl implements BoardService{
-	@Inject 
+public class BoardServiceImpl implements BoardService {
+
 	private BoardDAO bdao;
+	private MemberDAO mdao;
+	private CommentDAO cdao;	 
+//	private FileDAO fdao;
 //	@Inject 
 //	private CommentService csv;
-	@Inject 
-	private CommentDAO cdao;
-	@Inject 
-	private FileDAO fdao;
 
 	@Autowired
-	public BoardServiceImpl(BoardDAO bdao,CommentDAO cdao,FileDAO fdao) {
-		this.bdao=bdao;
-		this.cdao=cdao;
-		this.fdao=fdao;
-	
+	public BoardServiceImpl(BoardDAO bdao, MemberDAO mdao,CommentDAO cdao) {
+		this.bdao = bdao;
+		this.mdao = mdao;
+		this.cdao = cdao;
+
 	}
 
-//	@Override
-//	public int write(BoardVO bvo) {
-//		return bdao.insert(bvo);
-//	}
-
-	@Transactional
+	// 게시글 등록
 	@Override
-	public List<BoardVO> getList() {
-		int isOk = bdao.updateCommentCount();
-		isOk = bdao.updateFileCount();
-		return bdao.selectAll();
-	}
-
-
-
-//	@Override
-//	public int modify(BoardVO bvo) {
-//		log.info("modify 서비스 임플의 bvo는" + bvo);
-//		
-//		return bdao.update(bvo);
-//	}
-
-	@Override
-	public BoardVO SelectOneForModify(long bno) {
-		return bdao.SelectOneForModify(bno);
-	}
-
-	@Transactional
-	@Override
-	public int remove(long bno) {		
-	 cdao.deleteCommentAll(bno);//게시글 지우기전 댓글 먼저 지우기
-		 fdao.deleteBnoFileAll(bno);//게시글 지우기파일도 먼저 지우기
-		log.info("removed의isOk ");
-		return  bdao.delete(bno)  ; //게시글 지우기
-	}
-
-	@Transactional
-	@Override
-	public List<BoardVO> getList(PagingVO pagingVO) {
-		log.info("pageingVO는" +pagingVO);
-		int isOk = bdao.updateCommentCount();
-		isOk *= bdao.updateFileCount();
-		return bdao.getList(pagingVO);
-	}
-
-	@Override
-	public int getTotalCount(PagingVO pagingVO) {
-		return bdao.getTotalCount(pagingVO);
-	}
-
-	@Override
-	public int write(BoardDTO bdto) {
-		/*bvo, flist 가져와서 각자 db에 저장*/
+	public void write(BoardVO bvo) {
 		
-		//기존 메서드 활용
-		int isUp = bdao.insert(bdto.getBvo()); //bno 등록
-		
-		if(bdto.getFlist()==null) {
-			return isUp;
-		}else if (isUp>0 && bdto.getFlist().size()>0) {//bvo가 잘 등록되었고, 등록할 파일이 존재 한다면
-			long bno = bdao.selectOneBno(); //가장 마지막에 등록된 bno(방금 등록된)
-		
-			//모든 파일에 bno를 세팅
-			for(FileVO fvo : bdto.getFlist()) {
-				fvo.setBno(bno);
-				log.info("디비에 file인서트 직전");
-				log.info(""+fvo);
-				isUp*=fdao.insertFile(fvo);
-			}
+		// 타입에 따라 코드 set
+		if (bvo.getBoardType().equals("depart")) {
+			String depCd = mdao.selectDepCd(bvo.getId());
+			bvo.setDepCd(depCd);
+			log.info("depCd >> {}", depCd);
+		} else if (bvo.getBoardType().equals("club")) {
+			String clubCd = mdao.selecClubCd(bvo.getId());
+			bvo.setClubCd(clubCd);
+			log.info("clubCd >> {}", clubCd);
 		}
+
+			bdao.insert(bvo);
+
+	}
+
+	//로그인한 유저의 부서코드 가져오기
+	@Override
+	public String getUserDepCd(String id) {
+		return mdao.selectDepCd(id);
+	}
+
+	//로그인한 유저의 부서게시글 가져오기
+	@Override
+	public List<BoardVO> getDepartList(String depCd,PagingVO pgvo) {
 		
-		return isUp;
+		bdao.updateCmtCount();
+	
+		return bdao.selectAllDepartBoard(depCd,pgvo);
 	}
 
+	//부서명 가져오기
 	@Override
-	public List<FileVO> getFileList(long bno) {
-		return fdao.getFileList(bno);
+	public String getUserDepNm(String depCd) {
+		return bdao.getUserDepNm(depCd);
 	}
 
-	
-//	@Override
-//	public BoardVO detail(long bno) {
-////		bdao.readCount(bno); //detail2에서 카운트 해줘서 여기서는 빼자
-//		return bdao.selectOne(bno);
-//	}
-	
-	@Transactional
+	//로그인한 유저의 동호회코드 가져오기
 	@Override
-	public BoardDTO detail2(long bno) {
-		bdao.readCount(bno);
-		BoardDTO bdto = new BoardDTO();
-		bdto.setBvo(bdao.selectOne(bno));	//bdao bvo호출 select * from board where bno=#{bno}
+	public String getUserClubCd(String id) {
+		return mdao.selecClubCd(id);
+	}
+
+	//동호회명 가져오기
+	@Override
+	public String getUserClubNm(String clubCd) {
+		return bdao.getUserClubNm(clubCd);
+	}
+
+	//동호회 리스트 가져오기
+	@Override
+	public List<BoardVO> getClubList(String clubCd,PagingVO pgvo) {
+		bdao.updateCmtCount();
+		return bdao.selectAllClubBoard(clubCd,pgvo);
+	}
+
+	//익명게시글 가져오기
+	@Override
+	public List<BoardVO> getAnonyList() {
+		return bdao.selectAllAnonyBoard();
+	}
+
+	//디테일 bvo가져오기
+	@Override
+	public BoardVO getBoardDetail(long bno, String authId) {
+		bdao.updateCmtCount();
 		
-		bdto.setFlist(fdao.getFileList(bno));	//bdao bvo호출
-
-//      DTO클래스는 아래와 같음
-//		public class BoardDTO {
-//			private BoardVO bvo;
-//			private List<FileVO> flist;
-//			
-//		}
-
-		return bdto;
-	}
-
-	@Override
-	public int removefile(String uuid) {
-		// TODO Auto-generated method stub
-		return fdao.removefile(uuid); //여기서 fdao로 방향을 틀어버림
-	}
-
-	@Transactional
-	@Override
-	public int modifyFile(BoardDTO bdto) {
-		log.info("ttttttttttttt   ",bdto.getBvo().getBno());
-//		bdao.readCount(bdto.getBvo().getBno(), -2);
-		bdao.minusReadCount(bdto.getBvo().getBno());
-		log.info("bdto는 "+bdto);
-//		log.info("파일갯수"+bdto.getBvo().getFileCount());
-		int isOk = bdao.update(bdto.getBvo()); //기존 bvo update
-		if(bdto.getFlist()==null) {
-			isOk *= 1;
+		BoardVO bvo = bdao.selectOne(bno);
+		
+		int isOk=bdao.boardLikeCheck(bno,authId);
+		if(isOk>0) {
+			bvo.setLikeCheck(true);
 		}else {
-			if(isOk > 0   &&    bdto.getFlist().size()>0) {
-				long bno = (long)bdto.getBvo().getBno();
-				//모든 fvo에 bno set
-				for(FileVO fvo : bdto.getFlist()) {
-					fvo.setBno(bno);
-					isOk *= fdao.insertFile(fvo);
-				}
-			}
+			bvo.setLikeCheck(false);
 		}
-		return isOk;
+		return bvo;
 	}
+
+	//부서게시글totalCount
+	@Override
+	public int getDepartTotalCount(String depCd,PagingVO pgvo) {
+		return bdao.departTotalCount(depCd,pgvo);
+	}
+
+	//동호회게시글totalCount
+	@Override
+	public int getClubTotalCount(String clubCd, PagingVO pgvo) {
+		return bdao.clubTotalCount(clubCd,pgvo);
+	}
+
+	//조회수 update
+	@Override
+	public void updateReadQty(long bno) {
+		bdao.updateReadQty(bno);
+	}
+
+	//게시물 좋아요 확인(1이면 이미 체크, 0이면 체크안되어있는거)
+	@Override
+	public int boardLikeCheck(long bno, String id) {
+		return bdao.boardLikeCheck(bno,id);
+	}
+
+	//게시물 좋아요 취소
+	@Override
+	public void deleteBoardLike(long bno, String id) {
+		int num=-1;
+		 bdao.deleteBoardLike(bno,id);//board_like테이블에 delete
+		 bdao.updateLikeQty(bno,num); //board테이블의 likeQty에 -1해주기
+	}
+
+	//게시물 좋아요
+	@Override
+	public void addBoardLike(long bno, String id) {
+		int num=1;
+		 bdao.addBoardLike(bno,id); //board_like테이블에 insert
+		 bdao.updateLikeQty(bno,num); //board테이블의 likeQty에 +1해주기
+		
+	}
+
+	@Override
+	public int commentCount(long bno) {
+		bdao.updateCmtCount();
+	
+		return cdao.selectCmtCount(bno);
+	}
+
+	
+
+	
 
 }
