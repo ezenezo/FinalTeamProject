@@ -45,14 +45,41 @@
 	</select>
 	
 	<select id = "getBox" resultType="com.myweb.www.domain.ChatDTO">
-		select * from chat where chatID IN (SELECT MAX(chatID) FROM chat where toID = #{toID}  OR fromID= #{toID} 
-		group by fromID, toID) order by chatID DESC
-<!-- 		SELECT * FROM chat  -->
-<!-- 		WHERE chatID IN ( -->
-<!-- 		    SELECT MAX(chatID)  -->
-<!-- 		    FROM chat  -->
-<!-- 		    WHERE (toID = #{toID} OR fromID = #{toID}) OR (toID = #{toID} OR fromID = #{toID}) -->
-<!-- 		); -->
+<!-- 		select * from chat where chatID IN (SELECT MAX(chatID) FROM chat where toID = #{toID}  OR fromID= #{toID}  -->
+<!-- 		group by fromID, toID) order by chatID DESC -->
+	
+<!-- 		SELECT * FROM chat WHERE chatID IN ( -->
+<!-- 	    SELECT MAX(chatID) FROM ( -->
+<!-- 	        SELECT chatID, LEAST(fromID, toID) AS user1, GREATEST(fromID, toID) AS user2 -->
+<!-- 	        FROM chat -->
+<!-- 	    ) AS subquery -->
+<!-- 	    GROUP BY user1, user2 -->
+<!-- 		) ORDER BY chatID DESC; -->
+
+			SELECT * FROM chat WHERE chatID IN (
+			    SELECT MAX(chatID) FROM (
+			        SELECT chatID, CASE 
+			                        WHEN fromID = #{toID} THEN toID 
+			                        ELSE fromID 
+			                       END AS otherUserID
+			        FROM chat
+			        WHERE fromID = #{toID} OR toID = #{toID}
+			    ) AS subquery
+			    GROUP BY otherUserID
+			) ORDER BY chatID DESC;
+	
+	</select>
+	
+	<select id = "getUnreadChat2" resultType="com.myweb.www.domain.ChatDTO2">
+			SELECT fromID, COUNT(*) AS count
+			FROM chat
+			WHERE toID = #{toID} AND chatRead = 0
+			GROUP BY fromID;
+	</select>
+	
+	
+	<select id= "selectAllMemberforChat" resultType="com.myweb.www.security.MemberVO">
+		SELECT * FROM member;
 	</select>
 	
 	

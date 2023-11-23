@@ -33,6 +33,11 @@
 		update member set last_login = now() where id= #{id}
 	</update>
 
+	<select id="selectAllMemberforChat"
+		resultType="com.myweb.www.security.MemberVO">
+		select * from member
+	</select>
+	
 	<select id="selectAll"
 		resultType="com.myweb.www.security.MemberVO">
 		select * from member

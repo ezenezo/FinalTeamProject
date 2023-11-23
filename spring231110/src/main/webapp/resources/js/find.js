@@ -5,6 +5,7 @@ let currentUserID = document.getElementById("chatName").value; //프린시펄 us
 //호출해서 등록
 document.getElementById("findFcBtn").addEventListener("click", () => {
     console.log("findFcBtn 리스너 진입");
+    adjustEmpListHeight(); //사원명단나오는칸 높이줄임
 
     // 현재 로그인한 사용자 ID를 전역 변수로 저장
     // let currentUserID = document.getElementById("username").value;
@@ -86,13 +87,13 @@ function printChatFriendList(chatData) {
 
                 str += `<thead>`;
                 str += `<tr>`;
-                str += `<th><h4>검색결과</h4></th>`;
+                str += `<th><h4 style="color: black; margin: 2px;">검색결과</h4></th>`;
                 str += `</tr>`;
                 str += `</head>`;
                 str += `<tbody>`;
                 str += `<tr>`;
                 str += `<td style="text-align: center;">`;
-                str += `<h3> ${chatdto.id} </h3>`;
+                str += `<h3 style="margin: 2px;"> ${chatdto.id} </h3>`;
                 str += `<a href="/chaturl/chat2?toID=${chatdto.id}&fromID=${currentUserID}" class="btn btn-primary pull-right">`;
                 str += `메시지보내기`;
                 str += `</td>`;
@@ -204,4 +205,129 @@ document.addEventListener("DOMContentLoaded", (event) => {
     );
     getInfiniteChat();
     getUnread(currentUserID);
+    printEmpList();
 });
+
+//23-11-22추가
+//사원 리스트 출력 함수
+function printEmpList() {
+    //파라미터가 필요는 없을듯
+    spreadEmpListFromServer().then((result) => {
+        console.log("printEmpList 출력함수 진입");
+
+        const empList = document.getElementById("empList");
+        console.log("printEmpList의 result는 ", result);
+        console.log("result.length는 ", result.length);
+        //console.log("result.chatList는 " , result.chatList);
+        //console.log("result.chatList.length는 " , result.chatList.length);
+        if (result.length > 0) {
+            //대소문자 꼭 맞춰야함 위 아래
+
+            //다시 댓글을 뿌릴 때 기존 값 삭제 1page 경우
+            // if (page == 1) {
+            //     ul.innerText = "";
+            // }
+            empList.innerText = "";
+            let str = "";
+            for (let emp of result) {
+                let name1;
+                if (emp.id == currentUserID) {
+                    // name1 = "나";
+                    name1 = emp.id;
+                } else {
+                    name1 = emp.id;
+                }
+
+                // str += `<div class="row">`;
+                // str += `<div class="col-lg-12">`;
+                // str += `<div class="media" >`;
+                // str += `<div><a class="pull-left" href="#">`;
+                // str += `<img class="media-object img-circle" style="width: 30px; height:30px;" src="/resources/img/anoyicon.png" alt="">`;
+
+                // str += `<span class="media-heading">`;
+                // str += `사원아이디: ${name1}  <span class="small pull-rigth style="left-right: 30px;">사원이름:  ${emp.empNm}</span>`;
+                // str += `</span>`;
+
+                // str += `</a></div>`;
+                // str += `<div class="media-body" style="float: center">`;
+
+                // str += `<div style="text-align: left;">생년월일 ${emp.empBirth}</div>`;
+                // str += `</div>`;
+                // str += `</div>`;
+                // str += `</div>`;
+                // str += `</div>`;
+
+                str += `<div class="row" style="width:95%; height:10%; margin-left:10px">`;
+                str += `  <div class="col-lg-12" style="width:95%;">`;
+                str += `    <div class="media" style="width:95%; display: flex; align-items: center;">`;
+                str += `      <div style="flex-shrink: 0;">`;
+                str += `        <a href="/chaturl/chat2?toID=${emp.id}&fromID=${currentUserID}" class="pull-left">`;
+                str += `          <img class="media-object img-circle" style="width: 30px; height: 30px;" src="/resources/img/anoyicon.png" alt="">`;
+                str += `        </a>`;
+                str += `      </div>`;
+
+                str += `      <div style="flex-grow: 1; padding-left: 10px;">`;
+                str += `        <div>`;
+                str += `          <a href="/chaturl/chat2?toID=${emp.id}&fromID=${currentUserID}" class="pull-left"><span class="media-heading">ID: ${emp.id} </span></a>`;
+                str += `        </div>`;
+                str += `        <div style="text-align: left;">`;
+                str += `          <span class="small"><br> 이름: ${emp.empNm} </span><br>`;
+                str += `          <span class="small" style="margin-left: 0px;"> 생년월일 ${emp.empBirth}</span>`;
+                str += `        </div>`;
+                str += `      </div>`;
+                str += `    </div>`;
+                str += `  </div>`;
+                str += `</div>`;
+            }
+            empList.innerHTML += str;
+
+            // empList.scrollTop = empList.scrollHeight;
+            empList.scrollTop = 0;
+
+            //str += `</ul>`;
+
+            // //댓글 페이징 코드
+            // let moreBtn = document.getElementById('moreBtn');
+            // console.log(moreBtn, result.pgvo.pageNo, result.endPage);
+            // //db에서 pgvo + list 같이 가져와야 값을 줄 수 있음.
+            // if (result.pgvo.pageNo < result.endPage) {
+            //     moreBtn.style.visibility = 'visible'; //버튼 표시
+            //     moreBtn.dataset.page = page + 1;
+            // } else {
+            //     moreBtn.style.visibility = 'hidden'; //버튼 숨김
+            // }
+        } else {
+            empList.innerText = "내용이 없습니다.";
+        }
+    });
+}
+
+//모든 사원리스트 요청 함수
+async function spreadEmpListFromServer() {
+    try {
+        const url = "/chaturl/selectAllMemberforChat/";
+        const config = {
+            method: "get",
+            headers: {
+                "content-type": "application/json; charset=utf-8",
+            },
+            body: JSON.stringify(),
+        };
+        const resp = await fetch(url, config);
+        const result = await resp.json(); //리스트 받음
+        // const result = await resp.text(); //리스트 받음
+        console.log("spreadEmpListFromServer의 result는 ", result);
+        return result;
+    } catch (error) {
+        console.log("에러진입");
+        console.log(error);
+    }
+}
+
+// 검색 버튼 클릭 시 empList의 높이 변경
+function adjustEmpListHeight() {
+    var empList = document.getElementById("empList");
+    empList.style.height = "380px";
+}
+// 검색 버튼 이벤트 리스너 추가
+// document.getElementById('findFcBtn').addEventListener('click', adjustEmpListHeight);

@@ -45,4 +45,6 @@ public interface MemberDAO {
 
 	long getMaxEmpNo();
 
+	List<MemberVO> selectAllMemberforChat();
+
 }

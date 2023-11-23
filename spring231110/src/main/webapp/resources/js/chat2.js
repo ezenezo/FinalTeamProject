@@ -228,6 +228,7 @@ function getInfiniteChat() {
 }
 
 document.addEventListener("DOMContentLoaded", (event) => {
+    printChatList(chatData);
     getInfiniteChat();
     getUnread(currentUserID);
 });

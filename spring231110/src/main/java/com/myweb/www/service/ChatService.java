@@ -4,6 +4,7 @@ package com.myweb.www.service;
 import java.util.List;
 
 import com.myweb.www.domain.ChatDTO;
+import com.myweb.www.domain.ChatDTO2;
 import com.myweb.www.security.MemberVO;
 
 public interface ChatService {
@@ -25,4 +26,8 @@ public interface ChatService {
 //	Object getIntAllUnreadChat(ChatDTO chatdto);
 
 	List<ChatDTO> getBox(ChatDTO chatdto);
+
+	List<ChatDTO2> getUnreadChat2(ChatDTO chatdto);
+
+	List<MemberVO> selectAllMemberforChat();
 }

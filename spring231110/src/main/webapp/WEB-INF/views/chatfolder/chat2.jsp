@@ -106,7 +106,7 @@
 <!-- <div class="subject">채딩페이지</div> -->
 <div class="subject">
     <span>일대일 채팅 페이지</span>
-    <a href="/chaturl/find" class="find-link">사원찾기</a> 컨트롤러가 잡게 함
+     <a href="/chaturl/find" class="find-link">사원찾기</a> <!--컨트롤러가 잡게 함 -->
 </div>
 
 	<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -173,13 +173,13 @@
 	                    <div >
 	                        <div >
 <%-- 	                        <input type="text" id="chatName" value="${username}" /> --%>
-	                            <input style="height: 40px; width: 20%;" type="text" id="chatName" class="form-control" value="${username}"  maxlength="8" readonly="readonly">
+	                            <input style="height: 30px; width: 20%;" type="text" id="chatName" class="form-control" value="${username}"  maxlength="8" readonly="readonly">
 	                        </div>
 	                    </div>
-						<div style="height: 100px; display: flex; align-items: center;">
+						<div style="height: 60px; display: flex; align-items: center;">
 						    <div style="flex:0.5;">
 						    	
-						        <textarea style="height: 80px; width: 90%;" id="chatContent" class="form-control" placeholder="메시지를 입력하세요" maxlength="100"></textarea>
+						        <textarea style="height: 50px; width: 90%;" id="chatContent" class="form-control" placeholder="메시지를 입력하세요" maxlength="100"></textarea>
 						    	
 						    </div>
 						    <div>

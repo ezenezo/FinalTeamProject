@@ -26,7 +26,7 @@
 
 /* 채팅 관련 스타일 */
 .media {
-    padding: 10px;
+    padding: 15px;
     border-bottom: 1px solid #eee;
     height : 70px;
 }
@@ -48,6 +48,79 @@
 }
 /* 추가적인 스타일링 필요 */
 
+
+.split-container {
+    display: flex;
+    height: 90%
+}
+
+.left-panel {
+    flex: 1.3; /* 비율에 따라 조정 가능 */
+/*     background-color: #ADD8E6;  연한 파랑 */ 
+        width: 10%;
+        float: left;
+     height: 441px; /* 고정된 높이 설정 */    
+}
+
+.right-panel {
+    flex: 3; /* 비율에 따라 조정 가능 */
+/*      background-color: #FFC0CB;  연한 빨강 */ 
+}
+
+
+.find-container {
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
+  height: 510px;
+}
+@media (min-width: 768px) {
+  .find-container {
+   
+    width: 300px;
+  }
+    #empList {
+    overflow-y: auto;
+    height: 45vh;
+	/*     max-height: 100%;  left-panel의 높이를 넘지 않도록 설정 */
+		overflow-x: hidden; /* 가로 스크롤바 숨기기 */
+	}
+}
+@media (min-width: 992px) {
+  .find-container {
+	width: 345px;
+  }
+  
+  #empList {
+    overflow-y: auto;
+    height: 50vh;
+	/*     max-height: 100%;  left-panel의 높이를 넘지 않도록 설정 */
+		overflow-x: hidden; /* 가로 스크롤바 숨기기 */
+	}
+}
+
+@media (min-width: 1850px) {
+
+  #empList {
+    overflow-y: auto;
+    height: 55vh;
+	/*     max-height: 100%;  left-panel의 높이를 넘지 않도록 설정 */
+		overflow-x: hidden; /* 가로 스크롤바 숨기기 */
+	}
+}
+
+
+#empList {
+    overflow-y: auto;
+/*     max-height: 100%;  left-panel의 높이를 넘지 않도록 설정 */
+	overflow-x: hidden; /* 가로 스크롤바 숨기기 */
+}
+
+#findID::placeholder {
+    font-size: 13px; /* 플레이스홀더의 글자 크기 조정 */
+}
+
 </style>
 <head>
 
@@ -62,9 +135,9 @@
 
     <link href="<c:url value='../resources/bootstrap337/css/custom.css'/>" rel="stylesheet" type="text/css">
 	<link href="<c:url value='../resources/bootstrap337/css/bootstrap.css'/>" rel="stylesheet" type="text/css">
-	<link href="<c:url value='/resources/css/r_side.css'/>" rel="stylesheet"	type="text/css">
+	<link href="<c:url value='../resources/css/r_side.css'/>" rel="stylesheet"	type="text/css">
  
-	<link href="<c:url value='/resources/css/index_all.css'/>" rel="stylesheet" 	type="text/css">
+	<link href="<c:url value='../resources/css/index_all.css'/>" rel="stylesheet" 	type="text/css">
 	
 	
  	<script src="/resources/bootstrap337/js/bootstrap.js"></script>
@@ -78,8 +151,13 @@
 <jsp:include page="../common/nav.jsp"/>
 <jsp:include page="../common/l_side.jsp" />
 
-<div class="total">
 
+
+
+
+<div class="total">
+   
+        	<!-- 패널 내용 S-->
 	<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 	    <ul class="nav navbar-nav">
 	   		<li><a href="/chaturl/chat">채팅메신저페이지</a> </li>
@@ -88,10 +166,12 @@
 		    <li><a href="/chaturl/box">메시지함<span id="unread" class="label label-info"></span></a></li> <!-- 컨트롤러가 잡게 함 -->
 	    </ul>
 	</div>
+	
+<div class="split-container">
+    <div class="left-panel">
 
-
-	<div class="container">
-		<table class="table table-bordered table-hover" style="text-align: center; border: 1px solid #dddddd;">
+	<div class="find-container">
+		<table class="table table-bordered table-hover" style="margin-bottom:1px; text-align: center; border: 1px solid #dddddd;">
 			<thead>
 				<tr>
 					<th colspan="2" style="background-color: skyblue;"><h4 style="color: black;">검색으로 친구 찾기</h4></th>
@@ -105,41 +185,124 @@
 				<tr>
 					
 					<td colspan="2">
-					<input type="hidden" style="height: 40px; width: 20%;" type="text" id="chatName" class="form-control" value="${username}"  maxlength="8" readonly="readonly">
+					<input type="hidden" style="magin:1px; height: 37px; width: 20%;" type="text" id="chatName" class="form-control" value="${username}"  maxlength="8" readonly="readonly">
 					<button id ="findFcBtn" class="btn btn-primary pull-right"  >검색</button> 
 					</td>
 				</tr>
 			</tbody>
+		</table>	
+			
+		<table id="friendResult" class="" style="text-align: center; border: 1px solid #dddddd; width: 100%">
+
+						
 		</table>
+					
+					
+<!-- 					여기가 반복되면서 모든 친구 검색 결과를 알수 있는 부분임  S-->
+<!-- 						모든 사원들 여러명이 보일수도 있는 위치           S-->
+					<div id="empList">
+					
+						<div class="row">
+							<div class="col-lg-12">
+								<div class="media">
+									<a class="pull-left" href="#">
+										<img class="media-object img-circle" style="width: 30px; height:30px;" src="/resources/img/anoyicon.png" alt="">
+									</a>
+								<div class="media-body">
+									<h4 class="media-heading">
+										chatName<span class="small pull-rigth"; style="margin-left: 10px;">     chatTime </span>
+									</h4>
+									<p>chatContent</p>
+								</div>
+								</div>
+							</div>
+						</div>
+						
+						<div class="row">
+							<div class="col-lg-12">
+								<div class="media">
+									<a class="pull-left" href="#">
+										<img class="media-object img-circle" style="width: 30px; height:30px;" src="/resources/img/anoyicon.png" alt="">
+									</a>
+								<div class="media-body">
+									<h4 class="media-heading">
+										chatName<span class="small pull-rigth"; style="margin-left: 10px;">     chatTime </span>
+									</h4>
+									<p>chatContent</p>
+								</div>
+								</div>
+							</div>
+						</div>
+					
+					</div>
+<!-- 					여기가 반복되면서 모든 친구 검색 결과를 알수 있는 부분임  E-->
+<!-- 						모든 사원들 여러명이 보일수도 있는 위치           E-->
+			
+		
+					
 	</div>
-	<div class="container">
-		<table id="friendResult" class="table table-borderd table-hover" style="text-align: center; border: 1px solid #dddddd;">
-			<%--여기가 반복되면서 친구 검색 결과를 알수 있는 부분임 
-				보통은 1명이나 이름으로 검색할 경우 여러명이 보일수도 있는 위치 --%>
-<!-- 				<thead> -->
-<!--                 <tr> -->
-<!--                 <th><h4>검색결과</h4></th> -->
-<!--                 </tr> -->
-<!--                 </head> -->
-<!--                 <tbody> -->
-<!--                 <tr> -->
-<!--                 <td style="text-align: center;"> -->
-<%--                 <h3>${findID} testID</h3> --%>
-<!--                 <a href="http://www.naver.com" class="btn btn-primary pull-right"> -->
-<!--                 메시지보내기 -->
-<!--                 </td> -->
-<!--                 </tr> -->
-<!--                 </tbody> -->
-		</table>
+	
+
+
 	</div>
+	
+	
+<div class="right-panel">
+<!-- 	<div class="container"> -->
+<!-- 		<table class="table table-bordered table-hover" style="text-align: center; border: 1px solid #dddddd;"> -->
+<!-- 			<thead> -->
+<!-- 				<tr> -->
+<!-- 					<th colspan="2" style="background-color: skyblue;"><h4 style="color: black;">검색으로 친구 찾기</h4></th> -->
+<!-- 				</tr> -->
+<!-- 			</thead> -->
+<!-- 			<tbody> -->
+<!-- 				<tr> -->
+<!-- 					<td style="width: 110px;"><h5>친구 아이디</h5></td> -->
+<!-- 					<td><input class="form-control" type="text" id="findID" maxlength="20" placeholder="찾을 아이디를 입력하세요"> </td> -->
+<!-- 				</tr> -->
+<!-- 				<tr> -->
+					
+<!-- 					<td colspan="2"> -->
+<%-- 					<input type="hidden" style="height: 40px; width: 20%;" type="text" id="chatName" class="form-control" value="${username}"  maxlength="8" readonly="readonly"> --%>
+<!-- 					<button id ="findFcBtn" class="btn btn-primary pull-right"  >검색</button>  -->
+<!-- 					</td> -->
+<!-- 				</tr> -->
+<!-- 			</tbody> -->
+<!-- 					<table id="AllfriendResult" class="" style="text-align: center; border: 1px solid #dddddd;"> -->
+<!-- <!-- 					여기가 반복되면서 모든 친구 검색 결과를 알수 있는 부분임  --> 
+<!-- <!--  						모든 사원들 여러명이 보일수도 있는 위치   --> 
+<!-- 					<div class=""> -->
+<!-- 						<div class=""> -->
+<!-- 							<div class="media"> -->
+<!-- 								<a class="pull-left" href="#"> -->
+<!-- 									<img class="media-object img-circle" style="width: 30px; height:30px;" src="/resources/img/anoyicon.png" alt=""> -->
+<!-- 								</a> -->
+<!-- 							<div class="media-body"> -->
+<!-- 								<h4 class="media-heading"> -->
+<!-- 									chatName -->
+<!-- 								</h4> -->
+								
+<!-- 							</div> -->
+<!-- 							</div> -->
+<!-- 						</div> -->
+<!-- 					</div> -->
+						
+<!-- 					</table> -->
+			
+			
+<!-- 		</table> -->
+<!-- 	</div> -->
+</div>
+
+        
+        
+    </div>
 
 
 
-</div><!-- <div class="total"> 끝 -->
 
-
-
-
+ 
+</div>
 
 
 

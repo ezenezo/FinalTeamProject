@@ -31,6 +31,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.myweb.www.domain.BoardDTO;
 import com.myweb.www.domain.BoardVO;
 import com.myweb.www.domain.ChatDTO;
+import com.myweb.www.domain.ChatDTO2;
 import com.myweb.www.domain.CommentVO;
 import com.myweb.www.domain.FileVO;
 import com.myweb.www.domain.PagingVO;
@@ -372,7 +373,7 @@ public class ChatController {
 	
 	
 	
-	//나에게 온 메시지가 몇개 안읽었는지 확인용 (메시지함)
+	//나에게 온 메시지가 총 몇개 안읽었는지 개수 파악용 (메시지함)
 	@PostMapping(value ="/chatUnread" , consumes = "application/json", produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
 	public ResponseEntity<Integer> chatUnread(@RequestBody ChatDTO chatdto) 
@@ -408,10 +409,47 @@ public class ChatController {
 						: new ResponseEntity<>(unreadCount, HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 	
+	//각각의! 사원이 나에게 온 메시지가 각각! 몇개 안읽었는지 확인용 (메시지함)
+	@PostMapping(value ="/chatUnread2" , consumes = "application/json", produces = MediaType.APPLICATION_JSON_VALUE)
+	@ResponseBody
+	public ResponseEntity<List<ChatDTO2>> chatUnread2(@RequestBody ChatDTO chatdto) 
+	{
+		log.info("포스트 chatUnread2 진입");
+		log.info(">>>>>>chatdto>> "+chatdto.toString());
+
+		List<ChatDTO2> unreadCount2; //각각의 읽지 않은 글 확인용
+		int isOk = -7777;	
+		log.info("list2 초기화 직전");
+		
+		log.info("if문 직전");
+		if(chatdto.getToID() == null || chatdto.getToID().equals("") )
+		{
+			log.info("chatdto가 이상함");
+			isOk = 0;
+			unreadCount2 = chatsv.getUnreadChat2(chatdto); // 뭐 에러 날것 같기 한데 일단 진행...
+
+		}else {
+			log.info("chatdto가 멀쩡함");
+			isOk = 1;
+			log.info("컨트롤러의 chatdto는 "+ chatdto);
+			unreadCount2 = chatsv.getUnreadChat2(chatdto);
+			log.info("unreadCount는^^ "+ unreadCount2);
+
+		}
+
+		log.info("어쩄든 unreadCount는 "+ unreadCount2);
+		log.info(">>컨트롤러 chatsv.getAllUnreadChat(chatdto) >>>" + (isOk>0? "OK":"FAIL"));
+		log.info("isOk는" + isOk);
+
+		return isOk > 0 ? new ResponseEntity<>(unreadCount2, HttpStatus.OK)
+						: new ResponseEntity<>(unreadCount2, HttpStatus.INTERNAL_SERVER_ERROR);
+	}
 	
 	
 	
-	//나에게 온 메시지가 몇개 안읽었는지 확인용 (메시지함)
+	
+	
+	//모든 나에게 온 메시지가 몇개 안읽었는지 확인용 (메시지함)
 	@PostMapping(value ="/getBox" , consumes = "application/json", produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
 	public ResponseEntity<List<ChatDTO>> getBox(@RequestBody ChatDTO chatdto) 
@@ -455,6 +493,8 @@ public class ChatController {
 	
 	
 	
+	
+	
 	//다른페이지에서 a태그로 box.jsp로 이동 할떄 동작하는 부분
 	@GetMapping("/box")
 	public String box(Model model, Principal principal) {// jsp에서 온 매핑이랑 뷰로 들어가는 매핑이 같아서(이름이 같아서) void로 하면 왔던 곳으로 가라고 할 수 있음
@@ -470,7 +510,17 @@ public class ChatController {
 	
 	
 	
-	
+	// 사원 리스트 출력
+	@GetMapping(value = "/selectAllMemberforChat", produces = MediaType.APPLICATION_JSON_VALUE)
+	@ResponseBody
+	public ResponseEntity<List<MemberVO>> selectAllMemberforChat() { // Model 파라미터 제거, @ResponseBody 사용시 필요 없음
+		
+		log.info(">>>> GetMapping >>> /chat/list 진입 >>> ");
+		List<MemberVO> empList = chatsv.selectAllMemberforChat(); // List<ChatDTO> 반환하는지 확인
+	    log.info("empList의 값 " + empList);
+	    
+	    return new ResponseEntity<>(empList, HttpStatus.OK); // 제네릭 파라미터 간소화
+	}
 	
 	
 	
