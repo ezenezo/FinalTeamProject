@@ -1,12 +1,14 @@
-document.getElementById('eye1').addEventListener('click', (e)=>{
-    //비밀번호 보기
-    if(e.target.classList.contains('bi-eye-fill')){
-        e.target.classList.toggle('bi-eye-fill');
-        e.target.classList.toggle('bi-eye-slash-fill');
-        e.target.closest('.mb-3').querySelector('input').type = 'password';
-    }else{ //비밀번호 가리기
-        e.target.classList.toggle('bi-eye-fill');
-        e.target.classList.toggle('bi-eye-slash-fill');
-        e.target.closest('.mb-3').querySelector('input').type = 'text';
-    }
+//회원가입 페이지 설명란
+document.getElementById('registerATag').addEventListener('mouseover', ()=>{
+    document.getElementById('registerEx').classList.add('view');
+    document.getElementById('registerATag').addEventListener('mouseleave', ()=>{
+        document.getElementById('registerEx').classList.remove('view');
+    })
+})
+//비밀번호 변경 페이지 설명란
+document.getElementById('modifyPwdATag').addEventListener('mouseover', ()=>{
+    document.getElementById('modifyEx').classList.add('view');
+    document.getElementById('modifyPwdATag').addEventListener('mouseleave', ()=>{
+        document.getElementById('modifyEx').classList.remove('view');
+    })
 })
