@@ -161,7 +161,8 @@
 	width: 400px;
 	padding: 10px;
 	padding-bottom: 20px;
-	display: none;
+	/* display: none;  */
+display:block;
 	flex-direction: column;
 	top: 50%; /* 50%로 바꿔 */
 	left: -100%;
@@ -222,6 +223,7 @@ input[type="range"] {
 	bottom: 0;
 	left: 0;
 	border-radius: 5x;
+	background-color: rgb(197,245,255);
 }
 
 input[type="range"]::-webkit-slider-runnable-track {
@@ -243,7 +245,7 @@ input[type="range"]::-webkit-slider-thumb {
 	-webkit-appearance: none;
 	height: 1.7em;
 	width: 1.7em;
-	background-color: #3264fe;
+	background-color: rgb(53, 197, 240);
 	cursor: pointer;
 	border-radius: 10px;
 	pointer-events: auto;
