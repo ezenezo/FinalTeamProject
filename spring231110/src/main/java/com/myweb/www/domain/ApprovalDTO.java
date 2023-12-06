@@ -16,7 +16,8 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ApprovalDTO {
-    private ApprovalVO apvo;
-    private MemberVO mvo;
+    private List<RequestVO> rlist;
+    private ApprovalVO avo;
+    
     
 }

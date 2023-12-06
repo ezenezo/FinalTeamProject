@@ -1,9 +1,15 @@
 package com.myweb.www.repository;
 
-import org.apache.ibatis.annotations.Param;
+
+
+import java.util.List;
 
 import com.myweb.www.domain.ApprovalDTO;
 import com.myweb.www.domain.ApprovalVO;
+
+import com.myweb.www.domain.PagingVO;
+import com.myweb.www.domain.RequestVO;
+
 
 
 
@@ -11,13 +17,15 @@ import com.myweb.www.domain.ApprovalVO;
 public interface ApprovalDAO {
 
 
-	
-
-	
-
 		boolean approval_club(ApprovalVO avo);
 
-		boolean approvalExist(ApprovalVO avo);
+		Long approvalExist(ApprovalVO avo);
+
+		List<RequestVO> list_club(ApprovalDTO approvalDTO);
+
+		int total_club(PagingVO pagingVO);
+
+	
 	
 
 }
