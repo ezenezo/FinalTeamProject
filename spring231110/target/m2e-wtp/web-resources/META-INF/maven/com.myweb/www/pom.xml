@@ -267,10 +267,8 @@
 		</dependency>
 
 		
-
-
-	<!-- 전경환231205 좌표자동생성을위해...-->
-   <dependency>
+    <!-- 전경환231205 좌표자동생성을위해...-->
+    <dependency>
         <groupId>org.json</groupId>
         <artifactId>json</artifactId>
         <version>20210307</version>
@@ -303,7 +301,6 @@
 			<artifactId>jackson-databind</artifactId>
 			<version>2.16.0</version>
 		</dependency>
-
 
 
 

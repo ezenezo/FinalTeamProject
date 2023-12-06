@@ -137,7 +137,6 @@ public class MemberServiceImpl implements MemberService {
          sb.append("grant_type=authorization_code");
          sb.append("&client_id=e7f7342b45a67c5286814656c21b3bdd");
          sb.append("&redirect_uri=http://localhost:8088/member/");
-         sb.append(오케이);
          sb.append("&code=").append(code);
 
          bw.write(sb.toString());

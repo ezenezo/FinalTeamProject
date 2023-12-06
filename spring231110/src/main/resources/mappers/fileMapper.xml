@@ -39,4 +39,7 @@
 	<select id="getFile" resultType="com.myweb.www.domain.FileVO">
 		select * from file where id = #{id}
 	</select>
+	<select id="selectMainImg" resultType="com.myweb.www.domain.FileVO">
+	select * from file where pno=#{pno}
+	</select>
 </mapper>

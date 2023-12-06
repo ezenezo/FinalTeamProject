@@ -1,6 +1,5 @@
 package com.myweb.www.repository;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
@@ -8,39 +7,37 @@ import org.apache.ibatis.annotations.Param;
 import com.myweb.www.domain.ClubVO;
 import com.myweb.www.domain.PagingVO;
 import com.myweb.www.security.AuthVO;
-import com.myweb.www.security.MemberDTO;
 import com.myweb.www.security.MemberVO;
 
 public interface MemberDAO {
 
-   int insertMember(MemberVO mvo);
+	int insertMember(MemberVO mvo);
 
-   int insertAuthInit(String id);
+	int insertAuthInit(String id);
 
-   MemberVO selectEmail(String username);
+	MemberVO selectEmail(String username);
 
-   List<AuthVO> selectAuths(String username);
+	List<AuthVO> selectAuths(String username);
 
+	MemberVO selectOne(String id);
 
-   int remove(String email);
+	int modify(MemberVO mvo);
 
-   void removeAuth(String email);
+	int modifyPwdEmpty(MemberVO mvo);
 
-   int getTotalCount(PagingVO pagingVO);
+	int remove(String email);
 
-   int getMemberNo(String id);
+	void removeAuth(String email);
 
-   String selectDepCd(String id);
+	int getTotalCount(PagingVO pagingVO);
 
-   String selecClubCd(String id);
+	int getMemberNo(String id);
 
-   int updatePw(@Param("id") String id, @Param("pw") String password);
+	String selectDepCd(String id);
 
-   String checkId(String id);
+	String selecClubCd(String id);
 
-   MemberVO getUserKakao(String email);
-
-String selectCompanyName(String id);
+	int updatePw(@Param("id") String id, @Param("pw") String password);
 
 	String checkEmail(String email);
 
@@ -58,6 +55,6 @@ String selectCompanyName(String id);
 
 	List<MemberVO> selectAllMemberforChat();
 
-
+	String selectCompanyName(String id);
 
 }

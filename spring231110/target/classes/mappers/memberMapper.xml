@@ -3,122 +3,115 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.myweb.www.repository.MemberDAO">
+   <insert id="insertMember">
+      insert into member (id, pw, email, provider,
+      user_nm, type, register_date)
+      VALUES(#{id}, #{pw}, #{email}, #{provider}, #{userNm}, false, now())
+   </insert>
+   
+   <insert id="companyRegister">
+      insert into member (id, pw, email, address, zone_code, detail_address, extra_address, user_nm, type, register_date) values 
+      (#{id}, #{pw}, #{email}, #{address}, #{zoneCode}, #{detailAddress}, #{extraAddress}, #{userNm}, true, now())
+   </insert>
+   
+   <select id="kakaoLogin" resultType="com.myweb.www.security.MemberVO">
+      select * from member where email = #{kakaoEmail}
+   </select>
 
-	<insert id="insertMember">
-		insert into member (id, pw, email, provider,
-		user_nm, type, register_date)
-		VALUES(#{id}, #{pw}, #{email}, #{provider}, #{userNm}, false, now())
-	</insert>
-	
-	<insert id="companyRegister">
-		insert into member (id, pw, email, address, zone_code, detail_address, extra_address, user_nm, type, register_date) values 
-		(#{id}, #{pw}, #{email}, #{address}, #{zoneCode}, #{detailAddress}, #{extraAddress}, #{userNm}, true, now())
-	</insert>
-	
-	<select id="kakaoLogin" resultType="com.myweb.www.security.MemberVO">
-		select * from member where email = #{kakaoEmail}
-	</select>
+   <insert id="insertAuthInit">
+      insert into auth_member values('ROLE_USER', #{id})
+   </insert>
+   
+   <insert id="insertAuthCom">
+      insert into auth_member values('ROLE_COM', #{id})
+   </insert>
 
-	<insert id="insertAuthInit">
-		insert into auth_member values('ROLE_USER', #{id})
-	</insert>
-	
-	<insert id="insertAuthCom">
-		insert into auth_member values('ROLE_COM', #{id})
-	</insert>
+   <select id="getMemberNo" resultType="int">
+      select emp_no from member
+      where id = #{id}
+   </select>
 
-	<select id="getMemberNo" resultType="int">
-		select emp_no from member
-		where id = #{id}
-	</select>
-
+   <select id="selectEmail"
+      resultType="com.myweb.www.security.MemberVO"> <!--시큐리티컨피그에서 유저내임이 이메일임 -->
+      select * from member where id =#{id}
+   </select>
 
    <select id="selectAuths"
       resultType="com.myweb.www.security.AuthVO"> <!--시큐리티컨피그에서 유저내임이 이메일임 -->
       select * from auth_member where id =#{id}
    </select>
 
+
    <select id="selectOne"
       resultType="com.myweb.www.security.MemberVO">
       select * from member where id =#{id};
    </select>
 
+   <update id="updatePw">
+      update member set pw = #{pw} where id = #{id}
+   </update>
+   <update id="remove">
+      delete from member where id = #{id}
+   </update>
+   <update id="removeAuth">
+      delete from auth member where id = #{id}
+   </update>
+   <select id="checkEmail" resultType="string">
+      select email from member where email = #{email}
+   </select>
+   <select id="checkId" resultType="string">
+      select id from member where id = #{id}
+   </select>
 
-
-
+   <select id="getTotalCount" resultType="int">
+      select count(*) from member
+      <include refid="search"></include>
+   </select>
 
    <select id="selectDepCd" resultType="String">
       select dep_cd from member
       where id=#{id}
    </select>
 
+   <select id="selecClubCd" resultType="String">
+      select club_cd from member
+      where id=#{id}
+   </select>
+   
+   <select id="getAuthList" resultType="com.myweb.www.security.AuthVO">
+      select * from auth_member where id = #{id} 
+   </select>
 
-   <select id="selectCompanyName" resultType="String">
+<select id="selectCompanyName" resultType="String">
    select user_nm from member where id=#{id}
    </select>
 
-	<update id="updatePw">
-		update member set pw = #{pw} where id = #{id}
-	</update>
-	<update id="remove">
-		delete from member where id = #{id}
-	</update>
-	<update id="removeAuth">
-		delete from auth member where id = #{id}
-	</update>
-	<select id="checkEmail" resultType="string">
-		select email from member where email = #{email}
-	</select>
-	<select id="checkId" resultType="string">
-		select id from member where id = #{id}
-	</select>
-
-	<select id="getTotalCount" resultType="int">
-		select count(*) from member
-		<include refid="search"></include>
-	</select>
-
-	<select id="selectDepCd" resultType="String">
-		select dep_cd from member
-		where id=#{id}
-	</select>
-
-	<select id="selecClubCd" resultType="String">
-		select club_cd from member
-		where id=#{id}
-	</select>
-	
-	<select id="getAuthList" resultType="com.myweb.www.security.AuthVO">
-		select * from auth_member where id = #{id} 
-	</select>
-
-	<sql id="search">
-		<if test="type != null">
-			<trim prefix="where" prefixOverrides="or">
-				<foreach collection="typeToArray" item="typed">
-					<trim prefix="or">
-						<choose>
-							<when test="typed =='n'.toString()">
-								emp_nm like concat('%',#{keyword},'%')
-							</when>
-							<when test="typed =='i'.toString()">
-								id like concat('%',#{keyword},'%')
-							</when>
-							<when test="typed =='a'.toString()">
-								addr like concat('%',#{keyword},'%')
-							</when>
-							<when test="typed =='d'.toString()">
-								dep_cd like concat('%',#{keyword},'%')
-							</when>
-							<when test="typed =='c'.toString()">
-								club_cd like concat('%',#{keyword},'%')
-							</when>
-						</choose>
-					</trim>
-				</foreach>
-			</trim>
-		</if>
-	</sql>
-
+   <sql id="search">
+      <if test="type != null">
+         <trim prefix="where" prefixOverrides="or">
+            <foreach collection="typeToArray" item="typed">
+               <trim prefix="or">
+                  <choose>
+                     <when test="typed =='n'.toString()">
+                        emp_nm like concat('%',#{keyword},'%')
+                     </when>
+                     <when test="typed =='i'.toString()">
+                        id like concat('%',#{keyword},'%')
+                     </when>
+                     <when test="typed =='a'.toString()">
+                        addr like concat('%',#{keyword},'%')
+                     </when>
+                     <when test="typed =='d'.toString()">
+                        dep_cd like concat('%',#{keyword},'%')
+                     </when>
+                     <when test="typed =='c'.toString()">
+                        club_cd like concat('%',#{keyword},'%')
+                     </when>
+                  </choose>
+               </trim>
+            </foreach>
+         </trim>
+      </if>
+   </sql>
 
 </mapper>
