@@ -16,7 +16,6 @@
 	<select id = "selectListAllFiles" resultType="com.myweb.www.domain.FileVO">
 		select * from file;
 	</select>
-<<<<<<< HEAD
 	
 	<delete id = "removefile">
 	DELETE FROM file WHERE uuid = #{uuid}
@@ -31,24 +30,5 @@
 		values(#{file.uuid}, #{file.saveDir}, #{file.fileName}, #{file.fileType}, #{file.fileSize}, now(), #{empNo})
 	</insert>
 
-=======
-	
-	<delete id = "removefile">
-	DELETE FROM file WHERE uuid = #{uuid}
-	</delete>
-
-	<delete id = "deleteBnoFileAll">
-	DELETE FROM file WHERE bno = #{bno}
-	</delete>
-	
-	<insert id="insertProfile">
-		insert into file(uuid, save_dir, file_name, file_type, file_size, reg_at, id)
-		values(#{file.uuid}, #{file.saveDir}, #{file.fileName}, #{file.fileType}, #{file.fileSize}, now(), #{id})
-	</insert>
-	
-	<select id="getFile" resultType="com.myweb.www.domain.FileVO">
-		select * from file where id = #{id}
-	</select>
->>>>>>> 6d101762b9898b4588d6b29245d870cd26a20ac5
 	
 </mapper>

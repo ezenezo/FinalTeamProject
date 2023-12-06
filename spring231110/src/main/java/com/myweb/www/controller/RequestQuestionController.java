@@ -21,10 +21,7 @@ import lombok.extern.slf4j.Slf4j;
 @Controller
 public class RequestQuestionController {
 	
-<<<<<<< HEAD:spring231110/src/main/java/com/myweb/www/controller/RequestQuestionController.java
 	
-=======
->>>>>>> 6d101762b9898b4588d6b29245d870cd26a20ac5:spring231110/src/main/java/com/myweb/www/controller/ClubController.java
 	@Inject
 	private ClubService clsv;
 		@GetMapping("list")

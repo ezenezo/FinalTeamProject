@@ -54,11 +54,7 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler {
 		setAuthUrl("/member/index");
 		
 		//쭈욱 메퍼.xml까지 갔따옴
-<<<<<<< HEAD
 		boolean isOk = msv.updateLastLogin(getAuthEmail()); //내 이메일의 마지막로그인정보
-=======
-		//boolean isOk = msv.updateLastLogin(getAuthEmail()); //내 이메일의 마지막로그인정보
->>>>>>> 6d101762b9898b4588d6b29245d870cd26a20ac5
 		
 		//내부에서 로그인 세션 저장됨.
 		HttpSession ses = request.getSession();

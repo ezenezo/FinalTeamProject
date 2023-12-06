@@ -13,12 +13,8 @@ import lombok.ToString;
 @ToString
 @Setter
 @Getter
-<<<<<<< HEAD
 public class MemberVO {
 	private long empNo; //사원번호
-=======
-public class MemberVO{
->>>>>>> 6d101762b9898b4588d6b29245d870cd26a20ac5
 	private String id; //아이디
 	private String pw; //비밀번호
 	private String addr; //주소

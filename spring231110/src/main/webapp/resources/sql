@@ -82,7 +82,6 @@ CREATE TABLE `file` (
   
   --request_question 테이블--
   
-<<<<<<< HEAD
 CREATE TABLE request_question (
     request_question_id BIGINT PRIMARY KEY,
     subject VARCHAR(100),
@@ -96,17 +95,3 @@ CREATE TABLE request_question (
     request_id bigint PRIMARY KEY
 
 );
-=======
-  CREATE TABLE club (
-    club_cd VARCHAR(100) PRIMARY KEY,
-    club_nm VARCHAR(100),
-    emp_no BIGINT,
-    club_intro VARCHAR(300),
-    club_man BOOLEAN,
-    emp_nm VARCHAR(100),
-    club_type VARCHAR(100)
-
-);
-  
-) 
->>>>>>> 6d101762b9898b4588d6b29245d870cd26a20ac5

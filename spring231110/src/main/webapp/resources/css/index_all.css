@@ -1,7 +1,11 @@
+@font-face {
+	font-family: NotoSansKR;
+	src: url(../font/NotoSansKR-VariableFont_wght.ttf);
+}
+
 html, body {
 	height: 100%;
 	margin: 0;
-<<<<<<< HEAD
 	font-family: NotoSansKR;
 }
 *{
@@ -37,47 +41,12 @@ body {
 	padding-top: 0.75rem;
 	margin-bottom: 32px;
 
-=======
-	font-family: 'Noto Sans KR', sans-serif;
-}
-
-.body {
-	display: flex;
-	flex-direction: column;
-	min-height: 100vh;
-	margin: 0;
-	background-color: #f8f9fc;	
-}
-
-.total {
-	height: 82%;
-	margin-top: 80px;
-	width: 83%;
-	position: absolute;
-	top: 40%;
-	left: 56%;
-	transform: translate(-50%, -50%);
-
-}
-
-.subject {
-	padding: 0.75rem 1.25rem;
-	margin-bottom: 0;
-	background-color: #f8f9fc;
-	border-bottom: 1px solid #e3e6f0;
->>>>>>> 6d101762b9898b4588d6b29245d870cd26a20ac5
 }
 
 .content {
 	width: 100%;
-<<<<<<< HEAD
 	height: auto;
 	justify-content: center;
-=======
-	height: 94%;
-	padding-left: 40px;
-	padding-right: 40px;
->>>>>>> 6d101762b9898b4588d6b29245d870cd26a20ac5
 }
 
 @media screen and (max-width: 1200px) {
