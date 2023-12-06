@@ -1,0 +1,171 @@
+@font-face {
+	font-family: Montserrat;
+	src: url(../font/Montserrat-VariableFont_wght.ttf);
+}
+
+@font-face {
+	font-family: NotoSansKR;
+	src: url(../font/NotoSansKR-VariableFont_wght.ttf);
+}
+
+@font-face {
+	font-family: PlayFairDisplay;
+	src: url(../font/PlayfairDisplay-VariableFont_wght.ttf);
+}
+
+.footerbody * {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	border: none;
+	background-position: center;
+}
+
+/**********************main 헤더 모음**************************/
+header {
+	position: fixed;
+	background-image: url(../pictures/bgc투명.png);
+	height: 80px;
+	width: 100%;
+	z-index: 10;
+}
+.headerContainer {
+	height: 80px;
+	display: flex;
+	justify-content: space-between;
+	 transition: opacity 0.5s ease; /* 서서히 변화하도록 하는 트랜지션 */
+}
+
+/* .headerContainer:hover {
+    background-color: rgba(255, 255, 255, 0.92);
+} */
+.headerContainer>.boxContainer>a>li:hover {
+	color: green;
+}
+
+.boxContainer {
+	list-style: none;
+	display: flex;
+	margin-top: 30px;
+}
+
+.headerContainer>.boxContainer>a>li {
+	font-family: Montserrat;
+	font-size: 20px;
+	margin-left: 25px;
+	margin-right: 25px;
+	cursor: pointer;
+	color: white;
+	line-height: 1.45;
+	font-weight: 700;
+}
+
+.ezenDesign1 {
+	margin-left: 20px;
+	color: white;
+	font-family: NotoSansKR;
+	font-weight: 700;
+	font-size: 2.5em;
+	width: 241px;
+	height: 19px;
+}
+
+.ezenDesign2 {
+	color: white;
+	font-family: NotoSansKR;
+	font-size: 1.5em;
+}
+
+.headerContainer * {
+	padding: 0px;
+}
+
+/****************************************************************/
+.indexBody{
+margin: 0px;
+}
+/************main hearder 반응형 search *********/
+.indexBody a:visited {
+	color: white;
+	text-decoration: none;
+}
+
+.indexBody a {
+	display: block;
+	text-decoration: none;
+}
+
+/*************************************************/
+
+/*영상*/
+video {
+	width: 100%;
+	height: 100%;
+	background-color: black;
+	background-image: video;
+	left: 0;
+	bottom: 0;
+	top: 0;
+	right: 0;
+	display: block;
+	background-size: 100% 100%;
+	background-size: contain;
+}
+/*영상 속 텍스트*/
+.slideP {
+	position: relative;
+}
+
+.text {
+	position: absolute;
+	width: 100%;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+
+#mainText {
+	font-family: PlayFairDisplay;
+	transition: opacity 0.8s ease; /* 서서히 변화하도록 하는 트랜지션 */
+	text-align: center;
+	font-size: 38px;
+}
+#mainText>strong {
+	color: green;
+}
+
+#backgroundImg1{
+	width: 100%;
+	height: 980px;
+	background-image:url(../img/indexImg2.jpg);
+	position: relative;	
+}
+.secText {
+	position: absolute;
+	width: 100%;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	font-family:NotoSansKR;
+	text-align: center;
+	color: white;
+	transition: opacity 0.8s ease; /* 서서히 변화하도록 하는 트랜지션 */
+}
+.secText *{
+	margin-bottom: 10px;
+}
+.secText img{
+	margin: 0px;
+	padding: 0px;
+}
+.secText > p:nth-child(2){	
+	font-size: 60px;
+    line-height: 1.35;
+    font-weight: 300;
+}
+.secText > p:nth-child(3) {
+	font-size: 18px;
+	line-height: 1.45;
+    font-weight: 200;
+}
+

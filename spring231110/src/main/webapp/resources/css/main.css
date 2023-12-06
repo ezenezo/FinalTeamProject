@@ -1,0 +1,255 @@
+@font-face {
+	font-family: NotoSansKR;
+	src: url(../font/NotoSansKR-VariableFont_wght.ttf);
+}
+
+@font-face {
+	font-family: NotoSansKRBold;
+	src: url(../font/NotoSansKR-ExtraBold.ttf);
+}
+
+@font-face {
+	font-family: NotoSansKRSemiBold;
+	src: url(../font/NotoSansKR-SemiBold.ttf);
+}
+
+.mainBody {
+	font-family: NotoSansKR;
+	margin: 0px;
+	padding: 0px;
+}
+
+.mainBody a {
+	color: black;
+	text-decoration: none;
+}
+
+.mainBody a:hover {
+	color: black;
+	text-decoration: none;
+}
+
+.box {
+	height: 100%;
+	padding: 10px;
+	display: flex;
+	justify-content: center;
+	align-content: center;
+	flex-wrap: nowrap;
+}
+
+.event {
+	width: 970px;
+	height: 280px;
+	background-color: rgb(247, 245, 225);
+	border-radius: 5px, 5px, 5px, 5px;
+	display: flex;
+	justify-content: center;
+	margin-bottom: 100px;
+}
+
+.eventText {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	margin-left: 10px;
+	margin-right: 20px;
+	font-size: 22px;
+	margin-right: 20px;
+}
+
+.eventText>p {
+	font-family: NotoSansKR;
+	color: rgb(2, 82, 82);
+}
+
+.eventText p:first-child {
+	font-family: NotoSansKRSemiBold;
+}
+
+.eventText p:nth-child(2), .eventText p:nth-child(3) {
+	font-family: NotoSansKRBold;
+	margin: 0px;
+	font-size: 30px;
+}
+
+.miniTitle {
+	font-weight: 700;
+	color: rgb(47, 52, 56);
+	font-size: 20px;
+	margin: 0px;
+}
+
+.secTitle {
+	color: rgb(47, 52, 56);
+	font-weight: 400;
+	font-size: 14px;
+	margin-bottom: 10px;
+}
+
+.slides>li>a>img {
+	width: 235px;
+	height: 150px;
+	border-radius: 5px;
+}
+
+.slide_wrapper {
+	position: relative;
+	width: 970px;
+	margin: 0 auto;
+	height: 150px;
+	overflow: hidden;
+	margin-bottom: 100px;
+}
+
+.slides {
+	position: absolute;
+	width: 1705px;
+	left: 0;
+	top: 0;
+	padding: 0px;
+	transition: left 0.5s ease-out;
+	left: 0;
+}
+
+.slides li:not(:last-child) {
+	float: left;
+	margin-right: 10px;
+}
+
+.mainMoreBtn {
+	width: 235px;
+	height: 150px;
+	border: none;
+	display: flex;
+	align-items: center;
+	flex-direction: column;
+	justify-content: center;
+}
+
+.moreBtn {
+	width: 40px;
+	height: 40px;
+	color: #adaeb8;
+}
+
+.moreText {
+	font-size: 14px;
+}
+
+.controls div {
+	position: absolute;
+	padding: 10px 20px;
+	margin: 0 10px;
+	top: 50%;
+	transform: translateY(-50%);
+}
+
+.controls div.prev {
+	left: -15px;
+}
+
+.material-symbols-outlined {
+	color: white;
+	font-size: 30px;
+	font-weight: 400px;
+}
+
+.material-symbols-outlined:hover {
+	cursor: pointer;
+}
+
+.controls div.next {
+	right: -15px;
+}
+
+.margin10 {
+	margin-bottom: 10px;
+}
+
+.menu {
+	display: flex;
+	justify-content: space-between;
+}
+
+.rightText {
+	display: flex;
+	align-items: flex-end
+}
+
+.rightText p {
+	color: rgb(53, 197, 240);
+}
+
+.comunity {
+	width: 100%;
+	height: 308px;
+	border: 1px solid;
+	margin-bottom: 100px;
+}
+
+.leftText2 {
+	display: flex;
+}
+
+.leftText2>img {
+	width: 28px;
+	height: 28px;
+	margin: 0px;
+	padding: 0px;
+}
+
+#imgSize {
+	width: 30px;
+	height: 40px;
+	margin: 0px;
+	padding: 0px;
+}
+
+.atag {
+	width: 100%;
+	height: 100px;
+	display: flex;
+	align-items: center;
+	flex-direction: column;
+	justify-content: space-evenly;
+	
+}
+.divAtag1{
+	width:100%;
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+}
+.divAtag2{
+	width:100%;
+	display: flex;
+	align-items: center;
+	justify-content: center
+}
+.atag>div>a {
+	font-size: .875rem;
+	background-color: #eafaf9;
+	color: #00c7ae;
+	width: 58px;
+	display: block;
+	border-radius: 36px;
+	height: 36px;;
+	line-height: 2.25rem;
+	text-align: center;
+	margin-right: 10px;
+	
+}
+.areaText{
+	width: 50%;
+	display: flex;
+	flex-direction: column;
+	justify-content: center
+}
+.areaText > .secTitle{
+	margin: 0px;
+}
+.margin50{
+	margin-top: 100px;
+	margin-bottom: 100px;
+}
