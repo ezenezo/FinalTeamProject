@@ -82,8 +82,9 @@ function updateButtonColors() {
             button.style.backgroundColor = '#3264fe'; // 파란색
             button.style.color = '#fff'; // 글자 색상 변경 등 추가적인 스타일 적용 가능
         } else {
-            button.style.backgroundColor = ''; // 원래의 스타일로 돌아가게 설정
-            button.style.color = ''; // 원래의 글자 색상으로 돌아가게 설정
+            button.style = ''; // 모든 스타일 초기화
+            // button.style.backgroundColor = ''; // 원래의 스타일로 돌아가게 설정
+            // button.style.color = ''; // 원래의 글자 색상으로 돌아가게 설정
         };
     });
 };
