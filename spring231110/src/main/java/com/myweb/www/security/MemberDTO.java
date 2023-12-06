@@ -12,6 +12,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class MemberDTO {
+
 	private MemberVO mvo;
 	private String kakaoId;
 }
+

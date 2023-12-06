@@ -1,0 +1,559 @@
+@charset "UTF-8";
+
+body {
+	font-size: .8rem;
+	box-sizing: border-box;
+	margin: 0px;
+}
+ul {
+    display: block;
+    list-style-type: disc;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    padding-inline-start: 20px;
+}
+.jb-container {
+	height: 100vh;
+	background-color: Rgb(19, 151, 213);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+}
+
+.jb-container form {
+	width: 500px;
+	background-color: white;
+	padding: 30px;
+	border-top-left-radius: 0.35rem;
+	border-top-right-radius: 0.35rem;
+	border-bottom-right-radius: 0.35rem;
+	border-bottom-left-radius: 0.35rem;
+	display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.inputCss{
+	font-size: .8rem;
+	border-radius: 10rem;
+	display: block;
+	width: 90%;
+	height: 3px;
+	font-weight: 400;
+	line-height: 1.5;
+	color: #6e707e;
+	background-color: #fff;
+	background-clip: padding-box;
+	border: 1px solid #d1d3e2;
+	padding: 1.5rem 1rem;
+	margin: 10px;
+}
+
+form div {
+	border-top-left-radius: 10rem;
+	border-top-right-radius: 10rem;
+	border-bottom-right-radius: 10rem;
+	border-bottom-left-radius: 10rem;
+}
+
+.btn1 {
+	font-size: 1rem;
+	border-radius: 10rem;
+	display: inline-block; /* 수정된 부분 */
+	color: #737373;
+	background-color: transparent;
+	border: none;
+	margin: 14px 10px 5px; /*위 왼쪽 아래*/
+
+	height:33px;
+	padding: 0px calc(2% - 1rem); /* 수정된 부분 */
+	border: 1px solid #737373; 
+}
+
+.btn1:hover {
+    cursor: pointer;
+}
+
+.btn2 {
+    font-size: 1rem;
+    border-radius: 10rem;
+    display: inline-block;
+    color: #fff; /* 흰색 글자 */
+    background-color: #000; /* 검은색 배경 */
+    border: none;
+    margin: 40px 10px 5px;
+    height: 33px;
+    padding: 0px calc(2% - 1rem);
+}
+
+
+
+
+
+.loginBtn {
+	font-size: 1rem;
+	border-radius: 10rem;
+	padding: 1rem 1rem;
+	display: block;
+	width: 500px;
+	color: #fff;
+	background-color: Rgb(19, 151, 213);
+	border: none;
+	margin: 40px 0 5px;
+}
+
+#test {
+	display: flex;
+	justify-content: space-between;
+}
+/* .t1{
+   width: 150px;
+} */
+
+.inputCss option {
+	color: #000; /* 혹은 다른 원하는 색상으로 변경하세요 */
+}
+
+h4{
+	color: white;
+	font-size: 30px;
+}
+
+.mb-3{
+	width: 500px;
+	margin-top: 10px;
+}
+
+.explanation{
+	padding: 10px 15px;
+    background-color: #444444bf;
+    border-radius: 5px;
+    color: #ffffff;
+    margin: 10px;
+    position: absolute;
+
+    bottom: 20%;
+    display: none; 
+}
+
+.aTagDiv{
+	margin-top: 20px;
+	display: flex;
+    justify-content: space-evenly;
+    width: 500px;
+}
+
+.aTag{
+	color: white;
+}
+
+.view{
+	display: block;
+}
+
+
+
+
+
+
+/**********************************************************************/
+/* 모달창 스타일 */
+.modal {
+  display: none; /* 처음에는 숨겨져 있음 */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* 모달 컨텐츠 스타일 */
+.modal-content {
+  background-color: #fefefe;
+  margin: 15% auto; /* 15% from the top and centered */
+  padding: 20px;
+  border: 1px solid #888;
+  width: 30%; /* Could be more or less, depending on screen size */
+}
+
+/* 닫기 버튼 스타일 */
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+/*, CSS에 비활성화 스타일을 추가*/
+.page-content.modal-active {
+  pointer-events: none;
+}
+
+.modal-active .modal {
+  pointer-events: auto;
+}
+/**********************************************************************/
+
+/*전체 페이지를 비활성화하는 스타일을 추가*/
+.disable-scrolling {
+    overflow: hidden;
+    height: 100%;
+}
+.page-blur {
+    filter: blur(2px);
+}
+
+
+/* modal-backdrop 클래스는 모달의 배경을 어둡게 하고 흐리게 하는 역할 */
+.modal-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 100; /* 충분히 높은 z-index */
+}
+
+.modal {
+    z-index: 101; /* modal-backdrop보다 더 높은 z-index */
+}
+
+
+
+
+/* 탭 버튼 스타일 */
+  .tab button {
+    background-color: inherit; /* 배경색 없음 */
+    border: none; /* 테두리 없음 */
+    outline: none; /* 외곽선 없음 */
+    cursor: pointer; /* 커서 스타일 */
+    padding: 10px 15px; /* 패딩 */
+    transition: color 0.3s; /* 색상 변경 효과 */
+    color: grey; /* 기본 색상 */
+  }
+
+/* 탭 버튼 호버 스타일 */
+.tab button:hover {
+  color:rgb(80, 119, 113); /* 호버 시 색상 변경 */
+}
+
+/* 활성화된 탭 버튼 스타일 */
+.tab button.active {
+  color:rgb(80, 119, 113); /* 활성화 시 색상 변경 */
+  border-bottom: 2px solid rgb(80, 119, 113); /* 밑줄 스타일 변경 */
+}
+
+  /* 탭 컨텐츠 스타일 */
+  .tabcontent {
+    display: none; /* 기본적으로 숨김 */
+    padding: 5px; /* 패딩 */
+    border-top: none; /* 상단 테두리 없음 */
+  }
+  
+  
+   .tooltip {
+    display: none; /* 기본적으로 숨김 */
+    position: absolute; /* 상대 위치 설정 */
+    bottom: -40px; /* 버튼 아래 위치 조정 */
+    left: 0; /* 버튼 왼쪽에 맞춤 */
+    background-color: blue; /* 배경색 */
+    color: white; /* 글자색 */
+    padding: 10px; /* 패딩 */
+    border-radius: 5px; /* 둥근 모서리 */
+    z-index: 1; /* 다른 요소 위에 표시 */
+  }
+
+  /* 삼각형 모양 추가 */
+/*   .tooltip::after { */
+/*     content: ""; */
+/*     position: absolute; */
+/*     top: -20%; 말풍선 위쪽에 위치 */
+/*     left: -30%; 삼각형 위치 조정 */
+/*     margin-left: -5px; */
+/*     border-width: 8px; */
+/*     border-style: solid; */
+/*     border-color: blue transparent; 삼각형 색상과 방향 */
+/*   } */
+.tooltip::after {
+  content: "";
+  position: absolute;
+  top: -50%; /*말풍선 위쪽 위치*/
+  left: 15%; /*삼각형 위치 조정*/
+  border-width: 10px;
+  border-style: solid;
+  border-color: transparent transparent blue transparent; /*아래쪽 색상 지정*/
+}
+  
+  .button-container {
+  position: relative; /* 부모 요소의 상대 위치 설정 */
+}
+
+
+.custom-hr {
+  border: none;
+  height: 1px;
+  background-color: #ccc; /* 회색 */
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+/* 탭과 인풋 필드를 감싸는 컨테이너 스타일 */
+.tab-input-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* 인풋 필드 스타일 */
+.input-field {
+    width: 90%; /* 너비 */
+    padding: 10px; /* 패딩 */
+    margin: 10px 0; /* 마진 */
+    border: 1px solid #ccc; /* 테두리 */
+    border-radius: 10px; /* 테두리 둥글게 */
+    background-color: #f2f2f2; /* 배경색 */
+    outline: none; /* 외곽선 제거 */
+    font-size: 1rem; /* 글자 크기 */
+}
+
+/* placeholder 스타일 */
+.input-field::placeholder {
+    color: #888; /* 글자 색상 */
+}
+
+
+.input-with-icon {
+	margin : 27px 0 0 0;
+    display: flex;
+    align-items: center;
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    padding: 5px 10px;
+}
+
+.input-with-icon .fas {
+    color: #888;
+    margin-right: 10px;
+}
+
+.autocomplete-input {
+    border: none;
+    outline: none;
+    flex-grow: 1;
+}
+
+.tablinks.active {
+    border-bottom: 3px solid green; /* 초록색 바 */
+    color: green; /* 선택된 탭의 글자 색상 변경 (선택 사항) */
+}
+
+#subMenuMoving {
+    list-style-type: none; /* 목록 스타일 제거 */
+}
+
+#subMenuMoving li {
+     margin-top: 5px; /*항목 간 간격 조정 */
+}
+
+#subMenuMoving li:hover {
+    background-color: #cccccc; /* 하위 메뉴 항목 호버 시 배경색 변경 */
+}
+
+/* 모든 목록에 대한 스타일 */
+ul li {
+    position: relative; /* 아이콘 위치를 위해 필요 */
+    padding: 15px 10px 15px; /* 목록 항목의 패딩 */
+    cursor: pointer; /* 마우스 커서 변경 */
+}
+
+/* 모든 목록에 마우스를 올렸을 때의 스타일 */
+ul li:hover {
+    background-color: #eeeeee; 
+}
+
+
+
+/* 모든 목록에 마우스를 올렸을 때 'V' 아이콘 표시 */
+#myModal ul li:hover::after {
+    /*content: '▼';*/ /* 'V' 형태 아이콘 (아이콘 폰트 사용 가능) */
+    position: absolute; /* 상대 위치 설정 */
+    right: 10px; /* 오른쪽 끝에 위치 */
+    top: 50%; /* 목록 항목 중앙에 위치 */
+    transform: translateY(-50%); /* 중앙 정렬 */
+}
+#search-box {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background: white;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+    z-index: 1000; /* 지도 위에 표시 */
+}
+
+#address {
+    padding: 5px;
+    border: 1px solid #ddd;
+    width: 200px;
+}
+
+#submit {
+    padding: 5px 10px;
+    background: #007bff;
+    color: white;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+#submit:hover {
+    background: #0056b3;
+}
+
+#myModal .specific-class li::after {
+/*     content: '▼'; */
+    /* 추가적인 스타일링 */
+}
+
+/* 초기 상태에서 '이사' 메뉴에 역삼각형 표시 */
+#movingMenu::after {
+    content: '▼'; /* 역삼각형 */
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+#cleaningMenu::after {
+    content: '▼'; /* 역삼각형 */
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+#incheonMenu::after {
+    content: '▼'; /* 역삼각형 */
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+#seoulMenu::after {
+    content: '▼'; /* 역삼각형 */
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+
+#movingMenu.active::after {
+    content: none; /* 'active' 클래스가 있을 때 역삼각형 숨김 */
+}
+
+#cleaningMenu.active::after {
+    content: none; /* 'active' 클래스가 있을 때 역삼각형 숨김 */
+}
+
+
+/* #houseMovingMenu.active::after { */
+/*     content: none; 'active' 클래스가 있을 때 역삼각형 숨김 */
+/* } */
+
+/* #seoulMenu.active::after { */
+/*     content: none; 'active' 클래스가 있을 때 역삼각형 숨김 */
+/* } */
+
+
+/* 하위 메뉴 항목에 마우스를 올렸을 때만 역삼각형 표시 */
+#myModal .sub-menu-item:hover::after {
+    content: '▼'; /* 역삼각형 */
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+#houseMovingMenu:hover {
+  background-color: #eeeeee; /* 호버 시 배경색 변경 */
+}
+
+.modal ul li ul li a {
+    padding: 22px 65% 22px 20px; /*위 오른쪽 아래 왼쪽*/
+}
+
+.btn1-black {
+    background-color: black;
+    color: white;
+    /* 필요에 따라 다른 스타일 추가 */
+}
+
+
+
+
+
+
+
+
+/* 서울 관련  새로운 클래스 추가: 하위 메뉴를 표시하기 위한 클래스 */
+.sub-menu-visible {
+    display: block; /* 하위 메뉴 보이도록 설정 */
+}
+
+#subMenuSeoul {
+    list-style-type: none; /* 목록 스타일 제거 */
+}
+
+/* 하위 메뉴 항목에 대한 스타일 */
+#subMenuSeoul li {
+ margin-top: 5px; /*항목 간 간격 조정 */
+}
+
+#seoulMenu.active::after {
+    content: none; /* 'active' 클래스가 있을 때 역삼각형 숨김 */
+}
+
+
+
+
+
+
+/* 인천 관련  새로운 클래스 추가: 하위 메뉴를 표시하기 위한 클래스 */
+.sub-menu-visible {
+    display: block; /* 하위 메뉴 보이도록 설정 */
+}
+
+#subMenuIncheon {
+    list-style-type: none; /* 목록 스타일 제거 */
+}
+
+/* 하위 메뉴 항목에 대한 스타일 */
+#subMenuIncheon li {
+ margin-top: 5px; /*항목 간 간격 조정 */
+}
+
+#incheonMenu.active::after {
+    content: none; /* 'active' 클래스가 있을 때 역삼각형 숨김 */
+}
+
+
+
+
