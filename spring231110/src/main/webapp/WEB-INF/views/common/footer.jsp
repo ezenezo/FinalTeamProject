@@ -21,11 +21,10 @@
 
 <body>
 
-
-	<footer class="footer_detail">
+	<div class="footer_detail">
 		<p>&copy; 2023 Your Company. All Rights Reserved.</p>
 		
-	</footer>
+	</div>
 
 </body>
 
