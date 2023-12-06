@@ -4,11 +4,13 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <!DOCTYPE html>
 <html>
+
 <head>
-<link href="../resources/css/login.css" rel="stylesheet">
-<meta charset="UTF-8">
-<title>Insert title here</title>
+	<link href="../resources/css/login.css" rel="stylesheet">
+		<meta charset="UTF-8">
+	<title>Insert title here</title>
 </head>
+
 <body>
 	<div class="jb-container">
 		<form action="/member/login" method="post">

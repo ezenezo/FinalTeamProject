@@ -113,7 +113,7 @@
 		</table>
 	</div>
 	<div class="container">
-		<table id="friendResult" class="table table-borderd table-hover" style="text-align: center; border: 1px solid #dddddd;">
+		<table id="friendResult"  position: absolute; class="table table-borderd table-hover" style="text-align: center; border: 1px solid #dddddd;">
 			<%--여기가 반복되면서 친구 검색 결과를 알수 있는 부분임 
 				보통은 1명이나 이름으로 검색할 경우 여러명이 보일수도 있는 위치 --%>
 <!-- 				<thead> -->

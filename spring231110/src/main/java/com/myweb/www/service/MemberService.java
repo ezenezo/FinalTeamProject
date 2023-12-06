@@ -11,7 +11,7 @@ public interface MemberService {
 
 	int register(MemberVO mvo);
 
-	boolean updateLastLogin(String authEmail);
+//	boolean updateLastLogin(String authEmail);
 
 	List<MemberVO> getList(PagingVO pagingVO);
 

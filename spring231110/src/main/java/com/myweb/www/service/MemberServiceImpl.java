@@ -35,11 +35,11 @@ public class MemberServiceImpl implements MemberService {
 		return mdao.insertAuthInit(mvo.getId());
 	}
 
-	@Override
-	public boolean updateLastLogin(String authEmail) {
-		// TODO Auto-generated method stub
-		return mdao.updateLastLogin(authEmail) > 0 ? true : false;
-	}
+//	@Override
+//	public boolean updateLastLogin(String authEmail) {
+//		// TODO Auto-generated method stub
+//		return mdao.updateLastLogin(authEmail) > 0 ? true : false;
+//	}
 
 	@Override
 	public List<MemberVO> getList(PagingVO pagingVO) {

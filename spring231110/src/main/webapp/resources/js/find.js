@@ -1,6 +1,13 @@
 console.log("find.js진입");
 
 let currentUserID = document.getElementById("chatName").value; //프린시펄 username부터 input으로 넘어온값
+let let_toID;
+// const toID = urlParams.get("toID"); // 'toID' 파라미터의 값을 가져옵니다.
+let chatData = {
+    fromID: currentUserID, //여기 왼쪽 단어가 중요함 디비 컬럼이랑 맞춰야함
+    toID: "",
+    chatContent: "",
+};
 
 //호출해서 등록
 document.getElementById("findFcBtn").addEventListener("click", () => {
@@ -16,7 +23,7 @@ document.getElementById("findFcBtn").addEventListener("click", () => {
     // console.log("1 " + document.getElementById("chatContent").value);
     // const chatName = document.getElementById("chatName").value;
     // console.log("2 " + document.getElementById("chatName").value);
-    let chatData = {
+    chatData = {
         // bno: bnoVal,
         toID: findID,
         // chatContent: chatContent, //여기 왼쪽 단어가 중요함 디비 컬럼이랑 맞춰야함
@@ -25,7 +32,7 @@ document.getElementById("findFcBtn").addEventListener("click", () => {
     postComment(chatData).then((result) => {
         console.log("8번째 ", result);
         if (result.length > 0) {
-            alert("친구 ID가 조회는 됨");
+            // alert("친구 ID가 조회는 됨");
         } else {
             alert("친구 조회 실패");
         }
@@ -61,19 +68,25 @@ async function postComment(chatData) {
 }
 
 //사원id 검색 리스트 출력 함수
-function printChatFriendList(chatData) {
+function printChatFriendList(printchatData) {
     // spreadChatListFromServer(chatData).then((result) => {
-    postComment(chatData).then((result) => {
+    postComment(printchatData).then((result) => {
         //한번더 같은 함수 씀 이번엔 안에 데이터까지 확인하려고
         console.log("printChatFriendList 출력함수 진입");
 
         const ul = document.getElementById("friendResult");
         console.log("result는 ", result);
-        console.log("result.length는 ", result.length);
+        console.log("printChatFriendList의 result.length는 ", result.length);
         //console.log("result.chatList는 " , result.chatList);
         //console.log("result.chatList.length는 " , result.chatList.length);
         if (result.length > 0) {
             //대소문자 꼭 맞춰야함 위 아래
+            let_toID = result[0].id;
+            chatData = {
+                // bno: bnoVal,
+                toID: result[0].id,
+                // chatContent: chatContent, //여기 왼쪽 단어가 중요함 디비 컬럼이랑 맞춰야함
+            };
 
             ul.innerText = "";
             let str = "";
@@ -85,20 +98,27 @@ function printChatFriendList(chatData) {
                 //     name1 = chatdto.fromID;
                 // }
 
-                str += `<thead>`;
-                str += `<tr>`;
-                str += `<th><h4 style="color: black; margin: 2px;">검색결과</h4></th>`;
-                str += `</tr>`;
-                str += `</head>`;
-                str += `<tbody>`;
-                str += `<tr>`;
-                str += `<td style="text-align: center;">`;
-                str += `<h3 style="margin: 2px;"> ${chatdto.id} </h3>`;
-                str += `<a href="/chaturl/chat2?toID=${chatdto.id}&fromID=${currentUserID}" class="btn btn-primary pull-right">`;
-                str += `메시지보내기`;
-                str += `</td>`;
-                str += `</tr>`;
-                str += `</tbody>`;
+                // str += `<thead>`;
+                // str += `<tr>`;
+                // str += `<th><h5 style="color: black; margin: 2px; width:70px">검색결과</h5></th>`;
+                // str += `</tr>`;
+                // str += `</head>`;
+                // str += `<tbody>`;
+                // str += `<tr>`;
+                // str += `<td style="text-align: center;">`;
+                str += `<div style="display: flex; align-items: left;">`;
+                str += `<h5 style="color: black; margin: 2px; width:60px">검색결과</h5>`; //변경추가
+                str += `<h5 style="margin: 2px; width:30px"> ${chatdto.id} </h5><br>`;
+                str += `</div>`; // 새로운 div 종료
+                str += `<div>`; // 버튼을 위한 새로운 div 시작
+                // str += `<a href="/chaturl/chat2?toID=${chatdto.id}&fromID=${currentUserID}" class="btn btn-primary" style="padding:1px; height:25px;">`;
+                str += `<div id = "chatstartbtn" class="btn btn-primary" style="padding:1px; height:25px;">채팅시작<div>`;
+                // str += `채팅시작`;
+                str += `</div>`;
+                str += `</div>`;
+                // str += `</td>`;
+                // str += `</tr>`;
+                // str += `</tbody>`;
 
                 //     <tbody>
                 // 	<c:forEach items="${list }" var="bvo">
@@ -149,10 +169,10 @@ async function spreadChatListFromServer(chatData) {
 //     getInfiniteChat();
 // });
 
-
 function getInfiniteChat() {
     setInterval(function () {
-        printChatList();
+        console.log("getInfiniteChat setInterval의 chatData ", chatData);
+        printChatList(chatData);
     }, 3000);
 
     setInterval(function () {
@@ -218,7 +238,10 @@ function printEmpList() {
 
         const empList = document.getElementById("empList");
         console.log("printEmpList의 result는 ", result);
-        console.log("result.length는 ", result.length);
+        console.log(
+            "spreadEmpListFromServer의 result.length는 ",
+            result.length
+        );
         //console.log("result.chatList는 " , result.chatList);
         //console.log("result.chatList.length는 " , result.chatList.length);
         if (result.length > 0) {
@@ -328,8 +351,142 @@ async function spreadEmpListFromServer() {
 // 검색 버튼 클릭 시 empList의 높이 변경
 function adjustEmpListHeight() {
     var empList = document.getElementById("empList");
-    empList.style.height = "380px";
+    empList.style.height = "500px";
 }
 // 검색 버튼 이벤트 리스너 추가
 // document.getElementById('findFcBtn').addEventListener('click', adjustEmpListHeight);
 
+//우측에 채팅내용 출력 함수
+function printChatList(chatData) {
+    spreadChatListFromServer2(chatData).then((result) => {
+        console.log("printChatList 출력함수 진입");
+
+        const ul = document.getElementById("chatList2");
+        console.log("printChatList 의 result는 ", result);
+        console.log("result.length는 ", result.length);
+        //console.log("result.chatList는 " , result.chatList);
+        //console.log("result.chatList.length는 " , result.chatList.length);
+        if (result.length > 0) {
+            //대소문자 꼭 맞춰야함 위 아래
+
+            ul.innerText = "";
+            let str = "";
+            for (let chatdto of result) {
+                let name1;
+                if (chatdto.fromID == currentUserID) {
+                    name1 = "나";
+                } else {
+                    name1 = chatdto.fromID;
+                }
+
+                str += `<div class="row">`;
+                str += `<div class="col-lg-12">`;
+                str += `<div class="media" >`;
+                str += `<div><a class="pull-left" href="#">`;
+                str += `<img class="media-object img-circle" style="width: 30px; height:30px;" src="/resources/img/anoyicon.png" alt="">`;
+
+                str += `<span class="media-heading">`;
+                str += `${name1}  <span class="small pull-rigth style="left-right: 30px;">  ${chatdto.chatTime}</span>`;
+                str += `</span>`;
+
+                str += `</a></div>`;
+                str += `<div class="media-body" style="float: center">`;
+
+                str += `<div style="text-align: left;">${chatdto.chatContent}</div>`;
+                str += `</div>`;
+                str += `</div>`;
+                str += `</div>`;
+                str += `</div>`;
+            }
+            ul.innerHTML += str;
+
+            const chatList = document.getElementById("chatList2");
+            chatList.scrollTop = chatList.scrollHeight;
+
+            //str += `</ul>`;
+
+            // //댓글 페이징 코드
+            // let moreBtn = document.getElementById('moreBtn');
+            // console.log(moreBtn, result.pgvo.pageNo, result.endPage);
+            // //db에서 pgvo + list 같이 가져와야 값을 줄 수 있음.
+            // if (result.pgvo.pageNo < result.endPage) {
+            //     moreBtn.style.visibility = 'visible'; //버튼 표시
+            //     moreBtn.dataset.page = page + 1;
+            // } else {
+            //     moreBtn.style.visibility = 'hidden'; //버튼 숨김
+            // }
+        } else {
+            ul.innerText = "글이 없습니다.";
+        }
+    });
+}
+
+//채팅글 요청 함수
+async function spreadChatListFromServer2(chatData) {
+    try {
+        console.log("spreadChatListFromServer2의 chatData는 ", chatData);
+        const url = "/chaturl/list2/";
+        const config = {
+            method: "post",
+            headers: {
+                "content-type": "application/json; charset=utf-8",
+            },
+            body: JSON.stringify(chatData),
+        };
+        const resp = await fetch(url, config);
+        const result = await resp.json(); //리스트 받음
+        // const result = await resp.text(); //리스트 받음
+        console.log("spreadChatListFromServer2의 result는 ", result);
+        return result;
+    } catch (error) {
+        console.log("에러진입");
+        console.log(error);
+    }
+}
+
+//이벤트 위임은 상위 요소에 이벤트 리스너를 추가하고,
+//이벤트가 발생했을 때 타겟 요소가 관심 대상인지 확인하는 방법
+// 동적으로 생성되는 요소에도 효과적
+document.body.addEventListener("click", function (e) {
+    if (e.target && e.target.id === "chatstartbtn") {
+        // 여기에 'chatstartbtn' 클릭 시의 로직을 작성하세요.
+        //우측 채팅시작함수 등록
+        // document
+        //     .getElementById("chatstartbtn")
+        //     .addEventListener("click", () => {
+        console.log("chatstartbtn 리스너 진입");
+        adjustEmpListHeight(); //사원명단나오는칸 높이줄임
+
+        // const findID = document.getElementById("findID").value;
+
+        chatData = {
+            fromID: currentUserID,
+            toID: let_toID,
+            // chatContent: chatContent, //여기 왼쪽 단어가 중요함 디비 컬럼이랑 맞춰야함
+        };
+        console.log("chatstartbtn의 chatData ", chatData);
+        postComment(chatData).then((result) => {
+            console.log("8번째 ", result);
+            if (result.length > 0) {
+                // alert("chatstartbtn의 '친구 ID가' 조회는 됨");
+            } else {
+                alert("chatstartbtn의 '친구 조회' 실패");
+            }
+
+            // printCommentList(bnoVal);
+            //전체 채팅글 출력
+            printChatList(chatData);
+            // document.getElementById("chatContent").value = "";
+            // document.getElementById("chatContent").focus();
+        });
+        // });
+    }
+});
+// document.body.addEventListener("click", function (e) {
+//     if (e.target && e.target.id === "chatstartbtn") {
+//         // 여기에 'chatstartbtn' 클릭 시의 로직을 작성하세요.
+//         console.log("chatstartbtn 리스너 진입");
+//         adjustEmpListHeight(); //사원명단나오는칸 높이줄임
+//         // 기타 로직...
+//     }
+// });

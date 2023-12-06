@@ -13,20 +13,14 @@ import lombok.ToString;
 @ToString
 @Setter
 @Getter
-public class MemberVO {
-	private long empNo; //사원번호
-	private String id; //아이디
-	private String pw; //비밀번호
-	private String addr; //주소
-	private String phone; //전화번호
-	private String depCd; //부서코드
-	private String empNm; //사원명
-	private String empBirth; //생년월일
-	private String lastLogin; //마지막 로그인
+public class MemberVO{
+   private String id; //아이디
+   private String pw; //비밀번호
+   private String email; //이메일
+   private String userNm; //회원명
+   private String provider; //(naver, kakao, ...) //삭제
+   private boolean type; //업체 여부
 
-	private String clubCd;// 동호회 코드
-
-
-	private List<AuthVO> authVOList;
-	
+   private List<AuthVO> authVOList;
+   
 }

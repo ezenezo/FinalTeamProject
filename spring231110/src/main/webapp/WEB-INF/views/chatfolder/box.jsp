@@ -142,7 +142,7 @@
 	                            <input style="height: 40px; width: 20%;" type="text" id="chatName" class="form-control" value="${username}"  maxlength="8" readonly="readonly">
 	                        </div>
 	                    </div>
-						<div style="height: 100px; display: flex; align-items: center;">
+						<div style="height: 80px; display: flex; align-items: center;">
 
 						    <div>
 						        <button id="chatSubmitBtn" type="button" class="btn btn-default" >전송</button>

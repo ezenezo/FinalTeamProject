@@ -32,11 +32,10 @@ console.log("chat.js진입");
 //     });
 //     $('#chatContent').val('');
 // }
-
 // 현재 로그인한 사용자 ID를 전역 변수로 저장
+
 let currentUserID = document.getElementById("chatName").value;
-
-
+console.log("js 시작하자마자 currentUserID는 " + currentUserID);
 //호출해서 등록
 document.getElementById("chatSubmitBtn").addEventListener("click", () => {
     console.log("chatSubmitBtn 리스너 진입");
@@ -54,9 +53,7 @@ document.getElementById("chatSubmitBtn").addEventListener("click", () => {
     postComment(chatData).then((result) => {
         // console.log("8 " , result);
         if (result > 0) {
-
             //alert("채팅글 insert 완료");
-
         } else {
             alert("댓글 insert 실패");
         }
@@ -122,9 +119,7 @@ function printChatList() {
                 // <div class="col-lg-12">
                 //     <div class="media">
                 //         <a class="pull-left" href="#">
-
                 //             <img class="media-object img-circle" style="width: 30px; height:30px;" src="/resources/img/anoyicon.png" alt="">
-
                 //         </a>
                 //     <div class="media-body">
                 //         <h4 class="media-heading">
@@ -135,8 +130,8 @@ function printChatList() {
                 //     </div>
                 // </div>
                 // </div>
-
                 let name1;
+                console.log("js 133줄쯤 currentUserID는 " + currentUserID);
                 if (chatdto.fromID == currentUserID) {
                     name1 = "나";
                 } else {
@@ -157,12 +152,10 @@ function printChatList() {
                 str += `<div class="media-body" style="float: center">`;
 
                 str += `<div style="text-align: left;">${chatdto.chatContent}</div>`;
-
                 str += `</div>`;
                 str += `</div>`;
                 str += `</div>`;
                 str += `</div>`;
-
 
                 // str += `<div class="row">`;
                 // str += `<div class="col-lg-12">`;
@@ -179,7 +172,6 @@ function printChatList() {
                 // str += `</div>`;
                 // str += `</div>`;
                 // str += `</div>`;
-
             }
             ul.innerHTML += str;
 
@@ -221,9 +213,57 @@ async function spreadChatListFromServer() {
 function getInfiniteChat() {
     setInterval(function () {
         printChatList();
-    }, 2500);
+    }, 3000);
+
+    setInterval(function () {
+        getUnread(currentUserID);
+    }, 4000);
+}
+
+// 읽지 않은 메시지 관련 함수
+async function getUnread(currentUserID) {
+    try {
+        console.log("비동기 getUnread 함수 진입");
+        console.log("230줄의 currentUserID는", currentUserID);
+        const url = "/chaturl/chatUnread";
+        const chatData = { toID: currentUserID }; //이렇게 해야 컨트롤러가 인식하기 시작함 //ChatDTO형식의 변수(db컬럼명)개념으로 인식하기 시작
+        const config = {
+            method: "post",
+            headers: {
+                "content-type": "application/json; charset=utf-8",
+            },
+            body: JSON.stringify(chatData),
+        };
+        console.log("5는 ", config);
+        const resp = await fetch(url, config);
+        const result = await resp.text(); //isOk
+        // return result;
+        console.log("안읽은 글 개수는 " + result);
+        if (result >= 1) {
+            showUnread(result);
+        } else {
+            showUnread("");
+        }
+        console.log(" getUnread(currentUserID) 정상동작완료");
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+function showUnread(result) {
+    console.log("showUnread(result)함수 진입 " + result);
+    // $("#unread").html(result);
+    document.getElementById("unread").innerHTML = result;
+    console.log("showUnread(result)함수 탈출 " + result);
 }
 
 document.addEventListener("DOMContentLoaded", (event) => {
+    // 페이지가 완전히 로드된 후 currentUserID 값을 설정
+    currentUserID = document.getElementById("chatName").value;
+    console.log(
+        "//페이지가 완전히 로드된 후 currentUserID 값을 다시 설정한 값은 " +
+            currentUserID
+    );
     getInfiniteChat();
+    getUnread(currentUserID);
 });

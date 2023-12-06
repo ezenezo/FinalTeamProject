@@ -1,5 +1,4 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-
      pageEncoding="UTF-8"%> 
  <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> 
  
@@ -155,6 +154,7 @@
 
 
 
+
 <div class="total">
    
         	<!-- 패널 내용 S-->
@@ -170,22 +170,23 @@
 <div class="split-container">
     <div class="left-panel">
 
-
 	<div class="find-container">
 		<table class="table table-bordered table-hover" style="margin-bottom:1px; text-align: center; border: 1px solid #dddddd;">
 			<thead>
 				<tr>
-					<th colspan="2" style="background-color: skyblue;"><h4 style="color: black;">검색으로 친구 찾기</h4></th>
+					<th colspan="2" style="background-color: skyblue;"><h4 style="color: black;">검색으로 사원 찾기</h4></th>
 				</tr>
 			</thead>
 			<tbody>
 				<tr>
-					<td style="width: 110px;"><h5>친구 아이디</h5></td>
+					<td style="width: 110px;"><h5>사원 아이디</h5></td>
 					<td><input class="form-control" type="text" id="findID" maxlength="20" placeholder="찾을 아이디를 입력하세요"> </td>
 				</tr>
 				<tr>
 					
 					<td colspan="2">
+					<table id="friendResult" class="" style="margin: -6px; position: absolute; text-align: center; border: 1px solid #dddddd; width: 14%">						
+					</table>
 					<input type="hidden" style="magin:1px; height: 37px; width: 20%;" type="text" id="chatName" class="form-control" value="${username}"  maxlength="8" readonly="readonly">
 					<button id ="findFcBtn" class="btn btn-primary pull-right"  >검색</button> 
 					</td>
@@ -193,10 +194,7 @@
 			</tbody>
 		</table>	
 			
-		<table id="friendResult" class="" style="text-align: center; border: 1px solid #dddddd; width: 100%">
 
-						
-		</table>
 					
 					
 <!-- 					여기가 반복되면서 모든 친구 검색 결과를 알수 있는 부분임  S-->
@@ -249,7 +247,7 @@
 	
 	
 <div class="right-panel">
-<!-- 	<div class="container"> -->
+	<div class="container">
 <!-- 		<table class="table table-bordered table-hover" style="text-align: center; border: 1px solid #dddddd;"> -->
 <!-- 			<thead> -->
 <!-- 				<tr> -->
@@ -292,7 +290,72 @@
 			
 			
 <!-- 		</table> -->
-<!-- 	</div> -->
+
+
+
+				<div id="chat" >
+	               <div id="chatList2" style="overflow-y: auto; overflow-x: hidden; width: auto; height:550px;"> <!-- portlet-body chat widget -->
+	                <!--------------- 여기에 뭔가 주루루륵 반복해서 들어가는 부분 같음 S------------------------------------------------------------------->
+					<div>잠시만 기다려주세요</div>
+					<div class="row">
+						<div class="col-lg-12">
+							<div class="media">
+								<a class="pull-left" href="#">
+									<img class="media-object img-circle" style="width: 30px; height:30px;" src="/resources/img/anoyicon.png" alt="">
+								</a>
+							</div>
+							<div class="media-body">
+								<h4 class="media-heading">
+									chatName<span class="small pull-rigth">chatTime </span>
+								</h4>
+								<p>chatContent</p>
+							</div>
+							
+						</div>
+					</div>
+					
+					<div class="row">
+						<div class="col-lg-12">
+							<div class="media">
+								<a class="pull-left" href="#">
+									<img class="media-object img-circle" style="width: 30px; height:30px;" src="/resources/img/anoyicon.png" alt="">
+								</a>
+							<div class="media-body">
+								<h4 class="media-heading">
+									chatName<span class="small pull-rigth"; style="margin-left: 10px;">     chatTime </span>
+								</h4>
+								<p>chatContent</p>
+							</div>
+							</div>
+						</div>
+					</div>
+	                <!--------------- 여기에 뭔가 주루루륵 반복해서 들어가는 부분 같음 E------------------------------------------------------------------->
+	                </div>
+	                <div>    
+	                    <div>
+	                        <div>
+<%-- 	                        <input type="text" id="chatName" value="${username}" /> --%>
+	                            <input style="height: 30px; width: 20%;" type="text" id="chatName" class="form-control" value="${username}"  maxlength="8" readonly="readonly">
+	                        </div>
+	                    </div>
+						<div style="height: 60px; display: flex; align-items: center;">
+						    <div style="flex:0.5;">
+						    	
+						        <textarea style="height: 50px; width: 90%;" id="chatContent" class="form-control" placeholder="메시지를 입력하세요" maxlength="100"></textarea>
+						    	
+						    </div>
+						    <div>
+						        <button id="chatSubmitBtn" type="button" class="btn btn-default" >전송</button>
+						    </div>
+						</div>
+
+	                </div>
+	            </div>
+
+
+
+
+	</div>
 </div>
 
         
@@ -350,6 +413,7 @@
 <script type="text/javascript" src="/resources/js/find.js"></script>
 
 <!-- <script type="text/javascript" src="/resources/js/chat.js"></script> -->
+
 <script type="text/javascript">
 	printChatList();
 </script>
@@ -375,6 +439,5 @@
 <jsp:include page="../common/footer.jsp"/>
 
 </body>
-
 
 </html>
