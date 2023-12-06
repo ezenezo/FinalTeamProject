@@ -6,7 +6,9 @@
 html, body {
 	height: 100%;
 	margin: 0;
-	font-family: NotoSansKR;
+
+	font-family: 'Noto Sans KR', sans-serif;
+
 }
 
 body {
@@ -18,10 +20,15 @@ body {
 }
 
 .total {
-	margin: 0 auto;
-	position: relative;
-	width: 70.625rem;
-	padding-top:48px;
+
+	height: 82%;
+	margin-top: 80px;
+	width: 83%;
+	position: absolute;
+	top: 40%;
+	left: 56%;
+	transform: translate(-50%, -50%);
+
 
 	display: flex;
 	min-height: 70vh;

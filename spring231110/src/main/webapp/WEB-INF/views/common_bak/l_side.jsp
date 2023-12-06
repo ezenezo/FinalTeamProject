@@ -32,7 +32,8 @@
 					<li><a href="#">휴가신청</a></li>
 					<li><a href="/board/register">게시판등록</a></li>
 				</ul></li>
-			<li id="mainmenu"><a href="#" data-hover="게시판"><i class="bi bi-card-text"></i>게시판</a>
+			<li id="mainmenu"><a href="#" data-hover="게시판"><i
+					class="bi bi-card-text"></i>게시판</a>
 				<ul class="submenu">
 					<li><a href="#">공지사항</a></li>
 					<li><a href="/board/departBoardList">부서게시판</a></li>
@@ -54,7 +55,10 @@
 				</ul></li>
 			<li id="mainmenu"><a href="#"><i class="bi bi-door-open"></i>멤버확인용</a>
 				<ul class="submenu">
-					<li><a href="/member/register">회원가입</a></li>
+				<li><a>${user.userNm }</a></li>
+					<c:if test="${user==null }">
+						<li><a href="/member/register">회원가입</a></li>
+					</c:if>
 					<li><a href="#">동호회 설정</a></li>
 					<li><a href="/member/login">로그인</a></li>
 					<li><a href="/member/logout">로그아웃</a></li>

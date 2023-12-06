@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 
+import com.myweb.www.domain.ClubVO;
 import com.myweb.www.domain.PagingVO;
 import com.myweb.www.security.AuthVO;
 import com.myweb.www.security.MemberVO;
@@ -18,9 +19,6 @@ public interface MemberDAO {
 
 	List<AuthVO> selectAuths(String username);
 
-//	int updateLastLogin(String authEmail);
-
-	List<MemberVO> selectAll(PagingVO pagingVO);
 
 	MemberVO selectOne(String id);
 
@@ -42,9 +40,19 @@ public interface MemberDAO {
 
 	int updatePw(@Param("id") String id, @Param("pw") String password);
 
+	String checkEmail(String email);
+
+	MemberVO getUserKakao(String email);
+
+	MemberVO kakaoLogin(String kakaoEmail);
+
 	String checkId(String id);
 
-	long getMaxEmpNo();
+	AuthVO getAuthList(String id);
+
+	int companyRegister(MemberVO mvo);
+
+	void insertAuthCom(String id);
 
 	List<MemberVO> selectAllMemberforChat();
 

@@ -12,14 +12,6 @@ import lombok.ToString;
 @Setter
 @Getter
 public class AuthVO {
-
-//	create table auth_member(
-//	email varchar(100) not null,
-//	auth varchar(50) not null,
-//	primary key(email));
-
 	private String id;
 	private String auth;
-	
-	
 }

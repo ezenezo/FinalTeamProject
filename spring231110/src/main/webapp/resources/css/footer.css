@@ -2,13 +2,10 @@
 	color: rgb(22, 116, 161);
 	padding: 20px;
 	text-align: center;
-	width: 70.625rem;
-	margin: 0 auto;
-	position: relative;
-	display: flex;
-	bottom: 0;
-	
-	justify-content: center;
+
+	margin-top: auto;
+	margin-left: 12%;
+
 }
 
 .footer-links {
