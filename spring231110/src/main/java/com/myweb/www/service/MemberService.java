@@ -1,40 +1,45 @@
 package com.myweb.www.service;
 
-import java.util.List;
+import java.util.HashMap;
 
+import org.springframework.web.servlet.ModelAndView;
+
+import com.fasterxml.jackson.databind.JsonNode;
 import com.myweb.www.domain.FileVO;
 import com.myweb.www.domain.PagingVO;
-import com.myweb.www.security.AuthMember;
 import com.myweb.www.security.MemberVO;
 
 public interface MemberService {
+   
+   //회원가입
+   int register(MemberVO mvo);
+   
+   int modify(MemberVO mvo);
+   
+   int modifyPwdEmpty(MemberVO mvo);
+   
+   int remove(String email);
 
-	int register(MemberVO mvo);
+   MemberVO memberDetail(String id);
 
-	boolean updateLastLogin(String authEmail);
+   int getTotalCount(PagingVO pagingVO);
 
-	List<MemberVO> getList(PagingVO pagingVO);
+   int updatePw(String id, String password);
 
-	AuthMember detail(String email);
-	
-	int modify(MemberVO mvo);
-	
-	int modifyPwdEmpty(MemberVO mvo);
-	
-	int remove(String email);
+   int checkId(String id);
 
-	MemberVO memberDetail(String id);
+   int insert(String id, FileVO fvo);
 
-	int getTotalCount(PagingVO pagingVO);
+   JsonNode getAccessToken(String code);
 
-	MemberVO getMemberDetail(String id);
+   JsonNode getUserInfo(JsonNode accesstoken);
 
-	int updatePw(String id, String password);
+   void kakaoLogout(String attribute);
 
-	int checkId(String id);
+   ModelAndView kakaojoin(JsonNode profile);
 
-	int insert(long empNo, FileVO fvo);
+   ModelAndView kakaoLogin(JsonNode profile);
 
-	long getMaxEmpNo();
-	
+   
+   
 }

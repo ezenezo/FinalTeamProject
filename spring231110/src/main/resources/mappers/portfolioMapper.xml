@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.myweb.www.repository.PortfolioDAO">
+	<insert id="insert">
+		insert into
+		portfolio(title,introduction,id,home_type,room_cnt,family_type,home_size,home_style,user_nm)
+		values(#{title},#{introduction},#{id},#{homeType},#{roomCnt},#{familyType},#{homeSize},#{homeStyle},#{userNm})
+	</insert>
+	<select id="selectMaxPno" resultType="long">
+		select max(pno) from
+		portfolio
+	</select>
+	<select id="getListPortfolio"
+		resultType="com.myweb.www.domain.PortfolioVO">
+		select * from portfolio
+	</select>
+	<select id="getDetailPvo"
+		resultType="com.myweb.www.domain.PortfolioVO">
+		select * from portfolio where pno=#{pno}
+	</select>
+	<select id="portfolioLikeCheck" resultType="int">
+		select count(*) from
+		heart where pno=#{pno} and id=#{id}
+	</select>
+	<delete id="deletePortfolioLike">
+		delete from heart where pno=#{pno} and id=#{id}
+	</delete>
+	<update id="updatePortfolioLikeQty">
+		update portfolio set like_qty=like_qty+#{num} where
+		pno=#{pno}
+	</update>
+	<insert id="addPortfolioLike">
+		insert into heart(pno,id)
+		values(#{pno},#{id})
+	</insert>
+	<update id="updateReadCount">
+	update portfolio set read_qty=read_qty+1 where pno=#{pno}
+	</update>
+	<select id="selectId" resultType="String">
+	select id from portfolio where pno=#{pno}
+	</select>
+
+</mapper>

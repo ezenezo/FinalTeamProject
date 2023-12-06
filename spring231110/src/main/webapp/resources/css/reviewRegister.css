@@ -1,0 +1,182 @@
+@font-face {
+	font-family: NotoSansKR;
+	src: url(../font/NotoSansKR-VariableFont_wght.ttf);
+}
+
+.box {
+	height: 100%;
+	padding: 10px;
+	display: flex;
+	justify-content: center;
+	align-content: center;
+}
+
+.btn {
+	margin: 10px;
+}
+
+.box2 {
+	width: 700px;
+}
+
+#checkBox {
+	border-top-left-radius:;
+	border-top-right-radius:;
+	border-bottom-right-radius:;
+	border-bottom-left-radius:;
+}
+
+.btnContainer {
+	display: flex;
+	justify-content: center;
+}
+
+a {
+	color: #858796;
+}
+
+a:hover {
+	text-decoration: underline; /* 마우스를 가져다 댔을 때 밑줄 표시 */
+}
+
+.container-fluid {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+}
+
+.pagination {
+	justify-content: center;
+}
+
+.mag0 {
+	margin: 0px;
+}
+
+.fle, .fle2 {
+	display: flex;
+}
+
+.labelmargin {
+	margin-left: 5px;
+	margin-right: 5px;
+}
+
+.dddd {
+	width: 30%;
+}
+
+.smallBtn {
+	width: 40px;
+	height: 31px;
+}
+
+.row {
+	justify-content: space-between;
+}
+
+.dddddd {
+	justify-content: flex-end;
+}
+
+body {
+	font-family: NotoSansKR;
+}
+
+.titleh3 {
+	font-weight: 700px;
+	margin-bottom: 15px;
+	color: black;
+}
+
+.titleh3>span {
+	color: #858796;
+	font-weight: 300px;
+}
+
+.ratingStar {
+	display: flex;
+}
+
+.star {
+	color: gray;
+	width: 50px;
+	height: 50px;
+	margin-bottom: 50px;
+}
+
+.reviewBox {
+	width: 700px;
+	height: 360px;
+	border: 2px solid #dbdbdb;
+}
+
+#reviewText {
+	height: 63px;
+	overflow: hidden;
+	width: 100%;
+	height: 100%;
+	padding: 20px;
+}
+
+.reviewBox textarea:focus {
+	border: none;
+	outline: none;
+}
+
+.regContainer {
+	display: flex;
+	justify-content: center;
+}
+
+#regBtn {
+	background-color: #00c7ae;
+	border-color: #00c7ae;
+}
+
+---------------파일
+
+
+
+.upload-box {
+	width: 100%;
+	box-sizing: border-box;
+	margin-right: 30px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+.upload-box .drag-file {
+	margin-bottom: 50px;
+	position: relative;
+	width: 100%;
+	height: 360px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	border: 3px dashed #dbdbdb;
+}
+
+.upload-box .drag-file.highlight {
+	border: 3px dashed red;
+}
+
+.upload-box .drag-file .image {
+	width: 40px;
+}
+
+.upload-box .drag-file .message {
+	margin-bottom: 0;
+}
+
+.upload-box .drag-file .preview {
+	display: none;
+	position: absolute;
+	left: 0;
+	height: 0;
+	width: 100%;
+	height: 100%;
+}

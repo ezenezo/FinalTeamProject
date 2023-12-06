@@ -20,4 +20,9 @@ public interface FileDAO {
 
 	int insertProfile(@Param("empNo") long empNo, @Param("file") FileVO fvo);
 
+	int insertPortfolioMainImg(FileVO portfolioMainImg);//
+
+	FileVO selectMainImg(long pno);//
+
+
 }

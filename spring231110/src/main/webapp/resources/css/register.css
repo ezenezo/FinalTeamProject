@@ -1,10 +1,10 @@
 @charset "UTF-8";
 
-body {
+/* body {
 	font-size: .8rem;
 	box-sizing: border-box;
 	margin: 0px;
-}
+} */
 
 .jb-container {
 	height: 100vh;
@@ -25,9 +25,6 @@ body {
 	border-bottom-left-radius: 0.35rem;
 }
 
-input {
-	font-size: .8rem;
-}
 
 .inputCss, .selectInput {
 	font-size: .8rem;
@@ -69,7 +66,7 @@ form div {
 	background-color: Rgb(19, 151, 213);
 	border: none;
 	margin-top: 40px;
-}
+} 
 
 #test {
 	display: flex;

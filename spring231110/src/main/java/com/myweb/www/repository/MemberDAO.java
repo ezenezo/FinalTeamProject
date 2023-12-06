@@ -1,49 +1,53 @@
 package com.myweb.www.repository;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 
+import com.myweb.www.domain.ClubVO;
 import com.myweb.www.domain.PagingVO;
 import com.myweb.www.security.AuthVO;
+import com.myweb.www.security.MemberDTO;
 import com.myweb.www.security.MemberVO;
 
 public interface MemberDAO {
 
-	int insertMember(MemberVO mvo);
+   int insertMember(MemberVO mvo);
 
-	int insertAuthInit(String id);
+   int insertAuthInit(String id);
 
-	MemberVO selectEmail(String username);
+   MemberVO selectEmail(String username);
 
-	List<AuthVO> selectAuths(String username);
+   List<AuthVO> selectAuths(String username);
 
-	int updateLastLogin(String authEmail);
+   MemberVO selectOne(String id);
 
-	List<MemberVO> selectAll(PagingVO pagingVO);
+   int modify(MemberVO mvo);
+   
+   int modifyPwdEmpty(MemberVO mvo);
 
-	MemberVO selectOne(String id);
+   int remove(String email);
 
-	int modify(MemberVO mvo);
-	
-	int modifyPwdEmpty(MemberVO mvo);
+   void removeAuth(String email);
 
-	int remove(String email);
+   int getTotalCount(PagingVO pagingVO);
 
-	void removeAuth(String email);
+   int getMemberNo(String id);
 
-	int getTotalCount(PagingVO pagingVO);
+   String selectDepCd(String id);
 
-	int getMemberNo(String id);
+   String selecClubCd(String id);
 
-	String selectDepCd(String id);
+   int updatePw(@Param("id") String id, @Param("pw") String password);
 
-	String selecClubCd(String id);
+   String checkId(String id);
 
-	int updatePw(@Param("id") String id, @Param("pw") String password);
+   MemberVO getUserKakao(String email);
 
-	String checkId(String id);
+   MemberDTO kakaoLogin(String kakaoId);
 
-	long getMaxEmpNo();
+String selectCompanyName(String id);
+
 
 }

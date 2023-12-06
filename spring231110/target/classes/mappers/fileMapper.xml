@@ -5,30 +5,42 @@
 <mapper namespace="com.myweb.www.repository.FileDAO">
 
 	<insert id="insertFile">
-		insert into file(uuid,save_dir,file_name,file_type,bno,file_size)
+		insert into
+		file(uuid,save_dir,file_name,file_type,bno,file_size)
 		values(#{uuid},#{saveDir},#{fileName},#{fileType},#{bno},#{fileSize})
 	</insert>
-	
-	<select id="getFileList" resultType="com.myweb.www.domain.FileVO">
+	<insert id="insertPortfolioMainImg">
+		insert into file(uuid,save_dir,file_name,file_type,pno,file_size)
+		values(#{uuid},#{saveDir},#{fileName},#{fileType},#{pno},#{fileSize})
+	</insert>
+	<select id="getFileList"
+		resultType="com.myweb.www.domain.FileVO">
 		select * from file where bno=#{bno} order by reg_at desc
 	</select>
 	<!-- 231026 -->
-	<select id = "selectListAllFiles" resultType="com.myweb.www.domain.FileVO">
+	<select id="selectListAllFiles"
+		resultType="com.myweb.www.domain.FileVO">
 		select * from file;
 	</select>
-	
-	<delete id = "removefile">
-	DELETE FROM file WHERE uuid = #{uuid}
+
+	<delete id="removefile">
+		DELETE FROM file WHERE uuid = #{uuid}
 	</delete>
 
-	<delete id = "deleteBnoFileAll">
-	DELETE FROM file WHERE bno = #{bno}
+	<delete id="deleteBnoFileAll">
+		DELETE FROM file WHERE bno = #{bno}
 	</delete>
-	
+
 	<insert id="insertProfile">
-		insert into file(uuid, save_dir, file_name, file_type, file_size, reg_at, emp_no)
-		values(#{file.uuid}, #{file.saveDir}, #{file.fileName}, #{file.fileType}, #{file.fileSize}, now(), #{empNo})
+		insert into file(uuid, save_dir, file_name,
+		file_type, file_size, reg_at, emp_no)
+		values(#{file.uuid},
+		#{file.saveDir}, #{file.fileName}, #{file.fileType}, #{file.fileSize},
+		now(), #{empNo})
 	</insert>
+	<select id="selectMainImg" resultType="com.myweb.www.domain.FileVO">
+	select * from file where pno=#{pno}
+	</select>
 
-	
+
 </mapper>

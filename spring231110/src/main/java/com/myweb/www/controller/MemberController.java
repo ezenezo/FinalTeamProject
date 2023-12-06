@@ -52,21 +52,21 @@ public class MemberController {
 	public void register() {
 	}
 	
-	//사원 등록
-	@PostMapping("/register")
-	public String register(MemberVO mvo, Model m, @RequestParam(name="profile", required = false)MultipartFile[] files) {
-		int isOk = 1;
-		mvo.setPw(bcEncoder.encode(mvo.getPw())); // 암호화해서 넣음
-		isOk *= msv.register(mvo);
-		long empNo = msv.getMaxEmpNo();
-		FileVO fvo = null;
-		if(files[0] != null) {
-			fvo = pfh.uploadFiles(files[0], empNo);
-		}
-		isOk *= msv.insert(empNo, fvo);
-		log.info(isOk>0? "성공": "실패");
-		return "index";
-	}
+//	//사원 등록
+//	@PostMapping("/register")
+//	public String register(MemberVO mvo, Model m, @RequestParam(name="profile", required = false)MultipartFile[] files) {
+//		int isOk = 1;
+//		mvo.setPw(bcEncoder.encode(mvo.getPw())); // 암호화해서 넣음
+//		isOk *= msv.register(mvo);
+//		long empNo = msv.getMaxEmpNo();
+//		FileVO fvo = null;
+//		if(files[0] != null) {
+//			fvo = pfh.uploadFiles(files[0], empNo);
+//		}
+//		isOk *= msv.insert(empNo, fvo);
+//		log.info(isOk>0? "성공": "실패");
+//		return "index";
+//	}
 
 	@GetMapping("/login")
 	public void login() {
@@ -80,18 +80,18 @@ public class MemberController {
 		return "redirect:/member/login"; 
 	}
 
-	//회원 리스트(확인)
-	@GetMapping("/list")
-	public String list(Model model, PagingVO pagingVO) {
-		model.addAttribute("list", msv.getList(pagingVO));
-		// 총 페이지 갯수
-		int totalCount = msv.getTotalCount(pagingVO);
-		PagingHandler ph = new PagingHandler(totalCount, pagingVO);
-		model.addAttribute("ph", ph);
-		log.info("페이지정보" + ph);
-		return "/member/list";
-
-	}
+//	//회원 리스트(확인)
+//	@GetMapping("/list")
+//	public String list(Model model, PagingVO pagingVO) {
+//		model.addAttribute("list", msv.getList(pagingVO));
+//		// 총 페이지 갯수
+//		int totalCount = msv.getTotalCount(pagingVO);
+//		PagingHandler ph = new PagingHandler(totalCount, pagingVO);
+//		model.addAttribute("ph", ph);
+//		log.info("페이지정보" + ph);
+//		return "/member/list";
+//
+//	}
 
 	@GetMapping({ "/detail" })
 	public void detail(Model model, @RequestParam("id") String id) {
@@ -142,21 +142,21 @@ public class MemberController {
 
 	}
 	
-	//본인 인증 확인
-	@PostMapping("/checkMemberInfo")
-	public String postCheckMemberInfo(MemberVO mvo, RedirectAttributes re, Model m) {
-		MemberVO detail = msv.getMemberDetail(mvo.getId());
-		// 입력한 정보가 기존 정보와 전부 일치하는지 확인
-		if (detail.getId().equals(mvo.getId()) && detail.getDepCd().equals(mvo.getDepCd())
-				&& detail.getEmpNm().equals(mvo.getEmpNm()) && detail.getEmpBirth().equals(mvo.getEmpBirth())) {
-			m.addAttribute("id", mvo.getId());
-			return "/member/modifyPw";
-		} else {
-			m.addAttribute("msg", "해당 사원은 존재하지 않습니다.");
-			m.addAttribute("url", "/member/checkMemberInfo");
-			return "alert";
-		}
-	}
+//	//본인 인증 확인
+//	@PostMapping("/checkMemberInfo")
+//	public String postCheckMemberInfo(MemberVO mvo, RedirectAttributes re, Model m) {
+//		MemberVO detail = msv.getMemberDetail(mvo.getId());
+//		// 입력한 정보가 기존 정보와 전부 일치하는지 확인
+//		if (detail.getId().equals(mvo.getId()) && detail.getDepCd().equals(mvo.getDepCd())
+//				&& detail.getEmpNm().equals(mvo.getEmpNm()) && detail.getEmpBirth().equals(mvo.getEmpBirth())) {
+//			m.addAttribute("id", mvo.getId());
+//			return "/member/modifyPw";
+//		} else {
+//			m.addAttribute("msg", "해당 사원은 존재하지 않습니다.");
+//			m.addAttribute("url", "/member/checkMemberInfo");
+//			return "alert";
+//		}
+//	}
 
 	@GetMapping("/modifyPw")
 	public void modifyPw() {
