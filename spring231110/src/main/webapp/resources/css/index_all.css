@@ -1,6 +1,7 @@
 html, body {
 	height: 100%;
 	margin: 0;
+	font-family: 'Noto Sans KR', sans-serif;
 }
 
 .body {
@@ -13,7 +14,7 @@ html, body {
 
 .total {
 	height: 82%;
-	margin-top: 8%;
+	margin-top: 80px;
 	width: 83%;
 	position: absolute;
 	top: 40%;

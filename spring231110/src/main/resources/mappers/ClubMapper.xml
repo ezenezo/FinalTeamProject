@@ -13,27 +13,40 @@
 		select count(*) from club
 		<include refid="search"></include>
 	</select>
-	
 
+	<select id="selectClist"
+		resultType="com.myweb.www.domain.ClubVO">
+		select c.club_cd, c.club_nm from club c right join member m on m.club_cd = c.club_cd
+		<include refid="search"></include>
+		limit #{pageStart}, #{qty}
+	</select>
 
 	<sql id="search">
-		<if test="type != null"></if>
-		<trim prefix="where(" suffix=")" prefixOverrides="or">
-			<foreach collection="typeToArray" item="type">
-				<trim prefix="or">
-					<choose>
-						<when test="type == 't'.toString()">
-							title like concat('%',#{keyword},'%')
-						</when>
-						<when test="type == 'w'.toString()">
-							writer like concat('%',#{keyword},'%')
-						</when>
-						<when test="type == 'c'.toString()">
-							content like concat('%',#{keyword},'%')
-						</when>
-					</choose>
-				</trim>
-			</foreach>
-		</trim>
+		<if test="type != null">
+			<trim prefix="where" prefixOverrides="or">
+				<foreach collection="typeToArray" item="typed">
+					<trim prefix="or">
+						<choose>
+							<when test="typed =='n'.toString()">
+								emp_nm like concat('%',#{keyword},'%')
+							</when>
+							<when test="typed =='i'.toString()">
+								id like concat('%',#{keyword},'%')
+							</when>
+							<when test="typed =='a'.toString()">
+								addr like concat('%',#{keyword},'%')
+							</when>
+							<when test="typed =='d'.toString()">
+								dep_cd like concat('%',#{keyword},'%')
+							</when>
+							<when test="typed =='c'.toString()">
+								club_cd like concat('%',#{keyword},'%')
+							</when>
+						</choose>
+					</trim>
+				</foreach>
+			</trim>
+		</if>
 	</sql>
+
 </mapper>
