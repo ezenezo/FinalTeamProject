@@ -3,18 +3,6 @@ console.log("boardWriter>>> ", boardWriter);
 const authId = document.getElementById("authId").value; //세션아이디
 const authEmpNo = document.getElementById("authEmpNo").value; //세션사번
 
-  // textarea에 입력이 있을 때 이벤트를 감지하여 버튼을 표시하는 함수
-  document.getElementById('cmtText').addEventListener('input', function() {
-    // 입력된 내용이 있는지 체크
-    if (this.value.trim() !== '') {
-        // 내용이 있으면 버튼을 보이게 함
-        document.getElementById('cmtPostBtn').style.display = 'block';
-    } else {
-        // 내용이 없으면 버튼을 숨김
-        document.getElementById('cmtPostBtn').style.display = 'none';
-    }
-});
-
 //댓글 수 가져오기
 async function commentCount(bno) {
     try {
@@ -188,7 +176,7 @@ function printCommentList(bno, page = 1) { //page=1인거는 처음 뿌릴 때�
                     </svg>`;
                 }              
                 str += `</div>좋아요`;
-                str += `<div id="cmtLikeQtyArea">${cvo.likeQty}</div></div></li>`;
+                str += `<div id="cmtLikeQtyArea">${cvo.likeQty}</div></div></li><hr>`;
               
 
             //     str += `<div class="likeCnt miniFont"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
@@ -371,8 +359,6 @@ document.addEventListener('click', (e) => {
     }
 
 })
-
-
 
 
 //comment좋아요

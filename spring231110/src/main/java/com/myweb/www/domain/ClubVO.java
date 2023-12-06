@@ -1,5 +1,7 @@
 package com.myweb.www.domain;
 
+import java.util.List;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -13,13 +15,7 @@ import lombok.ToString;
 @NoArgsConstructor
 public class ClubVO {
 
-   private String clubCd;
-   private String clubNm;
-
-   private String clubIntro;
-
-   private int memberCnt;
-   private int memberLimitCnt;
+	
 
 
 }

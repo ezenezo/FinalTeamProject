@@ -87,4 +87,4 @@ update board set like_qty=like_qty+#{num} where bno=#{bno}
 		</if>
 	</sql>
 
-</mapper> 
+</mapper>
