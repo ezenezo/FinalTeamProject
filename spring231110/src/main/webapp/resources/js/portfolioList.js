@@ -8,7 +8,7 @@ let sliderOne=document.getElementById("slider-1");
 let sliderTwo=document.getElementById("slider-2");
 let displayValOne=document.getElementById("range1");
 let displayValTwo=document.getElementById("range2");
-let minGap=0;
+let minGap=1;
 let sliderTrack=document.querySelector(".slider-track");
 let sliderMaxValue=document.getElementById("slider-1").max;
 
@@ -36,7 +36,7 @@ function slideTwo() {
 function fillColor(){
     percent1=(sliderOne.value/sliderMaxValue)*100;
     percent2=(sliderTwo.value/sliderMaxValue)*100;
-    sliderTrack.style.background=`linear-gradient(to right,#dadae5 ${percent1}%,#3264fe ${percent1}%,#3264fe ${percent2}%,#dadae5 ${percent2}%)`;
+    sliderTrack.style.background=`linear-gradient(to right,#dadae5 ${percent1}%,rgb(197,245,255) ${percent1}%,rgb(197,245,255) ${percent2}%,#dadae5 ${percent2}%)`;
   
 };
 
@@ -66,25 +66,30 @@ function updateButtonColors() {
   
     const sliderValue1 = parseInt(document.getElementById("slider-1").value);
     const sliderValue2 = parseInt(document.getElementById("slider-2").value);
-    console.log("sliderValue1"+sliderValue1);
-    console.log("sliderValue2"+sliderValue2);
+    console.log("sliderValue1"+sliderValue1); //1
+    console.log("sliderValue2"+sliderValue2); //232
 
     // 버튼 엘리먼트들을 선택합니다.
-    const buttons = document.querySelectorAll('.rangeFilterBtn');
+    const buttons = document.querySelectorAll('.rangeBtn');
     console.log("buttons", buttons);
 
     // 각 버튼에 대해 현재 슬라이더 범위에 따라 스타일을 업데이트합니다.
     buttons.forEach((button) => {
         const rangeValues = button.innerText.split('~').map(value => parseInt(value.replace('㎡','')));
         console.log("rangeValues", rangeValues);    
-    
-        if (sliderValue1 >= rangeValues[0] && sliderValue2 <= rangeValues[1]) {
-            button.style.backgroundColor = '#3264fe'; // 파란색
+        console.log("rangeValues[0]",rangeValues[0]);
+        console.log("rangeValues[1]",rangeValues[1]);
+        if(rangeValues[1]==undefined){
+            rangeValues[1]=232;
+        }
+    // 1 >= 1 && 232 <=33
+        if (sliderValue1 <= rangeValues[0] && sliderValue2 >= rangeValues[1]) {
+            button.style.backgroundColor = 'rgb(53, 197, 240)'; // 파란색
             button.style.color = '#fff'; // 글자 색상 변경 등 추가적인 스타일 적용 가능
         } else {
-            button.style = ''; // 모든 스타일 초기화
-            // button.style.backgroundColor = ''; // 원래의 스타일로 돌아가게 설정
-            // button.style.color = ''; // 원래의 글자 색상으로 돌아가게 설정
+           
+             button.style.backgroundColor = ''; // 원래의 스타일로 돌아가게 설정
+             button.style.color = ''; // 원래의 글자 색상으로 돌아가게 설정
         };
     });
 };
