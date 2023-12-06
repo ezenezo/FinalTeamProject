@@ -22,15 +22,17 @@ public class ProfileFileHandler {
 //	private final String UP_DIR = "/aj2002/tomcat/webapps/_javaweb/_java/fileUpload/Profile";//231120전경환
 	private final String UP_DIR = "D:\\_myweb\\_java\\fileupload";//231120전경환
 	
-	public FileVO uploadFiles(MultipartFile pfile, long empNo) {
-		String empNumber = Long.toString(empNo);
-		File folders = new File(UP_DIR, empNumber);
+	public FileVO uploadFiles(MultipartFile pfile, String id) {
+		if(pfile.getSize()==0) {
+			return new FileVO();
+		}
+		File folders = new File(UP_DIR, id);
 		// 폴더 생성
 		if (!folders.exists()) {
 			folders.mkdir(); 
 		}
 		FileVO fvo = new FileVO();
-		fvo.setSaveDir(empNumber); // 2023\11\05
+		fvo.setSaveDir(id); // 2023\11\05
 		fvo.setFileSize(pfile.getSize());
 
 		// 실제 파일이름(ex:이벤트.jpg)
@@ -56,8 +58,7 @@ public class ProfileFileHandler {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
-		fvo.setEmpNo(empNo);
+		fvo.setId(id);
 
 		return fvo;
 	}

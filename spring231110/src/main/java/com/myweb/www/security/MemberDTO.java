@@ -1,15 +1,10 @@
 package com.myweb.www.security;
 
-import java.util.List;
-
-import com.myweb.www.domain.ClubVO;
-import com.myweb.www.domain.DepartmentVO;
-
+import lombok.Setter;
+import lombok.ToString;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
 
 @Getter
 @Setter
@@ -17,7 +12,6 @@ import lombok.ToString;
 @AllArgsConstructor
 @NoArgsConstructor
 public class MemberDTO {
-	private List<MemberVO> mlist;
-	private List<DepartmentVO> dlist;
-	private List<ClubVO> clist;
+	private MemberVO mvo;
+	private String kakaoId;
 }
