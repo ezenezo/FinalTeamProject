@@ -6,16 +6,12 @@
 	prefix="sec"%>
 <!DOCTYPE html>
 <html>
-
 <head>
-
 <link href="../resources/css/nav.css" rel="stylesheet">
 <link href="../resources/css/login.css" rel="stylesheet">
 <meta charset="UTF-8">
 <title>Insert title here</title>
-
 </head>
-
 <body>
 	<jsp:include page="../common/nav.jsp" />
 	<section>

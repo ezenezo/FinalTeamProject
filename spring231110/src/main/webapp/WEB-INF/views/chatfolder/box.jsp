@@ -59,17 +59,13 @@
 
 
 
-<!-- 	<div class="total"> -->
-<!-- 		<div class="subject">주제입니다.</div> -->
-<!-- 		<div class="content">content 입니다.</div> -->
-<!-- 	</div> -->
+
 
 
 
 <div class="total">
-<div class="subject">채딩페이지</div>
+<!-- <div class="subject">채딩페이지</div> -->
 
-<div class="content">
 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
     <ul class="nav navbar-nav">
    		<li><a href="/chaturl/chat">채팅메신저페이지</a> </li>
@@ -108,25 +104,22 @@
 												<th><h4>주고받은 메시지 목록</h4></th>
 											</tr>
 										</thead>
-
-										<div style="overflow-y: auto; width: 100%; max-height: 450px;">										    
-										    <table class="table table-bordered table-hover" style="text-align: center; border: 1px solid #dddddd; margin: 0 auto;">										       
-										       <tbody id="boxTable">	
-											        	<tr onclick="location.href='chat2.jsp?toID=<some_id>'">
-											                <td style="width: 150px;">
-											                    <h5>Test</h5>
-											                </td>
-											                <td>
-											                    <h5>Test</h5>									                    
-											                </td>										                  
-											                <td>
-											                    <div class="pull-right">Test</div>
-											                </td>
-											            </tr>										        											      
-										        </tbody>									        
-										    </table>										    
-										</div>
-										<div id="unreadContainer">
+										<div style="overflow-y: auto; width: 100%; max-height: 450px;">
+										    <table class="table table-bordered table-hover" style="text-align: center; border: 1px solid #dddddd; margin: 0 auto;">
+										        <tbody id="boxTable">
+										            <tr onclick="location.href='chat2.jsp?toID=<some_id>'">
+										                <td style="width: 150px;">
+										                    <h5>Test</h5>
+										                </td>
+										                <td>
+										                    <h5>Test</h5>
+										                </td>
+										                <td>
+										                    <div class="pull-right">Test</div>
+										                </td>
+										            </tr>
+										        </tbody>         
+										    </table>
 										</div>
 									</table>
 								</div>
@@ -142,7 +135,7 @@
 	                            <input style="height: 40px; width: 20%;" type="text" id="chatName" class="form-control" value="${username}"  maxlength="8" readonly="readonly">
 	                        </div>
 	                    </div>
-						<div style="height: 80px; display: flex; align-items: center;">
+						<div style="height: 100px; display: flex; align-items: center;">
 
 						    <div>
 						        <button id="chatSubmitBtn" type="button" class="btn btn-default" >전송</button>
@@ -161,8 +154,6 @@
 <!-- 231111_1전경환 채팅창관련해서 뭐 넣기 E ------------------------------------->
 </div>
 
-
-content 입니다.</div>
 
 
 
@@ -186,8 +177,6 @@ content 입니다.</div>
 
         // 페이지 로딩 후 setup 함수를 호출합니다.
         window.onload = setup;
-        
-        chatSubmitBtn.style.display="none";
     </script>
 
 

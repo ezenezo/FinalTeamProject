@@ -15,8 +15,6 @@ import lombok.ToString;
 @Setter
 @Getter
 public class MemberVO{
-
-
 	private String id; //아이디
 	private String pw; //비밀번호
 	private String email; //이메일
@@ -32,5 +30,3 @@ public class MemberVO{
 	private List<AuthVO> authVOList;
 	
 }
-
-

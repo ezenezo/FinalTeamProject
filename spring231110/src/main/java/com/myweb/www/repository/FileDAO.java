@@ -22,9 +22,4 @@ public interface FileDAO {
 
 	FileVO getFile(String id);
 
-	int insertPortfolioMainImg(FileVO portfolioMainImg);//
-
-	FileVO selectMainImg(long pno);//
-
-
 }

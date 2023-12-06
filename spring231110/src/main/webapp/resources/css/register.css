@@ -1,6 +1,5 @@
 @charset "UTF-8";
 
-
 @font-face {
 	font-family: 'NEXON Lv1 Gothic OTF';
 	src:
@@ -53,7 +52,6 @@ input[type=file]::file-selector-button, .form-control {
 	font-family: 'NEXON Lv1 Gothic OTF';
 	cursor: pointer;
 }
-
 
 .jb-container {
 	width: 300px;
@@ -122,11 +120,9 @@ section {
 	border-radius: 4px;
 }
 
-
 .idBox, .fileUploadDiv, .addrBox {
 	display: flex;
 }
-
 
 .idInput, #file {
 	width: 70%;
@@ -148,10 +144,8 @@ section {
 .allRead {
 	background-color: white;
 	border: none;
-
 	font-family: 'NEXON Lv1 Gothic OTF';
 }
-
 
 .agree1, .agree2 {
 	border: 1px solid #306c307a;

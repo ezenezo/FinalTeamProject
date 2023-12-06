@@ -20,5 +20,17 @@ import lombok.extern.slf4j.Slf4j;
 public class ClubController {
 	
 	
-	
+	@Inject
+	private ClubService clsv;
+		@GetMapping("list")
+		public String list(Model model, PagingVO PagingVO,RedirectAttributes reAttr) {
+			log.info(">>>>>pagingVO>>" + PagingVO);
+			model.addAttribute("list", clsv.getList(PagingVO));
+			
+			/* int totalCount = clsv.getTotalCount(PagingVO); */
+			/* PagingHandler ph = new PagingHandler(PagingVO, totalCount); */
+			
+			/* model.addAttribute("ph", ph); */
+			return "/club/club_apply";
+		}
 }

@@ -54,7 +54,8 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler {
 		setAuthUrl("/member/index");
 		
 		//쭈욱 메퍼.xml까지 갔따옴
-
+		//boolean isOk = msv.updateLastLogin(getAuthEmail()); //내 이메일의 마지막로그인정보
+		
 		//내부에서 로그인 세션 저장됨.
 		HttpSession ses = request.getSession();
 		log.info("LoginSuccess >>> ses >>> " + ses.toString() );
@@ -74,6 +75,5 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler {
 		// 처음이면 리스트를 넣고  이것저거것 있다면 로그인후 그페이지로 보내려고 getRedirectUrl가 있는듯 (로그인 값 이나 리스트 값으로 데이터를 보내줌)
 		rdstg.sendRedirect(request, response, (saveReq != null)? saveReq.getRedirectUrl() : getAuthUrl()  );
 	}
-
 
 }

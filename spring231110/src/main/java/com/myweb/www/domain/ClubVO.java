@@ -13,13 +13,13 @@ import lombok.ToString;
 @NoArgsConstructor
 public class ClubVO {
 
-   private String clubCd;
-   private String clubNm;
+	private String clubCd;
+	private String clubNm;
 
-   private String clubIntro;
+	private String clubIntro;
 
-   private int memberCnt;
-   private int memberLimitCnt;
+	private int memberCnt;
+	private int memberLimitCnt;
 
 
 }

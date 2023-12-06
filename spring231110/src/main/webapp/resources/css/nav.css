@@ -1,5 +1,3 @@
-
-
 body {
 	margin: 0px;
 }
@@ -33,19 +31,13 @@ a {
 	line-height: 72px;
 }
 
-
-
 .left_nav {
 	display: flex;
 }
 
 .ezenDesign1 {
-
-
 	/*    margin-left: 10px; */
 	font-size: 1.8em;
-
-
 	background: linear-gradient(to right top, rgb(80, 119, 113),
 		rgb(147, 191, 169));
 	color: transparent;
@@ -53,8 +45,6 @@ a {
 	font-family: NotoSansKR;
 	font-weight: 700;
 	float: left;
-
-
 	/*    width: 50%; */
 	padding-right: 0;
 }
@@ -71,8 +61,6 @@ a {
 	color: RGB(218, 164, 32);
 	font-family: NotoSansKR;
 	font-size: 1em;
-
-
 	float: right;
 	padding: 0;
 	margin-top: 6px;
@@ -82,21 +70,14 @@ a {
 
 #menu {
 	position: relative;
-
-
 	background-color: white;
 	text-align: center;
-
-
 }
 
 [class*="main"] {
 	background-color: white;
 	border-radius: 5px;
 }
-
-
-
 
 .main1>li:hover .main2 {
 	left: 0;
@@ -110,24 +91,16 @@ a {
 .main_m, .main1 {
 	padding-left: 0;
 	height: 100%;
-
-
 	/* padding-right: 50%; */
-
-
 	margin: 0 auto;
 	display: flex;
 	justify-content: flex-start;
 	font-family: NotoSansKR;
-
-
 	font-size: 16px;
 	align-items: center;
 }
 
 .main1>li {
-
-
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -137,8 +110,6 @@ a {
 	height: 40px;
 	margin: 20px 1px 15px 15px;
 }
-
-
 
 .main_m>li {
 	display: flex;
@@ -153,15 +124,11 @@ a {
 
 .main_m li:first-child>a, .main1 li>a, .main_m li:nth-child(2)>a,
 	.main_m li:last-child>a {
-
-
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	width: 100%;
 	height: 100%;
-
-
 	padding-left: 5px;
 	padding-right: 5px;
 }
@@ -183,23 +150,17 @@ ul.main_m li:nth-child(4)>a {
 	height: 100%;
 	padding-left: 20px;
 	padding-right: 20px;
-
-
 }
 
 .main1>li>a:hover {
 	border-bottom: 4px solid rgb(80, 119, 113);
 }
 
-
-
 /* .main_m li:nth-child(2)>a:hover, .main_m li:nth-child(1)>a:hover {
    border-bottom: 4px solid RGB(218, 164, 32);
 } */
 .main_m li>a:hover {
 	color: RGB(218, 164, 32);
-
-
 }
 
 .main2>li {
@@ -221,14 +182,12 @@ ul.main_m li:nth-child(4)>a {
 	line-height: inherit;
 	border-radius: 6px;
 	background: rgb(147, 191, 169);
-
-
 	padding-left: 10px;
 	padding-right: 10px;
 	font-size: 16px;
 	border: none;
 	color: white;
-	
+	`
 }
 
 .gosu_btn:hover {
@@ -389,5 +348,4 @@ ul.main_m li:nth-child(4)>a {
 
 .material-symbols-outlined {
 	font-size: 20px;
-
 }
