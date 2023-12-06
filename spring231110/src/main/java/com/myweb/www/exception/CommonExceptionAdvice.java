@@ -12,11 +12,11 @@ import lombok.extern.slf4j.Slf4j;
 @ControllerAdvice
 public class CommonExceptionAdvice {
 	
-	@ExceptionHandler(Exception.class)
-	public String except(Exception ex) {
-		log.info(">>exception> " + ex.getMessage());
-		return "error_page";
-	}
+//	@ExceptionHandler(Exception.class)
+//	public String except(Exception ex) {
+//		log.info(">>exception> " + ex.getMessage());
+//		return "error_page";
+//	}
 	
 
 	@ExceptionHandler(NoHandlerFoundException.class)
