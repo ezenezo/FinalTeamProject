@@ -12,6 +12,7 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 public class FileVO {
+
 	   private String uuid; 
 	   private String saveDir;
 	   private String fileName;
@@ -22,4 +23,5 @@ public class FileVO {
 	   private long pno;//포폴사진 받는 용도
 	   private long rno;//리뷰사진 받는 용도
 	}
+
 

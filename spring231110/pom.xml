@@ -267,7 +267,6 @@
 		</dependency>
 
 		
-
     <!-- 전경환231205 좌표자동생성을위해...-->
     <dependency>
         <groupId>org.json</groupId>

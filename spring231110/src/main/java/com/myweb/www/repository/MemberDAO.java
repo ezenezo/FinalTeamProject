@@ -19,11 +19,10 @@ public interface MemberDAO {
 
 	List<AuthVO> selectAuths(String username);
 
-
 	MemberVO selectOne(String id);
 
 	int modify(MemberVO mvo);
-	
+
 	int modifyPwdEmpty(MemberVO mvo);
 
 	int remove(String email);
@@ -55,5 +54,7 @@ public interface MemberDAO {
 	void insertAuthCom(String id);
 
 	List<MemberVO> selectAllMemberforChat();
+
+	String selectCompanyName(String id);
 
 }

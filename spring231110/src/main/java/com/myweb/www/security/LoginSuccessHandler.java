@@ -75,4 +75,5 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler {
 		rdstg.sendRedirect(request, response, (saveReq != null)? saveReq.getRedirectUrl() : getAuthUrl()  );
 	}
 
+
 }

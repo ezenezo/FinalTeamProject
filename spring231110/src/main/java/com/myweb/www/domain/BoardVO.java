@@ -14,10 +14,10 @@ import lombok.ToString;
 public class BoardVO {
 	private long bno;//글번호 
 	private long empNo;//사번 
-	private String id;//작성자 //
-	private String title;//제목 //
-	private String content;//내용 //
-	private String regDate;//등록일 //
+	private String id;//작성자 
+	private String title;//제목 
+	private String content;//내용 
+	private String regDate;//등록일 
 	private String modDate;//수정일
 	private String boardType;//게시판 종류(익명,보드,동호회)
 	private String clubCd;//동호회 코드

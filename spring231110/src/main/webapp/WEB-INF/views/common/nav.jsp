@@ -1,15 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 
+
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://www.springframework.org/security/tags"
 	prefix="sec"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+
 
 <link href="../../../resources/css/nav.css" rel="stylesheet"
 	type="text/css">
@@ -35,7 +38,7 @@
 				<ul class="main1">
 					<li><a href="/req/requestStart">견적요청</a></li>
 					<li><a href="#">메이트찾기</a></li>
-					<li><a href="#">업체포토폴리오</a></li>
+					<li><a href="/portfolio/register">업체포토폴리오</a></li>
 					<li><a href="#">커뮤니티</a></li>
 				</ul>
 			</div>
