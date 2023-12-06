@@ -50,8 +50,8 @@
 						</div>
 						<div class="container">
 							<div class="slider-track"></div>
-							<input type="range" min="0" max="232" value="1" id="slider-1"
-								oninput="slideOne()"> <input type="range" min="0"
+							<input type="range" min="1" max="232" value="1" id="slider-1"
+								oninput="slideOne()"> <input type="range" min="1"
 								max="232" value="232" id="slider-2" oninput="slideTwo()">
 
 						</div>
@@ -60,14 +60,14 @@
 							<p>232㎡이상</p>
 						</div>
 						<div class="rangeFilter">
-							<button class="filterBtn rangeFilterBtn" type="button">1~33㎡</button>
-							<button class="filterBtn rangeFilterBtn" type="button">33~66㎡</button>
-							<button class="filterBtn rangeFilterBtn" type="button">67~99㎡</button>
-							<button class="filterBtn rangeFilterBtn" type="button">100~132㎡</button>
-							<button class="filterBtn rangeFilterBtn" type="button">133~165㎡</button>
-							<button class="filterBtn rangeFilterBtn" type="button">166~198㎡</button>
-							<button class="filterBtn rangeFilterBtn" type="button">199~231㎡</button>
-							<button class="filterBtn rangeFilterBtn" type="button">232㎡이상</button>
+							<button class="filterBtn rangeBtn" type="button">1~33㎡</button>
+							<button class="filterBtn rangeBtn" type="button">33~66㎡</button>
+							<button class="filterBtn rangeBtn" type="button">67~99㎡</button>
+							<button class="filterBtn rangeBtn" type="button">100~132㎡</button>
+							<button class="filterBtn rangeBtn" type="button">133~165㎡</button>
+							<button class="filterBtn rangeBtn" type="button">166~198㎡</button>
+							<button class="filterBtn rangeBtn" type="button">199~231㎡</button>
+							<button class="filterBtn rangeBtn" type="button">232㎡이상</button>
 						</div>
 					</div>
 				</div>
