@@ -21,11 +21,6 @@ public interface MemberDAO {
 
    List<AuthVO> selectAuths(String username);
 
-   MemberVO selectOne(String id);
-
-   int modify(MemberVO mvo);
-   
-   int modifyPwdEmpty(MemberVO mvo);
 
    int remove(String email);
 
@@ -45,9 +40,24 @@ public interface MemberDAO {
 
    MemberVO getUserKakao(String email);
 
-   MemberDTO kakaoLogin(String kakaoId);
-
 String selectCompanyName(String id);
+
+	String checkEmail(String email);
+
+	MemberVO getUserKakao(String email);
+
+	MemberVO kakaoLogin(String kakaoEmail);
+
+	String checkId(String id);
+
+	AuthVO getAuthList(String id);
+
+	int companyRegister(MemberVO mvo);
+
+	void insertAuthCom(String id);
+
+	List<MemberVO> selectAllMemberforChat();
+
 
 
 }

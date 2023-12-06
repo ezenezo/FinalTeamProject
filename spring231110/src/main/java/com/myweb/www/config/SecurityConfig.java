@@ -25,15 +25,7 @@ import lombok.extern.slf4j.Slf4j;
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
-	@Bean
-	public HttpFirewall defaultHttpFirewall() {
-		return new DefaultHttpFirewall();
-	}
 
-	@Override
-	public void configure(WebSecurity web) throws Exception {
-		web.httpFirewall(defaultHttpFirewall());
-	}
 	// security package를 생성하여 사용자 핸들러 생성
 
 	// 비밀번호 암호화 객체 빈 생성
@@ -66,26 +58,36 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //		super.configure(auth);
 		// 로그인 한 값을 암호화하여 처리할것임
 		auth.userDetailsService(customUserService()).passwordEncoder(bcPasswordEncoder());
+
+	}
+	
+	//더블 슬래시 허용
+	@Bean
+	public HttpFirewall defaultHttpFirewall() {
+		return new DefaultHttpFirewall();
+	}
+	@Override
+	public void configure(WebSecurity web) throws Exception {
+		web.httpFirewall(defaultHttpFirewall());
+
 	}
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		// TODO Auto-generated method stub
 //		super.configure(http);
 		http.csrf().disable(); // 요건 나중에 설명해줄꼐용 쌤曰
 		// 승인요청
 		http.authorizeRequests().antMatchers("/member/list").hasRole("ADMIN")
 
+
 				.antMatchers("/", "/board/list", "/board/detail", "/resources/**", "/upload/**", "/upload/**",
 						"/comment/**", "/member/**", "/portfolio/**", "/review/**", "/clud/**", "/image-upload/**",
 						"/image-print/**")
+
 				.permitAll()
 
 				.anyRequest().authenticated(); // 나머지 리퀘스트는 인증된 사용자만 사용할수 있게 //비회원도 되는것이 PermitAll() //나중에 comment/**할때는
 												// 퍼미션으로 가면 됨 post modify등
-		// '맴버의 리스트'는 ADMIN만 보이게...
-
-		// 유저네임을 이메일로 할께~
 		// 커스텀 로그인 페이지를 구성 (로그인은 어떻게 할건지 설정)
 		// Controller의 주소요청 맵핑도 같이 꼭 적어줘야함(.loginPage("/member/login"))
 		http.formLogin().usernameParameter("id").passwordParameter("pw").loginPage("/member/login")

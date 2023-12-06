@@ -32,15 +32,13 @@
 	</delete>
 
 	<insert id="insertProfile">
-		insert into file(uuid, save_dir, file_name,
-		file_type, file_size, reg_at, emp_no)
-		values(#{file.uuid},
-		#{file.saveDir}, #{file.fileName}, #{file.fileType}, #{file.fileSize},
-		now(), #{empNo})
-	</insert>
-	<select id="selectMainImg" resultType="com.myweb.www.domain.FileVO">
-	select * from file where pno=#{pno}
-	</select>
 
+		insert into file(uuid, save_dir, file_name, file_type, file_size, reg_at, id)
+		values(#{file.uuid}, #{file.saveDir}, #{file.fileName}, #{file.fileType}, #{file.fileSize}, now(), #{id})
+	</insert>
+	
+	<select id="getFile" resultType="com.myweb.www.domain.FileVO">
+		select * from file where id = #{id}
+	</select>
 
 </mapper>

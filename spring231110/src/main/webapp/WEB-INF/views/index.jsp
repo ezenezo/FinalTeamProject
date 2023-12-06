@@ -23,6 +23,7 @@
 </head>
 
 
+
 <body class="indexBody">
 
 	<header>
@@ -87,6 +88,7 @@
 				src="/resources/img/arrow.png">
 			</a>
 		</div>
+
 	</div>
 	
 	<jsp:include page="common/footer.jsp"></jsp:include>

@@ -15,6 +15,7 @@ import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
+import org.springframework.web.client.RestTemplate;
 
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
@@ -112,5 +113,11 @@ public class RootConfig {
 	public DataSourceTransactionManager transactionManager() {
 		return new DataSourceTransactionManager(dataSource());
 	}
+	
+    // RestTemplate 빈 추가 지도 위도경도 자동추출을 위해 담 jgh1206 
+    @Bean
+    public RestTemplate restTemplate() {
+        return new RestTemplate();
+    }
 	
 }
