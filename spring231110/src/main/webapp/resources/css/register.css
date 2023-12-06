@@ -1,5 +1,17 @@
 @charset "UTF-8";
 
+<<<<<<< HEAD
+=======
+@font-face {
+	font-family: 'NEXON Lv1 Gothic OTF';
+	src:
+		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/NEXON Lv1 Gothic OTF.woff')
+		format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
+
+>>>>>>> 6d101762b9898b4588d6b29245d870cd26a20ac5
 body {
 	font-size: .8rem;
 	box-sizing: border-box;
@@ -64,6 +76,7 @@ form div {
 	border-radius: 10rem;
 	padding: 0.75rem 1rem;
 	display: block;
+<<<<<<< HEAD
 	width: 100%;
 	color: #fff;
 	background-color: Rgb(19, 151, 213);
@@ -72,6 +85,114 @@ form div {
 }
 
 #test {
+=======
+	width: 300px;
+	color: #fff;
+	background-color: #306c30;
+	border: none;
+	margin: 20px 0 5px;
+	font-family: 'NEXON Lv1 Gothic OTF';
+	cursor: pointer;
+}
+
+.jb-container {
+	width: 300px;
+	background-color: white;
+	padding: 40px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	margin-top: 60px;
+	background-color: rgb(255, 255, 255);
+	border-radius: 8px;
+	margin-bottom: 60px;
+}
+
+section {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	/* 숲그림 */
+	background-image: linear-gradient(rgb(0 0 0/ 65%), rgb(0 0 0/ 25%)),
+		url(https://i0.wp.com/picjumbo.com/wp-content/uploads/morning-fog-beautiful-nature-scenery-free-photo.jpg?w=2210&quality=70);
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+
+.title {
+	font-size: 30px;
+	font-weight: 700;
+	line-height: 125%;
+	margin-bottom: 100px;
+}
+
+.LoginPageDiv>a {
+	color: green;
+	text-decoration: none;
+	margin-left: 10px;
+}
+
+.LoginPageDiv>p {
+	color: #4a4a4a;
+}
+
+.LoginPageDiv {
+	display: flex;
+	align-items: center;
+	margin-top: 60px;
+}
+
+.mb-3 {
+	width: 100%;
+	margin-top: 10px;
+}
+
+.profileBox {
+	margin-top: 20px;
+}
+
+#checkId, #selectFile, .addrBtn {
+	border: 1px solid green;
+	background-color: white;
+	color: green;
+	font-family: 'NEXON Lv1 Gothic OTF';
+	padding: 0 14px;
+	margin: 10px 0 0 5px;
+	border-radius: 4px;
+}
+
+.idBox, .fileUploadDiv, .addrBox {
+	display: flex;
+}
+
+.idInput, #file {
+	width: 70%;
+}
+
+#checkId {
+	width: 30%;
+}
+
+.addrBtn {
+	width: 40%;
+}
+
+.checkBoxDiv {
+	margin-top: 100px;
+	font-size: 13px;
+}
+
+.allRead {
+	background-color: white;
+	border: none;
+	font-family: 'NEXON Lv1 Gothic OTF';
+}
+
+.agree1, .agree2 {
+	border: 1px solid #306c307a;
+	padding: 12px 18px;
+>>>>>>> 6d101762b9898b4588d6b29245d870cd26a20ac5
 	display: flex;
 	justify-content: space-between;
 	margin-bottom: 10px;

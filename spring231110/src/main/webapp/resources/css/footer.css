@@ -1,4 +1,5 @@
 .footer_detail {
+<<<<<<< HEAD
 	color: rgb(22, 116, 161);
 	padding: 20px;
 	text-align: center;
@@ -9,6 +10,14 @@
 	bottom: 0;
 	
 	justify-content: center;
+=======
+
+	color: rgb(22, 116, 161);
+	padding: 20px;
+	text-align: center;
+	margin-top: auto;
+	margin-left: 12%;
+>>>>>>> 6d101762b9898b4588d6b29245d870cd26a20ac5
 }
 
 .footer-links {

@@ -5,6 +5,10 @@
 <!DOCTYPE html>
 <html>
 <head>
+<<<<<<< HEAD
+=======
+<link href="../resources/css/nav.css" rel="stylesheet">
+>>>>>>> 6d101762b9898b4588d6b29245d870cd26a20ac5
 <link href="../resources/css/login.css" rel="stylesheet">
 <meta charset="UTF-8">
 <title>Insert title here</title>

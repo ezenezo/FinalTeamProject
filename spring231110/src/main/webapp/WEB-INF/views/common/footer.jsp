@@ -21,10 +21,18 @@
 
 <body>
 
+<<<<<<< HEAD
 	<div class="footer_detail">
 		<p>&copy; 2023 Your Company. All Rights Reserved.</p>
 		
 	</div>
+=======
+
+	<footer class="footer_detail">
+		<p>&copy; 2023 Your Company. All Rights Reserved.</p>
+		
+	</footer>
+>>>>>>> 6d101762b9898b4588d6b29245d870cd26a20ac5
 
 </body>
 

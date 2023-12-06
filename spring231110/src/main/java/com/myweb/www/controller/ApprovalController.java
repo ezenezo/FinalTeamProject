@@ -1,5 +1,6 @@
 package com.myweb.www.controller;
 
+<<<<<<< HEAD
 
 import java.util.List;
 
@@ -87,4 +88,23 @@ public class ApprovalController {
 	
 
 
+=======
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.myweb.www.service.ApprovalService;
+
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
+@RequestMapping("/approval/*")
+@Controller
+public class ApprovalController {
+	private ApprovalService asv;
+	
+	@GetMapping("/clubApproval")
+	public void clubApproval() {}
+	
+>>>>>>> 6d101762b9898b4588d6b29245d870cd26a20ac5
 }

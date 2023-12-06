@@ -17,7 +17,12 @@ import lombok.ToString;
 @AllArgsConstructor
 @NoArgsConstructor
 public class MemberDTO {
+<<<<<<< HEAD
 	private List<MemberVO> mlist;
 	private List<DepartmentVO> dlist;
 	private List<ClubVO> clist;
+=======
+	private MemberVO mvo;
+	private String kakaoId;
+>>>>>>> 6d101762b9898b4588d6b29245d870cd26a20ac5
 }

@@ -15,7 +15,10 @@ import com.myweb.www.repository.ChatDAO;
 import com.myweb.www.repository.CommentDAO;
 import com.myweb.www.repository.FileDAO;
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 6d101762b9898b4588d6b29245d870cd26a20ac5
 import com.myweb.www.security.MemberVO;
 
 
@@ -76,6 +79,10 @@ public class ChatServiceImpl implements ChatService {
 		return isUp;
 	}
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 6d101762b9898b4588d6b29245d870cd26a20ac5
 //	@Transactional
 //	@Override
 //	public List<BoardVO> getList() {

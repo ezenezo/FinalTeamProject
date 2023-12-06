@@ -18,6 +18,12 @@ public interface FileDAO {
 
 	List<FileVO> selectListAllFiles();
 
+<<<<<<< HEAD
 	int insertProfile(@Param("empNo") long empNo, @Param("file") FileVO fvo);
+=======
+	int insertProfile(@Param("id") String id, @Param("file") FileVO fvo);
+
+	FileVO getFile(String id);
+>>>>>>> 6d101762b9898b4588d6b29245d870cd26a20ac5
 
 }
