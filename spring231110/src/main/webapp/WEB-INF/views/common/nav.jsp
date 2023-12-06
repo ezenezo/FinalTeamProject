@@ -66,7 +66,7 @@
 									class="material-symbols-outlined"> notifications </span></a></li>
 							<li>
 								<div class="profile">
-									<img alt="프로필이미지 없음" src="../../resources/img/프로필지정안함.png"
+									<img alt="프로필이미지 없음" src="../../resources/img/profile_none.png"
 										style="width: 35px; height: 35px;" class="profile_img">
 
 								</div>
@@ -80,14 +80,19 @@
 										<li class="row" style="display: none;"><div class="col">프로필
 												관리</div></li>
 										<li class="row1"><div class="col">받은 견적</div></li>
-										<li class="row2"><div class="col"><a href="/member/myPage?id=${user.id }">마이페이지</a></div></li>
+										<li class="row2"><div class="col">
+												<a href="/member/myPage?id=${user.id }">마이페이지</a>
+											</div></li>
 										<li><div class="hr_usermenu"></div></li>
 									</ul>
-
-									<button type="button" class="_btn">
-										<span class="material-symbols-outlined" id="icon_drop"> headset_mic </span>
-										고객센터
-									</button>
+									<ul>
+										<li><div>
+												<a href="/customer/customerService"> <span
+													class="material-symbols-outlined" id="icon_drop">
+														headset_mic </span>고객센터
+												</a>
+											</div></li>
+									</ul>
 
 									<div class="logout">
 										<button type="button" class="logout_btn"
@@ -99,10 +104,10 @@
 							</li>
 
 							<%-- <li class="nav-item"><a class="nav-link" href=""
-								id="logoutLink">LogOut</a></li>
-							<form action="/member/logout" method="post" id="logoutForm">
-								<input type="hidden" name="id" value="${authId}">
-							</form> --%>
+                        id="logoutLink">LogOut</a></li>
+                     <form action="/member/logout" method="post" id="logoutForm">
+                        <input type="hidden" name="id" value="${authId}">
+                     </form> --%>
 						</c:otherwise>
 					</c:choose>
 				</ul>
@@ -115,14 +120,21 @@
 		const profile = document.querySelector('.profile');
 		const usermenu = document.querySelector('.usermenu-dropdown');
 
-		profile.addEventListener('click', function() {
+		document.addEventListener('click', function(e) {
 			if (usermenu.style.visibility == 'hidden') {
-				usermenu.style.visibility = 'visible';
-				/*  profile .style.border = '2px solid RGB(218, 164, 32)'; */
-				profile.style.boxShadow = '0 0 0px 2px #00000063';
+				if(e.target.classList.contains('profile_img')){
+					usermenu.style.visibility = 'visible';
+					/*  profile .style.border = '2px solid RGB(218, 164, 32)'; */
+					profile.style.boxShadow = '0 0 0px 2px #00000063';					
+				}
 			} else {
-				usermenu.style.visibility = 'hidden'
-				profile.style.boxShadow = 'none';
+				try {
+					e.target.closest('.usermenu-dropdown').classList.contains('usermenu-dropdown')
+				} catch (e) {
+					usermenu.style.visibility = 'hidden'
+					profile.style.boxShadow = 'none';			
+				}
+						
 			}
 		});
 	</script>
