@@ -50,6 +50,7 @@ import lombok.extern.slf4j.Slf4j;
 @RequestMapping("/chaturl/*")
 @Controller
 public class ChatController {
+//
 // 폴더명 : board / mapping : board
 	// mpapping => /board/register
 	// 목적지 => /board/register
