@@ -89,8 +89,14 @@ CREATE TABLE `file` (
     club_intro VARCHAR(300),
     club_man BOOLEAN,
     emp_nm VARCHAR(100),
-    club_type VARCHAR(100)
-
-);
-  
-) 
+    club_type VARCHAR(100));
+    
+  ---20231130 portfolio테이블---
+  create table portfolio(
+pno bigint auto_increment,
+like_qty int default 0,
+title varchar(500) not null,
+introduction text,
+id varchar(100) not null,
+rag_date datetime default now(),
+primary key(pno));

@@ -1,6 +1,3 @@
-/**
- *
- */
 console.log("chat2.js진입");
 
 // function autoClosingAlert(selector, delay){
@@ -35,24 +32,26 @@ console.log("chat2.js진입");
 // 현재 로그인한 사용자 ID를 전역 변수로 저장
 let currentUserID = document.getElementById("chatName").value; //프린시펄 username부터 input으로 넘어온값
 
+const chatName = document.getElementById("chatName").value;
+
+// URL에서 toID 값을 가져오기
+const urlParams = new URLSearchParams(window.location.search);
+const toID = urlParams.get("toID"); // 'toID' 파라미터의 값을 가져옵니다.
+let chatData = {
+    fromID: chatName, //여기 왼쪽 단어가 중요함 디비 컬럼이랑 맞춰야함
+    toID: toID,
+    chatContent: "",
+};
 //호출해서 등록
 document.getElementById("chatSubmitBtn").addEventListener("click", () => {
     console.log("chatSubmitBtn 리스너 진입");
-
     const chatContent = document.getElementById("chatContent").value;
-    // console.log("1 " + document.getElementById("chatContent").value);
-    const chatName = document.getElementById("chatName").value;
-
-    // URL에서 toID 값을 가져오기
-    const urlParams = new URLSearchParams(window.location.search);
-    const toID = urlParams.get("toID"); // 'toID' 파라미터의 값을 가져옵니다.
-
-    let chatData = {
-        // bno: bnoVal,
-        fromID: chatName,
-        chatContent: chatContent, //여기 왼쪽 단어가 중요함 디비 컬럼이랑 맞춰야함
+    chatData = {
+        fromID: chatName, //여기 왼쪽 단어가 중요함 디비 컬럼이랑 맞춰야함 //위의 내용 사라지고 다시 덮어쓰는듯
         toID: toID,
+        chatContent: chatContent,
     };
+
     console.log("3 ", chatData);
     postComment(chatData).then((result) => {
         console.log("8 ", result);
@@ -164,9 +163,18 @@ function printChatList(chatData) {
 //채팅글 요청 함수
 async function spreadChatListFromServer(chatData) {
     try {
+        console.log("spreadChatListFromServer의 chatData는 ", chatData);
         const url = "/chaturl/list2/";
-        const resp = await fetch(url);
+        const config = {
+            method: "post",
+            headers: {
+                "content-type": "application/json; charset=utf-8",
+            },
+            body: JSON.stringify(chatData),
+        };
+        const resp = await fetch(url, config);
         const result = await resp.json(); //리스트 받음
+        // const result = await resp.text(); //리스트 받음
         console.log("spreadChatListFromServer의 result는 ", result);
         return result;
     } catch (error) {
@@ -175,12 +183,52 @@ async function spreadChatListFromServer(chatData) {
     }
 }
 
+// 읽지 않은 메시지 관련 함수
+async function getUnread(currentUserID) {
+    try {
+        console.log("비동기 getUnread 함수 진입");
+        console.log("230줄의 currentUserID는", currentUserID);
+        const url = "/chaturl/chatUnread";
+        const chatData = { toID: currentUserID }; //이렇게 해야 컨트롤러가 인식하기 시작함 //ChatDTO형식의 변수(db컬럼명)개념으로 인식하기 시작
+        const config = {
+            method: "post",
+            headers: {
+                "content-type": "application/json; charset=utf-8",
+            },
+            body: JSON.stringify(chatData),
+        };
+        console.log("5는 ", config);
+        const resp = await fetch(url, config);
+        const result = await resp.text(); //isOk
+        // return result;
+        console.log("안읽은 글 개수는 " + result);
+        if (result >= 1) {
+            showUnread(result);
+        } else {
+            showUnread("");
+        }
+        console.log(" getUnread(currentUserID) 정상동작완료");
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+function showUnread(result) {
+    console.log("showUnread(result)함수 진입 " + result);
+    // $("#unread").html(result);
+    document.getElementById("unread").innerHTML = result;
+    console.log("showUnread(result)함수 탈출 " + result);
+}
+
 function getInfiniteChat() {
     setInterval(function () {
-        printChatList();
-    }, 2500000);
+        printChatList(chatData);
+        getUnread(currentUserID);
+    }, 3000);
 }
 
 document.addEventListener("DOMContentLoaded", (event) => {
+    printChatList(chatData);
     getInfiniteChat();
+    getUnread(currentUserID);
 });
