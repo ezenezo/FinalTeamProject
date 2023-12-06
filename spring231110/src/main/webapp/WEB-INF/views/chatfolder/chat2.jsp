@@ -81,8 +81,8 @@
     <!-- Custom styles for this template-->
 <%--     <link href="<c:url value='../resources/css/sb-admin-2.min.css'/>" rel="stylesheet" type="text/css"> --%>
 <%--     <link href="<c:url value='../resources/css/bootstrap.min.css'/>" rel="stylesheet" type="text/css"> --%>
-    <link href="<c:url value='../resources/bootstrap337/css/custom.css'/>" rel="stylesheet" type="text/css">
-	<link href="<c:url value='../resources/bootstrap337/css/bootstrap.css'/>" rel="stylesheet" type="text/css">
+    <link href="<c:url value='../resources/css/custom.css'/>" rel="stylesheet" type="text/css">
+	<link href="<c:url value='../resources/css/bootstrap.css'/>" rel="stylesheet" type="text/css">
 	<link href="<c:url value='/resources/css/r_side.css'/>" rel="stylesheet"
 	type="text/css">
 
@@ -106,18 +106,8 @@
 <!-- <div class="subject">채딩페이지</div> -->
 <div class="subject">
     <span>일대일 채팅 페이지</span>
-     <a href="/chaturl/find" class="find-link">사원찾기</a> <!--컨트롤러가 잡게 함 -->
+    <a href="/chaturl/find" class="find-link">사원찾기</a> <!-- 컨트롤러가 잡게 함 -->
 </div>
-
-	<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-	    <ul class="nav navbar-nav">
-	   		<li><a href="/chaturl/chat">채팅메신저페이지</a> </li>
-		    <li class="active"><a href="/member/index">메인</a></li>
-		    <li><a href="/chaturl/find" class="find-link">사원찾기</a></li> <!-- 컨트롤러가 잡게 함 -->
-		    <li><a href="/chaturl/box">메시지함<span id="unread" class="label label-info"></span></a></li> <!-- 컨트롤러가 잡게 함 -->
-	    </ul>
-	</div>
-
 
 <div ><!-- 231111_1전경환 채팅창관련해서 뭐 넣기 S -------------------------------------> <!-- class="content" -->
 <!-- https://www.youtube.com/watch?v=8s98IhtgwZ0&list=PLRx0vPvlEmdAlUbX_TGDxaSxKCvfl2isa&index=6 -->
@@ -134,7 +124,6 @@
 	            <div id="chat" >
 	                <div id="chatList2" style="overflow-y: auto; overflow-x: hidden; width: auto; height:550px;"> <!-- portlet-body chat widget -->
 	                <!--------------- 여기에 뭔가 주루루륵 반복해서 들어가는 부분 같음 S------------------------------------------------------------------->
-					<div>잠시만 기다려주세요</div>
 					<div class="row">
 						<div class="col-lg-12">
 							<div class="media">
@@ -173,14 +162,12 @@
 	                    <div >
 	                        <div >
 <%-- 	                        <input type="text" id="chatName" value="${username}" /> --%>
-	                            <input style="height: 30px; width: 20%;" type="text" id="chatName" class="form-control" value="${username}"  maxlength="8" readonly="readonly">
+	                            <input style="height: 40px; width: 20%;" type="text" id="chatName" class="form-control" value="${username}"  maxlength="8" readonly="readonly">
 	                        </div>
 	                    </div>
-						<div style="height: 60px; display: flex; align-items: center;">
+						<div style="height: 100px; display: flex; align-items: center;">
 						    <div style="flex:0.5;">
-						    	
-						        <textarea style="height: 50px; width: 90%;" id="chatContent" class="form-control" placeholder="메시지를 입력하세요" maxlength="100"></textarea>
-						    	
+						        <textarea style="height: 80px; width: 90%;" id="chatContent" class="form-control" placeholder="메시지를 입력하세요" maxlength="100"></textarea>
 						    </div>
 						    <div>
 						        <button id="chatSubmitBtn" type="button" class="btn btn-default" >전송</button>
