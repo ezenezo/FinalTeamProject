@@ -19,6 +19,7 @@ public interface MemberDAO {
 
 	List<AuthVO> selectAuths(String username);
 
+
 	MemberVO selectOne(String id);
 
 	int modify(MemberVO mvo);
@@ -52,5 +53,7 @@ public interface MemberDAO {
 	int companyRegister(MemberVO mvo);
 
 	void insertAuthCom(String id);
+
+	List<MemberVO> selectAllMemberforChat();
 
 }

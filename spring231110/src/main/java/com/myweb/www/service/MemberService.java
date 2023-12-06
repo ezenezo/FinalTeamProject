@@ -14,6 +14,7 @@ public interface MemberService {
 	
 	//회원가입
 	int register(MemberVO mvo);
+
 	
 	int modify(MemberVO mvo);
 	

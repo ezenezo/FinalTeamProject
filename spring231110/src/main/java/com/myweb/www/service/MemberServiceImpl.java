@@ -63,6 +63,7 @@ public class MemberServiceImpl implements MemberService {
 		return mdao.insertAuthInit(mvo.getId());
 	}
 
+
 	@Override
 	public int modify(MemberVO mvo) {
 		// TODO Auto-generated method stub
