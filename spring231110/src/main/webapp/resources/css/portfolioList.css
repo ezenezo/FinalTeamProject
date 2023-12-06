@@ -92,7 +92,8 @@
 	height: 33px;
 	font-family: NotoSansKRSemiBold;
 	margin-right: 10px;
-}
+	margin-top: 5px;
+} 
 
 .filterBtn {
 	display: flex;
@@ -179,11 +180,7 @@
 	justify-content: space-between;
 }
 
-.rangeFilterBtn {
-	width: 23%;
-	margin-top: 5px;
-	margin-right: 0px;
-}
+
 /*--------------------------  */
 .container {
 	width: 100%;
