@@ -36,17 +36,48 @@ async function getUnread1(currentUserID) {
         const resp = await fetch(url, config);
         const result = await resp.text(); //isOk
         // return result;
+        
+        // updateBadgeVisibility(result); // DOM 업데이트 함수 호출
+
         console.log("전체 안읽은 글 개수는 " + result);
+
         if (result >= 1) {
             showUnread(result);
         } else {
             // showUnread("총 안읽은 글개수 파악불가");
         }
+
+        // 서버에 안 읽은 메시지 수를 세션에 저장하도록 요청
+        // await fetch('chaturl/updateUnreadCount', {
+        //     method: 'POST',
+        //     headers: {
+        //         'Content-Type': 'application/json'
+        //     },
+        //     body: JSON.stringify({ unreadCount: result })
+        // });
+
+
         console.log(" getUnread(currentUserID) 정상동작완료");
     } catch (error) {
         console.log(error);
     }
 }
+// function updateBadgeVisibility(unreadCount) {
+//     console.log('updateBadgeVisibility함수 탐');
+//     const badgeElement = document.getElementById("badge");
+//     if (badgeElement) {
+//         if (unreadCount > 0) {
+//             console.log("보이게 진입");
+//             badgeElement.style.display = 'inline'; // 빨간점 보이기
+//         } else {
+//             console.log("안 보이게...");
+//             badgeElement.style.display = 'none'; // 빨간점 숨기기
+//         }
+//     }
+// }
+
+
+
 
 // 각 사원별 읽지 않은 메시지 관련 함수
 async function getUnread2(currentUserID) {

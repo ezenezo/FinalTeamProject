@@ -14,4 +14,5 @@ import lombok.ToString;
 public class PortfolioDTO {
 	private PortfolioVO pvo;
 	private FileVO mainImg;
+	
 }

@@ -1,28 +1,4 @@
 /* 사이드 메뉴바(왼쪽) */
-
- .modal {
-            display: none;
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            padding: 20px;
-            background-color: #fff;
-            border: 1px solid #ccc;
-            z-index: 1000;
-        }
-
-        .overlay {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.7);
-            z-index: 999;
-        }
-
 .logo {
 	display: flex;
 	height: 4.8em;
@@ -59,10 +35,9 @@
 .left_sidemenu_div {
 	width: 13%;
 	min-height: 100vh;
-	background: linear-gradient(to bottom, rgb(19, 151, 213), #1674a1);
+	background-color: white;
 	z-index: 1000;
 	position: fixed;
-
 	padding-top: 16.891px;
 	border-right: 1.5px solid #00000024;
 }
@@ -80,18 +55,19 @@
 	overflow: hidden;
 	list-style: none;
 	padding: 0;
+	margin: 0;
+	margin-top: 50px;
 }
 
 .left_sidemenu>li {
 	text-decoration: none;
 	width: 100%;
-	text-align: center;
 	line-height: 40px;
 	padding-bottom: 5%;
 	transition: background-color 0.5s ease;
 	margin-bottom: 30px;
 }
-#hover_menu1:hover,#hover_menu2:hover,#hover_menu3:hover,#hover_menu4:hover,#hover_menu5:hover,#hover_menu6:hover {
+#hover_menu1:hover,#hover_menu2:hover,#hover_menu3:hover,#hover_menu4:hover,#hover_menu5:hover {
 	transition: background-color 0.5s ease;
 	background-color: rgb(245 247 250 / 70%);
 	
@@ -100,7 +76,7 @@
 	
 }
 
-#hover_menu1,#hover_menu2,#hover_menu3,#hover_menu4,#hover_menu5,#hover_menu6{
+#hover_menu1,#hover_menu2,#hover_menu3,#hover_menu4,#hover_menu5{
 	width: 90%;
 	margin-left:5%;
 	border-radius:4px;
@@ -119,18 +95,11 @@
     margin: 20px;
     padding: 10px;
     border-radius: 4px;
-
-
-/* .left_sidemenu .submenu a {
-  color: #fff;
-  display: block;
-  color: rgb(19, 151, 213)
-} */
-.submenu>li {
-	line-height: 50px;
-	background-color: rgb(22, 116, 161);
 }
 
+.left_sidemenu i {
+	margin-right: 8px;
+}
 
 .c_logo a {
 	text-decoration: none;
@@ -164,7 +133,6 @@
 
 .submenu a>li:hover .submenu {
 	height: auto;
-
 }
 
 .submenu {
@@ -212,5 +180,4 @@
 	border-radius: 4px;
 	margin: 20px
 	
-
 }

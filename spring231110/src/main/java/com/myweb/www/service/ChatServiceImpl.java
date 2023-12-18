@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.myweb.www.domain.BoardVO;
 import com.myweb.www.domain.ChatDTO;
 import com.myweb.www.domain.ChatDTO2;
+import com.myweb.www.domain.FileVO;
 import com.myweb.www.repository.BoardDAO;
 import com.myweb.www.repository.ChatDAO;
 import com.myweb.www.repository.CommentDAO;
@@ -92,6 +93,12 @@ public class ChatServiceImpl implements ChatService {
 		log.info("읽음처리상태 " + oneorzero); //읽으면 개수별 1이상일듯 아님 0 
 		return chatdao.selectEmpId2(chatdto);
 	}
+	@Override
+	public FileVO getFile1(ChatDTO chatdto) {
+		// TODO Auto-generated method stub
+		return chatdao.selectFile1(chatdto);
+	}
+
 
 
 	@Override
@@ -99,6 +106,12 @@ public class ChatServiceImpl implements ChatService {
 		// TODO Auto-generated method stub
 		log.info("쳇서비스임플의 chatdto는"+ chatdto);
 		return chatdao.getAllUnreadChat(chatdto);
+	}
+	
+	@Override
+	public int getAllUnreadChatID(String chatid) {
+		log.info("쳇서비스임플의 getAllUnreadChatID의 chatid값은 "+ chatid);
+		return chatdao.getAllUnreadChatID(chatid);
 	}
 
 
@@ -122,6 +135,11 @@ public class ChatServiceImpl implements ChatService {
 		// TODO Auto-generated method stub
 		return memberdao.selectAllMemberforChat();
 	}
+
+
+
+
+
 
 
 

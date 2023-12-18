@@ -14,9 +14,7 @@ import lombok.ToString;
 @AllArgsConstructor
 @NoArgsConstructor
 public class MemberDTO {
-
 	private MemberVO mvo;
 	private DepartmentVO dvo;
 	private ClubVO cvo;
 }
-

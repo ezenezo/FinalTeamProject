@@ -97,3 +97,4 @@ preBtn3.addEventListener('click',()=>{
         document.getElementById('prev3').innerHTML=``;
     }
 });
+

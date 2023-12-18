@@ -33,8 +33,16 @@
 		AND (toID = #{fromID} and fromID = #{toID}) 
 		OR (fromID = #{fromID} and toID = #{toID})
 		order by chatID
-		limit 300;
+		limit 100;
 	</select>
+	
+	<select id="selectFile1" resultType="com.myweb.www.domain.FileVO">
+		select * from file
+		where 1=1 
+		AND id = #{toID} 
+		limit 1;
+	</select>
+	
 	
 	<update id="readChat">
 		UPDATE chat SET chatRead = 1 WHERE (fromID = #{toID} AND toId= #{fromID}) AND chatRead = 0;
@@ -43,6 +51,13 @@
 	<select id="getAllUnreadChat" resultType="int">
 		SELECT COUNT(chatID) FROM chat WHERE toID = #{toID} AND chatRead = 0;
 	</select>
+	<select id="getAllUnreadChatID" resultType="int">
+		SELECT COUNT(chatID) FROM chat WHERE toID = #{chatid} AND chatRead = 0;
+	</select>
+	
+	
+	
+	
 	
 	<select id = "getBox" resultType="com.myweb.www.domain.ChatDTO">
 <!-- 		select * from chat where chatID IN (SELECT MAX(chatID) FROM chat where toID = #{toID}  OR fromID= #{toID}  -->

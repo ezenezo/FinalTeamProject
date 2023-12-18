@@ -23,8 +23,8 @@ import net.coobird.thumbnailator.Thumbnails;
 @Component
 @Slf4j
 public class FileHandler {
-	private final String UP_DIR = "D:\\_myweb\\_java\\fileupload\\";// 231120전경환
-//	private final String UP_DIR = "/aj2002/tomcat/webapps/_javaweb/_java/fileUpload";//231120전경환
+	private final String UP_DIR = "D:\\_myweb\\_java\\fileUpload\\";// 231120전경환
+//	private final String UP_DIR = "/aj2002/tomcat/webapps/_javaweb/_java/fileUpload/";//231120전경환  //카페24배포용webapps
 
 	public FileVO uploadFiles(MultipartFile boardfile) {
 
