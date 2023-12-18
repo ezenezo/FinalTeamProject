@@ -13,5 +13,5 @@ import lombok.ToString;
 @NoArgsConstructor
 public class PortfolioDTO {
 	private PortfolioVO pvo;
-	private FileVO mainImg;	
+	private FileVO mainImg;
 }

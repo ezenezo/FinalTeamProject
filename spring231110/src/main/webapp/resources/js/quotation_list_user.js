@@ -40,7 +40,7 @@ function handleClick_q(event, quotationNm) {
       li += `<input type="text" value="${rvo.requestOp}" id="subject_q" >`;
       li += `돈:<input type="text"  id="subject_q" name ="budget">`;
       li += `회사 요청사항:<input type="text"  id="subject_q" name ="requestOp">`;
-      
+
       console.log(rvo.okTypeNo);
       console.log(rvo.okTypeYes);
       if (rvo.okTypeNo != true && rvo.okTypeYes != true) {
@@ -65,7 +65,7 @@ async function postDataToServer_req(url) {
     console.error(err);
   }
 }
-function cancel_btn() {
+function quo_user() {
   let reqNm = document.querySelector('.requestNm').value;
   postToServer_cancel(reqNm).then(result => {
     console.log(result);
@@ -77,25 +77,10 @@ function cancel_btn() {
 }
 
 
+function quo_user(quotationNm) {
 
-async function postToServer_cancel(reqNm) {
-  try {
-    const url = "/quotation/cancel/" + reqNm;
-    const config = {
-      method: "post",
-      headers: {
-        'content-type': 'application/json; charset=utf-8'
-      },
+  var url = "/quotation/quotation_user?quotationNm=" + quotationNm;
 
-    };
-
-    const resp = await fetch(url, config);
-    const result = await resp.text(); //isOk
-    return result;
-  } catch (err) {
-    console.log(err);
-  }
+  window.location.replace(url);
 }
-
-
 

@@ -47,4 +47,5 @@
 	<select id="getPortfolio" resultType="com.myweb.www.domain.PortfolioVO">
 		select * from portfolio where pno = #{pno}
 	</select>
+
 </mapper>

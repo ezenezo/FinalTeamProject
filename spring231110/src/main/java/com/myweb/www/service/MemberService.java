@@ -13,6 +13,7 @@ import com.myweb.www.security.MemberVO;
 
 public interface MemberService {
 
+
 	// 회원가입
 	int register(MemberVO mvo);
 
@@ -22,38 +23,43 @@ public interface MemberService {
 
 	int remove(String id);
 
-	MemberVO memberDetail(String id);
+   
+   int modify(MemberVO mvo);
+   
+   int modifyPwdEmpty(MemberVO mvo);
+   
+   int remove(String email);
 
-	int getTotalCount(PagingVO pagingVO);
+   MemberVO memberDetail(String id);
 
-	int updatePw(String id, String password);
+   int getTotalCount(PagingVO pagingVO);
 
-	int checkId(String id);
+   int updatePw(String id, String password);
 
-	int insert(String id, FileVO fvo);
+   int checkId(String id);
 
-	JsonNode getAccessToken(String code, String ok);
+   int insert(String id, FileVO fvo);
 
-	JsonNode getUserInfo(JsonNode accesstoken, String provider);
+   JsonNode getAccessToken(String code, String ok);
 
-	void kakaoLogout(String attribute);
+   JsonNode getUserInfo(JsonNode accesstoken, String provider);
 
-	String kakaojoin(JsonNode profile, Model m);
+   void kakaoLogout(String attribute);
 
-	String kakaoLogin(JsonNode user, HttpSession ses, Model m);
+   String kakaojoin(JsonNode profile, Model m);
 
-	JsonNode getAccessToken(String code, String state, String provider);
+   String kakaoLogin(JsonNode user, HttpSession ses, Model m);
 
-	String naverjoin(JsonNode user, Model m);
+   JsonNode getAccessToken(String code, String state, String provider);
 
-	String naverLogin(JsonNode user, HttpSession ses, Model m);
+   String naverjoin(JsonNode user, Model m);
 
-	AuthVO getAuthList(String id);
+   String naverLogin(JsonNode user, HttpSession ses, Model m);
 
-	FileVO getFile(String id);
+   AuthVO getAuthList(String id);
 
-	int companyRegister(MemberVO mvo);
-
+   FileVO getFile(String id);
+int companyRegister(MemberVO mvo);
 	FileVO getFilePno(long pno);
 
 	void heartCancel(String id, long pno);
@@ -61,5 +67,6 @@ public interface MemberService {
 	void heartAdd(String id, long pno);
 
 	CompanyVO getCvo(String id);
+
 
 }

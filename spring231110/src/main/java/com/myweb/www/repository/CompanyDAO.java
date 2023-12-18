@@ -2,6 +2,7 @@ package com.myweb.www.repository;
 
 import java.util.List;
 
+
 import org.apache.ibatis.annotations.Param;
 
 import com.myweb.www.domain.CompanyDTO;
@@ -20,3 +21,4 @@ public interface CompanyDAO {
    int updateRateAverage(String comId);
    
 }
+

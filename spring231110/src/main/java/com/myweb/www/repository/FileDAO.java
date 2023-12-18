@@ -26,6 +26,7 @@ public interface FileDAO {
 
 	FileVO selectMainImg(long pno);//
 
+
 	FileVO getFilePno(long pno);
 
 }

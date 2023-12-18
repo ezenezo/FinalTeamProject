@@ -7,12 +7,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+
 import com.myweb.www.domain.CouponVO;
+
 import com.myweb.www.domain.FileVO;
 import com.myweb.www.domain.PortfolioDTO;
 import com.myweb.www.domain.PortfolioVO;
 import com.myweb.www.repository.FileDAO;
+
 import com.myweb.www.repository.HeartDAO;
+
 import com.myweb.www.repository.MemberDAO;
 import com.myweb.www.repository.PortfolioDAO;
 
@@ -25,6 +29,7 @@ public class PortfolioServiceImpl implements PortfolioService {
 	private PortfolioDAO pdao;
 	private FileDAO fdao;
 	private MemberDAO mdao;
+
 	private HeartDAO hdao;
 
 	@Autowired
@@ -70,6 +75,7 @@ public class PortfolioServiceImpl implements PortfolioService {
 
 	// detail
 	@Override
+
 	public PortfolioDTO getDetail(long pno, String authId) {
 		PortfolioDTO pdto = new PortfolioDTO();
 
@@ -79,6 +85,7 @@ public class PortfolioServiceImpl implements PortfolioService {
 		if (isOk > 0) {
 			pvo.setLikeCheck(true);
 		} else {
+
 			pvo.setLikeCheck(false);
 		}
 		FileVO fvo = fdao.selectMainImg(pno);
@@ -121,6 +128,7 @@ public class PortfolioServiceImpl implements PortfolioService {
 	}
 
 	// 컴퍼니 이름 찾아오기
+
 	@Override
 	public String selectCompanyName(String id) {
 		return mdao.selectCompanyName(id);
@@ -131,12 +139,14 @@ public class PortfolioServiceImpl implements PortfolioService {
 	public void updateReadCount(long pno) {
 		pdao.updateReadCount(pno);
 
+
 	}
 
 	@Override
 	public String selectId(long pno) {
 		return pdao.selectId(pno);
 	}
+
 
 	//좋아요 찍힌 포폴 가져오기
 	@Override

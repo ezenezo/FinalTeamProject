@@ -33,6 +33,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @Service
 public class MemberServiceImpl implements MemberService {
+
 	@Inject
 	private MemberDAO mdao;
 
@@ -446,5 +447,6 @@ public class MemberServiceImpl implements MemberService {
 	public CompanyVO getCvo(String id) {
 		return cdao.getCvo(id);
 	}
+
 
 }

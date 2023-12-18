@@ -58,7 +58,9 @@ public interface MemberDAO {
 
 	String selectCompanyName(String id);
 
+
 	int usePoint(@Param("point") int point, @Param("id") String id);
 
 	int updatePoint(@Param("round") int round, @Param("id") String id);
+
 }
