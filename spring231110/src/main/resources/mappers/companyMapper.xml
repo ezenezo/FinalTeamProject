@@ -24,9 +24,12 @@
 		and m.id = c.id
 		and c.id = f.id
 	</select>
+
 	<select id="getCvo" resultType="com.myweb.www.domain.CompanyVO">
-		select * from company where id=#{id}
+		select * from company where
+		id=#{id}
 	</select>
+	
 	<update id="reviewCount">
 		update company set review_count=(select count(*) from review where com_id=company.id)
 	</update>

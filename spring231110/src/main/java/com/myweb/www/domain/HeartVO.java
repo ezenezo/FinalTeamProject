@@ -12,6 +12,7 @@ import lombok.ToString;
 @AllArgsConstructor
 @ToString
 public class HeartVO {
+
 	private int cmtNo;//댓글 좋아요용
 	private String id;// 아이디
 	private int pno;//포폴 좋아요용

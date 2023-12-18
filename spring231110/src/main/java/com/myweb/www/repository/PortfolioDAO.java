@@ -5,6 +5,10 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 import com.myweb.www.domain.FilterdataVO;
+
+
+import com.myweb.www.domain.CouponVO;
+
 import com.myweb.www.domain.PortfolioDTO;
 import com.myweb.www.domain.PortfolioVO;
 
@@ -47,6 +51,11 @@ public interface PortfolioDAO {
 //	List<PortfolioDTO> getListFilter(@Param("order") String order,@Param("homeTypeSh") String homeTypeSh,@Param("roomCntSh") String roomCntSh,@Param("familyTypeSh") String familyTypeSh,
 //			@Param("homeStyle") String homeStyle);
 
+
+
+	List<PortfolioVO> getHeartList(String id);
+
+	PortfolioVO getPortfolio(long pno);
 
 
 }

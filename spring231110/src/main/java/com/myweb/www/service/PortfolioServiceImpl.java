@@ -8,13 +8,18 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
+
+import com.myweb.www.domain.CouponVO;
+
 import com.myweb.www.domain.FileVO;
 import com.myweb.www.domain.FilterdataVO;
 import com.myweb.www.domain.PortfolioDTO;
 import com.myweb.www.domain.PortfolioVO;
 import com.myweb.www.repository.CompanyDAO;
 import com.myweb.www.repository.FileDAO;
+
 import com.myweb.www.repository.HeartDAO;
+
 import com.myweb.www.repository.MemberDAO;
 import com.myweb.www.repository.PortfolioDAO;
 
@@ -30,8 +35,12 @@ public class PortfolioServiceImpl implements PortfolioService {
 	private HeartDAO hdao;
 	private CompanyDAO codao;
 
+	private HeartDAO hdao;
+
 	@Autowired
+
 	public PortfolioServiceImpl(PortfolioDAO pdao, FileDAO fdao, MemberDAO mdao, HeartDAO hdao, CompanyDAO codao) {
+
 		this.pdao = pdao;
 		this.fdao = fdao;
 		this.mdao = mdao;
@@ -113,6 +122,7 @@ public class PortfolioServiceImpl implements PortfolioService {
 		return pdto;
 	}
 
+
 	// 포폴 좋아요 확인(1이면 이미 체크, 0이면 체크안되어있는거)
 	@Override
 	public int portfolioLikeCheck(long pno, String id) {
@@ -141,6 +151,7 @@ public class PortfolioServiceImpl implements PortfolioService {
 	}
 
 	// 컴퍼니 이름 찾아오기
+
 	@Override
 	public String selectCompanyName(String id) {
 		return mdao.selectCompanyName(id);
@@ -151,12 +162,14 @@ public class PortfolioServiceImpl implements PortfolioService {
 	public void updateReadCount(long pno) {
 		pdao.updateReadCount(pno);
 
+
 	}
 
 	@Override
 	public String selectId(long pno) {
 		return pdao.selectId(pno);
 	}
+
 
 	@Override
 	public int likeQtyAreaInput(long pno) {
@@ -237,6 +250,18 @@ public class PortfolioServiceImpl implements PortfolioService {
 	@Override
 	public int postModifyPortfolioOnlyContent(PortfolioVO pvo) {
 		return pdao.updatePortfolio(pvo);
+
+
+	//좋아요 찍힌 포폴 가져오기
+	@Override
+	public List<PortfolioVO> getHeartList(String id) {
+		return pdao.getHeartList(id);
+	}
+
+	@Override
+	public PortfolioVO getPortfolio(long pno) {
+		return pdao.getPortfolio(pno);
+
 	}
 
 }

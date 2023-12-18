@@ -9,23 +9,17 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
 import javax.inject.Inject;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import org.apache.ibatis.annotations.Mapper;
-import org.springframework.security.oauth2.common.OAuth2AccessToken;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
-import org.springframework.util.StringUtils;
-import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
@@ -43,6 +37,7 @@ import com.myweb.www.domain.ReviewVO;
 import com.myweb.www.repository.ClubDAO;
 import com.myweb.www.repository.CompanyDAO;
 import com.myweb.www.repository.DepartmentDAO;
+
 import com.myweb.www.repository.FileDAO;
 import com.myweb.www.repository.HeartDAO;
 import com.myweb.www.repository.MemberDAO;
@@ -56,6 +51,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @Service
 public class MemberServiceImpl implements MemberService {
+
 	@Inject
 	private MemberDAO mdao;
 
@@ -92,20 +88,21 @@ public class MemberServiceImpl implements MemberService {
 
 	@Override
 	public int modify(MemberVO mvo) {
-		// TODO Auto-generated method stub
 		return mdao.modify(mvo);
 	}
 
 	@Override
 	public int modifyPwdEmpty(MemberVO mvo) {
-		// TODO Auto-generated method stub
 		return mdao.modifyPwdEmpty(mvo);
 	}
 
 	@Override
-	public int remove(String email) {
-		mdao.removeAuth(email);
-		return mdao.remove(email);
+
+	@Transactional
+	public int remove(String id) {
+		mdao.removeAuth(id);
+		return mdao.remove(id);
+
 	}
 
 	@Override
@@ -465,6 +462,7 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
+
 	public MemberDTO getMdto(String id) {
 
 		MemberVO mvo = mdao.selectEmail(id);
@@ -532,6 +530,27 @@ public class MemberServiceImpl implements MemberService {
 		log.info("cdto>>{}",cdto);
 		
 		return cdto;
+
+	public FileVO getFilePno(long pno) {
+		return fdao.selectMainImg(pno);
+	}
+
+	@Override
+	public void heartCancel(String id, long pno) {
+		hdao.deletePortfolioLike(pno, id);
+		return;
+	}
+
+	@Override
+	public void heartAdd(String id, long pno) {
+		hdao.addPortfolioLike(pno, id);
+		return;
+	}
+
+	@Override
+	public CompanyVO getCvo(String id) {
+		return cdao.getCvo(id);
+
 	}
 
 

@@ -15,6 +15,7 @@
 <link rel="stylesheet" href="/resources/css/portfolioList.css">
 </head>
 <body>
+
 <input type="hidden" id="order" value="${filter.order}">
 <input type="hidden" id="homeTypeSh" value="${filter.homeTypeSh}">
 <input type="hidden" id="roomCntSh" value="${filter.roomCntSh}">
@@ -22,6 +23,7 @@
 <input type="hidden" id="homeStyleSh" value="${filter.homeStyleSh}">
 <input type="hidden" id="sliderOneVal" value="${filter.sliderOneVal}">
 <input type="hidden" id="sliderTwoVal" value="${filter.sliderTwoVal}">
+
 
 	<jsp:include page="../common/nav.jsp"></jsp:include>
 
@@ -37,7 +39,9 @@
 								expand_more </span>
 						</div>
 					</button>
+
 					<ul class="ulTag num0ul">
+
 						<li>인기순</li>
 						<li>최신순</li>
 						<li>오래된순</li>
@@ -87,6 +91,7 @@
 								expand_more </span>
 						</div>
 					</button>
+
 					<ul class="ulTag num2ul">
 						<li class="num2li">원룸</li>
 						<li class="num2li">오피스텔</li>
@@ -96,6 +101,7 @@
 						<li class="num2li">사무공간</li>
 						<li class="num2li">상업공간</li>
 						<li class="num2li">기타</li>
+
 					</ul>
 				</div>
 				<div class="filter num3">
@@ -106,7 +112,9 @@
 								expand_more </span>
 						</div>
 					</button>
+
 					<ul class="ulTag num3ul">
+
 						<li>1개</li>
 						<li>1.5개</li>
 						<li>2개</li>
@@ -124,7 +132,9 @@
 								expand_more </span>
 						</div>
 					</button>
+
 					<ul class="ulTag num4ul">
+
 						<li>싱글라이프</li>
 						<li>신혼부부</li>
 						<li>룸메이트와 함께 사는 집</li>
@@ -142,7 +152,9 @@
 								expand_more </span>
 						</div>
 					</button>
+
 					<ul class="ulTag num5ul">
+
 						<li>모던</li>
 						<li>미니멀&심플</li>
 						<li>내추럴</li>
@@ -167,10 +179,12 @@
 						<div class="pdtoBox">
 							<a class="a1"
 								href="/portfolio/portfolioDetail?pno=${pdto.pvo.pno}">
+
 								<div class="overHiddenBox">
 									<img class="portfolioMainImg"
 										src="/upload/${pdto.mainImg.saveDir}/${fn:replace(pdto.mainImg.saveDir,'\\','-')}_${pdto.mainImg.uuid}_${pdto.mainImg.fileName}">
 								</div>
+
 								<p class="pdtoBoxTitle">${pdto.pvo.title}</p> <a class="a2"
 								href="/member/companyInfo?id=${pdto.pvo.id}"><p class="pdtoBoxTitle">${pdto.pvo.userNm}</p></a>
 								<p class="pdtoBoxTitle pdtoTitle3th">
@@ -180,6 +194,7 @@
 						</div>
 					</c:forEach> --%>
 					
+
 				</div>
 			</div>
 		</div>

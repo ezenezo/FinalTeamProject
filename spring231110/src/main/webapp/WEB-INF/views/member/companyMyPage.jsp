@@ -19,29 +19,34 @@
 		<!-- 왼쪽 구역 프로필 -->
 		<div class="main">
 			<div id="userInfoBox">
-				<c:if test="${fvo eq null}">
-					<img alt="" src="../resources/img/익명프로필.png" class="profileImg">
-				</c:if>
 				<c:if test="${fvo ne null }">
 					<img alt=""
 						src="/upload/${fvo.saveDir}/${fvo.uuid}_${fvo.fileName}"
 						class="profileImg">
 				</c:if>
+				<c:if test="${fvo eq null }">
+					<img alt="" src="../resources/img/profile_none.png"
+						class="profileImg">
+				</c:if>
 				<div class="userInfo">
 					<p class="userNm">${user.userNm }</p>
 					<p class="email">${user.email }</p>
-					<button type="button" class="modifyUserInfoBtn">설정</button>
+					<a href="/member/modify?id=${user.id }"><button type="button"
+							class="modifyUserInfoBtn">설정</button></a>
 				</div>
 				<hr>
 				<div class="subUser">
 					<div class="iconBox">
+
 						<i class="bi bi-heart"></i> <span>좋아요 누적 수</span>
 						<p>${heartCount}</p>
+
 					</div>
 				</div>
 			</div>
 
 			<!-- 오른쪽 구역 -->
+
 			<section class="rightSection">
 				<div class="menu">
 					<div class="leftText">
@@ -75,10 +80,14 @@
 						</div>
 
 					</c:forEach>
+
 				</div>
 			</section>
 		</div>
 	</sec:authorize>
+	<jsp:include page="../common/footer.jsp"></jsp:include>
+
 </body>
 <link href="../resources/css/companyMyPage.css" rel="stylesheet">
+
 </html>

@@ -3,6 +3,7 @@ package com.myweb.www.repository;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
+import org.springframework.security.core.userdetails.User;
 
 import com.myweb.www.domain.ClubVO;
 import com.myweb.www.domain.PagingVO;
@@ -57,6 +58,11 @@ public interface MemberDAO {
 
 	String selectCompanyName(String id);
 
+
+
+	int usePoint(@Param("point") int point, @Param("id") String id);
+
+	int updatePoint(@Param("round") int round, @Param("id") String id);
 
 
 }

@@ -32,14 +32,23 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.fasterxml.jackson.databind.JsonNode;
+
 import com.myweb.www.domain.CompanyDTO2;
+
+import com.myweb.www.domain.CouponVO;
+import com.myweb.www.domain.CustomerServiceVO;
 import com.myweb.www.domain.FileVO;
+import com.myweb.www.domain.PortfolioDTO;
+import com.myweb.www.domain.PortfolioVO;
 import com.myweb.www.handler.ProfileFileHandler;
 import com.myweb.www.security.AuthMember;
 import com.myweb.www.security.AuthVO;
 import com.myweb.www.security.MemberDTO;
 import com.myweb.www.security.MemberVO;
+import com.myweb.www.service.CustomerService;
 import com.myweb.www.service.MemberService;
+import com.myweb.www.service.PaymentService;
+import com.myweb.www.service.PortfolioService;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -48,12 +57,20 @@ import lombok.extern.slf4j.Slf4j;
 @Controller
 public class MemberController {
 
-   @Inject
-   private BCryptPasswordEncoder bcEncoder;
-   @Inject
-   private MemberService msv;
-   @Inject
-   private ProfileFileHandler pfh;
+
+	@Inject
+	private BCryptPasswordEncoder bcEncoder;
+	@Inject
+	private MemberService msv;
+	@Inject
+	private ProfileFileHandler pfh;
+	@Inject
+	private CustomerService csv;
+	@Inject
+	private PortfolioService psv;
+	@Inject
+	private PaymentService paysv;
+
 
    @GetMapping("/register")
    public void register() {
@@ -78,28 +95,30 @@ public class MemberController {
       return "/member/login";
    }
 
-   @GetMapping("/companyRegister")
-   public void companyRegister() {
-   }
-   
-   // 업체 등록
-   @PostMapping("/companyRegister")
-   public String companyRegister(MemberVO mvo, @RequestParam(name = "profile", required = false) MultipartFile[] files,
-         Model m) {
-      int isOk = 1;
-      if (mvo.getPw() != null) {
-         mvo.setPw(bcEncoder.encode(mvo.getPw())); // 암호화해서 넣음
-      }
-      isOk *= msv.companyRegister(mvo);
-      String id = mvo.getId();
-      FileVO fvo = null;
-      if (files[0] != null) {
-         fvo = pfh.uploadFiles(files[0], id);
-      }
-      isOk *= msv.insert(id, fvo);
-      log.info(isOk > 0 ? "성공" : "실패");
-      return "/member/login";
-   }
+
+	@GetMapping("/companyRegister")
+	public void companyRegister() {
+	}
+
+	// 업체 등록
+	@PostMapping("/companyRegister")
+	public String companyRegister(MemberVO mvo, @RequestParam(name = "profile", required = false) MultipartFile[] files,
+			Model m) {
+		int isOk = 1;
+		if (mvo.getPw() != null) {
+			mvo.setPw(bcEncoder.encode(mvo.getPw())); // 암호화해서 넣음
+		}
+		isOk *= msv.companyRegister(mvo);
+		String id = mvo.getId();
+		FileVO fvo = null;
+		if (files[0] != null) {
+			fvo = pfh.uploadFiles(files[0], id);
+		}
+		isOk *= msv.insert(id, fvo);
+		log.info(isOk > 0 ? "성공" : "실패");
+		return "/member/login";
+	}
+
 
    @GetMapping("/login")
    public void login() {
@@ -109,22 +128,24 @@ public class MemberController {
    @PostMapping("/loginWithoutForm")
    public String loginWithoutForm(@RequestParam String id) {
 
-      List<GrantedAuthority> roles = new ArrayList<>(1);
-      String roleStr = "ROLE_USER";
-      roles.add(new SimpleGrantedAuthority(roleStr));
-      
-      MemberVO mvo = msv.memberDetail(id);
-      AuthVO avo = msv.getAuthList(id);
-      List<AuthVO> authList = new ArrayList<AuthVO>();
-      authList.add(avo);
-      mvo.setAuthVOList(authList);
-      mvo.setPw("");   
-      AuthMember authMember = new AuthMember(mvo);   
-      
-      Authentication auth = new UsernamePasswordAuthenticationToken(authMember, null, roles);
-      SecurityContextHolder.getContext().setAuthentication(auth);
-      return "index";
-   }
+
+		List<GrantedAuthority> roles = new ArrayList<>(1);
+		String roleStr = "ROLE_USER";
+		roles.add(new SimpleGrantedAuthority(roleStr));
+
+		MemberVO mvo = msv.memberDetail(id);
+		AuthVO avo = msv.getAuthList(id);
+		List<AuthVO> authList = new ArrayList<AuthVO>();
+		authList.add(avo);
+		mvo.setAuthVOList(authList);
+		mvo.setPw("");
+		AuthMember authMember = new AuthMember(mvo);
+
+		Authentication auth = new UsernamePasswordAuthenticationToken(authMember, null, roles);
+		SecurityContextHolder.getContext().setAuthentication(auth);
+		return "index";
+	}
+
 
    // 카카오 인증
    @RequestMapping(value = "/kakao", method = RequestMethod.GET)
@@ -214,52 +235,46 @@ public class MemberController {
       return "index";
    }
 
-   // 회원 리스트(확인)
-   /*
-    * @GetMapping("/list") public String list(Model model, PagingVO pagingVO) { //
-    * MemberDTO mdto = msv.getMemberList(pagingVO); List<MemberDTO> list =
-    * msv.getMemberList(pagingVO); model.addAttribute("list", list); // 총 페이지 갯수
-    * int totalCount = msv.getTotalCount(pagingVO); PagingHandler ph = new
-    * PagingHandler(totalCount, pagingVO); model.addAttribute("ph", ph); return
-    * "/member/list";
-    * 
-    * }
-    */
+	@GetMapping({ "/detail" })
+	public void detail(Model model, @RequestParam("id") String id) {
+		MemberVO mvo = msv.memberDetail(id);
+		model.addAttribute("mvo", mvo);
+	}
 
-   @GetMapping({ "/detail" })
-   public void detail(Model model, @RequestParam("id") String id) {
-      MemberVO mvo = msv.memberDetail(id);
-      model.addAttribute("mvo", mvo);
-   }
+	@GetMapping("/modify")
+	public void modify(@RequestParam("id") String id, Model m) {
+		m.addAttribute("mvo", msv.memberDetail(id));
+		m.addAttribute("fvo", msv.getFile(id));
+	}
 
-   @GetMapping("/modify")
-   public void modify(@RequestParam("id") String id, Model m) {
-      m.addAttribute("mvo", msv.memberDetail(id));
-   }
+	// 회원 수정
+	@PostMapping({ "/modify" })
+	public String modify(MemberVO mvo, Model m, HttpServletRequest req, HttpServletResponse res,
+			@RequestParam(name = "profile", required = false) MultipartFile[] files) {
+		int isOk = 1;
+		isOk *= msv.modifyPwdEmpty(mvo);
+		FileVO fvo = null;
+		if (files[0] != null) {
+			fvo = pfh.uploadFiles(files[0], mvo.getId());
+		}
+		isOk *= msv.insert(mvo.getId(), fvo);
+		log.info(isOk > 0 ? "성공" : "실패");
+		logout(req, res);
+		m.addAttribute("msg", "변경이 완료되었습니다.");
+		m.addAttribute("url", "/member/login");
+		logout(req, res);
+		return "alert";
+	}
 
-   // 회원 수정(확인)
-   @PostMapping({ "/modify" })
-   public void modify(MemberVO mvo, Model m, HttpServletRequest req, HttpServletResponse res) {
-      int isOk = 3;
-      if (mvo.getPw() == null || mvo.getPw().isEmpty()) {
-         isOk = msv.modifyPwdEmpty(mvo);
-      } else {
-         mvo.setPw(bcEncoder.encode(mvo.getPw()));
-         isOk = msv.modify(mvo);
-      }
-      logout(req, res);
+	// 회원 탈퇴
+	@GetMapping("/remove")
+	public String removeMember(@RequestParam("id") String id, Model m, HttpServletRequest req,
+			HttpServletResponse res) {
+		int isOk = msv.remove(id);
+		logout(req, res);
+		m.addAttribute("isOkDel", isOk);
+		return "index";
 
-      m.addAttribute("isOk", isOk);
-   }
-
-   // 회원 탈퇴(확인)
-   @GetMapping("/remove")
-   public String removeMember(@RequestParam("id") String id, Model m, HttpServletRequest req,
-         HttpServletResponse res) {
-      int isOk = msv.remove(id);
-      logout(req, res);
-      m.addAttribute("isOkDel", isOk);
-      return "index";
 
    }
 
@@ -274,48 +289,59 @@ public class MemberController {
 
    }
 
-   // 본인 인증 확인
-   @PostMapping("/checkMemberInfo")
-   public String postCheckMemberInfo(MemberVO mvo, RedirectAttributes re, Model m) {
-      MemberVO detail = msv.memberDetail(mvo.getId());
-      // 입력한 정보가 기존 정보와 전부 일치하는지 확인
-      if (detail.getId().equals(mvo.getId()) && detail.getUserNm().equals(mvo.getUserNm())) {
-         m.addAttribute("id", mvo.getId());
-         return "/member/modifyPw";
-      } else {
-         m.addAttribute("msg", "해당 사원은 존재하지 않습니다.");
-         m.addAttribute("url", "/member/checkMemberInfo");
-         return "alert";
-      }
-   }
+	// 본인 인증 확인
+	@PostMapping("/checkMemberInfo")
+	public String postCheckMemberInfo(MemberVO mvo, RedirectAttributes re, Model m) {
+		MemberVO detail = msv.memberDetail(mvo.getId());
+		// 입력한 정보가 기존 정보와 전부 일치하는지 확인
+		if (detail.getId().equals(mvo.getId()) && detail.getEmail().equals(mvo.getEmail())) {
+			m.addAttribute("id", mvo.getId());
+			return "/member/modifyPw";
+		} else {
+			m.addAttribute("msg", "존재하지 않는 유저입니다.");
+			m.addAttribute("url", "/member/checkMemberInfo");
+			return "alert";
+		}
+	}
 
-   @GetMapping("/modifyPw")
-   public void modifyPw() {
-   }
+	@GetMapping("/modifyPw")
+	public void modifyPw(@RequestParam("id") String id, Model m) {
+		m.addAttribute("id", id);
+	}
 
-   // 비밀번호 변경
-   @PostMapping("/modifyPw")
-   public String PostModifyPw(@RequestParam("pw") String pw, @RequestParam("pw2") String pw2,
-         @RequestParam("id") String id, Model m) {
-      if (pw.equals(pw2)) {
-         String password = bcEncoder.encode(pw);
-         log.info("id: " + id + "/ pw: " + pw);
-         int isOk = msv.updatePw(id, password);
-         if (isOk > 0) {
-            m.addAttribute("msg", "변경이 완료되었습니다.");
-            m.addAttribute("url", "/member/login");
-            return "alert";
-         } else {
-            m.addAttribute("msg", "비밀번호 변경 실패.");
-            m.addAttribute("url", "/member/modifyPw");
-            return "alert";
-         }
-      } else {
-         m.addAttribute("msg", "비밀번호가 일치하지 않습니다.");
-         m.addAttribute("url", "/member/checkMemberInfo");
-         return "alert";
-      }
-   }
+	// 비밀번호 변경
+	@PostMapping("/modifyPw")
+	public String PostModifyPw(@RequestParam("pw") String pw, @RequestParam("id") String id, Model m,
+			HttpServletRequest req, HttpServletResponse res) {
+		String password = bcEncoder.encode(pw);
+		log.info("id: " + id + "/ pw: " + pw);
+		int isOk = msv.updatePw(id, password);
+		if (isOk > 0) {
+			m.addAttribute("msg", "변경이 완료되었습니다.");
+			m.addAttribute("url", "/member/login");
+			logout(req, res);
+			return "alert";
+		} else {
+			m.addAttribute("msg", "비밀번호 변경 실패.");
+			m.addAttribute("url", "/member/modifyPw");
+			return "alert";
+		}
+	}
+
+	// 마이페이지
+	@RequestMapping("/myPage")
+	public void myPage(@RequestParam String id, Model m, HttpServletRequest request) {
+		FileVO fvo = msv.getFile(id);
+		m.addAttribute("fvo", fvo);
+		MemberVO mvo = msv.memberDetail(id);
+		m.addAttribute("mvo", mvo);
+		List<PortfolioVO> pvo = psv.getHeartList(id);
+		m.addAttribute("heart", pvo.size());
+		List<CouponVO> cvo = paysv.getCouponList(id);
+		int couponCount = cvo.size();
+		m.addAttribute("couponCount", couponCount);
+	}
+
    
    //업체 마이페이지
    @GetMapping("/companyMyPage")
@@ -346,9 +372,43 @@ public class MemberController {
             : new ResponseEntity<String>("0", HttpStatus.INTERNAL_SERVER_ERROR);
    }
 
-   private void logout(HttpServletRequest req, HttpServletResponse res) {
-      Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-      new SecurityContextLogoutHandler().logout(req, res, authentication);
+	// 좋아요 리스트
+	@RequestMapping(value = "/heart", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<List<PortfolioDTO>> heartList(@RequestParam("id") String id, Model m) {
+		List<PortfolioDTO> list = new ArrayList<PortfolioDTO>();
+		List<PortfolioVO> pvo = psv.getHeartList(id);
+		for (int i = 0; i < pvo.size(); i++) {
+			FileVO fvo = msv.getFilePno(pvo.get(i).getPno());
+			PortfolioDTO pdto = new PortfolioDTO(pvo.get(i), fvo);
+			list.add(pdto);
+		}
+		return new ResponseEntity<List<PortfolioDTO>>(list, HttpStatus.OK);
+	}
+	
+	//좋아요 취소
+	@PostMapping(value="/heartCancel/{id}/{pno}", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<String> heartCancel(@PathVariable String id, @PathVariable long pno){
+		msv.heartCancel(id, pno);
+		return new ResponseEntity<String>("1", HttpStatus.OK);
+	}
+	
+	//좋아요 추가
+	@PostMapping(value="/heartAdd/{id}/{pno}", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<String> heartAdd(@PathVariable String id, @PathVariable long pno){
+		msv.heartAdd(id, pno);
+		return new ResponseEntity<String>("1", HttpStatus.OK);
+	}
+
+	// 공지사항 리스트
+	@GetMapping(value = "/list", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<List<CustomerServiceVO>> list(@RequestParam("searchValue") String searchValue) {
+		List<CustomerServiceVO> list = csv.getList(searchValue);
+		return new ResponseEntity<List<CustomerServiceVO>>(list, HttpStatus.OK);
+	}
+
+	private void logout(HttpServletRequest req, HttpServletResponse res) {
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		new SecurityContextLogoutHandler().logout(req, res, authentication);
 
    }
 

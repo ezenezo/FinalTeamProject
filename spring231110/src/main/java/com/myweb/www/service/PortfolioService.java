@@ -4,6 +4,9 @@ import java.util.List;
 
 import org.springframework.web.multipart.MultipartFile;
 
+
+import com.myweb.www.domain.CouponVO;
+
 import com.myweb.www.domain.FileVO;
 import com.myweb.www.domain.FilterdataVO;
 import com.myweb.www.domain.PortfolioDTO;
@@ -33,6 +36,7 @@ public interface PortfolioService {
 
 	int likeQtyAreaInput(long pno);
 
+
 	int deletePortfolio(long pno);
 
 	int postModifyPortfolio(PortfolioVO pvo, FileVO portfolioMainImg);
@@ -46,6 +50,11 @@ public interface PortfolioService {
 
 
 
+
+
+	List<PortfolioVO> getHeartList(String id);
+
+	PortfolioVO getPortfolio(long pno);
 
 
 

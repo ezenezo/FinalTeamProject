@@ -40,4 +40,6 @@ public interface FileDAO {
 
 
 
+	FileVO getFilePno(long pno);
+
 }

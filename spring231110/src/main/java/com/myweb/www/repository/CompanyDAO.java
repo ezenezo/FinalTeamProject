@@ -9,6 +9,7 @@ import com.myweb.www.domain.CompanyVO;
 
 public interface CompanyDAO {
 
+
 	List<CompanyDTO> selectdetailAll();
 
 	CompanyVO getCvo(String id);
@@ -21,5 +22,5 @@ public interface CompanyDAO {
 
 
 
-	
 }
+

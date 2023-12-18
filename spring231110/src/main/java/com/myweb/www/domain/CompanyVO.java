@@ -11,6 +11,7 @@ import lombok.ToString;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
+
 public class CompanyVO {		
 	private int key_num; //회사키번호 auto_increment
 	private float rateAverage; //별점평균

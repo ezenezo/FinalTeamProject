@@ -5,6 +5,8 @@
 <mapper namespace="com.myweb.www.repository.CompanyDAO">
 
 
+
+
 	<select id="selectdetailAll"
 		resultType="com.myweb.www.domain.CompanyDTO">
 		select c.id as id,

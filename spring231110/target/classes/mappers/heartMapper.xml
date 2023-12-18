@@ -14,4 +14,5 @@
 	select count(*) from heart where pno=#{pno}
 	</select>
 
+
 </mapper>
