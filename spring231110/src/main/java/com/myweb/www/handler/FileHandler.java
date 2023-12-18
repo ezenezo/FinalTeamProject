@@ -23,59 +23,55 @@ import net.coobird.thumbnailator.Thumbnails;
 @Component
 @Slf4j
 public class FileHandler {
-	private final String UP_DIR = "D:\\_myweb\\_java\\fileupload";//231120전경환
+	private final String UP_DIR = "D:\\_myweb\\_java\\fileupload\\";// 231120전경환
 //	private final String UP_DIR = "/aj2002/tomcat/webapps/_javaweb/_java/fileUpload";//231120전경환
 
-	public List<FileVO> uploadFiles(MultipartFile[] files) {
-		List<FileVO> flist = new ArrayList<FileVO>();
+	public FileVO uploadFiles(MultipartFile boardfile) {
 
-		LocalDate date = LocalDate.now(); 
+		LocalDate date = LocalDate.now();
 		String today = date.toString();
-		today = today.replace("-", File.separator);
+		String todaySe = today.replace("-", File.separator);
 
-		File folders = new File(UP_DIR, today);
+		File folders = new File(UP_DIR, todaySe);
 
 		if (!folders.exists()) { // folders가 없다면
 			folders.mkdirs();
 		}
 
-		for (MultipartFile file : files) {
-			FileVO fvo = new FileVO();
-			fvo.setSaveDir(today);
-			fvo.setFileSize(file.getSize());
+		FileVO fvo = new FileVO();
+		fvo.setSaveDir(todaySe);
+		fvo.setFileSize(boardfile.getSize());
 
-			String originalFileName = file.getOriginalFilename();
-			String fileName = originalFileName.substring(originalFileName.lastIndexOf(File.separator) + 1);
-			fvo.setFileName(fileName);
-			
-			UUID uuid = UUID.randomUUID();
-			fvo.setUuid(uuid.toString());
+		String originalFileName = boardfile.getOriginalFilename();
+		String fileName = originalFileName.substring(originalFileName.lastIndexOf(File.separator) + 1);
+		fvo.setFileName(fileName);
 
-			String fullFileName = uuid.toString() + "_" + fileName;
+		UUID uuid = UUID.randomUUID();
+		fvo.setUuid(uuid.toString());
 
-			File storeFile = new File(folders, fullFileName);
+		String fullFileName = today + "_" + uuid.toString() + "_" + fileName;
 
-			try {
-				file.transferTo(storeFile);
-				if (isImageFile(storeFile)) {
-					fvo.setFileType(1); 
-					File thumbNail = new File(folders, uuid.toString() + "_th_" + fileName);
-					Thumbnails.of(storeFile).size(75, 75).toFile(thumbNail);
-				}
-			} catch (Exception e) {
-				log.debug(">>> 파일 생성 오류~!!");
-				e.printStackTrace();
+		File storeFile = new File(folders, fullFileName);
+
+		try {
+			boardfile.transferTo(storeFile);
+			if (isImageFile(storeFile)) {
+				fvo.setFileType(1);
+				File thumbNail = new File(folders, uuid.toString() + "_th_" + fileName);
+				Thumbnails.of(storeFile).size(75, 75).toFile(thumbNail);
 			}
-			flist.add(fvo);
+		} catch (Exception e) {
+			log.debug(">>> 파일 생성 오류~!!");
+			e.printStackTrace();
 		}
 
-		return flist;
+		return fvo;
 	}
 
+	// 이미지 파일인지 확인하는 메서드
 	private boolean isImageFile(File storeFile) throws IOException {
-		// detect => tika는 파일 형식을 확인할 때 Detector라는 인터페이스를 구현한 객체의 detect 메서드를 사용
 		String mimeType = new Tika().detect(storeFile); // image/jpg
+		log.info("mimeType>>>>" + mimeType);
 		return mimeType.startsWith("image") ? true : false;
-
 	}
 }

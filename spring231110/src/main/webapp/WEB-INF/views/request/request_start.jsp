@@ -56,7 +56,7 @@
 							<div class="no_money">
 								<i class="bi bi-currency-exchange"></i>
 								<p class="explanation">
-									<b>별도 비용이 들지 않아요<br></b>평균 4팀의 영상 업체에게 별도 비용 없이 <br>제안서와
+									<b>별도 비용이 들지 않아요<br></b>인테리어 업체에게 별도 비용 없이 <br>제안서와
 									견적,포트폴리오를 받아볼 수 있어요.
 								</p>
 							</div>

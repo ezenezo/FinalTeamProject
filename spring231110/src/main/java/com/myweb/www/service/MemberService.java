@@ -1,40 +1,57 @@
 package com.myweb.www.service;
 
-import java.util.List;
+import javax.servlet.http.HttpSession;
 
+import org.springframework.ui.Model;
+
+import com.fasterxml.jackson.databind.JsonNode;
 import com.myweb.www.domain.FileVO;
 import com.myweb.www.domain.PagingVO;
-import com.myweb.www.security.AuthMember;
+import com.myweb.www.security.AuthVO;
 import com.myweb.www.security.MemberVO;
 
 public interface MemberService {
+   
+   //회원가입
+   int register(MemberVO mvo);
 
-	int register(MemberVO mvo);
+   
+   int modify(MemberVO mvo);
+   
+   int modifyPwdEmpty(MemberVO mvo);
+   
+   int remove(String email);
 
-	boolean updateLastLogin(String authEmail);
+   MemberVO memberDetail(String id);
 
-	List<MemberVO> getList(PagingVO pagingVO);
+   int getTotalCount(PagingVO pagingVO);
 
-	AuthMember detail(String email);
-	
-	int modify(MemberVO mvo);
-	
-	int modifyPwdEmpty(MemberVO mvo);
-	
-	int remove(String email);
+   int updatePw(String id, String password);
 
-	MemberVO memberDetail(String id);
+   int checkId(String id);
 
-	int getTotalCount(PagingVO pagingVO);
+   int insert(String id, FileVO fvo);
 
-	MemberVO getMemberDetail(String id);
+   JsonNode getAccessToken(String code, String ok);
 
-	int updatePw(String id, String password);
+   JsonNode getUserInfo(JsonNode accesstoken, String provider);
 
-	int checkId(String id);
+   void kakaoLogout(String attribute);
 
-	int insert(long empNo, FileVO fvo);
+   String kakaojoin(JsonNode profile, Model m);
 
-	long getMaxEmpNo();
-	
+   String kakaoLogin(JsonNode user, HttpSession ses, Model m);
+
+   JsonNode getAccessToken(String code, String state, String provider);
+
+   String naverjoin(JsonNode user, Model m);
+
+   String naverLogin(JsonNode user, HttpSession ses, Model m);
+
+   AuthVO getAuthList(String id);
+
+   FileVO getFile(String id);
+
+   int companyRegister(MemberVO mvo);
+
 }

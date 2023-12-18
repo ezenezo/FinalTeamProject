@@ -27,8 +27,8 @@
 		<ul class="left_sidemenu">
 			  <li id="mainmenu">
 			 <div id="hover_menu1">
-        <a href="#" onclick="getCommentList()" id="mainmenu_text" >
-            <i class="bi bi-1-square-fill"></i> 유형고르기
+        <a href="#" onclick="getCommentList()" id="mainmenu_text" class="hover_menu" >
+            <i class="bi bi-1-square-fill"></i> 공간고르기
         </a>
         </div>
         </li>
@@ -37,12 +37,12 @@
         
         
 			<li id=""> <div id="hover_menu2">
-        <a href="#" onclick="getCommentList_1()" id="form_choice" class="hover_menu">
-            <i class="bi bi-2-square-fill"></i> 형태고르기
+        <a href="#" onclick="handleClick()" id="form_choice" class="hover_menu">
+            <i class="bi bi-2-square-fill"></i> 유형고르기
         </a> </div></li>
        
         <li id=""> <div id="hover_menu3">
-        <a href="#" id="choice_2" class="hover_menu">
+        <a href="#" id="choice_2" onclick="getCommentList_2_1()" class="hover_menu">
             <i class="bi bi-3-square-fill"></i>공사 범위/상태
         </a></div></li>
          <li id=""><div id="hover_menu4">
@@ -51,6 +51,10 @@
         </a></div></li>
                 <li id=""><div id="hover_menu5">
         <a href="#" onclick="getCommentList_4()" id="choice_4" class="hover_menu">
+            <i class="bi bi-5-square-fill"></i>추가 질문
+        </a></div></li>
+          <li id=""><div id="hover_menu6">
+        <a href="#" onclick="final_req()" id="choice_5" class="hover_menu">
             <i class="bi bi-5-square-fill"></i>추가 질문
         </a></div></li>
 		</ul>
