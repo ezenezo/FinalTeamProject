@@ -1,6 +1,5 @@
 package com.myweb.www.domain;
 
-import java.util.List;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -24,4 +23,7 @@ public class ChatDTO {
 	String fromNm;//
 	String Nm;//
 	int emp_no;//
+	
+//	private CompanyVO companyvo;
+	FileVO filevo;
 }

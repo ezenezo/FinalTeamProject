@@ -6,9 +6,7 @@ import java.util.List;
 import com.myweb.www.domain.ChatDTO;
 
 import com.myweb.www.domain.ChatDTO2;
-
-
-
+import com.myweb.www.domain.FileVO;
 import com.myweb.www.security.MemberVO;
 
 
@@ -27,8 +25,10 @@ public interface ChatService {
 
 
 	List<ChatDTO> getList2(ChatDTO chatdto);
+	FileVO getFile1(ChatDTO chatdto);
 
 	int getAllUnreadChat(ChatDTO chatdto);
+	int getAllUnreadChatID(String chatid);
 
 //	Object getIntAllUnreadChat(ChatDTO chatdto);
 

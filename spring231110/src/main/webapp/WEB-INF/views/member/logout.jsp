@@ -8,6 +8,7 @@
 </head>
 <body>
 <h3>로그아웃하려고 들어오는 페이지</h3>
+<jsp:include page="../common/header.jsp"/>
 <jsp:include page="../common/nav.jsp"/>
 
 

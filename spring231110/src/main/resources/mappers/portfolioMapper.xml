@@ -41,11 +41,5 @@
 	<select id="selectId" resultType="String">
 	select id from portfolio where pno=#{pno}
 	</select>
-	<select id="getHeartList" resultType="com.myweb.www.domain.PortfolioVO">
-		select p.pno, p.title, p.id, p.user_nm, p.like_qty, p.home_style, p.family_type from heart h right join portfolio p on h.pno = p.pno where h.id = #{id};
-	</select>
-	<select id="getPortfolio" resultType="com.myweb.www.domain.PortfolioVO">
-		select * from portfolio where pno = #{pno}
-	</select>
 
 </mapper>

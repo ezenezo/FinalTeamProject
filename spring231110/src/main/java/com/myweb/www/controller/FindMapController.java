@@ -99,14 +99,12 @@ public class FindMapController {
 		}
 
 		
-
-
 		    @Autowired
 		    private GeocodingService geocodingService;
-
+		    //http://localhost:8088/findmap/get-coordinates?address=인천광역시 연수구 원인재로 88
 		    @GetMapping("/get-coordinates")
 		    public ResponseEntity<?> getCoordinates(@RequestParam String address) {
-		    	log.info("/get-coordinates쪽 진입");
+		    	log.info("컨트롤러의 /get-coordinates쪽 진입");
 		        Coordinates coordinates = geocodingService.getCoordinate(address);
 		        // 위도와 경도 정보를 반환하거나 `company` 테이블에 저장하는 로직
 		        log.info("coordinates는 " +coordinates);

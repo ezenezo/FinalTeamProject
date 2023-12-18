@@ -4,11 +4,14 @@ import java.lang.ProcessBuilder.Redirect;
 import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -173,7 +176,7 @@ public class ChatController {
 
 		    if (principalObj instanceof AuthMember) {
 		        AuthMember authMember = (AuthMember) principalObj;
-		        empNm = authMember.getMvo().getEmpNm(); // AuthMember 클래스와 MemberVO 클래스에 적절한 getter 메서드가 정의되어 있어야 함
+		        //empNm = authMember.getMvo().getEmpNm(); // AuthMember 클래스와 MemberVO 클래스에 적절한 getter 메서드가 정의되어 있어야 함
 
 		        log.info("EmpNm은 {}", empNm);
 		        // 이제 empNm 변수를 사용할 수 있습니다.
@@ -247,6 +250,7 @@ public class ChatController {
 	    String username = principal.getName();
 	    // Model 객체에 사용자 이름(ID) 추가
 	    model.addAttribute("username", username);
+	    log.info("겟chat2의 model값: "+ model);
 	    log.info("/chatfolder/chat2로 넘겨주기 직전");
 		return "/chatfolder/chat2"; // 이렇게 해도 됨(뷰로 들어가는 매핑)
 	}
@@ -316,8 +320,13 @@ public class ChatController {
 		}else {
 			log.info("chatdto가 멀쩡함");
 			isOk = 1;
-			
+			log.info("PostMapping의 chatdto는 "+chatdto);
 			list2 = chatsv.getList2(chatdto);
+			FileVO filevo = chatsv.getFile1(chatdto);
+			log.info("PostMapping의 filevo는 "+filevo);
+		    for (ChatDTO chat : list2) {
+		        chat.setFilevo(filevo); // 각 ChatDTO에 FileVO 설정
+		    }
 			log.info("list2는^^ "+ list2);
 		}
 
@@ -523,10 +532,43 @@ public class ChatController {
 	}
 	
 	
+	//서버에서 안 읽은 메시지 수를 세션에 저장하는 엔드포인트 (box.jsp전용으로만듬)231216
+//	@PostMapping("/updateUnreadCount")
+//	public ResponseEntity<?> updateUnreadCount(HttpSession session, @RequestBody Map<String, Integer> payload) {
+//	    int unreadCount = payload.getOrDefault("unreadCount", 0);
+//	    log.info("/updateUnreadCount의 unreadCount는 "+unreadCount);
+//	    session.setAttribute("AllUnreadChat", unreadCount); // 세션에 'AllUnreadChat' 키로 값을 저장
+//	    return ResponseEntity.ok().build();
+//	}
 	
+	//get방식
+	@GetMapping("/updateUnreadCount")
+	public ResponseEntity<?> updateUnreadCount(HttpSession session, @RequestParam("userId") String userId) {
+		log.info("겟방식으로 /updateUnreadCount 진입1");
+	    // userId 값을 사용하여 안 읽은 메시지 수를 계산하는 로직 필요
+	    int unreadCount = chatsv.getAllUnreadChatID(userId);
+	    HttpHeaders headers = new HttpHeaders();
+	    headers.setContentType(MediaType.TEXT_PLAIN);
+	    log.info("겟방식으로 /updateUnreadCount 진입2");
+	    session.setAttribute("AllUnreadChat", unreadCount);
+	    log.info("unreadCount는" + unreadCount);
+	    return new ResponseEntity<>(String.valueOf(unreadCount), headers, HttpStatus.OK);
+	}
 	
-	
-	
+//	@PostMapping("/chatUnread")
+//	public ResponseEntity<?> chatUnread3(@RequestBody ChatDTO chatDTO) {
+//		log.info("포스트방식으로 /chatUnread/chatUnread 진입1");
+//	    // chatDTO에서 toID 값을 사용하여 안 읽은 메시지 수를 계산하는 로직 필요
+//	    String userId = chatDTO.getToID();
+//	    int unreadCount = chatsv.getAllUnreadChatID(userId);
+//	    HttpHeaders headers = new HttpHeaders();
+//	    headers.setContentType(MediaType.TEXT_PLAIN);
+//	    log.info("포스트방식으로 /chaturl/chatUnread 진입2");
+//	    log.info("unreadCount는" + unreadCount);
+//
+//	    return new ResponseEntity<>(String.valueOf(unreadCount), headers, HttpStatus.OK);
+//	}
+
 	
 	
 	

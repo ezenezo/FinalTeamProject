@@ -154,15 +154,34 @@
 							</div>
 							<div class="rightText atag">
 								<div class="divAtag1">
-									<a class="atag" href="#">서울</a> <a href="#">인천</a> <a href="#">세종</a>
-									<a href="#">강원</a> <a href="#">경기</a> <a href="#">충북</a> <a
-										href="#">충남</a> <a href="#">경북</a> <a href="#">대전</a>
-
+								<!-- 카페24배포용webapps -->
+<!-- 									<a class="atag" href="http://aj2002.cafe24.com/findmap/findmap#%EC%84%9C%EC%9A%B8%20%EC%A0%84%EC%B2%B4">서울</a>  -->
+<!-- 									<a href="http://aj2002.cafe24.com/findmap/findmap#%EC%9D%B8%EC%B2%9C%20%EC%A0%84%EC%B2%B4">인천</a>  -->
+									<!-- 로컬용 -->
+									<a class="atag" href="http://localhost:8088/findmap/findmap#%EC%84%9C%EC%9A%B8%20%EC%A0%84%EC%B2%B4">서울</a> 
+									<a href="http://localhost:8088/findmap/findmap#%EC%9D%B8%EC%B2%9C%20%EC%A0%84%EC%B2%B4">인천</a> 
+									
+									<a href="#">세종</a>
+									<a href="#">강원</a> 
+									<a href="#">경기</a> 
+									<a href="#">충북</a> 
+									<a href="#">충남</a> 
+									<a href="#">경북</a> 
+									<a href="#">대전</a>
 								</div>
 								<div class="divAtag divAtag2">
-									<a href="#">대구</a> <a href="#">전북</a> <a href="#">경남</a> <a
-										href="#">울산</a> <a href="#">광주</a> <a href="#">부산</a> <a
-										href="#">전남</a> <a href="#">제주</a>
+									<a href="#">대구</a> 
+									<a href="#">전북</a> 
+									<a href="#">경남</a> 
+									<a href="#">울산</a> 
+									<a href="#">광주</a> 
+									<!-- 카페24배포용webapps -->
+<!-- 									<a href="http://aj2002.cafe24.com/findmap/findmap#%EB%B6%80%EC%82%B0%20%EC%A0%84%EC%B2%B4">부산</a> -->
+									<!-- 로컬용 -->
+									<a href="http://localhost:8088/findmap/findmap#%EB%B6%80%EC%82%B0%20%EC%A0%84%EC%B2%B4">부산</a>  
+									
+									<a href="#">전남</a> 
+									<a href="#">제주</a>
 								</div>
 
 							</div>
@@ -177,17 +196,16 @@
 		</div>
 	</div>
 	<jsp:include page="../common/footer.jsp" />
+<!-- 	231216전경환추가S -->
+	<script>
+	    let fvoJson = '${fvojson}'; // 서버에서 받은 JSON 문자열
+	    // nav.jsp로 데이터 전달
+	    passDataToNav(fvoJson);
+	</script>
+<!-- 	231216전경환추가E -->	
 	<script src="/resources/js/main.js"></script>
 
 
-<script type="text/javascript">
-let isUp = '<c:out value="${isUp}"/>';
-
-if (parseInt(isUp)) {
-	
-}
-
-</script>
 
 
 

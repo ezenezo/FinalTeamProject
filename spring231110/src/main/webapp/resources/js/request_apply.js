@@ -1,70 +1,5 @@
-    let interval;
-let targetElement;
-
-function fadeIn(element) {
-    targetElement = element;
-    targetElement.style.opacity = 0;
-    let opacity = 0;
-    interval = setInterval(() => {
-        if (opacity >= 1) {
-            clearInterval(interval);
-        }
-        targetElement.style.opacity = opacity;
-        opacity += 0.01;
-    }, 5);
-}
-
-function resetFadeIn() {
-    if (interval) {
-        clearInterval(interval);
-
-        fadeIn(targetElement);
-    }
-}
-
-const cards_show = document.querySelector('.cards');
-fadeIn(cards_show);
-
 
 getCommentList();
-
-
-
-
-document.getElementById('gosu_btn').addEventListener('click', () => {
-    Swal.fire({
-        title: '작성하신 요청서가 사라집니다.',
-        text: "다른 페이지로 이동하면 다시 복구시킬 수 없습니다.",
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-        confirmButtonText: '나가기',
-        cancelButtonText: '취소'
-    }).then((result) => {
-        if (result.value) {
-            window.localStorage.clear();
-            window.location.href = '/req/main';
-        }
-    })
-});
-
-
-window.addEventListener('beforeunload', (event) => {
-
-
-    window.localStorage.clear();
-});
-/*
-window.addEventListener('beforeunload', (event) => {
-    event.preventDefault();
-
-    event.returnValue = '페이지를 떠나시겠습니까?';
-       window.localStorage.clear();
-});
-
-*/
-
 function checkboxChangeHandler1(subject, image) {
     const checkbox = document.getElementById("checkbox1-" + subject);
 
@@ -225,7 +160,6 @@ function clickCheck2(target) {
 
 
 // 체크값을 저장하는 함수
-/*
 function storeCheckedValues() {
     var checkedValues = [];
     document.querySelectorAll('.myCheckbox:checked').forEach(function (checkbox) {
@@ -278,7 +212,7 @@ function storeCheckedValues_2_2() {
 //         });
 //     }
 // }
-*/
+
 // submit_btn 함수
 async function submit_btn() {
     console.log("제발들어와라");
@@ -293,13 +227,13 @@ async function submit_btn() {
         }
     });
 
+
     if (checkedValue) {
         console.log('선택된 체크박스의 값2: ', checkedValue);
         await spreadCommentFromServer_1(checkedValue);
-
+        getCommentList_1(checkedValue);
         store(checkedValue);
-        //storeCheckedValues();
-
+        storeCheckedValues();  // 체크값을 저장합니다.
         const checkboxes_choice = document.querySelectorAll("input[type='checkbox']");
         console.log('제ㄹ: ', checkedValue);
     } else {
@@ -308,16 +242,11 @@ async function submit_btn() {
             icon: 'warning',
             title: '필수 항목을 선택해주세요.',
         }).then((result) => {
-            if (result.isConfirmed) {
-                getCommentList();
-
-            }
+            if (result.isConfirmed) { }
         });
     }
-
-    getCommentList_1(checkedValue);
-
 }
+
 async function submit_btn_2() {
 
     let checkedValue1 = '';
@@ -368,7 +297,6 @@ async function submit_btn_2() {
 
 
 
-
 async function submit_btn_1() {
     var subjects = [];
     $('.myCheckbox:checked').each(function () {
@@ -385,13 +313,13 @@ async function submit_btn_1() {
 
     if (checkedValue) {
         console.log('선택된 체크박스의 값2: ', checkedValue);
-        await spreadCommentFromServer_2(checkedValue);
+        await spreadCommentFromServer_1(checkedValue);
 
         store_1(checkedValue);
-        //    storeCheckedValues_1();
+        storeCheckedValues_1();
 
         getCommentList_2_1(checkedValue);
-
+        getCommentList_2_2(checkedValue);
         const checkboxes_choice = document.querySelectorAll("input[type='checkbox']");
         console.log('제ㄹ: ', checkedValue);
     } else {
@@ -444,22 +372,12 @@ async function submit_btn_3() {
     let adress = document.getElementById('sample6_addres');
     if (subjects[0] != '' && subjects[1] != '') {
         console.log('선택된 체크박스의 값2: ', subjects);
-        let sample6_postcode = document.getElementById('#sample6_postcode');
+
 
         store_3(subjects);
         getCommentList_4();
 
-    } else if (isNaN(parseFloat(subjects[0]))) {
-        console.log('숫자만 가능합니다.');
-        Swal.fire({
-            icon: 'warning',
-            title: '우편번호는 숫자만 가능합니다.',
-        }).then((result) => {
-            if (result.isConfirmed) { }
-        });
-    }
-
-    else {
+    } else {
         console.log('선택된 체크박스가 없습니다.');
         Swal.fire({
             icon: 'warning',
@@ -472,18 +390,14 @@ async function submit_btn_3() {
 
 async function submit_btn_4() {
 
-
     var subjects = [];
-    $('#leftInput, #rightInput, #bud, #comment').each(function () {
-        subjects.push($(this).val());
-    });
-
-    /*var subjects = [];
     $('#sample6_postcode, #sample6_address, #sample6_detailAddress').each(function () {
         subjects.push($(this).val());
     });
-    */
 
+
+
+    console.log(subjects);
 
 
     if (subjects) {
@@ -495,8 +409,7 @@ async function submit_btn_4() {
 
 
 
-    }
-    else {
+    } else {
         console.log('선택된 체크박스가 없습니다.');
         Swal.fire({
             icon: 'warning',
@@ -506,7 +419,6 @@ async function submit_btn_4() {
         });
     }
 }
-
 async function submit_btn_5() {
 
     var subjects = [];
@@ -572,24 +484,16 @@ async function submit_btn_5() {
 
             const checkboxes_choice = document.querySelectorAll("input[type='checkbox']");
             console.log('제ㄹ: ', checkedValue1);
-            final_req();
         }
-    }
-    else {
+    } else {
         console.log('선택된 체크박스가 없습니다.');
         Swal.fire({
             icon: 'warning',
             title: '필수 항목을 작성해주세요.',
         }).then((result) => {
-            if (result.isConfirmed) {
-
-
-            }
+            if (result.isConfirmed) { }
         });
     }
-
-    // sendDataToControllers();
-
 
 }
 
@@ -616,7 +520,7 @@ async function postCommentToServer(choice) {
 async function spreadCommentFromServer_2_2(checkedValue) {
     console.log("체크값 가져오기" + checkedValue);
     try {
-        const resp = await fetch('/req/req2_2/' + encodeURIComponent(checkedValue));
+        const resp = await fetch('/req/req2_2/' + checkedValue);
         const result = await resp.json();
         return result;
     } catch (err) {
@@ -627,8 +531,7 @@ async function spreadCommentFromServer_2_2(checkedValue) {
 async function spreadCommentFromServer_2(checkedValue) {
     console.log("체크값 가져오기" + checkedValue);
     try {
-        const resp = await fetch('/req/req2/' + encodeURIComponent(checkedValue));
-
+        const resp = await fetch('/req/req2/' + checkedValue);
         const result = await resp.json();
         return result;
     } catch (err) {
@@ -639,19 +542,7 @@ async function spreadCommentFromServer_2(checkedValue) {
 async function spreadCommentFromServer_1(checkedValue) {
     console.log("체크값 가져오기" + checkedValue);
     try {
-        const resp = await fetch('/req/' + encodeURIComponent(checkedValue));
-        const result = await resp.json();
-        return result;
-    } catch (err) {
-        console.log(err);
-    }
-}
-
-async function spreadCommentFromServer_1_2(stringValue2) {
-    console.log("체크값 가져오기" + stringValue2);
-    try {
-        const resp = await fetch('/req/' + encodeURIComponent(stringValue2));
-        console.log("체크값 가져오기zzzzzzzzzzzz" + resp);
+        const resp = await fetch('/req/' + checkedValue);
         const result = await resp.json();
         return result;
     } catch (err) {
@@ -659,7 +550,6 @@ async function spreadCommentFromServer_1_2(stringValue2) {
     }
 }
 async function getCommentList_2_1(checkedValue) {
-    resetFadeIn();
     try {
         const result = await spreadCommentFromServer_2(checkedValue);
 
@@ -676,8 +566,7 @@ async function getCommentList_2_1(checkedValue) {
         form_choice.style = '';
         cards.style.display = 'block';
         choice_2.style.color = '#006400';
-        const choice_5 = document.getElementById('choice_5');
-        choice_5.style = '';
+
 
         if (result && result.length > 0) {
             cards.innerHTML = '<h2>원하시는 공사 범위를 선택해주세요.</h2><br><div class="box_card"></div>';
@@ -695,7 +584,7 @@ async function getCommentList_2_1(checkedValue) {
             cards.innerHTML += btnBox;
 
 
-            //   storeCheckedValues_2_1();
+            storeCheckedValues_2_1();
             await getCommentList_2_2();
             loadStoredOptions_2_1();
 
@@ -706,222 +595,8 @@ async function getCommentList_2_1(checkedValue) {
         console.error('An error occurred:', error);
     }
 }
-
-async function final_req() {
-    resetFadeIn();
-    console.log("마지막 버튼 눌림");
-    try {
-        const card_img = document.getElementById('card__image');
-        const mainmenu = document.getElementById('mainmenu_text');
-        const form_choice = document.getElementById('form_choice');
-        const choice_2 = document.getElementById('choice_2');
-        const choice_3 = document.getElementById('choice_3');
-        const choice_4 = document.getElementById('choice_4');
-        const choice_ = document.getElementById('choice_4');
-        const choice_5 = document.getElementById('choice_5');
-        choice_5.style.color = '#006400';
-
-        mainmenu.style = '';
-        form_choice.style = '';
-        cards.style.display = 'block';
-        choice_2.style = '';
-        choice_3.style.color = '';
-        choice_4.style.color = '';
-        const hover_menu1 = document.getElementById('hover_menu1');
-        const hover_menu2 = document.getElementById('hover_menu2');
-        const hover_menu3 = document.getElementById('hover_menu3');
-        const hover_menu4 = document.getElementById('hover_menu4');
-        const hover_menu5 = document.getElementById('hover_menu5');
-        const hover_menu6 = document.getElementById('hover_menu6');
-        hover_menu5.style = '';
-        hover_menu6.style.backgroundColor = 'rgb(245, 247, 250)';
-        hover_menu1.style = '';
-        hover_menu3.style = '';
-        hover_menu2.style = '';
-        hover_menu4.style = '';
-        cards.innerHTML = '';
-
-
-        var storedOptions = localStorage.getItem('selectedOptionsStore');
-        var storedOptions_1 = localStorage.getItem('selectedOptionsStore_1');
-        var latestOptions, latestOptions_1, latestOptions_2_1, latestOptions_2_2, latestOptions_3, latestOptions_4;
-        if (storedOptions !== null) {
-            var parsedOptions = JSON.parse(storedOptions);
-            latestOptions = parsedOptions.slice(-1);
-        } else {
-            latestOptions = "필수항목을 입력해주세요.";
-        }
-        if (storedOptions_1 !== null) {
-            var parsedOptions_1 = JSON.parse(storedOptions_1);
-            latestOptions_1 = parsedOptions_1.slice(-1);
-        } else {
-            latestOptions_1 = "필수항목을 입력해주세요.";
-        }
-
-        var storedOptions_2_1 = localStorage.getItem('selectedOptionsStore_2_1');
-        if (storedOptions_2_1 !== null) {
-            var parsedOptions_2_1 = JSON.parse(storedOptions_2_1);
-            latestOptions_2_1 = parsedOptions_2_1.slice(-1);
-        } else {
-            latestOptions_2_1 = "필수항목을 입력해주세요.";
-        }
-
-
-        var storedOptions_2_2 = localStorage.getItem('selectedOptionsStore_2_2');
-        if (storedOptions_2_2 !== null) {
-            var parsedOptions_2_2 = JSON.parse(storedOptions_2_2);
-            latestOptions_2_2 = parsedOptions_2_2.slice(-1);
-        } else {
-            latestOptions_2_2 = "필수항목을 입력해주세요.";
-        }
-        var storedOptions_3 = localStorage.getItem('selectedOptionsStore_3');
-        if (storedOptions_3 !== null) {
-            var parsedOptions_3 = JSON.parse(storedOptions_3);
-            var latestOptions_3 = [];
-            if (parsedOptions_3.length >= 4) {
-                latestOptions_3.push(parsedOptions_3[parsedOptions_3.length - 4]);
-                latestOptions_3.push(parsedOptions_3[parsedOptions_3.length - 3]);
-                latestOptions_3.push(parsedOptions_3[parsedOptions_3.length - 2]);
-                latestOptions_3.push(parsedOptions_3[parsedOptions_3.length - 1]);
-                console.log("zzzzzzz" + latestOptions_3);
-            }
-        } else {
-            latestOptions_3 = ["필수항목을 입력해주세요.", "필수항목을 입력해주세요.", "공백(선택항목)", "공백(선택항목)"];
-        }
-        var storedOptions_4 = localStorage.getItem('selectedOptionsStore_4');
-        if (storedOptions_4 !== null) {
-            var parsedOptions_4 = JSON.parse(storedOptions_4);
-            var latestOptions_4 = [];
-            if (parsedOptions_4.length >= 4) {
-                latestOptions_4.push(parsedOptions_4[parsedOptions_4.length - 4]);
-                latestOptions_4.push(parsedOptions_4[parsedOptions_4.length - 3]);
-                latestOptions_4.push(parsedOptions_4[parsedOptions_4.length - 2]);
-                latestOptions_4.push(parsedOptions_4[parsedOptions_4.length - 1]);
-                console.log("zzzzzzz" + latestOptions_4);
-            }
-
-
-        } else {
-            latestOptions_4 = ["필수항목을 입력해주세요.", "필수항목을 입력해주세요.", "필수항목을 입력해주세요.", "공백(선택항목)"];
-        }
-
-
-
-        let tr = '';
-
-        tr += `<li id="li_final"><div class="final_ex">공간(필수)</div><input value="${latestOptions}" id="optionValue" readonly="readonly" name ="form" class="optionfinal"><div class="wrap"><button type="button" class="final_btn_mo" onclick="getCommentList()"><span class="material-symbols-outlined" >contract_edit</span></button>    <div class="tooltip">수정하러가기</div></div></li>`;
-        tr += `<li id="li_final"><div class="final_ex">유형(필수) </div><input value="${latestOptions_1}" id="optionValue" readonly="readonly" name ="categoryType"class="optionfinal"><div class="wrap"><button type="button" class="final_btn_mo" onclick="handleClick()"><span class="material-symbols-outlined" >contract_edit</span></button>    <div class="tooltip">수정하러가기</div></div></li>`;
-        tr += `<li id="li_final"><div class="final_ex">공사범위(필수)</div><input value="${latestOptions_2_1}" id="optionValue" readonly="readonly"name ="rang" class="optionfinal"><div class="wrap"><button type="button" class="final_btn_mo" onclick="getCommentList_2_1()"><span class="material-symbols-outlined" >contract_edit</span></button>    <div class="tooltip">수정하러가기</div></div></li>`;
-        tr += `<li id="li_final"><div class="final_ex">공사상태(필수)</div><input value="${latestOptions_2_2}" id="optionValue" readonly="readonly" name ="status"class="optionfinal"><div class="wrap"><button type="button"  class="final_btn_mo"onclick="getCommentList_2_1()"><span class="material-symbols-outlined" >contract_edit</span></button>    <div class="tooltip">수정하러가기</div></div></li>`;
-
-        tr += `<li id="li_final"><div class="final_ex">우편번호(필수)</div><input value="${latestOptions_3[0]}" id="optionValue" class="optionfinal" name ="zoneCode" readonly="readonly"><div class="wrap"><button type="button" class="final_btn_mo" onclick="getCommentList_3()"><span class="material-symbols-outlined" >contract_edit</span></button>    <div class="tooltip">수정하러가기</div></div></li>`;
-        tr += `<li id="li_final"><div class="final_ex">주소(필수)</div><input value="${latestOptions_3[1]}" id="optionValue" class="optionfinal" name ="address"readonly="readonly"><div class="wrap"><button type="button" class="final_btn_mo" onclick="getCommentList_3()"><span class="material-symbols-outlined" >contract_edit</span></button>    <div class="tooltip">수정하러가기</div></div></li>`;
-        tr += `<li id="li_final"><div class="final_ex">상세주소</div><input value="${latestOptions_3[2]}" id="optionValue" readonly="readonly" name ="detailAddress"class=""><div class="wrap"><button type="button" class="final_btn_mo" onclick="getCommentList_3()"><span class="material-symbols-outlined" >contract_edit</span></button>    <div class="tooltip">수정하러가기</div></div></li>`;
-        tr += `<li id="li_final"><div class="final_ex">참고항목</div><input value="${latestOptions_3[3]}" id="optionValue" readonly="readonly" name ="extraAddress"class=""><div class="wrap"><button type="button" class="final_btn_mo" onclick="getCommentList_3()"><span class="material-symbols-outlined" >contract_edit</span></button>    <div class="tooltip">수정하러가기</div></div></li>`;
-
-        tr += `<li id="li_final"><div class="final_ex">공간면적_평수(필수)</div><input value="${latestOptions_4[0]}" id="optionValue" readonly="readonly" name ="aquareFootage" class="optionfinal"><div class="wrap"><button class="final_btn_mo" type="button" onclick="getCommentList_4()"><span class="material-symbols-outlined" >contract_edit</span></button>    <div class="tooltip">수정하러가기</div></div></li>`;
-        tr += `<li id="li_final"><div class="final_ex">공간면적_제곱미터(필수)</div><input value="${latestOptions_4[1]}" id="optionValue" readonly="readonly" name ="squareMeter"class="optionfinal"><div class="wrap"><button type="button"  class="final_btn_mo" onclick="getCommentList_4()"><span class="material-symbols-outlined" >contract_edit</span></button>    <div class="tooltip">수정하러가기</div></div></li>`;
-        tr += `<li id="li_final"><div class="final_ex">예산</div><input value="${latestOptions_4[2]}" id="optionValue" readonly="readonly"name ="wishBudget" class="optionfinal"><div class="wrap"><button type="button" class="final_btn_mo" onclick="getCommentList_4()"><span class="material-symbols-outlined" >contract_edit</span></button>    <div class="tooltip">수정하러가기</div></div></li>`;
-        tr += `<li id="li_final"><div class="final_ex">상세 의뢰 내용</div><input value="${latestOptions_4[3]}" id="optionValue"  readonly="readonly"name ="requestOp" class=""><div class="wrap"><button type="button" class="final_btn_mo" onclick="getCommentList_4()"><span class="material-symbols-outlined" >contract_edit</span></button>    <div class="tooltip">수정하러가기</div></div></li>`;
-        tr += `<li id="li_final"><input value="" id="optionValue"  name ="keynumCom" class="optionfinal"></li>`;
-        cards.innerHTML += tr;
-
-        let btnBox = '<div class="btn_box"><button type="submit" class="ok_btn" id="final_submit"  onsubmit="final_submit()">확인</button></div>';
-        cards.innerHTML += btnBox;
-        unit();
-        console.log("unit 다음");
-        convertBudget();
-        checkNumber_counter();
-
-
-        let myCheckboxNull = document.getElementById('myCheckboxNull');
-        let bud = document.getElementById('bud');
-        let result_budget = document.getElementById('result_budget');
-
-        if (myCheckboxNull && bud && result_budget) {
-            myCheckboxNull.addEventListener('change', function () {
-                if (this.checked) {
-                    bud.value = '협의결정';
-                    bud.readOnly = true;
-                    bud.style.backgroundColor = "#80808021";
-                    result_budget.innerText = '협의 후 결정';
-                } else {
-                    bud.value = '';
-                    bud.readOnly = false;
-                    bud.style.backgroundColor = "rgb(128 128 128 / 0%)";
-                    result_budget.innerText = '';
-                }
-            });
-        } else {
-            console.log('One or more elements could not be found.');
-        }
-
-        document.querySelector('form').addEventListener('submit', handleSubmitForm);
-
-
-
-    } catch (error) {
-        console.error('An error occurred:', error);
-    }
-
-    loadStoredOptions_4();
-    loadStoredOptions_5_1();
-}
-
-function handleSubmitForm(e) {
-    try {
-        let optionValues = document.querySelectorAll('.optionfinal');
-        let hasEmptyValue = false;
-
-        optionValues.forEach(function (option) {
-            if (option.value.trim() === "필수항목을 입력해주세요." || option.value.trim() === '') {
-                hasEmptyValue = true;
-                option.style.color = "red";
-            }
-        });
-
-        if (hasEmptyValue) {
-            e.preventDefault();
-            Swal.fire({
-                icon: 'warning',
-                title: '필수 항목을 입력해 주셔야 합니다.',
-            });
-            return false;
-        } else {
-            e.preventDefault();
-            Swal.fire({
-                title: '요청서를 업체에 보내시겠습니까?',
-                icon: 'question',
-                showCancelButton: true,
-                confirmButtonText: '네, 요청합니다',
-                cancelButtonText: '아니오, 취소합니다',
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    Swal.fire({
-                        title: '요청서를 업체에 보냈습니다.<br>감사합니다.',
-                        html: '이제, 고객님이 원하시는 스타일을 말씀해주세요!',
-                        icon: 'success',
-                        timer: 2000,
-                        showConfirmButton: false,
-                    });
-
-                    setTimeout(function () {
-                        document.querySelector('form').submit();
-                    }, 2100);
-                }
-            });
-
-        }
-    } catch (error) {
-        console.error('An error occurred:', error);
-    }
-}
-
-
-
 async function getCommentList_4(checkedValue) {
     try {
-        resetFadeIn();
         const result = await spreadCommentFromServer_2(checkedValue);
 
         const card_img = document.getElementById('card__image');
@@ -931,8 +606,7 @@ async function getCommentList_4(checkedValue) {
         const choice_3 = document.getElementById('choice_3');
         const choice_4 = document.getElementById('choice_4');
         const cards = document.getElementById('cards');
-        const choice_5 = document.getElementById('choice_5');
-        choice_5.style = '';
+
         mainmenu.style = '';
         form_choice.style = '';
         cards.style.display = 'block';
@@ -944,8 +618,6 @@ async function getCommentList_4(checkedValue) {
         const hover_menu3 = document.getElementById('hover_menu3');
         const hover_menu4 = document.getElementById('hover_menu4');
         const hover_menu5 = document.getElementById('hover_menu5');
-        const hover_menu6 = document.getElementById('hover_menu6');
-        hover_menu6.style = '';
         hover_menu5.style.backgroundColor = 'rgb(245, 247, 250)';
         hover_menu1.style = '';
         hover_menu3.style = '';
@@ -967,9 +639,8 @@ async function getCommentList_4(checkedValue) {
             <div class="unit_money">만원</div>
    
         </div>
-        <label for="myCheckboxNull"><div class="exp_1">·협의 후 결정을 원하시면 클릭해주세요 <input type="checkbox" class="myCheckboxNull" name="subject" value="nullValue" id="myCheckboxNull" ></div>
+        <div class="exp_1">·협의 후 결정을 원하시면 클릭해주세요 <input type="checkbox" class="myCheckboxNull" name="subject" value="nullValue" id="myCheckboxNull" ></div>
        </div>
-       </label>
           <div><h2 class="main_sub">추가 전달 내용을 적어주세요.<div class="sc-7683fa06-0 kuxWUg">(선택)</h2></div></div><div class="budget_box_cho"><div class="budget_inner_option">
        <textarea placeholder="원하시는 인테리어에 대한 상세설명이나 참고해야 할 사항이 있다면 작성해주세요. 사전 컨설팅 시 도움이 됩니다." maxlength="200" class="sc-1952d657-10 bTUUoF" id="comment"></textarea>
         </div>
@@ -993,8 +664,6 @@ async function getCommentList_4(checkedValue) {
         let result_budget = document.getElementById('result_budget');
 
         myCheckboxNull.addEventListener('change', function () {
-
-
             if (this.checked) {
                 bud.value = '협의결정';
                 bud.readOnly = true;
@@ -1005,7 +674,6 @@ async function getCommentList_4(checkedValue) {
                 bud.value = '';
                 bud.readOnly = false;
                 bud.style.backgroundColor = "rgb(128 128 128 / 0%)";
-                result_budget.innerText = '';
             }
         });
 
@@ -1017,7 +685,6 @@ async function getCommentList_4(checkedValue) {
 
     loadStoredOptions_4();
     loadStoredOptions_5_1();
-
 }
 
 
@@ -1129,17 +796,11 @@ const calculateForRight = () => {
 function unit() {
     leftInput = document.getElementById("leftInput");
     rightInput = document.getElementById("rightInput");
-    if (rightInput !== null) {
-        rightInput.addEventListener("input", calculateForLeft);
-    }
 
-    if (leftInput !== null) {
-        leftInput.addEventListener("input", calculateForRight);
-    }
-
+    rightInput.addEventListener("input", calculateForLeft);
+    leftInput.addEventListener("input", calculateForRight);
 }
 async function getCommentList_3(checkedValue) {
-    resetFadeIn();
     try {
         const result = await spreadCommentFromServer_2(checkedValue);
 
@@ -1162,20 +823,17 @@ async function getCommentList_3(checkedValue) {
         const hover_menu3 = document.getElementById('hover_menu3');
         const hover_menu4 = document.getElementById('hover_menu4');
         const hover_menu5 = document.getElementById('hover_menu5');
-        const hover_menu6 = document.getElementById('hover_menu6');
-        hover_menu6.style = '';
         hover_menu4.style.backgroundColor = 'rgb(245, 247, 250)';
         hover_menu1.style = '';
         hover_menu3.style = '';
         hover_menu2.style = '';
         hover_menu5.style = '';
         cards.innerHTML = '';
-        const choice_5 = document.getElementById('choice_5');
-        choice_5.style = '';
+
 
         let tr = '';
         tr += `<h2 class="main_sub">주소를  입력해주세요.</h2><br><br><div class="adress_api">
-                <div class="address_box">  <input type="number" id="sample6_postcode" placeholder="우편번호" >
+                <div class="address_box">  <input type="text" id="sample6_postcode" placeholder="우편번호" >
                   <input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기"  class="address_btn"></div>
                   <input type="text" id="sample6_address" placeholder="주소">
                   <input type="text" id="sample6_detailAddress" placeholder="상세주소">
@@ -1211,8 +869,6 @@ async function getCommentList_2_2(checkedValue) {
     const hover_menu3 = document.getElementById('hover_menu3');
     const hover_menu4 = document.getElementById('hover_menu4');
     const hover_menu5 = document.getElementById('hover_menu5');
-    const hover_menu6 = document.getElementById('hover_menu6');
-    hover_menu6.style = '';
     hover_menu3.style.backgroundColor = 'rgb(245, 247, 250)';
     hover_menu1.style = '';
     hover_menu4.style = '';
@@ -1221,12 +877,10 @@ async function getCommentList_2_2(checkedValue) {
     choice_4.style = '';
     mainmenu.style = '';
     form_choice.style = '';
-    hover_menu5.style = '';
     const cards = document.getElementById('cards');
     cards.style.gridTemplateColumns = 'repeat(3,0.5fr)';
     choice_2.style.color = '#006400';
-    const choice_5 = document.getElementById('choice_5');
-    choice_5.style = '';
+
 
     if (result && result.length > 0) {
 
@@ -1251,7 +905,7 @@ async function getCommentList_2_2(checkedValue) {
         cards.innerHTML += btnBox;
 
 
-        //storeCheckedValues_2_2();
+        storeCheckedValues_2_2();
         await loadStoredOptions_2_2();
 
 
@@ -1260,25 +914,6 @@ async function getCommentList_2_2(checkedValue) {
 
 function getCommentList_1(checkedValue) {
 
-    let checkedValue1 = '';
-    var storedValue1 = localStorage.getItem('selectedOptionsStore');
-
-    if (storedValue1) {
-        checkedValue1 = storedValue1;
-    }
-    if (checkedValue1 === null || checkedValue1 === '') {
-        console.log('선택된 체크박스가 없습니다.');
-        Swal.fire({
-            icon: 'warning',
-            title: '유형을 고르려면, <br> 공간을 먼저 골라주셔야 합니다.',
-        }).then((result) => {
-            if (result.isConfirmed) {
-                getCommentList();
-            }
-        });
-        return; // 함수 종료
-    }
-    resetFadeIn();
     spreadCommentFromServer_1(checkedValue).then(result => {
 
         const cards = document.getElementById('cards');
@@ -1298,154 +933,26 @@ function getCommentList_1(checkedValue) {
         form_choice.style = '';
         form_choice.style.color = '#006400';
 
-        const choice_5 = document.getElementById('choice_5');
-        choice_5.style = '';
 
         const hover_menu1 = document.getElementById('hover_menu1');
         const hover_menu2 = document.getElementById('hover_menu2');
         const hover_menu3 = document.getElementById('hover_menu3');
         const hover_menu4 = document.getElementById('hover_menu4');
         const hover_menu5 = document.getElementById('hover_menu5');
-        const card__image = document.querySelectorAll('.card__image');
-        const hover_menu6 = document.getElementById('hover_menu6');
-        hover_menu6.style = '';
-
         hover_menu2.style.backgroundColor = 'rgb(245, 247, 250)';
         hover_menu1.style = '';
         hover_menu3.style = '';
         hover_menu4.style = '';
         hover_menu5.style = '';
-
-        card__image.style = '';
         if (result && result.length > 0) {
             cards.innerHTML = '';
-
             result.forEach(rvo => {
-                console.log("아니왜??" + result.length);
-                if (checkedValue == '상업공간') {
-
-                    let li = `<li class="cards__item"><input type="hidden" value="${rvo.subject}" id="subject">`;
-                    li += `<label><div class="card"><div class="card__image card__image--${rvo.subject}" id="image-${rvo.subject}" style="height: 150px; !important" ></div>`;
-                    li += `<div class="card__content">  <div class="card__title">${rvo.subject}</div>  <input type="checkbox" class="myCheckbox" name="subject"`;
-                    li += `  value = "${rvo.subject}" id = "checkbox-${rvo.subject}" onclick = "clickCheck(this)"  >`
-                    li += `    </div ></div> </label ></li >`
-                    cards.innerHTML += li;
-
-                } else {
-                    let li = `<li class="cards__item"><input type="hidden" value="${rvo.subject}" id="subject">`;
-                    li += `<label><div class="card"><div class="card__image card__image--${rvo.subject}" id="image-${rvo.subject}"></div>`;
-                    li += `<div class="card__content">  <div class="card__title">${rvo.subject}</div>  <input type="checkbox" class="myCheckbox" name="subject"`;
-                    li += `  value = "${rvo.subject}" id = "checkbox-${rvo.subject}" onclick = "clickCheck(this)"  >`
-                    li += `    </div ></div> </label ></li >`
-                    cards.innerHTML += li;
-
-                }
-            });
-
-            // btn_box 추가
-            let btnBox = '<div class="btn_box"><button type="button" class="ok_btn" id="ok_btn_1" onclick="submit_btn_1()">확인</button></div>';
-            cards.innerHTML += btnBox;
-
-            loadStoredOptions_1();
-            // storeCheckedValues_1();
-            return true;
-        }
-    });
-}
-
-
-
-function handleClick() {
-    var storedValue2 = localStorage.getItem('selectedOptionsStore');
-
-    if (storedValue2 === null || storedValue2 === '') {
-        console.log('선택된 체크박스가 없습니다.');
-        Swal.fire({
-            icon: 'warning',
-            title: `유형을 고르려면, <br> 공간을 먼저 골라주셔야 합니다.`
-        }).then((result) => {
-            if (result.isConfirmed) {
-                getCommentList();
-            }
-        });
-        return; // 함수 종료
-    }
-
-    var arrayValue2;
-
-    try {
-        arrayValue2 = JSON.parse(storedValue2);
-    } catch (error) {
-
-        return; // 함수 종료
-    }
-    //배열이 맞는지 확인
-    if (!Array.isArray(arrayValue2) || arrayValue2.length === 0) {
-        console.error('유효하지 않거나 빈 배열:', arrayValue2);
-        return; // 함수 종료
-    }
-
-    var latestOption = arrayValue2[arrayValue2.length - 1];
-    console.log("마지막 값:", latestOption);
-    resetFadeIn();
-    spreadCommentFromServer_1_2(latestOption).then(result => {
-        const progress = document.getElementById('progress');
-        let currentValue = 0;
-
-
-        const cards = document.getElementById('cards');
-        cards.style.gridTemplateColumns = 'repeat(4, 0.5fr)';
-        cards.style.gridTemplateRows = 'minmax(1px, 30px);';
-        const mainmenu = document.getElementById('mainmenu_text');
-        const form_choice = document.getElementById('form_choice');
-        const choice_2 = document.getElementById('choice_2');
-        const choice_3 = document.getElementById('choice_3');
-        const choice_4 = document.getElementById('choice_4');
-        choice_3.style = '';
-        choice_4.style = '';
-        cards.style.display = 'grid';
-        choice_2
-        choice_2.style = '';
-        mainmenu.style = '';
-        form_choice.style = '';
-        form_choice.style.color = '#006400';
-
-        const hover_menu1 = document.getElementById('hover_menu1');
-        const hover_menu2 = document.getElementById('hover_menu2');
-        const hover_menu3 = document.getElementById('hover_menu3');
-        const hover_menu4 = document.getElementById('hover_menu4');
-        const hover_menu5 = document.getElementById('hover_menu5');
-        const hover_menu6 = document.getElementById('hover_menu6');
-        hover_menu6.style = '';
-        const card__image = document.querySelectorAll('.card__image');
-        const choice_5 = document.getElementById('choice_5');
-        choice_5.style = '';
-        hover_menu2.style.backgroundColor = 'rgb(245, 247, 250)';
-        hover_menu1.style = '';
-        hover_menu3.style = '';
-        hover_menu4.style = '';
-        hover_menu5.style = '';
-
-        card__image.style = '';
-        if (result && result.length > 0) {
-            cards.innerHTML = '';
-            console.log("제발부탁이야제발" + result.length);
-            result.forEach(rvo => {
-                if (result.length == 8) {
-                    let li = `<li class="cards__item"><input type="hidden" value="${rvo.subject}" id="subject">`;
-                    li += `<label><div class="card"><div class="card__image card__image--${rvo.subject}" id="image-${rvo.subject}" style="height: 150px; !important" ></div>`;
-                    li += `<div class="card__content">  <div class="card__title">${rvo.subject}</div>  <input type="checkbox" class="myCheckbox" name="subject"`;
-                    li += `  value="${rvo.subject}" id="checkbox-${rvo.subject}" onclick="clickCheck(this)"  >`
-                    li += `    </div ></div> </label ></li >`
-                    cards.innerHTML += li;
-                } else if (result.length == 4) {
-                    let li = `<li class="cards__item"><input type="hidden" value="${rvo.subject}" id="subject">`;
-                    li += `<label><div class="card"><div class="card__image card__image--${rvo.subject}" id="image-${rvo.subject}"></div>`;
-                    li += `<div class="card__content">  <div class="card__title">${rvo.subject}</div>  <input type="checkbox" class="myCheckbox" name="subject"`;
-                    li += `  value="${rvo.subject}" id="checkbox-${rvo.subject}" onclick="clickCheck(this)"  >`
-                    li += `    </div ></div> </label ></li >`
-                    cards.innerHTML += li;
-                }
+                let li = `<li class="cards__item"><input type="hidden" value="${rvo.subject}" id="subject">`;
+                li += `<label><div class="card"><div class="card__image card__image--${rvo.subject}" id="image-${rvo.subject}"></div>`;
+                li += `<div class="card__content">  <div class="card__title">${rvo.subject}</div>  <input type="checkbox" class="myCheckbox" name="subject"`;
+                li += `  value = "${rvo.subject}" id = "checkbox-${rvo.subject}" onclick = "clickCheck(this)"  >`
+                li += `    </div ></div> </label ></li >`
+                cards.innerHTML += li;
             });
 
             // btn_box 추가
@@ -1454,13 +961,12 @@ function handleClick() {
 
             loadStoredOptions_1();
             storeCheckedValues_1();
-            return true;
         }
     });
 }
 
 async function getCommentList() {
-    resetFadeIn();
+
     let result = await spreadCommentFromServer();
     const cards = document.getElementById('cards');
     cards.style.gridTemplateColumns = 'repeat(2,0.5fr)';
@@ -1471,15 +977,11 @@ async function getCommentList() {
     const hover_menu3 = document.getElementById('hover_menu3');
     const hover_menu4 = document.getElementById('hover_menu4');
     const hover_menu5 = document.getElementById('hover_menu5');
-    const hover_menu6 = document.getElementById('hover_menu6');
-    hover_menu6.style = '';
-    hover_menu5.style = '';
     hover_menu1.style.backgroundColor = 'rgb(245, 247, 250)';
     hover_menu2.style = '';
     hover_menu3.style = '';
     hover_menu4.style = '';
-    const choice_5 = document.getElementById('choice_5');
-    choice_5.style = '';
+
     const form_choice = document.getElementById('form_choice');
     const choice_4 = document.getElementById('choice_4');
     const choice_3 = document.getElementById('choice_3');
@@ -1494,8 +996,6 @@ async function getCommentList() {
 
 
     if (result && result.length > 0) {
-
-
         cards.innerHTML = '';
         result.forEach(rvo => {
             let li = `<li class="cards__item"><input type="hidden" value="${rvo.subject}" id="subject">`;
@@ -1513,7 +1013,7 @@ async function getCommentList() {
         loadStoredOptions();
 
         // 체크박스의 체크 상태를 저장합니다.
-        //    storeCheckedValues();
+        storeCheckedValues();
 
     }
 }
@@ -1539,36 +1039,27 @@ document.getElementById('mainmenu').addEventListener('click', async function () 
 
 
 
-// 데이터 저장 함수
+document.getElementById('choice_2').addEventListener('click', async function () {
 
-// 저장 
-var DataC = {};
 
-let totalDataCount = 5; // 데이터를 저장하는 함수의 개수
-let progressElement = document.getElementById('progress');
-progressElement.max = totalDataCount; // progress의 최대값을 데이터의 개수로 설정
-let zeroCount = 0;
+    await getCommentList_2_1();
 
+
+
+
+})
+
+// 저장
 function store() {
     let selectedOptions = [];
     var checkboxes = document.querySelectorAll('input[type="checkbox"]:checked');
-
     for (var i = 0; i < checkboxes.length; i++) {
         selectedOptions.push(checkboxes[i].value);
     }
+    console.log("선택된 옵션zzz: " + selectedOptions.join(", "));
     localStorage.setItem('selectedOptionsStore', JSON.stringify(selectedOptions));
-
-    DataC['store'] = selectedOptions;
-
-
-    let interval = setInterval(function () {
-        if (progressElement.value >= 1) {
-            clearInterval(interval);
-        } else {
-            progressElement.value += 0.01;
-        }
-    }, 8);
 }
+
 
 function store_1() {
     let selectedOptions = [];
@@ -1577,45 +1068,26 @@ function store_1() {
         selectedOptions.push(checkboxes[i].value);
     }
     localStorage.setItem('selectedOptionsStore_1', JSON.stringify(selectedOptions));
-
-    DataC['store'] = selectedOptions;
-    let interval = setInterval(function () {
-        if (progressElement.value >= 2) {
-            clearInterval(interval);
-        } else {
-            progressElement.value += 0.01;
-        }
-    }, 8);
 }
-
 function store_2_1() {
     let selectedOptions = [];
     var checkboxes = document.querySelectorAll('input.myCheckbox1:checked');
+    console.log("저장된 체크박스 store_2_1" + checkboxes);
     for (var i = 0; i < checkboxes.length; i++) {
         selectedOptions.push(checkboxes[i].value);
     }
+    console.log("제발제발" + selectedOptions);
     localStorage.setItem('selectedOptionsStore_2_1', JSON.stringify(selectedOptions));
-
-    DataC['store'] = selectedOptions;
-    let interval = setInterval(function () {
-        if (progressElement.value >= 3) {
-            clearInterval(interval);
-        } else {
-            progressElement.value += 0.01;
-        }
-    }, 8);
 }
 
 function store_2_2() {
     let selectedOptions = [];
     var checkboxes = document.querySelectorAll('input.myCheckbox2:checked');
+    console.log("저장된 체크박스 store_2_2" + checkboxes);
     for (var i = 0; i < checkboxes.length; i++) {
         selectedOptions.push(checkboxes[i].value);
     }
     localStorage.setItem('selectedOptionsStore_2_2', JSON.stringify(selectedOptions));
-
-    DataC['store'] = selectedOptions;
-
 }
 
 function store_3() {
@@ -1623,77 +1095,49 @@ function store_3() {
     $('#sample6_postcode, #sample6_address, #sample6_detailAddress, #sample6_extraAddress').each(function () {
         subjects.push($(this).val());
     });
-    localStorage.setItem('selectedOptionsStore_3', JSON.stringify(subjects));
 
-    DataC['store'] = subjects;
-    let interval = setInterval(function () {
-        if (progressElement.value >= 4) {
-            clearInterval(interval);
-        } else {
-            progressElement.value += 0.01;
-        }
-    }, 8);
+    console.log("저장된 체크박스 store_3" + subjects);
+
+    localStorage.setItem('selectedOptionsStore_3', JSON.stringify(subjects));
 }
+
+
 
 function store_4() {
     var subjects = [];
     $('#leftInput, #rightInput, #bud, #comment').each(function () {
         subjects.push($(this).val());
     });
+
+
+    console.log("저장된 체크박스 store_4 " + subjects);
+
     localStorage.setItem('selectedOptionsStore_4', JSON.stringify(subjects));
 
-    DataC['store'] = subjects;
-    let interval = setInterval(function () {
-        if (progressElement.value >= 5) {
-            clearInterval(interval);
-        } else {
-            progressElement.value += 0.01;
-        }
-    }, 8);
 }
+
+
 
 function store_5_1() {
     let selectedOptions = [];
     var checkboxes = document.querySelectorAll('input[type="checkbox"]:checked');
-    let result_budget = document.getElementById('result_budget').value;
-    let selectedOptions_1 = [];
-
     for (var i = 0; i < checkboxes.length; i++) {
         selectedOptions.push(checkboxes[i].value);
     }
-    selectedOptions_1.push(result_budget);
-
     console.log("선택된 옵션zzz: " + selectedOptions.join(", "));
-    console.log("선택된 옵션zzz: " + selectedOptions_1.join(", "));
     localStorage.setItem('selectedOptionsStore_5_1', JSON.stringify(selectedOptions));
-    localStorage.setItem('selectedOptionsStore_5_1_2', JSON.stringify(selectedOptions_1));
+
 }
 
-function store_5_1() {
-    let selectedOptions = [];
-    var checkboxes = document.querySelectorAll('input[type="checkbox"]:checked');
-    let result_budget = document.getElementById('result_budget').value;
-    let selectedOptions_1 = [];
-
-    for (var i = 0; i < checkboxes.length; i++) {
-        selectedOptions.push(checkboxes[i].value);
-    }
-    selectedOptions_1.push(result_budget);
-
-    console.log("선택된 옵션zzz: " + selectedOptions.join(", "));
-    console.log("선택된 옵션zzz: " + selectedOptions_1.join(", "));
-    localStorage.setItem('selectedOptionsStore_5_1', JSON.stringify(selectedOptions));
-    localStorage.setItem('selectedOptionsStore_5_1_2', JSON.stringify(selectedOptions_1));
-}
 
 
 
 //jgh231201추가
-/*document.getElementById('form_choice').addEventListener('click', function () {
+document.getElementById('form_choice').addEventListener('click', function () {
     getCommentList_1();
     loadStoredOptions_1();
 });
-*/
+
 //jgh
 function loadStoredOptions() {
     var storedOptions = localStorage.getItem('selectedOptionsStore');
@@ -1706,7 +1150,6 @@ function loadStoredOptions() {
 
         var latestOptions = parsedOptions.slice(-1);
 
-        //document.getElementById('li_final').innerText = latestOptions;
 
         latestOptions.forEach((value) => {
             var checkbox = document.getElementById('checkbox-' + value);
@@ -1725,7 +1168,6 @@ function loadStoredOptions() {
             }
         });
     }
-
 }
 
 function loadStoredOptions_5_1() {
@@ -1741,7 +1183,6 @@ function loadStoredOptions_5_1() {
 
 
             let bud = document.getElementById('bud');
-            let result_budget = document.getElementById('result_budget');
             if (checkbox) {
                 checkbox.checked = true;
 
@@ -1750,41 +1191,23 @@ function loadStoredOptions_5_1() {
                     bud.readOnly = true;
                     bud.style.backgroundColor = "#80808021";
                     result_budget.innerText = '협의 후 결정';
+                } else {
+                    convertBudget();
                 }
-            } else {
-
-
             }
         });
     }
 }
-
-function loadStoredOptions_5_1_2() {
-    var storedOptions = localStorage.getItem('selectedOptionsStore_5_1_2');
-    console.log("저장한 5_1 : " + storedOptions)
-    if (storedOptions) {
-        var parsedOptions = JSON.parse(storedOptions);
-
-        var latestOptions = parsedOptions.slice(-1);
-
-        latestOptions.forEach((value) => {
-            let result_budget = document.getElementById('result_budget');
-
-
-            let convertedValue = convertBudget(value);
-
-
-            result_budget.innerText = convertedValue;
-        });
-    }
-}
-
 
 
 function loadStoredOptions_2_1() {
     var storedOptions = localStorage.getItem('selectedOptionsStore_2_1');
     if (storedOptions) {
         var parsedOptions = JSON.parse(storedOptions);
+
+        document.querySelectorAll('.myCheckbox1').forEach((checkbox) => {
+            checkbox.checked = false;
+        });
 
 
         var latestOptions = parsedOptions.slice(-1);
@@ -1808,7 +1231,7 @@ function loadStoredOptions_2_1() {
         });
     }
 }
-/*function loadStoredOptions_2_2() {
+function loadStoredOptions_2_2() {
     var storedOptions = localStorage.getItem('selectedOptionsStore_2_2');
     if (storedOptions) {
         var parsedOptions = JSON.parse(storedOptions);
@@ -1817,7 +1240,7 @@ function loadStoredOptions_2_1() {
             checkbox.checked = false;
         });
 
-        console.log("저장된 옵션좀 보장" + storedsOptions)
+        console.log("저장된 옵션좀 보장" + storedOptions)
         var latestOptions = parsedOptions.slice(-1);
 
 
@@ -1838,7 +1261,7 @@ function loadStoredOptions_2_1() {
             }
         });
     }
-}*/
+}
 function loadStoredOptions_1() {
     var storedOptions = localStorage.getItem('selectedOptionsStore_1');
     if (storedOptions) {
@@ -1940,74 +1363,13 @@ function loadStoredOptions_4() {
         let rightInput = document.getElementById('rightInput');
         let bud = document.getElementById('bud');
         let comment = document.getElementById('comment');
-        let result_budget = document.getElementById('result_budget');
         unit();
-        convertBudget();
-        leftInput.value = latestOptions[0];
-        rightInput.value = latestOptions[1];
-        bud.value = latestOptions[2];
-        result_budget.innerText = convertToKorean(latestOptions[2]);
-        comment.value = latestOptions[3];
+        leftInput.value += latestOptions[0];
+        rightInput.value += latestOptions[1];
+        bud.value += latestOptions[2];
+        comment.value += latestOptions[3];
 
 
 
     }
 }
-function convertToKorean(value) {
-    var digits = ['영', '일', '이', '삼', '사', '오', '육', '칠', '팔', '구'];
-    var units = ['', '십', '백', '천', '만', '십만', '백만', '천만', '억', '십억', '백억', '천억', '조', '십조', '백조', '천조'];
-
-    var numStr = "" + value;
-    var numLen = numStr.length;
-    var result = '';
-
-    for (var i = 0; i < numLen; i++) {
-        var digit = parseInt(numStr.charAt(i));
-        var unit = units[numLen - i - 1];
-        if (i === numLen - 1 && digit === 1 && numLen !== 1) {
-            result += '일';
-        } else if (digit !== 0) {
-            result += digits[digit] + unit;
-        } else if (i === numLen - 5) {
-            result += '만';
-        }
-    }
-
-    if (numLen > 0) {
-        result += '원';
-    }
-
-    return result;
-}
-
-// 비동기 필요시, 사용 바람
-/*
-async function postDataToServer(data, url) {
-    try {
-        const config = {
-            method: "post",
-            headers: {
-                'content-type': 'application/json; charset=utf-8'
-            },
-            body: JSON.stringify(data)
-        };
-
-        const resp = await fetch(url, config);
-        const result = await resp.text();
-        return result;
-    } catch (err) {
-        console.log(err);
-    }
-}
-
-
-
-
-async function sendDataToControllers() {
-    let user_id = document.getElementById('user_id').value;
-    console.log("user_id를 부려라" + user_id);
-
-    await postDataToServer(DataC['store'], DataC['store_1'], DataC['store_2_1'],DataC['store_2_2'],DataC['store_3'],DataC['store_4'],"/req/store/" + user_id);
-   
-}
-*/

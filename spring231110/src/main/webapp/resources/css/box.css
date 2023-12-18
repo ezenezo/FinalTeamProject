@@ -1,0 +1,14 @@
+
+
+
+
+a:hover{
+	text-decoration: none;
+}
+
+.total {
+    background-image: url('/resources/img/chatbox/bg.png'); 
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
