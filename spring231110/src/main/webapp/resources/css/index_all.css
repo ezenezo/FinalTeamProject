@@ -1,6 +1,7 @@
 @font-face {
 	font-family: NotoSansKR;
 	src: url(../font/NotoSansKR-VariableFont_wght.ttf);
+
 }
 
 html, body {
@@ -13,10 +14,12 @@ html, body {
 }
 body {
 /* 	display: flex; */
+
 	min-height: 100vh;
 	margin: 0;
 	flex-direction: column;
 	justify-content: space-between;
+
 	font-family: NotoSansKR;
 }
 
@@ -34,25 +37,32 @@ body {
 }
 
 .subject {
+
 	font-size: 2.5rem;
 	font-weight: 500;
 	line-height: 1.58;
 	letter-spacing: -0.03125rem;
 	padding-top: 0.75rem;
+
 	margin-bottom: 32px;
+
 
 }
 
 .content {
 	width: 100%;
 	height: auto;
+
 	justify-content: center;
+
 }
 
 @media screen and (max-width: 1200px) {
-	.total {
-		height: 95%;
-	}
+  .total {
+   height: 95%; 
+  }
+
+   
 }
 
 @media screen and (max-width: 600px) {

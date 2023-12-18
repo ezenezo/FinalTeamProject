@@ -21,9 +21,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.myweb.www.domain.QuotationVO;
+
 import com.myweb.www.domain.RequestDTO;
 import com.myweb.www.domain.RequestVO;
 import com.myweb.www.security.MemberVO;
+
 import com.myweb.www.service.QuotationService;
 
 import lombok.extern.slf4j.Slf4j;
@@ -45,7 +47,7 @@ public class QuotationController {
 		model.addAttribute("list_read", qsv.getList_read(id));
 		log.info("받은 요청 리스트들어옴" + rvo);
 	}
-	
+
 	@GetMapping("/quotation")
 	public String quotation(Model model, @RequestParam("requestNm") long reNm, HttpServletRequest request) {
 	    model.addAttribute("list", qsv.setQutation(reNm));
@@ -82,6 +84,7 @@ public class QuotationController {
 		log.info("받은요청 리스트 아이디 들어옴"+id);
 		log.info("받은요청 리스트 보기"+rvo);
 		model.addAttribute("list", qsv.getList_user(id));
+
 		
 		log.info("받은 요청 리스트들어옴"+rvo);
 	}
@@ -127,9 +130,12 @@ public class QuotationController {
 
 	@PostMapping(value = "/alarm_user/{userId}", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<String> request_alarm_user(@PathVariable("userId") String userId, RedirectAttributes reAttr) {
+
 		//log.info("사용자확인하기"+userId);
 		int alarm_count = qsv.request_alarm_user(userId);
 		//log.info("사용자 카운트 하기"+alarm_count);
+
+
 		reAttr.addFlashAttribute("alarm_count", alarm_count);
 		return alarm_count > 0 ? new ResponseEntity<String>("1", HttpStatus.OK)
 				: new ResponseEntity<String>("0", HttpStatus.INTERNAL_SERVER_ERROR);
@@ -144,7 +150,6 @@ public class QuotationController {
 	RequestDTO rlist = qsv.getRequest_list(requestNm);
 		log.info("받은요청 개인 리스트 받음" + rlist);
 		return new ResponseEntity<RequestDTO>(rlist, HttpStatus.OK);
-
 	}
 
 	@GetMapping(value = "/user/{qutationNm}", produces = MediaType.APPLICATION_JSON_VALUE)

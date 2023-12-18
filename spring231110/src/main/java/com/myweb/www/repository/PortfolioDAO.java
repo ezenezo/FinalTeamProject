@@ -4,6 +4,9 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 
+
+import com.myweb.www.domain.CouponVO;
+
 import com.myweb.www.domain.PortfolioDTO;
 import com.myweb.www.domain.PortfolioVO;
 
@@ -28,6 +31,11 @@ public interface PortfolioDAO {
 	void updateReadCount(long pno);
 
 	String selectId(long pno);
+
+
+	List<PortfolioVO> getHeartList(String id);
+
+	PortfolioVO getPortfolio(long pno);
 
 
 }

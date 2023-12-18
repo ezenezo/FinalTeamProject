@@ -7,6 +7,7 @@ import javax.inject.Inject;
 import org.springframework.stereotype.Service;
 
 import com.myweb.www.domain.QuotationVO;
+
 import com.myweb.www.domain.RequestDTO;
 import com.myweb.www.domain.RequestVO;
 import com.myweb.www.repository.QuotationDAO;
@@ -18,6 +19,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Service
+
 public class QuotationServiceImpl  implements QuotationService{
 	@Inject
 	private  QuotationDAO qdao;
@@ -44,12 +46,13 @@ public class QuotationServiceImpl  implements QuotationService{
 
 	@Override
 	public int request_alarm(String userId) {
-		// TODO Auto-generated method stub
-
+		
+	
 		return rdao.request_alarm(userId);
 	}
 
 	@Override
+
 	public RequestDTO getRequest_list(long requestNm) {
 		log.info("request 서비스 임필 리스트 개인"+requestNm);
 		RequestDTO dto = new RequestDTO();
@@ -59,12 +62,14 @@ public class QuotationServiceImpl  implements QuotationService{
 		dto.setMvo(rdao.memberSelect(requestNm));
 		rdao.checked(requestNm);
 		return dto;
+
 	}
 
 	@Override
 	public void quatation_submit(QuotationVO qvo) {
 		qdao.quatation_submit(qvo);
 		RequestVO req = new RequestVO();
+
 		long reqNm_q=qvo.getRequestNm();
 	
 	//	rdao.quest_alarm_submit(reqNm_q);
@@ -73,6 +78,7 @@ public class QuotationServiceImpl  implements QuotationService{
 	}
 
 	
+
 	@Override
 	public int request_cancel(long reqNm) {
 		// TODO Auto-generated method stub
@@ -87,7 +93,6 @@ public class QuotationServiceImpl  implements QuotationService{
 
 	@Override
 	public int request_alarm_user(String userId) {
-		
 		return qdao.request_alarm_user(userId);
 	}
 
@@ -100,6 +105,7 @@ public class QuotationServiceImpl  implements QuotationService{
 	@Override
 	public List<QuotationVO> getList_read_user(String id) {
 		// TODO Auto-generated method stub
+
 		return  qdao.getList_read_user(id);
 	}
 
@@ -123,5 +129,12 @@ public class QuotationServiceImpl  implements QuotationService{
 	}
 
 
+
+
+
+	@Override
+	public QuotationVO getQuotation(long quotationNm) {
+		return qdao.getQuotation(quotationNm);
+	}
 
 }

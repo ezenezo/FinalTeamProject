@@ -2,7 +2,9 @@ package com.myweb.www.repository;
 
 import java.util.List;
 
+
 import com.myweb.www.domain.FileVO;
+
 import com.myweb.www.domain.ReqFileVO;
 import com.myweb.www.domain.RequestDTO;
 import com.myweb.www.domain.RequestQuestionVO;
@@ -73,7 +75,6 @@ void checked(long requestNm);
 	MemberVO memberSelect(long requestNm);
 
 	List<RequestVO> setQutation(long reNm);
-
 
 
 

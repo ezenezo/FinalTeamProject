@@ -4,6 +4,9 @@ import java.util.List;
 
 import org.springframework.web.multipart.MultipartFile;
 
+
+import com.myweb.www.domain.CouponVO;
+
 import com.myweb.www.domain.FileVO;
 import com.myweb.www.domain.PortfolioDTO;
 import com.myweb.www.domain.PortfolioVO;
@@ -28,6 +31,11 @@ public interface PortfolioService {
 
 	String selectId(long pno);
 
+	int likeQtyAreaInput(long pno);
+
+	List<PortfolioVO> getHeartList(String id);
+
+	PortfolioVO getPortfolio(long pno);
 
 
 }

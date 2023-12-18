@@ -1,592 +1,57 @@
-let interval;
-let targetElement;
+let joinBtn = document.getElementsByClassName('joinBtn')[0];
+let checkIdResult = document.getElementById('checkIdResult');
+let checkPwResult = document.getElementById('checkPwResult');
+let checkPwOkResult = document.getElementById('checkPwOkResult');
+let checkImgResult = document.getElementById('checkImgResult');
+const reg = new RegExp("^(?=.*[a-zA-Z])(?=.*[0-9]).{8,25}$"); //비밀번호 정규 표현식
+const regPhone = new RegExp("^[0-9]{3}-[0-9]{4}-[0-9]{4}$"); //전화번호 정규 표현식
 
-function fadeIn(element) {
-    targetElement = element;
-    targetElement.style.opacity = 0;
-    let opacity = 0;
-    interval = setInterval(() => {
-      if (opacity >= 1) {
-        clearInterval(interval);
-      }
-      targetElement.style.opacity = opacity;
-      opacity += 0.01;
-    }, 5);
-}
+checkIdResult.value = false;
+checkPwResult.value = false;
 
-function resetFadeIn() {
-    if (interval) {
-        clearInterval(interval);
+//아이디 중복확인 버튼 click
+document.getElementById('checkId').addEventListener('click', () => {
+    const id = document.getElementById('id').value;
+    if (id != '') {
+        let userId = {
+            id: id
+        };
 
-        fadeIn(targetElement);
-    }
-}
-
-const cards_show = document.querySelector('.cards');
-fadeIn(cards_show);
-
-
-getCommentList();
-
-
-
-
-  document.getElementById('gosu_btn').addEventListener('click', () => {
-    Swal.fire({
-        title: '작성하신 요청서가 사라집니다.',
-        text: "다른 페이지로 이동하면 다시 복구시킬 수 없습니다.",
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-        confirmButtonText: '나가기',
-        cancelButtonText: '취소'
-    }).then((result) => {
-        if (result.value) {
-             window.localStorage.clear();
-             window.location.href = '/req/main';
-        }
-    })
-});
-
-
-window.addEventListener('beforeunload', (event) => {
-
-
-       window.localStorage.clear();
-});
-/*
-window.addEventListener('beforeunload', (event) => {
-    event.preventDefault();
-
-    event.returnValue = '페이지를 떠나시겠습니까?';
-       window.localStorage.clear();
-});
-
-*/
-
-function checkboxChangeHandler1(subject, image) {
-    const checkbox = document.getElementById("checkbox1-" + subject);
-
-    if (checkbox.checked) {
-        applyImageStyles(image);
-    } else {
-        resetImageStyles(image);
-    }
-}
-
-function checkboxChangeHandler2(subject, image) {
-    const checkbox = document.getElementById("checkbox2-" + subject);
-
-    if (checkbox.checked) {
-        applyImageStyles(image);
-    } else {
-        resetImageStyles(image);
-    }
-}
-
-
-function applyImageStyles(image) {
-    image.style.border = '4px solid rgb(80, 119, 113)';
-    image.style.filter = "none";
-    image.style.padding = '0px';
-    console.log('Border Applied:', image.style.border);
-    console.log('Filter Applied:', image.style.filter);
-}
-
-function resetImageStyles(image) {
-    image.style.borderBottom = '0px';
-    image.style.borderLeft = '0px';
-    image.style.borderTop = '0px';
-    image.style.borderRight = '0px';
-    image.style.filter = "";
-    image.style.padding = '';
-    image.style.transition = 'filter 0.5s cubic-bezier(.43, .41, .22, .91)';
-}
-
-document.body.addEventListener('change', function (e) {
-    const checkboxes = document.querySelectorAll('.myCheckbox');
-    checkboxes.forEach(function (checkbox) {
-        const subject = checkbox.id.slice(9);
-        const image = document.getElementById("image-" + subject);
-        const checkboxes_choice = document.querySelectorAll("input[type='checkbox']");
-        console.log('Checkbox ID:', checkbox.id);
-        console.log('Subject:', subject);
-        console.log('Image Element:', image);
-
-        if (checkbox.checked) {
-            image.style.border = '4px solid rgb(80, 119, 113)';
-            image.style.filter = "none";
-            image.style.padding = '0px';
-            console.log('Border Applied:', image.style.border);
-            console.log('Filter Applied:', image.style.filter);
-        } else {
-            image.style.borderBottom = '0px';
-            image.style.borderLeft = '0px';
-            image.style.borderTop = '0px';
-            image.style.borderRight = '0px';
-            image.style.filter = "";
-            image.style.padding = '';
-            image.style.transition = 'filter 0.5s cubic-bezier(.43, .41, .22, .91)';
-        }
-    });
-
-
-});
-
-document.body.addEventListener('change', function (e) {
-    const checkboxes = document.querySelectorAll('.myCheckbox1');
-    checkboxes.forEach(function (checkbox) {
-        const subject = checkbox.id.slice(9);
-        const image = document.getElementById("image-" + subject);
-        const checkboxes_choice = document.querySelectorAll("input[type='checkbox']");
-        console.log('Checkbox ID:', checkbox.id);
-        console.log('Subject:', subject);
-        console.log('Image Element:', image);
-
-        if (checkbox.checked) {
-            image.style.border = '4px solid rgb(80, 119, 113)';
-            image.style.filter = "none";
-            image.style.padding = '0px';
-            console.log('Border Applied:', image.style.border);
-            console.log('Filter Applied:', image.style.filter);
-        } else {
-            image.style.borderBottom = '0px';
-            image.style.borderLeft = '0px';
-            image.style.borderTop = '0px';
-            image.style.borderRight = '0px';
-            image.style.filter = "";
-            image.style.padding = '';
-            image.style.transition = 'filter 0.5s cubic-bezier(.43, .41, .22, .91)';
-        }
-    });
-
-
-
-});
-
-document.body.addEventListener('change', function (e) {
-    const checkboxes = document.querySelectorAll('.myCheckbox2');
-    checkboxes.forEach(function (checkbox) {
-        const subject = checkbox.id.slice(9);
-        const image = document.getElementById("image-" + subject);
-        const checkboxes_choice = document.querySelectorAll("input[type='checkbox']");
-        console.log('Checkbox ID:', checkbox.id);
-        console.log('Subject:', subject);
-        console.log('Image Element:', image);
-
-        if (checkbox.checked) {
-            image.style.border = '4px solid rgb(80, 119, 113)';
-            image.style.filter = "none";
-            image.style.padding = '0px';
-            console.log('Border Applied:', image.style.border);
-            console.log('Filter Applied:', image.style.filter);
-        } else {
-            image.style.borderBottom = '0px';
-            image.style.borderLeft = '0px';
-            image.style.borderTop = '0px';
-            image.style.borderRight = '0px';
-            image.style.filter = "";
-            image.style.padding = '';
-            image.style.transition = 'filter 0.5s cubic-bezier(.43, .41, .22, .91)';
-        }
-    });
-
-
-});
-
-
-
-function clickCheck(target) {
-    const targetChecked = target.checked;
-    const wasChecked = target.checked;
-    document.querySelectorAll('.myCheckbox').forEach((checkbox) => {
-        checkbox.checked = false;
-    });
-    target.checked = targetChecked;
-}
-function clickCheck1(target) {
-    const targetChecked = target.checked;
-    const wasChecked = target.checked;
-    document.querySelectorAll('.myCheckbox1').forEach((checkbox) => {
-        checkbox.checked = false;
-    });
-    target.checked = targetChecked;
-
-}
-function clickCheck2(target) {
-    const targetChecked = target.checked;
-    const wasChecked = target.checked;
-    document.querySelectorAll('.myCheckbox2').forEach((checkbox) => {
-        checkbox.checked = false;
-    });
-    target.checked = targetChecked;
-}
-
-
-// 체크값을 저장하는 함수
-function storeCheckedValues() {
-    var checkedValues = [];
-    document.querySelectorAll('.myCheckbox:checked').forEach(function (checkbox) {
-        checkedValues.push(checkbox.value);
-    });
-    sessionStorage.setItem('checkedValues', JSON.stringify(checkedValues));
-}
-
-function storeCheckedValues_1() {
-    var checkedValues = [];
-    document.querySelectorAll('.myCheckbox:checked').forEach(function (checkbox) {
-        checkedValues.push(checkbox.value);
-    });
-    sessionStorage.setItem('checkedValues_1', JSON.stringify(checkedValues));
-}
-
-function storeCheckedValues_2_1() {
-    var checkedValues = [];
-    document.querySelectorAll('.myCheckbox1:checked').forEach(function (checkbox) {
-        checkedValues.push(checkbox.value);
-    });
-    sessionStorage.setItem('checkedValues_2_1', JSON.stringify(checkedValues));
-}
-
-function storeCheckedValues_2_2() {
-    var checkedValues = [];
-    document.querySelectorAll('.myCheckbox2:checked').forEach(function (checkbox) {
-        checkedValues.push(checkbox.value);
-    });
-    sessionStorage.setItem('checkedValues_2_2', JSON.stringify(checkedValues));
-}
-
-// // 체크값을 불러오는 함수
-// function loadCheckedValues() {
-//     var checkedValues = JSON.parse(sessionStorage.getItem('checkedValues'));
-//     if (checkedValues && checkedValues.length > 0) {
-//         checkedValues.forEach(function(value) {
-//             var checkbox = document.querySelector('.myCheckbox[value="' + value + '"]');
-//             if (checkbox) checkbox.checked = true;
-//         });
-//     }
-// }
-
-// function loadCheckedValues_1() {
-//     var checkedValues = JSON.parse(sessionStorage.getItem('checkedValues_1'));
-//     if (checkedValues && checkedValues.length > 0) {
-//         checkedValues.forEach(function(value) {
-//             var checkbox = document.querySelector('.myCheckbox[value="' + value + '"]');
-//             if (checkbox) checkbox.checked = true;
-//         });
-//     }
-// }
-
-// submit_btn 함수
-async function submit_btn() {
-    console.log("제발들어와라");
-    var subjects = [];
-    $('.myCheckbox:checked').each(function () {
-        subjects.push($(this).val());
-    });
-    let checkedValue = null;
-    document.querySelectorAll('.myCheckbox').forEach((checkbox) => {
-        if (checkbox.checked) {
-            checkedValue = checkbox.value;
-        }
-    });
-
-    if (checkedValue) {
-        console.log('선택된 체크박스의 값2: ', checkedValue);
-        await spreadCommentFromServer_1(checkedValue);
-    
-        store(checkedValue);
-        storeCheckedValues();  // 체크값을 저장합니다.
-
-        const checkboxes_choice = document.querySelectorAll("input[type='checkbox']");
-        console.log('제ㄹ: ', checkedValue);
-    } else {
-        console.log('선택된 체크박스가 없습니다.');
-        Swal.fire({
-            icon: 'warning',
-            title: '필수 항목을 선택해주세요.',
-        }).then((result) => {
-            if (result.isConfirmed) { 
-getCommentList();
-
+        postId(userId).then(result => {
+            if (result > 0) {
+                Swal.fire({
+                    icon: "success",
+                    text: "사용 가능한 아이디입니다."
+                });
+                checkIdResult.value = true;
+            } else {
+                Swal.fire({
+                    icon: "error",
+                    text: "이미 존재하는 아이디입니다."
+                });
+                checkIdResult.value = false;
             }
-        });
-    }
-
-    getCommentList_1(checkedValue);
-    
-}
-async function submit_btn_2() {
-
-    let checkedValue1 = '';
-    let checkedValue2 = '';
-    var subjects = [];
-    $('.myCheckbox1:checked').each(function () {
-        subjects.push($(this).val());
-    });
-    var subjects2 = [];
-    $('.myCheckbox2:checked').each(function () {
-        subjects2.push($(this).val());
-    });
-
-    document.querySelectorAll('.myCheckbox1').forEach((checkbox) => {
-        if (checkbox.checked) {
-            checkedValue1 = checkbox.value;
-        }
-    });
-    document.querySelectorAll('.myCheckbox2').forEach((checkbox) => {
-        if (checkbox.checked) {
-            checkedValue2 = checkbox.value;
-        }
-    });
-    console.log("체크된 마이박스" + checkedValue1);
-    console.log("체크된 마이박스2" + checkedValue2);
-
-    if (checkedValue1 != '' && checkedValue2 != '') {
-        console.log('선택된 체크박스의 값1zz: ', checkedValue1);
-        console.log('선택된 체크박스의 값2zz: ', checkedValue2);
-        await spreadCommentFromServer_2(checkedValue1);
-        await spreadCommentFromServer_2_2(checkedValue2);
-        store_2_1(checkedValue1);
-        store_2_2(checkedValue2);
-
-        getCommentList_3();
-
-
+        })
     } else {
-        console.log('선택된 체크박스가 없습니다.');
         Swal.fire({
-            icon: 'warning',
-            title: '필수 항목을 선택해주세요.',
-        }).then((result) => {
-            if (result.isConfirmed) { }
+            icon: "warning",
+            text: "아이디를 입력해주세요."
         });
+        checkIdResult.value = false;
     }
-}
-
-
-
-
-async function submit_btn_1() {
-    var subjects = [];
-    $('.myCheckbox:checked').each(function () {
-        subjects.push($(this).val());
-    });
-    let checkedValue = null;
-    document.querySelectorAll('.myCheckbox').forEach((checkbox) => {
-        if (checkbox.checked) {
-            checkedValue = checkbox.value;
-        }
-    });
-
-
-
-    if (checkedValue) {
-        console.log('선택된 체크박스의 값2: ', checkedValue);
-        await spreadCommentFromServer_2(checkedValue);
-
-        store_1(checkedValue);
-        storeCheckedValues_1();
-
-        getCommentList_2_1(checkedValue);
-
-        const checkboxes_choice = document.querySelectorAll("input[type='checkbox']");
-        console.log('제ㄹ: ', checkedValue);
-    } else {
-        console.log('선택된 체크박스가 없습니다.');
-        Swal.fire({
-            icon: 'warning',
-            title: '필수 항목을 선택해주세요.',
-        }).then((result) => {
-            if (result.isConfirmed) { }
-        });
-    }
-}
-
-async function submit_btn_5_1() {
-    var subjects = [];
-    $('.myCheckboxNull:checked').each(function () {
-        subjects.push($(this).val());
-    });
-    let checkedValue = null;
-    document.querySelectorAll('.myCheckboxNull').forEach((checkbox) => {
-        if (checkbox.checked) {
-            checkedValue = checkbox.value;
-        }
-    });
-
-
-
-    if (checkedValue) {
-        console.log('선택된 체크박스의 값2: ', checkedValue);
-        await spreadCommentFromServer_1(checkedValue);
-
-        store_5_1(checkedValue);
-
-        const checkboxes_choice = document.querySelectorAll("input[type='checkbox']");
-        console.log('제ㄹ: ', checkedValue);
-    }
-}
-
-async function submit_btn_3() {
-
-
-    var subjects = [];
-    $('#sample6_postcode, #sample6_address, #sample6_detailAddress, #sample6_extraAddress').each(function () {
-        subjects.push($(this).val());
-    });
-
-
-    console.log(subjects);
-    let code = document.getElementById('sample6_postcode');
-    let adress = document.getElementById('sample6_addres');
-    if (subjects[0] != '' && subjects[1] != '') {
-        console.log('선택된 체크박스의 값2: ', subjects);
-
-
-        store_3(subjects);
-        getCommentList_4();
-
-    } else {
-        console.log('선택된 체크박스가 없습니다.');
-        Swal.fire({
-            icon: 'warning',
-            title: '필수 항목을 작성해주세요.',
-        }).then((result) => {
-            if (result.isConfirmed) { }
-        });
-    }
-}
-
-async function submit_btn_4() {
-
-    var subjects = [];
-    $('#sample6_postcode, #sample6_address, #sample6_detailAddress').each(function () {
-        subjects.push($(this).val());
-    });
-
-
-
-    console.log(subjects);
-
-
-    if (subjects) {
-        console.log('선택된 체크박스의 값2: ', subjects);
-
-
-        store_3(subjects);
-
-
-
-
-    } else {
-        console.log('선택된 체크박스가 없습니다.');
-        Swal.fire({
-            icon: 'warning',
-            title: '필수 항목을 선택해주세요.',
-        }).then((result) => {
-            if (result.isConfirmed) { }
-        });
-    }
-}
-async function submit_btn_5() {
-
-    var subjects = [];
-    $('#leftInput, #rightInput, #bud, #comment').each(function () {
-        subjects.push($(this).val());
-    });
-
-
-
-    console.log(subjects);
-
-    let left = document.getElementById('leftInput').value;
-    let right = document.getElementById('rightInput').value;
-    let bud = document.getElementById('bud').value;
-    if (left != '' && right != '' && bud != '') {
-        if (subjects) {
-            console.log('선택된 체크박스의 값2: ', subjects);
-
-
-            store_4(subjects);
-
-
-
-
-        } else {
-            console.log('선택된 체크박스가 없습니다.');
-            Swal.fire({
-                icon: 'warning',
-                title: '필수 항목을 선택해주세요.',
-            }).then((result) => {
-                if (result.isConfirmed) { }
-            });
-        }
-
-
-
-        var subjects1 = [];
-        $('.myCheckboxNull:checked').each(function () {
-            subjects1.push($(this).val());
-        });
-        let checkedValue1 = null;
-        document.querySelectorAll('.myCheckboxNull').forEach((checkbox) => {
-            if (checkbox.checked) {
-                checkedValue1 = checkbox.value;
-            }
-        });
-
-
-
-        if (checkedValue1) {
-            console.log('선택된 체크박스의 값2: ', checkedValue1);
-
-
-            store_5_1(checkedValue1);
-
-            const checkboxes_choice = document.querySelectorAll("input[type='checkbox']");
-            console.log('제ㄹ: ', checkedValue1);
-        } else {
-            console.log('선택된 체크박스의 값2: ', checkedValue1);
-
-
-            store_5_1('');
-
-            const checkboxes_choice = document.querySelectorAll("input[type='checkbox']");
-            console.log('제ㄹ: ', checkedValue1);
-            final_req();
-        }
-    } else {
-        console.log('선택된 체크박스가 없습니다.');
-        Swal.fire({
-            icon: 'warning',
-            title: '필수 항목을 작성해주세요.',
-        }).then((result) => {
-            if (result.isConfirmed) {
-
-             getCommentList_4();
-             }
-        });
-    }
-
-   // sendDataToControllers();
-  
-
-}
-
-
-
-
-async function postCommentToServer(choice) {
+})
+
+//controller에서 아이디 중복확인 체크
+//중복된 아이디가 없다면 1 return
+async function postId(userId) {
     try {
-        const url = '/req/requestStart';
+        const url = '/member/checkId';
         const config = {
-            method: 'put',
+            method: 'post',
             headers: {
-                'Content-Type': 'application/json; charset=utf-8'
+                'content-type': 'application/json; charset=utf-8'
             },
-            body: JSON.stringify(choice)
+            body: JSON.stringify(userId)
         };
         const resp = await fetch(url, config);
         const result = await resp.text();
@@ -595,1365 +60,318 @@ async function postCommentToServer(choice) {
         console.log(error);
     }
 }
-async function spreadCommentFromServer_2_2(checkedValue) {
-    console.log("체크값 가져오기" + checkedValue);
-    try {
-        const resp = await fetch('/req/req2_2/' + encodeURIComponent(checkedValue));
-        const result = await resp.json();
-        return result;
-    } catch (err) {
-        console.log(err);
-    }
-}
 
-async function spreadCommentFromServer_2(checkedValue) {
-    console.log("체크값 가져오기" + checkedValue);
-    try {
-        const resp = await fetch('/req/req2/' + encodeURIComponent(checkedValue));
-        
-        const result = await resp.json();
-        return result;
-    } catch (err) {
-        console.log(err);
-    }
-}
-
-async function spreadCommentFromServer_1(checkedValue) {
-    console.log("체크값 가져오기" + checkedValue);
-    try {
-        const resp = await fetch('/req/' + encodeURIComponent(checkedValue));
-        const result = await resp.json();
-        return result;
-    } catch (err) {
-        console.log(err);
-    }
-}
-
-async function spreadCommentFromServer_1_2(stringValue2) {
-    console.log("체크값 가져오기" +stringValue2);
-    try {
-        const resp = await fetch('/req/' + encodeURIComponent(stringValue2));
-        console.log("체크값 가져오기zzzzzzzzzzzz" +resp);
-        const result = await resp.json();
-        return result;
-    } catch (err) {
-        console.log(err);
-    }
-}
-async function getCommentList_2_1(checkedValue) {
-    resetFadeIn();
-    try {
-        const result = await spreadCommentFromServer_2(checkedValue);
-
-        const card_img = document.getElementById('card__image');
-        const mainmenu = document.getElementById('mainmenu_text');
-        const form_choice = document.getElementById('form_choice');
-        const choice_2 = document.getElementById('choice_2');
-        const cards = document.getElementById('cards');
-        const choice_3 = document.getElementById('choice_3');
-        const choice_4 = document.getElementById('choice_4');
-        choice_3.style = '';
-        choice_4.style = '';
-        mainmenu.style = '';
-        form_choice.style = '';
-        cards.style.display = 'block';
-        choice_2.style.color = '#006400';
-
-
-        if (result && result.length > 0) {
-            cards.innerHTML = '<h2>원하시는 공사 범위를 선택해주세요.</h2><br><div class="box_card"></div>';
-
-            result.forEach((rvo) => {
-
-                let li = `<li class="cards__item"><input type="hidden" value="${rvo.subject}" id="subject">`;
-                li += `<label><div class="card"><div class="card__image card__image--${rvo.subject}" id="image-${rvo.subject}" style="height: 100px; line-height: 30px;">`;
-                li += `<div class="card__content">  <div class="card__title">${rvo.subject}</div>  <input type="checkbox" class="myCheckbox1" name="subject"`;
-                li += `  value="${rvo.subject}" id="checkbox-${rvo.subject}" onclick="clickCheck1(this)">`;
-                li += `   </div> </div ></div> </label ></li >`;
-                cards.querySelector('.box_card').innerHTML += li;
-            });
-            let btnBox = '<div class="btn_box"><button type="button" class="ok_btn" id="ok_btn_1" onclick="submit_btn_2()">확인</button></div>';
-            cards.innerHTML += btnBox;
-
-
-            storeCheckedValues_2_1();
-            await getCommentList_2_2();
-            loadStoredOptions_2_1();
-
-
-
-        }
-    } catch (error) {
-        console.error('An error occurred:', error);
-    }
-}
-
-async function final_req() {
-    resetFadeIn();
-    console.log("마지막 버튼 눌림");
-    try {
-        const card_img = document.getElementById('card__image');
-        const mainmenu = document.getElementById('mainmenu_text');
-        const form_choice = document.getElementById('form_choice');
-        const choice_2 = document.getElementById('choice_2');
-        const choice_3 = document.getElementById('choice_3');
-        const choice_4 = document.getElementById('choice_4');
-        const cards = document.getElementById('cards');
-
-        mainmenu.style = '';
-        form_choice.style = '';
-        cards.style.display = 'block';
-        choice_2.style = '';
-        choice_3.style.color = '';
-        choice_4.style.color = '#006400';
-        const hover_menu1 = document.getElementById('hover_menu1');
-        const hover_menu2 = document.getElementById('hover_menu2');
-        const hover_menu3 = document.getElementById('hover_menu3');
-        const hover_menu4 = document.getElementById('hover_menu4');
-        const hover_menu5 = document.getElementById('hover_menu5');
-        hover_menu5.style.backgroundColor = 'rgb(245, 247, 250)';
-        hover_menu1.style = '';
-        hover_menu3.style = '';
-        hover_menu2.style = '';
-        hover_menu4.style = '';
-        cards.innerHTML = '';
-
-        
-    var storedOptions = localStorage.getItem('selectedOptionsStore');
-    var storedOptions_1 = localStorage.getItem('selectedOptionsStore_1');
-    var latestOptions, latestOptions_1, latestOptions_2_1,latestOptions_2_2,latestOptions_3,latestOptions_4;
-    if(storedOptions !== null) {
-        var parsedOptions = JSON.parse(storedOptions);
-        latestOptions = parsedOptions.slice(-1);
-    } else {
-        latestOptions = "필수항목을 입력해주세요.";
-    }
-    if(storedOptions_1 !== null){
-        var parsedOptions_1 = JSON.parse(storedOptions_1);
-        latestOptions_1 = parsedOptions_1.slice(-1);
-    } else {
-        latestOptions_1 = "필수항목을 입력해주세요.";
-    }
-
-    var storedOptions_2_1 = localStorage.getItem('selectedOptionsStore_2_1');
-    if(storedOptions_2_1 !== null){
-        var parsedOptions_2_1 = JSON.parse(storedOptions_2_1);
-        latestOptions_2_1 = parsedOptions_2_1.slice(-1);
-    } else {
-        latestOptions_2_1 = "필수항목을 입력해주세요.";
-    }
-
-
-    var storedOptions_2_2 = localStorage.getItem('selectedOptionsStore_2_2');
-    if(storedOptions_2_2 !== null){
-        var parsedOptions_2_2 = JSON.parse(storedOptions_2_2);
-        latestOptions_2_2 = parsedOptions_2_2.slice(-1);
-    } else {
-        latestOptions_2_2 = "필수항목을 입력해주세요.";
-    }
-    var storedOptions_3 = localStorage.getItem('selectedOptionsStore_3');
-if (storedOptions_3 !== null) {
-  var parsedOptions_3 = JSON.parse(storedOptions_3);
-  var latestOptions_3 = [];
-  if (parsedOptions_3.length >= 4) {
-    latestOptions_3.push(parsedOptions_3[parsedOptions_3.length - 4]);
-    latestOptions_3.push(parsedOptions_3[parsedOptions_3.length - 3]);
-    latestOptions_3.push(parsedOptions_3[parsedOptions_3.length - 2]);
-    latestOptions_3.push(parsedOptions_3[parsedOptions_3.length - 1]);
-    console.log("zzzzzzz" + latestOptions_3);
-  } 
-} else {
-    latestOptions_3 = ["필수항목을 입력해주세요.","필수항목을 입력해주세요.","공백(선택항목)","공백(선택항목)"];
-}
-    var storedOptions_4 = localStorage.getItem('selectedOptionsStore_4');
-    if (storedOptions_4 !== null) {
-      var parsedOptions_4 = JSON.parse(storedOptions_4);
-      var latestOptions_4 = [];
-      if (parsedOptions_4.length >= 4) {
-        latestOptions_4.push(parsedOptions_4[parsedOptions_4.length - 4]);
-        latestOptions_4.push(parsedOptions_4[parsedOptions_4.length - 3]);
-        latestOptions_4.push(parsedOptions_4[parsedOptions_4.length - 2]);
-        latestOptions_4.push(parsedOptions_4[parsedOptions_4.length - 1]);
-        console.log("zzzzzzz"+latestOptions_4);
-      }
-        
-      
-    } else {
-      latestOptions_4 = ["필수항목을 입력해주세요.","필수항목을 입력해주세요.","필수항목을 입력해주세요.","공백(선택항목)"];
-    }
-
-
-
-            let tr = '';
-            
-            tr += `<li id="li_final"><input value="${latestOptions}" id="optionValue" readonly="readonly" name ="form" class="optionfinal"><button type="button" onclick="getCommentList()"><span class="material-symbols-outlined" >contract_edit</span></button></li>`;
-            tr += `<li id="li_final"><input value="${latestOptions_1}" id="optionValue" readonly="readonly" name ="categoryType"class="optionfinal"><button type="button" onclick="handleClick()"><span class="material-symbols-outlined" >contract_edit</span></button></li>`;
-            tr += `<li id="li_final"><input value="${latestOptions_2_1}" id="optionValue" readonly="readonly"name ="rang" class="optionfinal"><button type="button" onclick="getCommentList_2_1()"><span class="material-symbols-outlined" >contract_edit</span></button></li>`;
-            tr += `<li id="li_final"><input value="${latestOptions_2_2}" id="optionValue" readonly="readonly" name ="status"class="optionfinal"><button type="button" onclick="getCommentList_2_1()"><span class="material-symbols-outlined" >contract_edit</span></button></li>`;
-
-            tr += `<li id="li_final"><input value="${latestOptions_3[0]}" id="optionValue" class="optionfinal" name ="zoneCode" readonly="readonly"><button type="button" onclick="getCommentList_3()"><span class="material-symbols-outlined" >contract_edit</span></button></li>`;
-            tr += `<li id="li_final"><input value="${latestOptions_3[1]}" id="optionValue" class="optionfinal" name ="address"readonly="readonly"><button type="button" onclick="getCommentList_3()"><span class="material-symbols-outlined" >contract_edit</span></button></li>`;
-            tr += `<li id="li_final"><input value="${latestOptions_3[2]}" id="optionValue" readonly="readonly" name ="detailAddress"class=""><button type="button" onclick="getCommentList_3()"><span class="material-symbols-outlined" >contract_edit</span></button></li>`;
-            tr += `<li id="li_final"><input value="${latestOptions_3[3]}" id="optionValue" readonly="readonly" name ="extraAddress"class=""><button type="button" onclick="getCommentList_3()"><span class="material-symbols-outlined" >contract_edit</span></button></li>`;
-            
-             tr += `<li id="li_final"><input value="${latestOptions_4[0]}" id="optionValue" readonly="readonly" name ="aquareFootage" class="optionfinal"><button type="button" onclick="getCommentList_4()"><span class="material-symbols-outlined" >contract_edit</span></button></li>`;
-            tr += `<li id="li_final"><input value="${latestOptions_4[1]}" id="optionValue" readonly="readonly" name ="squareMeter"class="optionfinal"><button type="button" onclick="getCommentList_4()"><span class="material-symbols-outlined" >contract_edit</span></button></li>`;
-            tr += `<li id="li_final"><input value="${latestOptions_4[2]}" id="optionValue" readonly="readonly"name ="wishBudget" class="optionfinal"><button type="button" onclick="getCommentList_4()"><span class="material-symbols-outlined" >contract_edit</span></button></li>`;
-            tr += `<li id="li_final"><input value="${latestOptions_4[3]}" id="optionValue"  readonly="readonly"name ="requestOp" sclass=""><button type="button" onclick="getCommentList_4()"><span class="material-symbols-outlined" >contract_edit</span></button></li>`;
-        
-            cards.innerHTML += tr;
-
-            let btnBox = '<div class="btn_box"><button type="submit" class="ok_btn" id="final_submit"  onsubmit=" return final_submit()">확인</button></div>';
-            cards.innerHTML += btnBox;
-            unit();
-            console.log("unit 다음");
-            convertBudget();
-            checkNumber_counter();
-
-
-            let myCheckboxNull = document.getElementById('myCheckboxNull');
-            let bud = document.getElementById('bud');
-            let result_budget = document.getElementById('result_budget');
-
-            if (myCheckboxNull && bud && result_budget) {
-                myCheckboxNull.addEventListener('change', function () {
-                    if (this.checked) {
-                        bud.value = '협의결정';
-                        bud.readOnly = true;
-                        bud.style.backgroundColor = "#80808021";
-                        result_budget.innerText = '협의 후 결정';
-                    } else {
-                        bud.value = '';
-                        bud.readOnly = false;
-                        bud.style.backgroundColor = "rgb(128 128 128 / 0%)";
-                        result_budget.innerText = '';
-                    }
-                });
-            } else {
-                console.log('One or more elements could not be found.');
-            }
-        
-    } catch (error) {
-        console.error('An error occurred:', error);
-    }
-
-}
-
-document.querySelector('form').addEventListener('submit', function(e) {
-  try {
-    // 조건 검사
-    let optionValues = document.querySelectorAll('.optionfinal');
-    let hasEmptyValue = false;
-
-    optionValues.forEach(function(option) {
-      if (option.value.trim() === "필수항목을 입력해주세요." || option.value.trim() === '') {
-        hasEmptyValue = true;
-        option.style.color = "red";
-      } else {
-        setTimeout(() => {
-          document.final_submit.submit();
-
-          Swal.fire({
-            icon: 'success',
-            title: '요청서가 만들어졌습니다.',
-            timer: 5000
-          }).then((result) => {
-            if (result.isConfirmed) {
-              // 이 부분에서 원하는 작업을 수행하도록 코드를 작성해주세요.
-              // 예를 들어, 다시 시작하거나 다른 동작을 수행할 수 있습니다.
-              return true;
-            }
-          });
-
-        }, 3000);
-      }
-    });
-
-    if (hasEmptyValue) {
-      e.preventDefault();
-      Swal.fire({
-        icon: 'warning',
-        title: '필수 항목을 입력해 주셔야 합니다.',
-      });
-      // 조건이 충족되지 않았으므로 제출을 중단합니다.
-      return false;
-    }
-
-  } catch (error) {
-    console.error('An error occurred:', error);
-  }
-});
-
-
-async function getCommentList_4(checkedValue) {
-    try {resetFadeIn();
-        const result = await spreadCommentFromServer_2(checkedValue);
-
-        const card_img = document.getElementById('card__image');
-        const mainmenu = document.getElementById('mainmenu_text');
-        const form_choice = document.getElementById('form_choice');
-        const choice_2 = document.getElementById('choice_2');
-        const choice_3 = document.getElementById('choice_3');
-        const choice_4 = document.getElementById('choice_4');
-        const cards = document.getElementById('cards');
-
-        mainmenu.style = '';
-        form_choice.style = '';
-        cards.style.display = 'block';
-        choice_2.style = '';
-        choice_3.style.color = '';
-        choice_4.style.color = '#006400';
-        const hover_menu1 = document.getElementById('hover_menu1');
-        const hover_menu2 = document.getElementById('hover_menu2');
-        const hover_menu3 = document.getElementById('hover_menu3');
-        const hover_menu4 = document.getElementById('hover_menu4');
-        const hover_menu5 = document.getElementById('hover_menu5');
-        hover_menu5.style.backgroundColor = 'rgb(245, 247, 250)';
-        hover_menu1.style = '';
-        hover_menu3.style = '';
-        hover_menu2.style = '';
-        hover_menu4.style = '';
-        cards.innerHTML = '';
-
-        let tr = '';
-        tr += `<h2 class="main_sub">공간의 면적을 입력해주세요.</h2><br><div class="last_box"><div class="last_box_inner"><br><br>
-            <div class="user_input"><input style="width: 200px;" id="leftInput" name="area" type="text" align="right" value=""  onkeypress='return checkNumber(event)' ></div>
-            <div class="unit">평</div><span class="material-symbols-outlined">arrow_range</span>
-            <div class="auto_input"><input style="width: 200px;" id="rightInput" type="text" align="right" value=""   onkeypress='return checkNumber(event)'></div>
-            <div class="unit">㎡</div>
-        </div></div>
-        <h2 class="main_sub">희망하는 예산을 입력해주세요.</h2><br><div class="budget_box"><div class="budget_inner">
-            <input style="width: 250px; margin-bottom: 0px !important;" id="bud" name="area"   maxlength="12" type="text" onkeypress='return checkNumber(event)'> <div color="#ff7631" class="sc-7683fa06-0 eAkweW" id="result_budget">영<div class="unit" id="unitId"></div>
-            </div></div>
-        
-            <div class="unit_money">만원</div>
-   
-        </div>
-        <label for="myCheckboxNull"><div class="exp_1">·협의 후 결정을 원하시면 클릭해주세요 <input type="checkbox" class="myCheckboxNull" name="subject" value="nullValue" id="myCheckboxNull" ></div>
-       </div>
-       </label>
-          <div><h2 class="main_sub">추가 전달 내용을 적어주세요.<div class="sc-7683fa06-0 kuxWUg">(선택)</h2></div></div><div class="budget_box_cho"><div class="budget_inner_option">
-       <textarea placeholder="원하시는 인테리어에 대한 상세설명이나 참고해야 할 사항이 있다면 작성해주세요. 사전 컨설팅 시 도움이 됩니다." maxlength="200" class="sc-1952d657-10 bTUUoF" id="comment"></textarea>
-        </div>
-       
-        </div>
-         <div class="sc-ef390a2d-0 donOnO" ><div color="#ff7631" class="sc-7683fa06-0 eAkweW">&nbsp;</div><div color="#7a7a7c" class="sc-7683fa06-0 kTtyyx" id="counter">/ 200자</div></div>
-        `;
-
-        cards.innerHTML += tr;
-
-        let btnBox = '<div class="btn_box"><button type="button" class="ok_btn" id="ok_btn_1" onclick="submit_btn_5()">확인</button></div>';
-        cards.innerHTML += btnBox;
-        unit();
-        console.log("unit 다음");
-        convertBudget();
-        checkNumber_counter();
-
-
-        let myCheckboxNull = document.getElementById('myCheckboxNull');
-        let bud = document.getElementById('bud');
-        let result_budget = document.getElementById('result_budget');
-
-        myCheckboxNull.addEventListener('change', function () {
-
-            
-            if (this.checked) {
-                bud.value = '협의결정';
-                bud.readOnly = true;
-                bud.style.backgroundColor = "#80808021";
-                result_budget.innerText = '협의 후 결정';
-
-            } else {
-                bud.value = '';
-                bud.readOnly = false;
-                bud.style.backgroundColor = "rgb(128 128 128 / 0%)";
-                result_budget.innerText = '';
-            }
-        });
-
-
-
-    } catch (error) {
-        console.error('An error occurred:', error);
-    }
-
-    loadStoredOptions_4();
-    loadStoredOptions_5_1();
-
-}
-
-
-function checkNumber_counter(event) {
-    $(document).ready(function () {
-        $('#counter').html("<div style='color:#ff7631' class='sc-7683fa06-0 kTtyyx'>0</div> / <div style='color:#7a7a7c' class='sc-7683fa06-0 kTtyyx'>200자</div>");
-
-        $('#comment').on('input', function () {
-            var content = $(this).val();
-            $('#counter').html("<div style='color:#ff7631' class='sc-7683fa06-0 kTtyyx'>" + content.length + "</div> / <div style='color:#7a7a7c' class='sc-7683fa06-0 kTtyyx'>200자</div>");
-
-            if (content.length > 200) {
-                $(this).val(content.substring(0, 200));
-                $('#counter').html("<div style='color:#ff7631' class='sc-7683fa06-0 kTtyyx'>200</div> / <div style='color:#7a7a7c' class='sc-7683fa06-0 kTtyyx'>200자</div>");
-            }
-        });
-    });
-}
-
-
-function checkNumber(event) {
-    if (event.key === '.'
-        || event.key === '-'
-        || event.key >= 0 && event.key <= 9) {
-        return true;
-    }
-
-    return false;
-}
-function convertBudget() {
-
-    let result_budget = document.getElementById('result_budget');
-
-
-    const bud = document.getElementById('bud');
-
-    var digits = ['영', '일', '이', '삼', '사', '오', '육', '칠', '팔', '구'];
-    var units = ['', '십', '백', '천', '만', '십만', '백만', '천만', '억', '십억', '백억', '천억', '조', '십조', '백조', '천조'];
-    console.log("bud는" + bud);
-    if (bud != null) {
-
-        bud.addEventListener('input', (event) => {
-            console.log("여기에 들어오니");
-
-            console.log("  convertBudget if문 진입 ");
-            if (bud.value)
-                var numStr = "" + bud.value;
-            var numLen = numStr.length;
-
-            result_budget.innerHTML = '';
-
-            for (var i = 0; i < numLen; i++) {
-
-                var digit = parseInt(numStr.charAt(i));
-                console.log("여기는 digit입니다." + digit);
-                var unit = units[numLen - i - 1];
-                console.log("여기는 유닛입니다." + unit);
-                if (i === numLen - 1 && digit === 1 && numLen !== 1) {
-                    console.log("  convertBudget for문 에 if1 문 진입 ");
-                    result_budget.innerHTML += '일';
-                } else if (digit !== 0) {
-                    console.log("  convertBudget for문 에 if2 문 진입 ");
-                    result_budget.innerHTML += digits[digit] + unit;
-                } else if (i === numLen - 5) {
-                    console.log("  convertBudget for문 에 if3 문 진입 ");
-                    result_budget.innerHTML += '만';
-                }
-
-
-            }
-
-            if (numLen > 0) {
-                result_budget.innerHTML += '원';
-
-            }
-        });
-    }
-}
-
-
-window.onload = function () {
-    convertBudget();
-};
-
-
-let leftInput;
-let rightInput;
-
-const calculateForLeft = () => {
-    const inputValue = parseFloat(rightInput.value);
-    if (!isNaN(inputValue)) {
-        const convertedValue = (inputValue * 0.3025).toFixed(2);
-        leftInput.value = convertedValue;
-    } else {
-        leftInput.value = "";
-    }
-};
-
-const calculateForRight = () => {
-    const inputValue = parseFloat(leftInput.value);
-    if (!isNaN(inputValue)) {
-        const convertedValue = (inputValue * 3.3057).toFixed(2);
-        rightInput.value = convertedValue;
-    } else {
-        rightInput.value = "";
-    }
-};
-
-function unit() {
-    leftInput = document.getElementById("leftInput");
-    rightInput = document.getElementById("rightInput");
-    if (rightInput !== null) {
-        rightInput.addEventListener("input", calculateForLeft);
-    }
-    
-    if (leftInput !== null) {
-        leftInput.addEventListener("input", calculateForRight);
-    }
-    
-}
-async function getCommentList_3(checkedValue) {
-    resetFadeIn();
-    try {
-        const result = await spreadCommentFromServer_2(checkedValue);
-
-        const card_img = document.getElementById('card__image');
-        const mainmenu = document.getElementById('mainmenu_text');
-        const form_choice = document.getElementById('form_choice');
-        const choice_2 = document.getElementById('choice_2');
-        const choice_3 = document.getElementById('choice_3');
-        const choice_4 = document.getElementById('choice_4');
-        const cards = document.getElementById('cards');
-
-        mainmenu.style = '';
-        form_choice.style = '';
-        cards.style.display = 'block';
-        choice_2.style = '';
-        choice_3.style.color = '#006400';
-        choice_4.style = '';
-        const hover_menu1 = document.getElementById('hover_menu1');
-        const hover_menu2 = document.getElementById('hover_menu2');
-        const hover_menu3 = document.getElementById('hover_menu3');
-        const hover_menu4 = document.getElementById('hover_menu4');
-        const hover_menu5 = document.getElementById('hover_menu5');
-        hover_menu4.style.backgroundColor = 'rgb(245, 247, 250)';
-        hover_menu1.style = '';
-        hover_menu3.style = '';
-        hover_menu2.style = '';
-        hover_menu5.style = '';
-        cards.innerHTML = '';
-
-
-        let tr = '';
-        tr += `<h2 class="main_sub">주소를  입력해주세요.</h2><br><br><div class="adress_api">
-                <div class="address_box">  <input type="text" id="sample6_postcode" placeholder="우편번호" >
-                  <input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기"  class="address_btn"></div>
-                  <input type="text" id="sample6_address" placeholder="주소">
-                  <input type="text" id="sample6_detailAddress" placeholder="상세주소">
-                 <input type="text" id="sample6_extraAddress" placeholder="참고항목">
-
-                </div>`;
-        tr += `<div class="exp">·정교한 견적을 제공하기 위해 공사 현장 실측이 필요할 수 있습니다.</div>`;
-        cards.innerHTML += tr;
-
-
-        // btn_box 추가
-        let btnBox = '<div class="btn_box"><button type="button" class="ok_btn" id="ok_btn_1" onclick="submit_btn_3()">확인</button></div>';
-        cards.innerHTML += btnBox;
-        loadStoredOptions_3();
-        //storeCheckedValues_1();
-    }
-    catch (error) {
-        console.error('An error occurred:', error);
-    }
-
-}
-async function getCommentList_2_2(checkedValue) {
-    const result = await spreadCommentFromServer_2_2(checkedValue);
-
-    const card_img = document.getElementById('card__image');
-    const mainmenu = document.getElementById('mainmenu_text');
-    const form_choice = document.getElementById('form_choice');
-    const choice_2 = document.getElementById('choice_2');
-    const choice_3 = document.getElementById('choice_3');
-    const choice_4 = document.getElementById('choice_4');
-    const hover_menu1 = document.getElementById('hover_menu1');
-    const hover_menu2 = document.getElementById('hover_menu2');
-    const hover_menu3 = document.getElementById('hover_menu3');
-    const hover_menu4 = document.getElementById('hover_menu4');
-    const hover_menu5 = document.getElementById('hover_menu5');
-    hover_menu3.style.backgroundColor = 'rgb(245, 247, 250)';
-    hover_menu1.style = '';
-    hover_menu4.style = '';
-    hover_menu2.style = '';
-    choice_3.style = '';
-    choice_4.style = '';
-    mainmenu.style = '';
-    form_choice.style = '';
-    hover_menu5.style = '';
-    const cards = document.getElementById('cards');
-    cards.style.gridTemplateColumns = 'repeat(3,0.5fr)';
-    choice_2.style.color = '#006400';
-
-
-    if (result && result.length > 0) {
-
-        cards.innerHTML += '<h2>원하시는 공사 상태를 선택해주세요.</h2><br><div class="box_card2"></div>';
-
-        result.forEach(rvo => {
-            //  checkboxChangeHandler2();
-
-            let li = `<li class="cards__item"><input type="hidden" value="${rvo.subject}" id="subject">`;
-
-            li += `<label><div class="card"><div class="card__image card__image--${rvo.subject}" id="image-${rvo.subject}" style="height: 100px; line-height: 30px;">`;
-            li += `<div class="card__content">  <div class="card__title">${rvo.subject}</div>  <input type="checkbox" class="myCheckbox2" name="subject"`;
-            li += `  value="${rvo.subject}" id="checkbox-${rvo.subject}" onclick="clickCheck2(this)">`;
-            li += `   </div> </div ></div> </label ></li >`;
-
-
-            cards.querySelector('.box_card2').innerHTML += li;
-        });
-
-
-        let btnBox = '<div class="btn_box"><button type="button" class="ok_btn" id="ok_btn_1" onclick="submit_btn_2()">확인</button></div>';
-        cards.innerHTML += btnBox;
-
-
-        storeCheckedValues_2_2();
-        await loadStoredOptions_2_2();
-
-
-    }
-}
-
-function getCommentList_1(checkedValue) {
-   
-    let checkedValue1 = '';
-    var storedValue1 = localStorage.getItem('selectedOptionsStore');
-
-    if (storedValue1) {
-        checkedValue1 = storedValue1;
-    }
-    if (checkedValue1 === null || checkedValue1 === '') {
-        console.log('선택된 체크박스가 없습니다.');
+//submit 차단 경우의 수
+document.querySelector('.form').addEventListener("submit", (e) => {
+    //아이디 중복체크에서 true를 받지 못했을 때
+    if (checkIdResult.value == 'false') {
         Swal.fire({
-            icon: 'warning',
-            title: '유형을 고르려면, <br> 공간을 먼저 골라주셔야 합니다.',
-        }).then((result) => {
-            if (result.isConfirmed) {
-                getCommentList();
-            }
+            icon: "error",
+            text: "아이디 중복체크를 확인해주세요."
         });
-        return; // 함수 종료
+        e.preventDefault();
     }
-    resetFadeIn();
-    spreadCommentFromServer_1(checkedValue).then(result => {
-      
-        const cards = document.getElementById('cards');
-        cards.style.gridTemplateColumns = 'repeat(4,0.5fr)';
-        cards.style.gridTemplateRows = 'minmax(1px, 30px);';
-        const mainmenu = document.getElementById('mainmenu_text');
-        const form_choice = document.getElementById('form_choice');
-        const choice_2 = document.getElementById('choice_2');
-        const choice_3 = document.getElementById('choice_3');
-        const choice_4 = document.getElementById('choice_4');
-        choice_3.style = '';
-        choice_4.style = '';
-        cards.style.display = 'grid';
-        choice_2
-        choice_2.style = '';
-        mainmenu.style = '';
-        form_choice.style = '';
-        form_choice.style.color = '#006400';
-
-
-
-        const hover_menu1 = document.getElementById('hover_menu1');
-        const hover_menu2 = document.getElementById('hover_menu2');
-        const hover_menu3 = document.getElementById('hover_menu3');
-        const hover_menu4 = document.getElementById('hover_menu4');
-        const hover_menu5 = document.getElementById('hover_menu5');   
-        const card__image = document.querySelectorAll('.card__image');
-        
-        hover_menu2.style.backgroundColor = 'rgb(245, 247, 250)';
-        hover_menu1.style = '';
-        hover_menu3.style = '';
-        hover_menu4.style = '';
-        hover_menu5.style = '';
-    
-        card__image.style='';
-        if (result && result.length > 0) {
-            cards.innerHTML = '';
-          
-            result.forEach(rvo => {
-                console.log("아니왜??"+result.length);
-                if(checkedValue=='상업공간'){
-                  
-                    let li = `<li class="cards__item"><input type="hidden" value="${rvo.subject}" id="subject">`;
-                    li += `<label><div class="card"><div class="card__image card__image--${rvo.subject}" id="image-${rvo.subject}" style="height: 150px; !important" ></div>`;
-                    li += `<div class="card__content">  <div class="card__title">${rvo.subject}</div>  <input type="checkbox" class="myCheckbox" name="subject"`;
-                    li += `  value = "${rvo.subject}" id = "checkbox-${rvo.subject}" onclick = "clickCheck(this)"  >`
-                    li += `    </div ></div> </label ></li >`
-                    cards.innerHTML += li;
-                
-                }else{
-                let li = `<li class="cards__item"><input type="hidden" value="${rvo.subject}" id="subject">`;
-                li += `<label><div class="card"><div class="card__image card__image--${rvo.subject}" id="image-${rvo.subject}"></div>`;
-                li += `<div class="card__content">  <div class="card__title">${rvo.subject}</div>  <input type="checkbox" class="myCheckbox" name="subject"`;
-                li += `  value = "${rvo.subject}" id = "checkbox-${rvo.subject}" onclick = "clickCheck(this)"  >`
-                li += `    </div ></div> </label ></li >`
-                cards.innerHTML += li;
-
-                }
-            });
-
-            // btn_box 추가
-            let btnBox = '<div class="btn_box"><button type="button" class="ok_btn" id="ok_btn_1" onclick="submit_btn_1()">확인</button></div>';
-            cards.innerHTML += btnBox;
-
-            loadStoredOptions_1();
-            storeCheckedValues_1();
-            return true;
-        }
-    });
-}   
-
-
-
-function handleClick() {
-    var storedValue2 = localStorage.getItem('selectedOptionsStore');
-
-    if (storedValue2 === null || storedValue2 === '') {
-        console.log('선택된 체크박스가 없습니다.');
+    //비밀번호 정규표현식에서 true를 받지 못했을 때
+    else if (checkPwResult.value == 'false' || checkPwResult.value == '') {
         Swal.fire({
-            icon: 'warning',
-            title:`유형을 고르려면, <br> 공간을 먼저 골라주셔야 합니다.`
-        }).then((result) => {
-            if (result.isConfirmed) {
-                getCommentList();
-            }
+            icon: "error",
+            text: "비밀번호는 최소 8 자, 문자와 숫자가 포함되어야 합니다."
         });
-        return; // 함수 종료
+        e.preventDefault();
     }
-
-    var arrayValue2;
-
-    try {
-        arrayValue2 = JSON.parse(storedValue2);
-    } catch (error) {
-
-        return; // 함수 종료
+    //비밀번호가 일치하지 않을 때
+    else if (checkPwOkResult.value == 'false' || checkPwOkResult.value == '') {
+        Swal.fire({
+            icon: "error",
+            text: "비밀번호가 일치하지 않습니다."
+        });
+        e.preventDefault();
     }
-//배열이 맞는지 확인
-    if (!Array.isArray(arrayValue2) || arrayValue2.length === 0) {
-        console.error('유효하지 않거나 빈 배열:', arrayValue2);
-        return; // 함수 종료
+    //이메일을 입력하지 않았을 때
+    else if (document.getElementById('email').value == '') {
+        Swal.fire({
+            icon: "error",
+            text: "이메일을 입력해주세요."
+        });
+        e.preventDefault();
     }
+    //전화번호 정규표현식 확인
+    else if (checkPhoneResult.value == 'false' || checkPhoneResult.value == '') {
+        Swal.fire({
+            icon: "error",
+            text: "올바르지 않은 전화번호입니다."
+        });
+        e.preventDefault();
+    }
+    //주소를 입력하지 않았을 때
+    else if (document.getElementById('address').value == '' || document.getElementById('zoneCode').value == '') {
+        Swal.fire({
+            icon: "error",
+            text: "주소를 입력해주세요."
+        });
+        e.preventDefault();
+    }
+    //빈칸이 있을 때
+    else if (document.getElementById('userNm').value == '' || document.getElementById('email').value == '' || document.getElementById('phone').value == '') {
+        Swal.fire({
+            icon: "error",
+            text: "빈칸이 없도록 작성해주십시오."
+        });
+        e.preventDefault();
+    }
+    //이미지를 넣지 않았을 때
+    else if (document.getElementById('file').files.length == 0) {
+        Swal.fire({
+            icon: "error",
+            text: "대표 이미지를 선택해주세요."
+        });
+        e.preventDefault();
+    }
+    //필수 동의 항목을 동의하지 않았을 때
+    else if (document.getElementById('agree1Check').checked == false ||
+        document.getElementById('agree2Check').checked == false) {
+        Swal.fire({
+            icon: "error",
+            text: "필수 항목을 동의하지 않으셨습니다."
+        });
+        e.preventDefault();
+    }
+    //첨부파일이 정규표현식에 위반될 때
+    else if (checkImgResult.value == 'false') {
+        Swal.fire({
+            icon: "error",
+            text: "업로드 불가능한 파일입니다."
+        });
+        e.preventDefault();
+    }
+})
 
-    var latestOption = arrayValue2[arrayValue2.length - 1];
-    console.log("마지막 값:", latestOption);
-    resetFadeIn();
-    spreadCommentFromServer_1_2(latestOption).then(result => {
-        const progress= document.getElementById('progress');
-        let currentValue = 0;
+//비밀번호 정규 표현식 확인
+document.getElementById('pw').addEventListener('input', () => {
+    let pw = document.getElementsByClassName('password')[0];
+    let pwOk = document.getElementsByClassName('passwordOk')[0];
+    if (!reg.test(document.getElementById('pw').value)) {
+        pw.classList.add('block');
+        pw.classList.remove('none');
+        pwOk.classList.remove('block');
+        pwOk.classList.add('none');
+        checkPwResult.value = false;
+    } else {
+        pw.classList.add('none');
+        pw.classList.remove('block');
+        pwOk.classList.remove('none');
+        pwOk.classList.add('block');
+        checkPwResult.value = true;
+    }
+})
 
-         
-        const cards = document.getElementById('cards');
-        cards.style.gridTemplateColumns = 'repeat(4, 0.5fr)';
-        cards.style.gridTemplateRows = 'minmax(1px, 30px);';
-        const mainmenu = document.getElementById('mainmenu_text');
-        const form_choice = document.getElementById('form_choice');
-        const choice_2 = document.getElementById('choice_2');
-        const choice_3 = document.getElementById('choice_3');
-        const choice_4 = document.getElementById('choice_4');
-        choice_3.style = '';
-        choice_4.style = '';
-        cards.style.display = 'grid';
-        choice_2
-        choice_2.style = '';
-        mainmenu.style = '';
-        form_choice.style = '';
-        form_choice.style.color = '#006400';
+//비밀번호 일치 확인
+document.getElementById('pwCheck').addEventListener('input', () => {
+    let pwCk = document.getElementsByClassName('passwordCheck')[0];
+    let pwOkCk = document.getElementsByClassName('passwordCheckOk')[0];
+    if (document.getElementById('pw').value == document.getElementById('pwCheck').value) { //비밀번호가 일치하면
+        pwCk.classList.add('none');
+        pwCk.classList.remove('block');
+        pwOkCk.classList.remove('none');
+        pwOkCk.classList.add('block');
+        checkPwOkResult.value = true;
+    } else {//일치하지 않으면
+        pwCk.classList.add('block');
+        pwCk.classList.remove('none');
+        pwOkCk.classList.remove('block');
+        pwOkCk.classList.add('none');
+        checkPwOkResult.value = false;
+    }
+})
 
-        const hover_menu1 = document.getElementById('hover_menu1');
-        const hover_menu2 = document.getElementById('hover_menu2');
-        const hover_menu3 = document.getElementById('hover_menu3');
-        const hover_menu4 = document.getElementById('hover_menu4');
-        const hover_menu5 = document.getElementById('hover_menu5');
-        const card__image = document.querySelectorAll('.card__image');
+//전화번호 정규 표현식 확인
+document.getElementById('phone').addEventListener('input', () => {
+    let phone = document.getElementsByClassName('phone')[0];
+    if (!regPhone.test(document.getElementById('phone').value)) {
+        phone.classList.add('block');
+        phone.classList.remove('none');
+        checkPhoneResult.value = false;
+    } else {
+        phone.classList.add('none');
+        phone.classList.remove('block');
+        checkPhoneResult.value = true;
+    }
+})
 
-        hover_menu2.style.backgroundColor = 'rgb(245, 247, 250)';
-        hover_menu1.style = '';
-        hover_menu3.style = '';
-        hover_menu4.style = '';
-        hover_menu5.style = '';
+//실행 파일, 이미지 파일에 대한 정규표현식
+const regExp = new RegExp("\.(exe|sh|bat|js|msi|dll)$"); //실행 파일 막기
+const regExpImg = new RegExp("\.(jpg|jpeg|png|gif)$"); //이미지 파일 받기
+const maxSize = 1024 * 1024 * 20;
 
-        card__image.style = '';
-        if (result && result.length > 0) {
-            cards.innerHTML = '';
-            console.log("제발부탁이야제발" + result.length);
-            result.forEach(rvo => {
-                if (result.length ==8) {
-                    let li = `<li class="cards__item"><input type="hidden" value="${rvo.subject}" id="subject">`;
-                    li += `<label><div class="card"><div class="card__image card__image--${rvo.subject}" id="image-${rvo.subject}" style="height: 150px; !important" ></div>`;
-                    li += `<div class="card__content">  <div class="card__title">${rvo.subject}</div>  <input type="checkbox" class="myCheckbox" name="subject"`;
-                    li += `  value="${rvo.subject}" id="checkbox-${rvo.subject}" onclick="clickCheck(this)"  >`
-                    li += `    </div ></div> </label ></li >`
-                    cards.innerHTML += li;
-                } else if(result.length==4){
-                    let li = `<li class="cards__item"><input type="hidden" value="${rvo.subject}" id="subject">`;
-                    li += `<label><div class="card"><div class="card__image card__image--${rvo.subject}" id="image-${rvo.subject}"></div>`;
-                    li += `<div class="card__content">  <div class="card__title">${rvo.subject}</div>  <input type="checkbox" class="myCheckbox" name="subject"`;
-                    li += `  value="${rvo.subject}" id="checkbox-${rvo.subject}" onclick="clickCheck(this)"  >`
-                    li += `    </div ></div> </label ></li >`
-                    cards.innerHTML += li;
-                }
-            });
+function fileValidation(fileName, fileSize) {
+    if (!regExpImg.test(fileName)) { //이미지 파일이 아니면
+        return 0;
+    } else if (regExp.test(fileName)) { //실행 파일이라면
+        return 0;
+    } else if (fileSize > maxSize) {
+        return 0;
+    } else {
+        return 1;
+    }
+}
 
-            // btn_box 추가
-            let btnBox = '<div class="btn_box"><button type="button" class="ok_btn" id="ok_btn_1" onclick="submit_btn_1()">확인</button></div>';
-            cards.innerHTML += btnBox;
-
-            loadStoredOptions_1();
-            storeCheckedValues_1();
-            return true;
+//이미지파일 확인
+document.addEventListener('change', (e) => {
+    if (e.target.id == 'file') {
+        const fileObj = document.getElementById('file').files;
+        console.log(fileObj);
+        let validResult = fileValidation(fileObj[0].name, fileObj[0].size); //0 또는 1로 리턴됨
+        if (validResult == 0) {
+            alert('업로드 불가능한 파일입니다.');
+            checkImgResult = false;
+        } else {
+            checkImgResult = true;
         }
-    });
-}
-
-async function getCommentList() {
-    resetFadeIn();
-    let result = await spreadCommentFromServer();
-    const cards = document.getElementById('cards');
-    cards.style.gridTemplateColumns = 'repeat(2,0.5fr)';
-    cards.style.gridTemplateRows = 'none';
-    const mainmenu = document.getElementById('mainmenu_text');
-    const hover_menu1 = document.getElementById('hover_menu1');
-    const hover_menu2 = document.getElementById('hover_menu2');
-    const hover_menu3 = document.getElementById('hover_menu3');
-    const hover_menu4 = document.getElementById('hover_menu4');
-    const hover_menu5 = document.getElementById('hover_menu5');
-    hover_menu1.style.backgroundColor = 'rgb(245, 247, 250)';
-    hover_menu2.style = '';
-    hover_menu3.style = '';
-    hover_menu4.style = '';
-
-    const form_choice = document.getElementById('form_choice');
-    const choice_4 = document.getElementById('choice_4');
-    const choice_3 = document.getElementById('choice_3');
-    choice_3.style = '';
-    form_choice.style = '';
-    const choice_2 = document.getElementById('choice_2');
-    choice_2.style = '';
-    choice_4.style = '';
-    mainmenu.style.color = '#006400';
-    cards.style.display = 'grid';
-    mainmenu.style.setProperty('color', '#006400', 'important');
-
-
-    if (result && result.length > 0) {
-
-     
-        cards.innerHTML = '';
-        result.forEach(rvo => {
-            let li = `<li class="cards__item"><input type="hidden" value="${rvo.subject}" id="subject">`;
-            li += `<label><div class="card"><div class="card__image card__image--${rvo.subject}" id="image-${rvo.subject}"></div>`;
-            li += `<div class="card__content">  <div class="card__title">${rvo.subject}</div>  <input type="checkbox" class="myCheckbox" name="subject"`;
-            li += `  value = "${rvo.subject}" id = "checkbox-${rvo.subject}" onclick = "clickCheck(this)" >`
-            li += `    </div ></div> </label ></li >`
-            cards.innerHTML += li;
-        });
-
-        // btn_box 추가
-        let btnBox = '<div class="btn_box"><button type="button" class="ok_btn" id="ok_btn" onclick="submit_btn()">확인</button></div>';
-        cards.innerHTML += btnBox;
-
-        loadStoredOptions();
-
-        // 체크박스의 체크 상태를 저장합니다.
-        storeCheckedValues();
-
     }
+})
+
+const modal = document.getElementsByClassName('modal')[0];
+const modal2 = document.getElementById('agree2');
+const body = document.querySelector('body');
+
+//전문보기 모달창 열기
+function modalOpen() {
+    modal.classList.add('block');
+    modal.classList.remove('none');
+    body.classList.add('black');
+    document.getElementsByClassName('total_nav')[0].style = 'display: none';
+    window.scrollTo(0, 0);
+}
+function modalOpen2() {
+    modal2.classList.add('block');
+    modal2.classList.remove('none');
+    body.classList.add('black');
+    document.getElementsByClassName('total_nav')[0].style = 'display: none';
+    window.scrollTo(0, 0);
 }
 
-async function spreadCommentFromServer(checkedValue) {
+//모달창 닫기
+function modalExit() {
+    modal.classList.remove('block');
+    modal.classList.add('none');
+    body.classList.remove('black');
+    document.getElementsByClassName('total_nav')[0].style = 'display: flex';
+}
+function modalExit2() {
+    modal2.classList.remove('block');
+    modal2.classList.add('none');
+    body.classList.remove('black');
+    document.getElementsByClassName('total_nav')[0].style = 'display: flex';
+}
 
+let agree1Check = document.getElementById('agree1Check');
+let agree2Check = document.getElementById('agree2Check');
 
-    try {
-        const resp = await fetch('/req/mainCategory');
-        const result = await resp.json();
-        return result;
-    } catch (err) {
-        console.log(err);
+//이용약관 동의 버튼을 누르면 체크박스가 눌림
+document.getElementsByClassName('agree1Btn')[0].addEventListener('click', () => {
+    agree1Check.checked = true;
+})
+document.getElementsByClassName('agree2Btn')[0].addEventListener('click', () => {
+    agree2Check.checked = true;
+})
+
+//파일 선택 버튼 연동
+document.getElementById('selectFile').addEventListener('click', () => {
+    document.getElementById('file').click();
+})
+
+//전문보기를 누르지않고 체크버튼을 누르려 했다면
+document.getElementById('agree1Check').addEventListener('click', () => {
+    console.log(agree1Check.checked);
+    if (agree1Check.checked == true) {
+        Swal.fire("전문보기를 눌러 확인 후 체크해주십시오.");
+        agree1Check.checked = false;
     }
-}
+})
+document.getElementById('agree2Check').addEventListener('click', () => {
+    if (agree2Check.checked == true) {
+        Swal.fire("전문보기를 눌러 확인 후 체크해주십시오.");
+        agree2Check.checked = false;
+    }
+})
 
+document.getElementById('eye1').addEventListener('click', (e) => {
+    //비밀번호 보기
+    if (e.target.classList.contains('bi-eye-fill')) {
+        e.target.classList.toggle('bi-eye-fill');
+        e.target.classList.toggle('bi-eye-slash-fill');
+        e.target.closest('.mb-3').querySelector('input').type = 'password';
+    } else { //비밀번호 가리기
+        e.target.classList.toggle('bi-eye-fill');
+        e.target.classList.toggle('bi-eye-slash-fill');
+        e.target.closest('.mb-3').querySelector('input').type = 'text';
+    }
+})
 
-
-
-document.getElementById('mainmenu').addEventListener('click', async function () {
-    await getCommentList();
+document.getElementById('eye2').addEventListener('click', (e) => {
+    //비밀번호 보기
+    if (e.target.classList.contains('bi-eye-fill')) {
+        e.target.classList.toggle('bi-eye-fill');
+        e.target.classList.toggle('bi-eye-slash-fill');
+        e.target.closest('.mb-3').querySelector('input').type = 'password';
+    } else { //비밀번호 가리기
+        e.target.classList.toggle('bi-eye-fill');
+        e.target.classList.toggle('bi-eye-slash-fill');
+        e.target.closest('.mb-3').querySelector('input').type = 'text';
+    }
 })
 
 
+//주소 선택 api
+function inputAddr() {
+    new daum.Postcode(
+        {
+            oncomplete: function (data) {
+                // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+                var addr = ''; // 주소 변수
+                var extraAddr = ''; // 참고항목 변수
 
-// 데이터 저장 함수
-
-// 저장 
-var DataC = {};
-
-let totalDataCount = 5; // 데이터를 저장하는 함수의 개수
-let progressElement = document.getElementById('progress');
-progressElement.max = totalDataCount; // progress의 최대값을 데이터의 개수로 설정
-let zeroCount=0;
-
-function store() {
-    let selectedOptions = [];
-    var checkboxes = document.querySelectorAll('input[type="checkbox"]:checked');
-
-    for (var i = 0; i < checkboxes.length; i++) {
-        selectedOptions.push(checkboxes[i].value);
-    }
-    localStorage.setItem('selectedOptionsStore', JSON.stringify(selectedOptions));
-
-    DataC['store'] = selectedOptions;
-  
-
-    let interval = setInterval(function() {
-        if (progressElement.value >= 1) {
-            clearInterval(interval);
-        } else {
-            progressElement.value += 0.01;
-        }
-    }, 8);
-}
-
-function store_1() {
-    let selectedOptions = [];
-    var checkboxes = document.querySelectorAll('input[type="checkbox"]:checked');
-    for (var i = 0; i < checkboxes.length; i++) {
-        selectedOptions.push(checkboxes[i].value);
-    }
-    localStorage.setItem('selectedOptionsStore_1', JSON.stringify(selectedOptions));
-
-    DataC['store']= selectedOptions;
-    let interval = setInterval(function() {
-        if (progressElement.value >= 2) {
-            clearInterval(interval);
-        } else {
-            progressElement.value += 0.01;
-        }
-    }, 8);
-}
-
-function store_2_1() {
-    let selectedOptions = [];
-    var checkboxes = document.querySelectorAll('input.myCheckbox1:checked');
-    for (var i = 0; i < checkboxes.length; i++) {
-        selectedOptions.push(checkboxes[i].value);
-    }
-    localStorage.setItem('selectedOptionsStore_2_1', JSON.stringify(selectedOptions));
-
-    DataC['store'] = selectedOptions;
-    let interval = setInterval(function() {
-        if (progressElement.value >= 3) {
-            clearInterval(interval);
-        } else {
-            progressElement.value += 0.01;
-        }
-    }, 8);
-}
-
-function store_2_2() {
-    let selectedOptions = [];
-    var checkboxes = document.querySelectorAll('input.myCheckbox2:checked');
-    for (var i = 0; i < checkboxes.length; i++) {
-        selectedOptions.push(checkboxes[i].value);
-    }
-    localStorage.setItem('selectedOptionsStore_2_2', JSON.stringify(selectedOptions));
-
-    DataC['store'] = selectedOptions;
-   
-}
-
-function store_3() {
-    var subjects = [];
-    $('#sample6_postcode, #sample6_address, #sample6_detailAddress, #sample6_extraAddress').each(function () {
-        subjects.push($(this).val());
-    });
-    localStorage.setItem('selectedOptionsStore_3', JSON.stringify(subjects));
-
-    DataC['store'] = subjects;
-    let interval = setInterval(function() {
-        if (progressElement.value >= 4) {
-            clearInterval(interval);
-        } else {
-            progressElement.value += 0.01;
-        }
-    }, 8);
-}
-
-function store_4() {
-    var subjects = [];
-    $('#leftInput, #rightInput, #bud, #comment').each(function () {
-        subjects.push($(this).val());
-    });
-    localStorage.setItem('selectedOptionsStore_4', JSON.stringify(subjects));
-
-    DataC['store'] = subjects;
-    let interval = setInterval(function() {
-        if (progressElement.value >= 5) {
-            clearInterval(interval);
-        } else {
-            progressElement.value += 0.01;
-        }
-    }, 8);
-}
-
-function store_5_1() {
-    let selectedOptions = [];
-    var checkboxes = document.querySelectorAll('input[type="checkbox"]:checked');
-    let result_budget = document.getElementById('result_budget').value;
-    let selectedOptions_1 = [];
-
-    for (var i = 0; i < checkboxes.length; i++) {
-        selectedOptions.push(checkboxes[i].value);
-    }
-    selectedOptions_1.push(result_budget);
-
-    console.log("선택된 옵션zzz: " + selectedOptions.join(", "));
-    console.log("선택된 옵션zzz: " + selectedOptions_1.join(", "));
-    localStorage.setItem('selectedOptionsStore_5_1', JSON.stringify(selectedOptions));
-    localStorage.setItem('selectedOptionsStore_5_1_2', JSON.stringify(selectedOptions_1));
-}
-
-function store_5_1() {
-    let selectedOptions = [];
-    var checkboxes = document.querySelectorAll('input[type="checkbox"]:checked');
-    let result_budget = document.getElementById('result_budget').value;
-    let selectedOptions_1 = [];
-
-    for (var i = 0; i < checkboxes.length; i++) {
-        selectedOptions.push(checkboxes[i].value);
-    }
-    selectedOptions_1.push(result_budget);
-
-    console.log("선택된 옵션zzz: " + selectedOptions.join(", "));
-    console.log("선택된 옵션zzz: " + selectedOptions_1.join(", "));
-    localStorage.setItem('selectedOptionsStore_5_1', JSON.stringify(selectedOptions));
-    localStorage.setItem('selectedOptionsStore_5_1_2', JSON.stringify(selectedOptions_1));
-}
-
-
-
-//jgh231201추가
-/*document.getElementById('form_choice').addEventListener('click', function () {
-    getCommentList_1();
-    loadStoredOptions_1();
-});
-*/
-//jgh
-function loadStoredOptions() {
-    var storedOptions = localStorage.getItem('selectedOptionsStore');
-    if (storedOptions) {
-        var parsedOptions = JSON.parse(storedOptions);
-
-        document.querySelectorAll('.myCheckbox').forEach((checkbox) => {
-            checkbox.checked = false;
-        });
-
-        var latestOptions = parsedOptions.slice(-1);
-
-        //document.getElementById('li_final').innerText = latestOptions;
-
-        latestOptions.forEach((value) => {
-            var checkbox = document.getElementById('checkbox-' + value);
-            if (checkbox) {
-                checkbox.checked = true;
-                if (checkbox.checked) {
-
-                    const subject = checkbox.id.slice(9);
-                    const image = document.getElementById("image-" + subject);
-                    image.style.border = '4px solid rgb(80, 119, 113)';
-                    image.style.filter = "none";
-                    image.style.padding = '0px';
-                    console.log('Border Applied:', image.style.border);
-                    console.log('Filter Applied:', image.style.filter);
+                //사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
+                if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
+                    addr = data.roadAddress;
+                } else { // 사용자가 지번 주소를 선택했을 경우(J)
+                    addr = data.jibunAddress;
                 }
-            }
-        });
-    }
 
-}
+                // 사용자가 선택한 주소가 도로명 타입일때 참고항목을 조합한다.
+                if (data.userSelectedType === 'R') {
+                    // 법정동명이 있을 경우 추가한다. (법정리는 제외)
+                    // 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
+                    if (data.bname !== ''
+                        && /[동|로|가]$/g.test(data.bname)) {
+                        extraAddr += data.bname;
+                    }
+                    // 건물명이 있고, 공동주택일 경우 추가한다.
+                    if (data.buildingName !== ''
+                        && data.apartment === 'Y') {
+                        extraAddr += (extraAddr !== '' ? ', '
+                            + data.buildingName
+                            : data.buildingName);
+                    }
+                    // 표시할 참고항목이 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
+                    if (extraAddr !== '') {
+                        extraAddr = ' (' + extraAddr + ')';
+                    }
+                    // 조합된 참고항목을 해당 필드에 넣는다.
+                    document
+                        .getElementById("extraAddress").value = extraAddr;
 
-function loadStoredOptions_5_1() {
-    var storedOptions = localStorage.getItem('selectedOptionsStore_5_1');
-    console.log("저장한 5_1 : " + storedOptions)
-    if (storedOptions) {
-        var parsedOptions = JSON.parse(storedOptions);
-
-        var latestOptions = parsedOptions.slice(-1);
-
-        latestOptions.forEach((value) => {
-            var checkbox = document.getElementById('myCheckboxNull');
-
-
-            let bud = document.getElementById('bud');
-            let result_budget = document.getElementById('result_budget');
-            if (checkbox) {
-                checkbox.checked = true;
-
-                if (checkbox.checked) {
-                    bud.value = '협의결정';
-                    bud.readOnly = true;
-                    bud.style.backgroundColor = "#80808021";
-                    result_budget.innerText = '협의 후 결정';
+                } else {
+                    document
+                        .getElementById("extraAddress").value = '';
                 }
-            } else {
 
-
+                // 우편번호와 주소 정보를 해당 필드에 넣는다.
+                document.getElementById('zoneCode').value = data.zonecode;
+                document.getElementById("address").value = addr;
+                // 커서를 상세주소 필드로 이동한다.
+                document.getElementById(
+                    "detailAddress").focus();
             }
-        });
-    }
+        }).open();
 }
-
-function loadStoredOptions_5_1_2() {
-    var storedOptions = localStorage.getItem('selectedOptionsStore_5_1_2');
-    console.log("저장한 5_1 : " + storedOptions)
-    if (storedOptions) {
-        var parsedOptions = JSON.parse(storedOptions);
-
-        var latestOptions = parsedOptions.slice(-1);
-
-        latestOptions.forEach((value) => {
-            let result_budget = document.getElementById('result_budget');
-
-
-            let convertedValue = convertBudget(value);
-
-
-            result_budget.innerText = convertedValue;
-        });
-    }
-}
-
-
-
-function loadStoredOptions_2_1() {
-    var storedOptions = localStorage.getItem('selectedOptionsStore_2_1');
-    if (storedOptions) {
-        var parsedOptions = JSON.parse(storedOptions);
-
-
-        var latestOptions = parsedOptions.slice(-1);
-        console.log("마지막 옵션" + latestOptions);
-
-        latestOptions.forEach((value) => {
-            var checkbox = document.getElementById('checkbox-' + value);
-            if (checkbox) {
-                checkbox.checked = true;
-                if (checkbox.checked) {
-
-                    const subject = checkbox.id.slice(9);
-                    const image = document.getElementById("image-" + subject);
-                    image.style.border = '4px solid rgb(80, 119, 113)';
-                    image.style.filter = "none";
-                    image.style.padding = '0px';
-                    console.log('Border Applied:', image.style.border);
-                    console.log('Filter Applied:', image.style.filter);
-                }
-            }
-        });
-    }
-}
-/*function loadStoredOptions_2_2() {
-    var storedOptions = localStorage.getItem('selectedOptionsStore_2_2');
-    if (storedOptions) {
-        var parsedOptions = JSON.parse(storedOptions);
-
-        document.querySelectorAll('.myCheckbox2').forEach((checkbox) => {
-            checkbox.checked = false;
-        });
-
-        console.log("저장된 옵션좀 보장" + storedsOptions)
-        var latestOptions = parsedOptions.slice(-1);
-
-
-        latestOptions.forEach((value) => {
-            var checkbox = document.getElementById('checkbox-' + value);
-            if (checkbox) {
-                checkbox.checked = true;
-                if (checkbox.checked) {
-
-                    const subject = checkbox.id.slice(9);
-                    const image = document.getElementById("image-" + subject);
-                    image.style.border = '4px solid rgb(80, 119, 113)';
-                    image.style.filter = "none";
-                    image.style.padding = '0px';
-                    console.log('Border Applied:', image.style.border);
-                    console.log('Filter Applied:', image.style.filter);
-                }
-            }
-        });
-    }
-}*/
-function loadStoredOptions_1() {
-    var storedOptions = localStorage.getItem('selectedOptionsStore_1');
-    if (storedOptions) {
-        var parsedOptions = JSON.parse(storedOptions);
-
-        document.querySelectorAll('.myCheckbox').forEach((checkbox) => {
-            checkbox.checked = false;
-        });
-
-
-        var latestOptions = parsedOptions.slice(-1);
-
-
-        latestOptions.forEach((value) => {
-            var checkbox = document.getElementById('checkbox-' + value);
-            if (checkbox) {
-                checkbox.checked = true;
-                if (checkbox.checked) {
-                    // Apply styles as needed
-                    const subject = checkbox.id.slice(9);
-                    const image = document.getElementById("image-" + subject);
-                    image.style.border = '4px solid rgb(80, 119, 113)';
-                    image.style.filter = "none";
-                    image.style.padding = '0px';
-                    console.log('Border Applied:', image.style.border);
-                    console.log('Filter Applied:', image.style.filter);
-                }
-            }
-        });
-    }
-}
-function loadStoredOptions_2_2() {
-    var storedOptions = localStorage.getItem('selectedOptionsStore_2_2');
-    if (storedOptions) {
-        var parsedOptions = JSON.parse(storedOptions);
-
-        document.querySelectorAll('.myCheckbox2').forEach((checkbox) => {
-            checkbox.checked = false;
-        });
-
-        console.log("저장된 옵션좀 보장" + storedOptions)
-        var latestOptions = parsedOptions.slice(-1);
-
-
-        latestOptions.forEach((value) => {
-            var checkbox = document.getElementById('checkbox-' + value);
-            if (checkbox) {
-                checkbox.checked = true;
-                if (checkbox.checked) {
-
-                    const subject = checkbox.id.slice(9);
-                    const image = document.getElementById("image-" + subject);
-                    image.style.border = '4px solid rgb(80, 119, 113)';
-                    image.style.filter = "none";
-                    image.style.padding = '0px';
-                    console.log('Border Applied:', image.style.border);
-                    console.log('Filter Applied:', image.style.filter);
-                }
-            }
-        });
-    }
-}
-function loadStoredOptions_3() {
-    var storedOptions = localStorage.getItem('selectedOptionsStore_3');
-    if (storedOptions) {
-        var parsedOptions = JSON.parse(storedOptions);
-
-
-        var latestOptions = parsedOptions.slice(-4);
-
-        console.log("저장된 옵션좀 보장" + latestOptions)
-
-
-        let sample6_postcode = document.getElementById('sample6_postcode');
-        let sample6_address = document.getElementById('sample6_address');
-        let sample6_detailAddress = document.getElementById('sample6_detailAddress');
-        let extraAddress = document.getElementById('sample6_extraAddress');
-
-        sample6_postcode.value += latestOptions[0];
-        sample6_address.value += latestOptions[1];
-        sample6_detailAddress.value += latestOptions[2];
-
-        extraAddress.value += latestOptions[3];
-
-
-    }
-}
-function loadStoredOptions_4() {
-    var storedOptions = localStorage.getItem('selectedOptionsStore_4');
-    if (storedOptions) {
-        var parsedOptions = JSON.parse(storedOptions);
-
-
-        var latestOptions = parsedOptions.slice(-4);
-
-        console.log("저장된 옵션좀 보장4" + latestOptions)
-
-        let leftInput = document.getElementById('leftInput').value;
-        let rightInput = document.getElementById('rightInput').value;
-        let bud = document.getElementById('bud').value;
-        let comment = document.getElementById('comment').value;
-        let result_budget = document.getElementById('result_budget').value;
-        unit();
-        convertBudget();
-        leftInput.value = latestOptions[0];
-        rightInput.value = latestOptions[1];
-        bud.value = latestOptions[2];
-        result_budget.innerText = convertToKorean(latestOptions[2]);
-        comment.value = latestOptions[3];
-
-
-
-    }
-}
-function convertToKorean(value) {
-    var digits = ['영', '일', '이', '삼', '사', '오', '육', '칠', '팔', '구'];
-    var units = ['', '십', '백', '천', '만', '십만', '백만', '천만', '억', '십억', '백억', '천억', '조', '십조', '백조', '천조'];
-
-    var numStr = "" + value;
-    var numLen = numStr.length;
-    var result = '';
-
-    for (var i = 0; i < numLen; i++) {
-        var digit = parseInt(numStr.charAt(i));
-        var unit = units[numLen - i - 1];
-        if (i === numLen - 1 && digit === 1 && numLen !== 1) {
-            result += '일';
-        } else if (digit !== 0) {
-            result += digits[digit] + unit;
-        } else if (i === numLen - 5) {
-            result += '만';
-        }
-    }
-
-    if (numLen > 0) {
-        result += '원';
-    }
-
-    return result;
-}
-
-// 비동기 필요시, 사용 바람
-/*
-async function postDataToServer(data, url) {
-    try {
-        const config = {
-            method: "post",
-            headers: {
-                'content-type': 'application/json; charset=utf-8'
-            },
-            body: JSON.stringify(data)
-        };
-
-        const resp = await fetch(url, config);
-        const result = await resp.text();
-        return result;
-    } catch (err) {
-        console.log(err);
-    }
-}
-
-
-
-
-async function sendDataToControllers() {
-    let user_id = document.getElementById('user_id').value;
-    console.log("user_id를 부려라" + user_id);
-
-    await postDataToServer(DataC['store'], DataC['store_1'], DataC['store_2_1'],DataC['store_2_2'],DataC['store_3'],DataC['store_4'],"/req/store/" + user_id);
-   
-}
-*/

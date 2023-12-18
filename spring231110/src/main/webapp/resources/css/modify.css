@@ -1,0 +1,162 @@
+@charset "UTF-8";
+
+body {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	font-family: NotoSansKR;
+}
+
+section {
+	width: 1000px;
+	padding: 50px 70px;
+	box-sizing: border-box;
+	border: 1px solid rgba(0, 0, 0, .1);
+	border-radius: 6px;
+	margin: 100px 0;
+}
+
+.none {
+	border: none;
+}
+
+input {
+	font-family: 'NotoSansKR';
+	height: 40px;
+	padding: 0 15px;
+	font-size: 15px;
+	border: 1px solid #dbdbdb;
+	border-radius: 6px;
+	width: 400px;
+}
+
+.remove {
+	border: none;
+	background-color: white;
+	font-family: 'NotoSansKR';
+	font-size: 15px;
+	color: #ff6363;
+	font-weight: 600;
+	padding: 0;
+	background-color: white;
+	cursor: pointer;
+}
+
+form {
+	display: flex;
+	align-items: center;
+	flex-wrap: wrap;
+	justify-content: space-between;
+}
+
+.title {
+	width: 998px;
+}
+
+form>.info {
+	margin-top: 30px;
+	display: flex;
+	align-items: center;
+	height: 100px;
+	width: 100%;
+}
+
+.infoLeft>p, .infoLeftMargin>p {
+	width: 100px;
+	font-size: 15px;
+	margin: 0px;
+}
+
+.infoLeftMargin {
+	margin-top: 20px;
+}
+
+#at {
+	font-size: 15px;
+	color: #c5c5c5;
+	width: 20px;
+	display: flex;
+	justify-content: center;
+}
+
+.info span {
+	font-size: 12px;
+	color: gray;
+}
+
+#startEmail, #lastEmail {
+	width: 190px;
+}
+
+#lastEmail{
+	position:relative;
+}
+
+#imageBox, #imageBox>img {
+	width: 200px;
+	height: 200px;
+	background-color: gray;
+}
+
+#imageBox {
+	border: 1px solid #dbdbdb;
+}
+
+#imageBox:hover {
+	filter: brightness(104%);
+}
+
+#imageInfo {
+	height: 200px;
+	align-items: flex-start;
+	margin-top: 70px;
+}
+
+.modifyBtn {
+	background-color: rgb(125, 183, 155);
+	border: none;
+	border-radius: 4px;
+	font-family: 'NotoSansKR';
+	font-weight: 500;
+	padding: 11px;
+	font-size: 17px;
+	width: 200px;
+	margin-top: 90px;
+	margin-left: calc(658px/ 2);
+	color: white;
+	cursor: pointer;
+}
+
+.modifyBtn:hover {
+	filter: brightness(93%);
+}
+
+input:focus {
+	box-shadow: 0px 0px 6px rgb(104, 187, 255);
+	border: none;
+	outline: none;
+}
+select:focus {
+	box-shadow: 0px 0px 6px rgb(104, 187, 255);
+	border: none;
+	outline: none;
+}
+
+.pwModify {
+	margin-left: 10px;
+	font-size: 14px;
+	cursor: pointer;
+}
+
+.pwModify>a {
+	color: rgb(0, 104, 238);
+}
+
+select {
+    width: 222px;
+    padding: 11px 10px;
+    font-family: 'NotoSansKR';
+    border: 1px solid #dbdbdb;
+	border-radius: 6px;
+    appearance: none;
+}

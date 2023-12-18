@@ -180,6 +180,7 @@ ul.main_m li:nth-child(4)>a {
 }
 
 .gosu_btn {
+
    color: inherit;
    font-family: NotoSansKR;
    line-height: inherit;
@@ -191,7 +192,8 @@ ul.main_m li:nth-child(4)>a {
    border: none;
    color: white;
 
-`
+
+
 }
 
 .gosu_btn:hover {
@@ -235,7 +237,10 @@ ul.main_m li:nth-child(4)>a {
 }
 
 .profile_img {
+
    border-radius: 70%;
+	cursor: pointer;
+
 }
 
 .usermenu-dropdown {
@@ -259,6 +264,7 @@ ul.main_m li:nth-child(4)>a {
 }
 
 .usermenu-dropdown-name {
+
    margin-top: 0;
 }
 /* 
@@ -321,6 +327,10 @@ ul.main_m li:nth-child(4)>a {
    text-align: center;
    align-items: center;
    border: none;
+}
+
+.logout_btn {
+	cursor: pointer;
 }
 
 #id_usermenu-dropdown_btn {

@@ -14,6 +14,7 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 public class QuotationVO {
+
 private long quotationNm;//견적서고유번호
 private boolean approveOk;//승인여부
 private long requestNm; // 요청서 고유번호

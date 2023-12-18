@@ -179,6 +179,7 @@
 	<jsp:include page="../common/footer.jsp" />
 	<script src="/resources/js/main.js"></script>
 
+
 <script type="text/javascript">
 let isUp = '<c:out value="${isUp}"/>';
 
@@ -187,6 +188,7 @@ if (parseInt(isUp)) {
 }
 
 </script>
+
 
 
 </body>

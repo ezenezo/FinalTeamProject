@@ -7,10 +7,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+
+import com.myweb.www.domain.CouponVO;
+
 import com.myweb.www.domain.FileVO;
 import com.myweb.www.domain.PortfolioDTO;
 import com.myweb.www.domain.PortfolioVO;
 import com.myweb.www.repository.FileDAO;
+
+import com.myweb.www.repository.HeartDAO;
+
 import com.myweb.www.repository.MemberDAO;
 import com.myweb.www.repository.PortfolioDAO;
 
@@ -24,8 +30,10 @@ public class PortfolioServiceImpl implements PortfolioService {
 	private FileDAO fdao;
 	private MemberDAO mdao;
 
+	private HeartDAO hdao;
+
 	@Autowired
-	public PortfolioServiceImpl(PortfolioDAO pdao, FileDAO fdao,MemberDAO mdao) {
+	public PortfolioServiceImpl(PortfolioDAO pdao, FileDAO fdao, MemberDAO mdao) {
 		this.pdao = pdao;
 		this.fdao = fdao;
 		this.mdao = mdao;
@@ -67,15 +75,17 @@ public class PortfolioServiceImpl implements PortfolioService {
 
 	// detail
 	@Override
-	public PortfolioDTO getDetail(long pno,String authId) {
+
+	public PortfolioDTO getDetail(long pno, String authId) {
 		PortfolioDTO pdto = new PortfolioDTO();
-		
+
 		PortfolioVO pvo = pdao.getDetailPvo(pno);
-		
-		int isOk=pdao.portfolioLikeCheck(pno,authId);
-		if(isOk>0) {
+
+		int isOk = pdao.portfolioLikeCheck(pno, authId);
+		if (isOk > 0) {
 			pvo.setLikeCheck(true);
-		}else {
+		} else {
+
 			pvo.setLikeCheck(false);
 		}
 		FileVO fvo = fdao.selectMainImg(pno);
@@ -83,47 +93,70 @@ public class PortfolioServiceImpl implements PortfolioService {
 		pdto.setMainImg(fvo);
 		return pdto;
 	}
-	
-	//포폴 좋아요 확인(1이면 이미 체크, 0이면 체크안되어있는거)
+
+	@Override
+	public int likeQtyAreaInput(long pno) {
+		log.info("서비스임플 오는지");
+		return hdao.likeQtyAreaInput(pno);
+	}
+
+	// 포폴 좋아요 확인(1이면 이미 체크, 0이면 체크안되어있는거)
 	@Override
 	public int portfolioLikeCheck(long pno, String id) {
-		return pdao.portfolioLikeCheck(pno,id);
+		return pdao.portfolioLikeCheck(pno, id);
 	}
 
-	//포폴 좋아요 취소
+	// 포폴 좋아요 취소
 	@Override
 	public void deletePortfolioLike(long pno, String id) {
-		int num=-1;
-		 pdao.deletePortfolioLike(pno,id);//heart테이블에 delete
-		 pdao.updatePortfolioLikeQty(pno,num); //portfolio테이블의 likeQty에 -1해주기
-	
-		
+		int num = -1;
+		log.info("취소할 때 여기오는지2");
+		log.info("서비스임플pno>> " + pno);
+		log.info("서비스임플id>> " + id);
+		hdao.deletePortfolioLike(pno, id);// heart테이블에 delete
+		log.info("취소할 때 여기오는지3");
+		pdao.updatePortfolioLikeQty(pno, num); // portfolio테이블의 likeQty에 -1해주기
+
 	}
 
-	//포폴 좋아요
+	// 포폴 좋아요
 	@Override
 	public void addPortfolioLike(long pno, String id) {
-		int num=1;
-		 pdao.addPortfolioLike(pno,id); //heart테이블에 insert
-		 pdao.updatePortfolioLikeQty(pno,num); //portfolio테이블의 likeQty에 +1해주기
+		int num = 1;
+		hdao.addPortfolioLike(pno, id); // heart테이블에 insert
+		pdao.updatePortfolioLikeQty(pno, num); // portfolio테이블의 likeQty에 +1해주기
 	}
 
-	//컴퍼니 이름 찾아오기
+	// 컴퍼니 이름 찾아오기
+
 	@Override
 	public String selectCompanyName(String id) {
 		return mdao.selectCompanyName(id);
 	}
 
-	//조회수 올리기
+	// 조회수 올리기
 	@Override
 	public void updateReadCount(long pno) {
 		pdao.updateReadCount(pno);
-		
+
+
 	}
 
 	@Override
 	public String selectId(long pno) {
 		return pdao.selectId(pno);
+	}
+
+
+	//좋아요 찍힌 포폴 가져오기
+	@Override
+	public List<PortfolioVO> getHeartList(String id) {
+		return pdao.getHeartList(id);
+	}
+
+	@Override
+	public PortfolioVO getPortfolio(long pno) {
+		return pdao.getPortfolio(pno);
 	}
 
 }
