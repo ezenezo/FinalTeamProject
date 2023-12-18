@@ -1,4 +1,3 @@
-const joinBtn = document.getElementsByClassName('joinBtn')[0];
 const checkPwResult = document.getElementById('checkPwResult');
 const reg = new RegExp("^(?=.*[a-zA-Z])(?=.*[0-9]).{8,25}$"); //비밀번호 정규 표현식
 
@@ -25,27 +24,64 @@ document.querySelector('.form').addEventListener("submit", (e)=>{
 
 //비밀번호 정규 표현식 확인
 document.getElementById('pw').addEventListener('input', ()=>{
-    const pwCheck = document.getElementsByClassName('passwordCheck')[0];
-    const pwCheckOk = document.getElementsByClassName('passwordCheckOk')[0];
+    let pw = document.getElementsByClassName('password')[0];
+    let pwOk = document.getElementsByClassName('passwordOk')[0];
     if(!reg.test(document.getElementById('pw').value)){
-        pwCheck.classList.add('block');
-        pwCheckOk.classList.remove('block');
+        pw.classList.add('block');
+        pw.classList.remove('none');
+        pwOk.classList.remove('block');
+        pwOk.classList.add('none');
         checkPwResult.value = false;
     }else{
-        pwCheck.classList.remove('block');
-        pwCheckOk.classList.add('block');
+        pw.classList.add('none');
+        pw.classList.remove('block');
+        pwOk.classList.remove('none');
+        pwOk.classList.add('block');
         checkPwResult.value = true;
     }
 })
+
 //비밀번호 일치 확인
-document.getElementById('pw2').addEventListener('input', ()=>{
-    const pwCheck2 = document.getElementsByClassName('passwordCheck2')[0];
-    const pwCheckOk2 = document.getElementsByClassName('passwordCheckOk2')[0];
-    if(document.getElementById('pw').value != document.getElementById('pw2').value){
-        pwCheck2.classList.add('block');
-        pwCheckOk2.classList.remove('block');
-    }else{
-        pwCheck2.classList.remove('block');
-        pwCheckOk2.classList.add('block');
+document.getElementById('pwCheck').addEventListener('input', ()=>{
+    let pwCk = document.getElementsByClassName('passwordCheck')[0];
+    let pwOkCk = document.getElementsByClassName('passwordCheckOk')[0];
+    if(document.getElementById('pw').value == document.getElementById('pwCheck').value){ //비밀번호가 일치하면
+        pwCk.classList.add('none');
+        pwCk.classList.remove('block');
+        pwOkCk.classList.remove('none');
+        pwOkCk.classList.add('block');
+        checkPwOkResult.value = true;
+    }else{//일치하지 않으면
+        pwCk.classList.add('block');
+        pwCk.classList.remove('none');
+        pwOkCk.classList.remove('block');
+        pwOkCk.classList.add('none');
+        checkPwOkResult.value = false;
+    }
+})
+
+document.getElementById('eye1').addEventListener('click', (e)=>{
+    //비밀번호 보기
+    if(e.target.classList.contains('bi-eye-fill')){
+        e.target.classList.toggle('bi-eye-fill');
+        e.target.classList.toggle('bi-eye-slash-fill');
+        e.target.closest('.mb-3').querySelector('input').type = 'password';
+    }else{ //비밀번호 가리기
+        e.target.classList.toggle('bi-eye-fill');
+        e.target.classList.toggle('bi-eye-slash-fill');
+        e.target.closest('.mb-3').querySelector('input').type = 'text';
+    }
+})
+
+document.getElementById('eye2').addEventListener('click', (e)=>{
+    //비밀번호 보기
+    if(e.target.classList.contains('bi-eye-fill')){
+        e.target.classList.toggle('bi-eye-fill');
+        e.target.classList.toggle('bi-eye-slash-fill');
+        e.target.closest('.mb-3').querySelector('input').type = 'password';
+    }else{ //비밀번호 가리기
+        e.target.classList.toggle('bi-eye-fill');
+        e.target.classList.toggle('bi-eye-slash-fill');
+        e.target.closest('.mb-3').querySelector('input').type = 'text';
     }
 })

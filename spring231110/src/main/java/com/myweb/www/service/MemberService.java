@@ -5,53 +5,61 @@ import javax.servlet.http.HttpSession;
 import org.springframework.ui.Model;
 
 import com.fasterxml.jackson.databind.JsonNode;
+import com.myweb.www.domain.CompanyVO;
 import com.myweb.www.domain.FileVO;
 import com.myweb.www.domain.PagingVO;
 import com.myweb.www.security.AuthVO;
 import com.myweb.www.security.MemberVO;
 
 public interface MemberService {
-   
-   //회원가입
-   int register(MemberVO mvo);
 
-   
-   int modify(MemberVO mvo);
-   
-   int modifyPwdEmpty(MemberVO mvo);
-   
-   int remove(String email);
+	// 회원가입
+	int register(MemberVO mvo);
 
-   MemberVO memberDetail(String id);
+	int modify(MemberVO mvo);
 
-   int getTotalCount(PagingVO pagingVO);
+	int modifyPwdEmpty(MemberVO mvo);
 
-   int updatePw(String id, String password);
+	int remove(String id);
 
-   int checkId(String id);
+	MemberVO memberDetail(String id);
 
-   int insert(String id, FileVO fvo);
+	int getTotalCount(PagingVO pagingVO);
 
-   JsonNode getAccessToken(String code, String ok);
+	int updatePw(String id, String password);
 
-   JsonNode getUserInfo(JsonNode accesstoken, String provider);
+	int checkId(String id);
 
-   void kakaoLogout(String attribute);
+	int insert(String id, FileVO fvo);
 
-   String kakaojoin(JsonNode profile, Model m);
+	JsonNode getAccessToken(String code, String ok);
 
-   String kakaoLogin(JsonNode user, HttpSession ses, Model m);
+	JsonNode getUserInfo(JsonNode accesstoken, String provider);
 
-   JsonNode getAccessToken(String code, String state, String provider);
+	void kakaoLogout(String attribute);
 
-   String naverjoin(JsonNode user, Model m);
+	String kakaojoin(JsonNode profile, Model m);
 
-   String naverLogin(JsonNode user, HttpSession ses, Model m);
+	String kakaoLogin(JsonNode user, HttpSession ses, Model m);
 
-   AuthVO getAuthList(String id);
+	JsonNode getAccessToken(String code, String state, String provider);
 
-   FileVO getFile(String id);
+	String naverjoin(JsonNode user, Model m);
 
-   int companyRegister(MemberVO mvo);
+	String naverLogin(JsonNode user, HttpSession ses, Model m);
+
+	AuthVO getAuthList(String id);
+
+	FileVO getFile(String id);
+
+	int companyRegister(MemberVO mvo);
+
+	FileVO getFilePno(long pno);
+
+	void heartCancel(String id, long pno);
+
+	void heartAdd(String id, long pno);
+
+	CompanyVO getCvo(String id);
 
 }
