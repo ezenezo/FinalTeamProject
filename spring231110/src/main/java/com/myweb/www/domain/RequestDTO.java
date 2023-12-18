@@ -1,18 +1,21 @@
 package com.myweb.www.domain;
 
+import java.util.List;
+
+import org.springframework.web.multipart.MultipartFile;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
+@Getter
+@Setter
+@ToString
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString
-@Setter
-@Getter
-public class boardLikeVO {
-	private String id; //좋아요한 아이디
-	private long bno; //좋아요 게시물 번호
-	private long cmtNo; //좋아요 댓글 번호
+public class RequestDTO {
+private RequestVO rvo;
+private ReqFileVO flist;
 }

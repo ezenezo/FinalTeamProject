@@ -90,14 +90,6 @@
 				<p class="moveChangePw" id="modifyPwdATag">비밀번호를 잊으셨나요?</p>
 				<a href="/member/checkMemberInfo">찾기</a>
 			</div>
-			<!-- 임시 페이지 이동 -->
-<%-- 			<sec:authorize access="isAuthenticated()">
-				<sec:authentication property="principal.mvo" var="user" />
-				<div class="ChangePwDiv">
-					<p class="moveChangePw" id="modifyPwdATag">${user }님마이페이지</p>
-					<a href="/member/myPage?id=${user.id }">이동</a>
-				</div>
-			</sec:authorize> --%>
 		</div>
 	</section>
 	<script type="text/javascript" src="../resources/js/login.js"></script>

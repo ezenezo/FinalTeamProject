@@ -1,6 +1,4 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-
-
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://www.springframework.org/security/tags"
 	prefix="sec"%>
@@ -57,65 +55,65 @@
 
 		<sec:authorize access="isAuthenticated()">
 			<sec:authentication property="principal.mvo.id" var="authId" />
+			<sec:authentication property="principal.mvo.authVOList" var="auths" />
+			<input type="hidden" value="${authId}" id="alarm_id">
 			<div id="menu_m">
 				<ul class="main_m">
 					<c:choose>
 						<c:when
 							test="${auths.stream().anyMatch(authVO -> authVO.auth.equals('ROLE_ADMIN')).get()}">
-
 						</c:when>
-						<c:otherwise>
-							<li><a href="/member/list">받은견적<span id="badge"></span></a></li>
-							<li><a href="/member/list" class="chat_class">채팅<span
-									id="chat_badge">1</span></a></li>
-							<li id="bell_icon"><a href="/member/list"><span
-									class="material-symbols-outlined"> notifications </span></a></li>
-							<li>
-								<div class="profile">
-									<img alt="프로필이미지 없음" src="../../resources/img/profile_none.png"
-										style="width: 35px; height: 35px;" class="profile_img">
-
-								</div>
-								<div class="usermenu-dropdown" style="visibility: hidden;">
-									<div data-name="user-info">
-										<h4 data-name="name" class="usermenu-dropdown-name">${authId}
-											고객님</h4>
-
-									</div>
-									<ul data-name="usermenu-control">
-										<li class="row" style="display: none;"><div class="col">프로필
-												관리</div></li>
-										<li class="row1"><div class="col">받은 견적</div></li>
-										<li class="row2"><div class="col">
-												<a href="/member/myPage?id=${user.id }">마이페이지</a>
-											</div></li>
-										<li><div class="hr_usermenu"></div></li>
-									</ul>
-									<ul>
-										<li><div>
-												<a href="/customer/customerService"> <span
-													class="material-symbols-outlined" id="icon_drop">
-														headset_mic </span>고객센터
-												</a>
-											</div></li>
-									</ul>
-
-									<div class="logout">
-										<button type="button" class="logout_btn"
-											id="id_usermenu-dropdown_btn">로그아웃</button>
-									</div>
-
-
-								</div>
-							</li>
-
-							<%-- <li class="nav-item"><a class="nav-link" href=""
-                        id="logoutLink">LogOut</a></li>
-                     <form action="/member/logout" method="post" id="logoutForm">
-                        <input type="hidden" name="id" value="${authId}">
-                     </form> --%>
-						</c:otherwise>
+						<c:when
+							test="${auths.stream().anyMatch(authVO -> authVO.auth.equals('ROLE_COM')).get()}">
+							<li><a href="/quotation/list?id=${authId}">받은요청<span
+									id="badge" style="visibility: hidden;"></span></a></li>
+						</c:when>
 					</c:choose>
+
+					<li><a href="/quotation/list_user?id=${authId}">받은견적<span
+							id="badge" style="visibility: hidden;"></span></a></li>
+					<li><a href="/member/list" class="chat_class">채팅<span
+							id="chat_badge">1</span></a></li>
+					<li id="bell_icon"><a href="/member/list"><span
+							class="material-symbols-outlined"> notifications </span></a></li>
+					<li>
+						<div class="profile">
+							<img alt="프로필이미지 없음" src="../../resources/img/profile_none.png"
+								style="width: 35px; height: 35px;" class="profile_img">
+
+						</div>
+						<div class="usermenu-dropdown" style="visibility: hidden;">
+							<div data-name="user-info">
+								<h4 data-name="name" class="usermenu-dropdown-name">${authId}
+									고객님</h4>
+
+							</div>
+							<ul data-name="usermenu-control">
+								<li class="row" style="display: none;"><div class="col">프로필
+										관리</div></li>
+								<li class="row1"><div class="col">받은 견적</div></li>
+								<li class="row2"><div class="col">
+										<a href="/member/myPage?id=${authId }">마이페이지</a>
+									</div></li>
+								<li><div class="hr_usermenu"></div></li>
+							</ul>
+							<ul>
+								<li><div>
+										<a href="/customer/customerService"> <span
+											class="material-symbols-outlined" id="icon_drop">
+												headset_mic </span>고객센터
+										</a>
+									</div></li>
+							</ul>
+
+							<div class="logout">
+								<a href="/member/logout"><button type="button"
+										class="logout_btn" id="id_usermenu-dropdown_btn">로그아웃</button></a>
+							</div>
+
+
+						</div>
+					</li>
 				</ul>
 			</div>
 		</sec:authorize>
@@ -128,19 +126,20 @@
 
 		document.addEventListener('click', function(e) {
 			if (usermenu.style.visibility == 'hidden') {
-				if(e.target.classList.contains('profile_img')){
+				if (e.target.classList.contains('profile_img')) {
 					usermenu.style.visibility = 'visible';
 					/*  profile .style.border = '2px solid RGB(218, 164, 32)'; */
-					profile.style.boxShadow = '0 0 0px 2px #00000063';					
+					profile.style.boxShadow = '0 0 0px 2px #00000063';
 				}
 			} else {
 				try {
-					e.target.closest('.usermenu-dropdown').classList.contains('usermenu-dropdown')
+					e.target.closest('.usermenu-dropdown').classList
+							.contains('usermenu-dropdown')
 				} catch (e) {
 					usermenu.style.visibility = 'hidden'
-					profile.style.boxShadow = 'none';			
+					profile.style.boxShadow = 'none';
 				}
-						
+
 			}
 		});
 	</script>

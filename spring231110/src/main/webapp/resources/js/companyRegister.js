@@ -4,7 +4,7 @@ let checkPwResult = document.getElementById('checkPwResult');
 let checkPwOkResult = document.getElementById('checkPwOkResult');
 let checkImgResult = document.getElementById('checkImgResult');
 const reg = new RegExp("^(?=.*[a-zA-Z])(?=.*[0-9]).{8,25}$"); //비밀번호 정규 표현식
-const regPhone = new RegExp("^01([0|1|6|7|8|9])-?([0-9]{3,4})-?([0-9]{4})$"); //전화번호 정규 표현식
+const regPhone = new RegExp("^[0-9]{3}-[0-9]{4}-[0-9]{4}$"); //전화번호 정규 표현식
 
 checkIdResult.value = false;
 checkPwResult.value = false;

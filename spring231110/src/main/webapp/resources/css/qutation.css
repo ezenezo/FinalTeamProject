@@ -1,0 +1,78 @@
+@charset "UTF-8";
+
+.p_left::-webkit-scrollbar {
+	width: 8px; /* 스크롤바의 너비 */
+}
+
+.p_left::-webkit-scrollbar-thumb {
+	height: 30%; /* 스크롤바의 길이 */
+	background: rgb(202,215,191); /* 스크롤바의 색상 */
+	border-radius: 10px;
+}
+
+.p_left::-webkit-scrollbar-track {
+	background: #c0c0c033122244; /*스크롤바 뒷 배경 색상*/
+}
+
+.content {
+	display: flex;
+	margin-bottom: 20px;
+}
+
+.p_left {
+	width: 31%;
+	/*   border: 1px solid red; */
+	height: 80vh;
+	margin-right: 2%;
+	overflow: auto;
+	background-color:rgb(244,245,239);
+	border-radius: 10px;
+
+}
+
+.list_requset {
+
+	background-color:  white;
+	margin: 10px ;
+	border: 3px solid rgb(244,245,239);
+	border-radius: 20px;
+	padding: 20px;
+	width: 90%;
+//	color: rgb(96,107,84);
+}
+
+.p_right {
+	width: 65%;
+	border: 1px solid blue;
+	/* 		box-sizing: border-box; */
+	/* 	float: right; */
+	height: 80vh;
+	float: right;
+}
+
+.list_requset_read {
+
+	border: 3px solid rgb(244,245,239);
+	background-color: white;
+	margin: 10px;
+	border-radius: 20px;
+	padding: 20px;
+		width: 90%;
+}
+
+.not_badge{
+	
+
+}
+
+.not_badge::before {
+   content: "";
+    position: relative;
+    background-color: #ff3131;
+    width: 0.375rem;
+    height: 0.375rem;
+    border-radius: 50%;
+    display: inline-block;
+    margin-left: 95%;
+}
+
