@@ -25,7 +25,7 @@ let essential1Left =document.getElementById("essential1Left")
 // })
 
 document.addEventListener('click', function (event) {
-  if (event.target && event.target.id === 'essential2Btn') {
+  if (event.target && event.target.id === 'essential2Btn' || event.target && event.target.id === 'essential1Right') {
       if (toggle == 0) {
           essential2Div.style.display = "block";
           essential1Div.style.borderBottom = "none";
@@ -40,8 +40,6 @@ document.addEventListener('click', function (event) {
       }
   }
 });
-
-
 	//------------------------------------------- 
 	const editor = new toastui.Editor({
         el: document.querySelector('#editor'),      // 에디터를 적용할 요소 (컨테이너)

@@ -35,31 +35,50 @@
 				<hr>
 				<div class="subUser">
 					<div class="iconBox">
-						<i class="bi bi-heart"></i> <span>좋아요</span>
-						<p>0</p>
-					</div>
-					<div class="iconBox">
-						<img alt="" src="../resources/img/free-icon-ticket-7937829.png"><span>내
-							쿠폰</span>
-						<p>0</p>
+						<i class="bi bi-heart"></i> <span>좋아요 누적 수</span>
+						<p>${heartCount}</p>
 					</div>
 				</div>
 			</div>
 
 			<!-- 오른쪽 구역 -->
-			<section>
-				<nav class="mypageNav">
-					<ul>
-						<li>보낸 견적서</li>
-						<li>받은 견적서</li>
-						<li>쿠폰함</li>
-						<li>좋아요</li>
-					</ul>
-				</nav>
-				<div class="subMain"></div>
+			<section class="rightSection">
+				<div class="menu">
+					<div class="leftText">
+						<p class="miniTitle">받은 견적서</p>
+					</div>
+					<div class="rightText">
+						<a href="/portfolio/list"><p>더보기</p></a>
+					</div>
+				</div>
+				<div class="rightBoxbox boxNum1"></div>
+
+				<div class="menu">
+					<div class="leftText">
+						<p class="miniTitle">나의 포트폴리오</p>
+					</div>
+					<div class="rightText">
+						<a href="/portfolio/mylist?"><p>더보기</p></a>
+					</div>
+				</div>
+				<div class="rightBoxbox boxNum2">
+					<c:forEach items="${mdto.pdtoList}" var="pdto" begin="0" end="3">
+						<div>
+							<a href="/portfolio/portfolioDetail?pno=${pdto.pvo.pno}">
+									<img class="portfolioMainImg"
+										src="/upload/${pdto.mainImg.saveDir}/${fn:replace(pdto.mainImg.saveDir,'\\','-')}_${pdto.mainImg.uuid}_${pdto.mainImg.fileName}">
+
+							</a>
+								<p class="pdtoBoxTitle">${pdto.pvo.title}</p>
+									<span>좋아요${pdto.pvo.likeQty} </span><span>조회수${pdto.pvo.readQty}</span>
+								</p>
+						</div>
+
+					</c:forEach>
+				</div>
 			</section>
 		</div>
 	</sec:authorize>
 </body>
-<link href="../resources/css/myPage.css" rel="stylesheet">
+<link href="../resources/css/companyMyPage.css" rel="stylesheet">
 </html>

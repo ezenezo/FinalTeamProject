@@ -19,8 +19,9 @@ import lombok.extern.slf4j.Slf4j;
 @Setter
 @Slf4j
 public class ProfileFileHandler {
+	//장원희 대문자 바꿔라
 //	private final String UP_DIR = "/aj2002/tomcat/webapps/_javaweb/_java/fileUpload/Profile";//231120전경환
-	private final String UP_DIR = "D:\\_myweb\\_java\\fileupload";//231120전경환
+	private final String UP_DIR = "D:\\_myweb\\_java\\fileUpload";//231120전경환
 	
 	public FileVO uploadFiles(MultipartFile pfile, String id) {
 		if(pfile.getSize()==0) {

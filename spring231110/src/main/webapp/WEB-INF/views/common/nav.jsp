@@ -87,7 +87,7 @@
 												관리</div></li>
 										<li class="row1"><div class="col">받은 견적</div></li>
 										<li class="row2"><div class="col">
-												<a href="/member/myPage?id=${user.id }">마이페이지</a>
+												<a href="/member/companyMyPage">마이페이지</a>
 											</div></li>
 										<li><div class="hr_usermenu"></div></li>
 									</ul>

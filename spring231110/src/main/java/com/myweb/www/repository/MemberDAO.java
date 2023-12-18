@@ -57,4 +57,6 @@ public interface MemberDAO {
 
 	String selectCompanyName(String id);
 
+
+
 }
