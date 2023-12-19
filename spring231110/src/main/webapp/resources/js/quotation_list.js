@@ -62,6 +62,15 @@ function handleClick_q(event, requestNm) {
         console.log(filePath_img);
         li += `<div id="right_div_${rvo.requestNm}" class="right_div"><div class="title_right"><div><img alt="그림 없당" src="${filePath_img}" class="p_img"></div><div class="user_info"><div class="user_id">${rvo.requestId}님의 요청서</div><div class="user_email"><span class="material-symbols-outlined">
                 mail</span>${mvo.email}</div></div>`;
+      }else{
+
+
+
+
+   
+        li += `<div id="right_div_${rvo.requestNm}" class="right_div"><div class="title_right"><div><img alt="이미지 없당" src="../../../resources/img/프로필지정안함.png" class="p_img"></div><div class="user_info"><div class="user_id">${rvo.requestId}님의 요청서</div><div class="user_email"><span class="material-symbols-outlined">
+                mail</span>${mvo.email}</div></div>`;
+
       }
       li += `</div><div><ul>`;
 
@@ -79,7 +88,13 @@ function handleClick_q(event, requestNm) {
       li += `<div class="value_row">참조주소:${rvo.extraAddress}</div></div>`;
       li += `<div class="b_div_right"><div class="value_row">제곱미터:${rvo.squareMeter}m<sup>2</sup></div>`;
       li += `<div class="value_row">평수:${rvo.aquareFootage}평</div>`;
-      li += `<div class="value_row">희망비용:${rvo.wishBudget}원</div>`;
+      if(`${rvo.wishBudget}`=="협의결정"){
+        li += `<div class="value_row">희망비용:${rvo.wishBudget}</div>`;
+
+      }else{
+        li += `<div class="value_row">희망비용:${rvo.wishBudget}원</div>`;
+      }
+   
       li += `<div class="value_row">요청사항${rvo.requestOp}</div></div>`;
       /* li += `<div class="value_row"><span class="label">돈</span>: <span class="value">${rvo.budget}</span></div>`;
        li += `<div class="value_row"><span class="label">회사 요청사항</span>: <span class="value">${rvo.requestOp}</span></div>`;*/
@@ -93,6 +108,9 @@ function handleClick_q(event, requestNm) {
 
         console.log(filePath);
         li += `<li><div><img alt="그림 없당" src="${filePath}"></div></li>`;
+      }else{
+      
+      
       }
 
 

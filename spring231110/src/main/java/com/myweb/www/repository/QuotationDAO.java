@@ -2,6 +2,8 @@ package com.myweb.www.repository;
 
 import java.util.List;
 
+import com.myweb.www.domain.CompanyVO;
+import com.myweb.www.domain.QuotationDTO;
 import com.myweb.www.domain.QuotationVO;
 import com.myweb.www.domain.RequestVO;
 
@@ -13,7 +15,7 @@ public interface QuotationDAO {
 	void submit(QuotationVO avo);
 	void quatation_submit(QuotationVO qvo);
 
-	List<RequestVO> getList_user(String id);
+	List<QuotationDTO> getList_user(String id);
 
 
 	void checked(long qutationNm);
@@ -32,9 +34,11 @@ public interface QuotationDAO {
 
 
 
-	List<QuotationVO> getList_read_user(String id);
+
 
 	QuotationVO getQuotation(long quotationNm);
+	CompanyVO findKeynum(int keynum);
+	void cancle_ok(long quotationNm);
 
 
 }

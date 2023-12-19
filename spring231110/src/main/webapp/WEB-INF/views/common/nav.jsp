@@ -91,38 +91,43 @@
 
 										</div>
 										<ul data-name="usermenu-control">
-											<li class="row" style="display: none;">
-												<div class="col">프로필
-													관리</div>
-											</li>
-											<li class="row1">
-												<div class="col">받은 견적</div>
-											</li>
-											<li class="row2">
-												<div class="col">
-													<a href="/member/myPage?id=${user.id }">마이페이지</a>
-												</div>
-											</li>
-											<li>
-												<div class="hr_usermenu"></div>
-											</li>
-										</ul>
-
-										<button type="button" class="_btn">
-											<span class="material-symbols-outlined" id="icon_drop">
-												headset_mic </span> 고객센터
-										</button>
-
-										<div class="logout">
-											<button type="button" class="logout_btn" id="id_usermenu-dropdown_btn"> <a
-													href="/member/logout"> 로그아웃</a></button>
-										</div>
-
-
-
+								<li class="row" style="display: none;">
+									<div class="col">프로필 관리</div>
+								</li>
+								<li class="row1">
+									<div class="col">받은 견적</div>
+								</li>
+								<li class="row2">
+									<div class="col">
+										<a href="/member/myPage?id=${authId}">마이페이지</a>
 									</div>
 								</li>
+								<li>
+									<div class="hr_usermenu"></div>
+								</li>
 							</ul>
+
+							<button type="button" class="_btn">
+								<a href="/customer/customerService"> <span
+									class="material-symbols-outlined" id="icon_drop">
+										headset_mic </span>고객센터
+								</a>
+
+							</button>
+
+							<div class="logout">
+								<button type="button" class="logout_btn"
+									id="id_usermenu-dropdown_btn">
+									<a href="/member/logout"> 로그아웃</a>
+								</button>
+							</div>
+
+
+
+						</div>
+
+					</li>
+				</ul>
 						</div>
 					</sec:authorize>
 				</div>
@@ -150,45 +155,7 @@
 					});
 
 
-					let userRole = '<c:out value="${auths[0].auth}"/>';
-
-					console.log("사용자 권한: " + userRole);
-					let intervalId;
-
-					// 특정 페이지인 경우 getInfiniteChat2 함수를 10분 지연 실행
-					if (currentPage.includes('localhost:8088/member/login') || currentPage.includes('aj2002.cafe24.com/member/login')) {
-						setTimeout(function () {
-							if (userRole == "ROLE_COM") {
-								postDataToServer_al("/quotation/alarm/" + userId);
-
-
-							} else {
-								postDataToServer_al("/quotation/alarm_user/" + userId);
-
-							}
-						}
-						), 600000;
-					}// 10분 지연
-
-
-					window.onload = function () {
-						if (userRole == "ROLE_COM") {
-							postDataToServer_al("/quotation/alarm/" + userId);
-
-						} else {
-							postDataToServer_al("/quotation/alarm_user/" + userId);
-
-						}
-					};
-					if (userRole == "ROLE_COM") {
-						intervalId = setInterval(function () {
-							postDataToServer_al("/quotation/alarm/" + userId);
-						}, 3100);
-					} else {
-						intervalId = setInterval(function () {
-							postDataToServer_al("/quotation/alarm_user/" + userId);
-						}, 3100);
-					}
+				
 
 				</script>
 			</body>

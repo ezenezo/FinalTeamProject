@@ -41,7 +41,7 @@
 		<div class="content">
 			<div class="left" style="width: 50%; height: 70vh;">
 				<div class="left_into">
-					<img alt="이미지 없음" src="../../resources/img/인테리어추천.jpg"
+					<img alt="이미지 없음" src="../../resources/img/start.jpg"
 						class="into_img">
 				</div>
 			</div>

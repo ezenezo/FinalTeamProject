@@ -48,11 +48,11 @@ function spreadCouponList(id) {
         html.innerHTML = '';
         html.innerHTML += `<div class="tableBorder"></div><table class="tbl_col"><thead><tr><th class="cno">번호</th><th class="name">쿠폰명</th>
         <th class="discountAmount">할인금액(%)</th><th class="expire">제한일</th></tr></thead><tbody id="insert"></tbody></table>`;
-        let count = 1;
+        count = 0;
         if (result.length > 0) {
             for (let list of result) {
                 let str = ``;
-                str += `<tr class="tr"><td>${list.couponNum}</td><td class="tal">${list.name}</td>`;
+               	str += `<tr class="tr"><td>${list.couponNum}</td><td class="tal">${list.name}</td>`;
                 if(list.percent>0){
                     str += `<td>${list.percent}%</td>`;
                 }else{

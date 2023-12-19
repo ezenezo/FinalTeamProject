@@ -21,7 +21,7 @@ function addCoupon(coupon) {
              } else { // 결제완료 후 DB저장 실패시
              	Swal.fire({
            			icon: "error",
-            		text: "받은 적이 있는 쿠폰입니다."
+            		text: "이미 받은 쿠폰입니다."
           		});
              }
 		});
@@ -39,7 +39,7 @@ function addCoupon(coupon) {
              } else { // 결제완료 후 DB저장 실패시
              	Swal.fire({
            			icon: "error",
-            		text: "받은 적이 있는 쿠폰입니다."
+            		text: "이미 받은 쿠폰입니다."
           		});
              }
 		});
@@ -57,7 +57,7 @@ function addCoupon(coupon) {
              } else { // 결제완료 후 DB저장 실패시
              	Swal.fire({
            			icon: "error",
-            		text: "받은 적이 있는 쿠폰입니다."
+            		text: "이미 받은 쿠폰입니다."
           		});
              }
 		});

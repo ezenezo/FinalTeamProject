@@ -24,13 +24,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.google.gson.Gson;
 import com.mysql.cj.x.protobuf.MysqlxDatatypes.Array;
-import com.myweb.www.domain.ChatDTO;
-import com.myweb.www.domain.ChatDTO2;
 import com.myweb.www.domain.CompanyDTO;
 import com.myweb.www.domain.Coordinates;
 import com.myweb.www.security.AuthMember;
 import com.myweb.www.security.MemberVO;
-import com.myweb.www.service.ChatService;
 import com.myweb.www.service.FindMapService;
 import com.myweb.www.service.GeocodingService;
 
