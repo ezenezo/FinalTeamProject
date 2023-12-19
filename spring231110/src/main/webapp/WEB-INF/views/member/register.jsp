@@ -24,11 +24,11 @@
 			<div class="title">새로운 계정</div>
 			<div id="providerBox">
 				<a href="/member/kakao?ok=kakaojoin" id="kakaoRegister"><img
-					alt="" src="../resources/img/kakao_register.png"></a>
+					alt="" src="../resources/img/카카오로 시작하기.png"></a>
 				<!-- 네이버 회원가입 -->
 				<div class="naver">
 					<a href="/member/naver?ok=naverjoin" id="naverRegister"> <img
-						alt="" src="../resources/img/naver_logo.png">
+						alt="" src="../resources/img/네이버 로고.png">
 						<p>네이버로 시작하기</p>
 					</a>
 				</div>
@@ -127,20 +127,19 @@
 			<!-- 이미지 정규표현식 확인용 -->
 			<input type='text' id="checkImgResult" hidden="hidden">
 			
+			<!-- 메이트 가입으로 넘어가기 -->
+			<div class="ChangePwDiv">
+				<p class="moveRegisterPage">메이트로 가입하고 싶으신가요?</p>
+				<a href="/member/companyRegister">메이트 가입</a>
+			</div>
 			<!-- 로그인 창으로 넘어가기 -->
 			<div class="LoginPageDiv">
 				<p class="moveLoginPage">이미 가입된 아이디가 있으신가요?</p>
 				<a href="/member/login">로그인</a>
 			</div>
-			<!-- 메이트 가입으로 넘어가기 -->
-			<div class="comRegisterDiv">
-				<p class="moveRegisterPage">메이트로 가입하고 싶으신가요?</p>
-				<a href="/member/companyRegister">메이트 가입</a>
-			</div>
 		</div>
 		<jsp:include page="../member/agree.jsp" />
 	</section>
-	<jsp:include page="../common/footer.jsp"></jsp:include>
 	<script type="text/javascript" src="../resources/js/register.js"></script>
 </body>
 <link href="../resources/css/registerNav.css" rel="stylesheet">

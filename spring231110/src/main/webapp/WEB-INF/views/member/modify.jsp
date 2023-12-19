@@ -1,97 +1,98 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<!-- sweetAlert -->
-<link rel="stylesheet"
-	href="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.css">
-<script
-	src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.js"></script>
 </head>
-<link href="../resources/css/modify.css" rel=" stylesheet">
+
 <body>
+	<jsp:include page="../common/header.jsp" />
 	<jsp:include page="../common/nav.jsp" />
+<%-- 	console.log("mvo는 " + "${mvo}"); --%>
+	
+<!-- 		private String email; -->
+<!-- 	private String pwd; -->
+<!-- 	private String nickName; -->
+<!-- 	private String regAt; -->
+<!-- 	private String lastLogin; -->
+<!-- 	private List<AuthVO> authVOList; -->
+	<form action="/member/modify" method="post">
+	<div class="bigBox">
+		<table class="table">
 
-	<!-- 회원정보 수정폼 -->
-	<section>
-		<form action="/member/modify" method="post" class="form"
-			enctype="multipart/form-data">
-			<h2 class="title">회원정보수정</h2>
-			<a href="/member/remove"><button type="button" class="remove">회원탈퇴</button></a>
-			<div class="info">
-				<div class="infoLeftMargin">
-					<p>아이디</p>
-					<span>*변경불가</span>
-				</div>
-				<input type="text" value="${mvo.id }" name="id" readonly="readonly">
-			</div>
-			<div class="info">
-				<div class="infoLeft">
-					<p>닉네임</p>
-				</div>
-				<input type="text" value="${mvo.userNm }">
-			</div>
-			<div class="info">
-				<div class="infoLeft">
-					<p>비밀번호</p>
-				</div>
-				<input type="password" value="${mvo.pw.substring(0, 10) }"
-					readonly="readonly">
-				<p class="pwModify">
-					<a href="/member/modifyPw?id=${mvo.id }">비밀번호 변경</a>
-				</p>
-			</div>
-			<div class="info">
-				<div class="infoLeft">
-					<p>이메일</p>
-				</div>
-				<input type="text"
-					value="${mvo.email.substring(0,mvo.email.indexOf('@')) }"
-					id="startEmail" class="email"> <span id="at">@</span> <select>
-					<option selected disabled hidden="hidden"
-						value="${mvo.email.substring(mvo.email.indexOf('@')+1) }">${mvo.email.substring(mvo.email.indexOf('@')+1) }</option>
-					<option disabled>선택해주세요.</option>
-					<option value="gmail.com">gmail.com</option>
-					<option value="naver.com">naver.com</option>
-					<option value="hanmail.net">hanmail.net</option>
-					<option value="daum.net">daum.net</option>
-					<option value="nate.com">nate.com</option>
-					<option>직접입력</option>
-				</select> <input type="text" id="lastEmail" class="email" placeholder="직접입력">
-				<!-- 실제 이메일 데이터 -->
-				<input type="text" name="email" id="email" value="${mvo.email }"
-					hidden="hidden">
-			</div>
-			<div class="info" id="imageInfo">
-				<div class="infoLeft">
-					<p>프로필 이미지</p>
-				</div>
-				<input class="form-control mb-3" type="file" name="profile"
-					id="file" hidden="hidden">
-				<div id="imageBox">
-					<c:if test="${fvo ne null }">
-						<img alt=""
-							src="/upload/${fvo.saveDir}/${fvo.uuid}_${fvo.fileName}"
-							class="profileImg">
-					</c:if>
-					<c:if test="${fvo eq null }">
-						<img alt="" src="../resources/img/profile_none.png"
-							class="profileImg">
-					</c:if>
-				</div>
-			</div>
-			<button type="submit" class="modifyBtn">회원 정보 수정</button>
+			<tr>
+				<th scope="col">Email</th>
+				<td>${mvo.email}</td><!-- -->
+			</tr>
+
+			<tr>
+<!-- 				<th scope="col">PWD</th> -->
+<!-- 				<td> -->
+<%-- 					<input type="text" class="form-control"  name="pwd" id="p" value="${mvo.pwd}">		 --%>
+<!-- 				</td> -->
+<!-- 			</tr> $2a$10$29D5swWSM7v9jqSycKcuPuB0m3R5rhP9MeGnk7Mo1jE9ofl2UBNhO-->
+			
+			<tr>
+				<th scope="col">NICK_NAME</th>
+				<td>
+					<input type="text" class="form-control"  name="nickName" id="n" value="${mvo.nickName}">
+				</td>
+			</tr>
+			
+			<tr>
+				<th scope="col">REG_AT</th>
+				<td>${mvo.regAt }</td><!-- -->
+			</tr>
+			<tr>
+				<th scope="col">LAST_LOGIN</th>
+				<td>${mvo.lastLogin }</td><!-- bdto.삭제 전경환231025_00:40-->
+			</tr>
+		</table>
+		
+		<%-- 파일 표시란 --%>
+<%-- 		<c:set value = "${bdto.flist}" var ="flist"></c:set><!-- 난 안쓰는 부분인듯 --> --%>
+<%-- 		<c:forEach items="${bdto.flist}" var="fvo"> <!-- bdto.삭제 전경환231025_00:40--> --%>
+<%-- 			<c:choose> -->
+<%-- 				<c:when test="${fvo.fileType > 0}"> --%>
+<%--	  			<div> -->
+<%-- 						<a href="/upload/${fn:replace(fvo.saveDir,'\\','/')}/${fvo.uuid}_${fvo.fileName}"> --%>
+<%-- 							<img src="/upload/${fn:replace(fvo.saveDir,'\\','/')}/${fvo.uuid}_th_${fvo.fileName}"> --%>
+<%-- 						</a> 원본파일명 규칙 th해봄							 --%>
+<%--					</div> --%>
+<%--				</c:when> --%>
+<%-- 				<c:otherwise> --%>
+<%-- 					이미지 없은 경우 아이콘 표시 --%>
+<%--				</c:otherwise> --%>
+<%-- 			</c:choose> --%>
+<%-- 			<div class="ms-2 me-auto"> --%>
+<%-- 				<div class="fw-bold">${fvo.fileName }</div> --%>
+<%-- 				<span class="badge bg-secondary rounded-pull">${fvo.fileSize}Byte</span> --%>
+<%-- 			</div> --%>
+<%-- 		</c:forEach> --%>
+
+<%-- 		<a href="/board/modify?bno=${bvo.bno}"><button	class="btn btn-primary" type="button">수정</button></a>  --%>
+<%-- 		<a	href="/board/remove?bno=${bvo.bno}"><button	class="btn btn-primary" type="button">삭제</button></a>  --%>
+<%-- 		<a	href="/board/list"><button class="btn btn-primary" type="button">리스트로</button></a> --%>
+<!-- 		<hr> -->
+		
+<%-- 		<a href="/member/modify?email=${mvo.email}"><button	class="btn btn-primary" type="button">수정완료!</button></a>  --%>
+		
+		<input type="hidden" name="email" value="${mvo.email}">
+    <button class="btn btn-primary" type="submit">수정완료!</button>
+<%-- 		<a href="/member/remove?email=${mvo.email}"><button	class="btn btn-primary" type="button">삭제</button></a>  --%>
+		<a href="/member/list"><button class="btn btn-primary" type="button">리스트로</button></a>
+		
+
+
+		</div>
 		</form>
-	</section>
 
-	<!-- 이미지 정규표현식 확인용 -->
-	<input type='text' id="checkImgResult" hidden="hidden">
-
-	<jsp:include page="../common/footer.jsp" />
+		<jsp:include page="../common/footer.jsp" />
 </body>
-<script type="text/javascript" src="../resources/js/modify.js"></script>
+
+
+
+
 </html>

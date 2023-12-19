@@ -3,11 +3,6 @@
 	src: url(../font/NotoSansKR-VariableFont_wght.ttf);
 }
 
-@font-face {
-	font-family: NotoSansKRSemiBold;
-	src: url(../font/NotoSansKR-SemiBold.ttf);
-}
-
 .box {
 	height: 100%;
 	padding: 10px;
@@ -22,6 +17,66 @@
 
 .box2 {
 	width: 700px;
+}
+
+#checkBox {
+	border-top-left-radius:;
+	border-top-right-radius:;
+	border-bottom-right-radius:;
+	border-bottom-left-radius:;
+}
+
+.btnContainer {
+	display: flex;
+	justify-content: center;
+}
+
+a {
+	color: #858796;
+}
+
+a:hover {
+	text-decoration: underline; /* 마우스를 가져다 댔을 때 밑줄 표시 */
+}
+
+.container-fluid {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+}
+
+.pagination {
+	justify-content: center;
+}
+
+.mag0 {
+	margin: 0px;
+}
+
+.fle, .fle2 {
+	display: flex;
+}
+
+.labelmargin {
+	margin-left: 5px;
+	margin-right: 5px;
+}
+
+.dddd {
+	width: 30%;
+}
+
+.smallBtn {
+	width: 40px;
+	height: 31px;
+}
+
+.row {
+	justify-content: space-between;
+}
+
+.dddddd {
+	justify-content: flex-end;
 }
 
 body {
@@ -39,11 +94,34 @@ body {
 	font-weight: 300px;
 }
 
+.ratingStar {
+	display: flex;
+}
+
 .star {
 	color: gray;
 	width: 50px;
 	height: 50px;
 	margin-bottom: 50px;
+}
+
+.reviewBox {
+	width: 700px;
+	height: 360px;
+	border: 2px solid #dbdbdb;
+}
+
+#reviewText {
+	height: 63px;
+	overflow: hidden;
+	width: 100%;
+	height: 100%;
+	padding: 20px;
+}
+
+.reviewBox textarea:focus {
+	border: none;
+	outline: none;
 }
 
 .regContainer {
@@ -55,53 +133,14 @@ body {
 	background-color: #00c7ae;
 	border-color: #00c7ae;
 }
-.star:hover,
-.star.hovered {
-  color: #f7f77e;
-}
-.star.clicked {
-  color: #f7f77e;
-}
-.titleInput {
+
+---------------파일
+
+
+
+.upload-box {
 	width: 100%;
-	display: block;
 	box-sizing: border-box;
-	margin: 0;
-	padding: 15px 50px 15px 0;
-	border: none;
-	border-bottom: 1px solid #eaebef;
-	color: #292929;
-	font: inherit;
-	margin-bottom: 20px;
-	ont-weight: bold;
-	padding: 15px 60px 15px 0;
-	line-height: 31px;
-	font-size: 1.70rem;
-	
-}
-.titleInput:focus {
-	outline: none;
-}
-/* ----파일 */
-
-#root {
-	width: 100%;
-	margin: 0 auto;
-	max-width: 800px;
-}
-
-.title {
-	text-align: center;
-}
-
-.contents {
-	display: flex;
-	flex-direction: row;
-	margin-top: 10px;
-}
-
-.contents .upload-box {
-	width: 100%;
 	margin-right: 30px;
 	display: flex;
 	flex-direction: column;
@@ -109,9 +148,10 @@ body {
 	align-items: center;
 }
 
-.contents .upload-box .drag-file {
+.upload-box .drag-file {
+	margin-bottom: 50px;
 	position: relative;
-	width: 698px;
+	width: 100%;
 	height: 360px;
 	display: flex;
 	flex-direction: column;
@@ -120,63 +160,23 @@ body {
 	border: 3px dashed #dbdbdb;
 }
 
-.contents .upload-box .drag-file.highlight {
+.upload-box .drag-file.highlight {
 	border: 3px dashed red;
 }
 
-.contents .upload-box .drag-file .image {
+.upload-box .drag-file .image {
 	width: 40px;
 }
 
-.contents .upload-box .drag-file .message {
+.upload-box .drag-file .message {
 	margin-bottom: 0;
 }
 
-.contents .upload-box .drag-file .preview {
+.upload-box .drag-file .preview {
 	display: none;
 	position: absolute;
 	left: 0;
 	height: 0;
 	width: 100%;
 	height: 100%;
-}
-
-.contents .upload-box .file-label {
-	margin-top: 30px;
-	background-color: #5b975b;
-	color: #fff;
-	text-align: center;
-	padding: 10px 0;
-	width: 65%;
-	border-radius: 6px;
-	cursor: pointer;
-}
-.file-label{
-	margin-bottom: 40px;
-}
-
-.contents .upload-box .file {
-	display: none;
-}
-
-@media ( max-width : 700px) {
-	.contents {
-		display: flex;
-		flex-direction: column;
-		margin-top: 30px;
-	}
-	.contents .upload-box {
-		width: 100%;
-		box-sizing: border-box;
-		margin-right: 0;
-	}
-	.contents .upload-box .drag-file {
-		height: 150px;
-	}
-	.contents .files {
-		width: 100%;
-		box-sizing: border-box;
-		margin-right: 0;
-		overflow: initial;
-	}
 }

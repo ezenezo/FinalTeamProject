@@ -51,7 +51,6 @@ h1 {
 }
 
 .portfolioInfo p {
-	margin-top:0px;
 	margin-bottom: 0px;
 	margin-right: 10px;
 	margin-left: 10px;
@@ -91,8 +90,7 @@ h1 {
 }
 
 .left2 {
-	margin-left: 9px;
-	display: flex;
+	margin-left: 9px; display : flex;
 	align-items: flex-end;
 	flex-direction: column;
 	align-items: flex-start;
@@ -119,16 +117,13 @@ h1 {
 	line-height: 20px;
 	color: #656E75;
 }
-
-.heartIcon span {
+.heartIcon span{
 	margin-right: 3px;
 }
-
-.topTitle {
+.topTitle{
 	margin-bottom: 20px;
-	margin-top: 0px;
+	margin-top: 30px;
 }
-
 .colorRed {
 	color: red;
 }
@@ -142,69 +137,9 @@ h1 {
 	width: 100%;
 	height: 100%;
 }
-
 .introductionDiv p>img {
 	width: 100%;
-}
-
-.mar {
+} 
+.mar{
 	margin-right: 8px;
-}
-
-.modDel {
-	display: flex;
-	justify-content: flex-end
-}
-
-#modBtn, #delBtn {
-	color: rgb(130, 140, 148);
-}
-
-.classify {
-	margin-left: 3px;
-	margin-right: 3px;
-	color: rgb(234, 237, 239);
-}
-
-.modDel * {
-	cursor: pointer;
-}
-
-.he56 {
-	width: 50px;
-	height: 56px;
-}
-
-.stickyBtn {
-	padding: 12px;
-	margin: 0;
-	box-sizing: border-box;
-	background: #fff;
-	border: 1px solid #dadce0;
-	color: #828c94;
-	border-radius: 100%;
-	font-size: 24px;
-	line-height: 0;
-	box-shadow: 1px 3px 4px 0 rgba(209, 213, 217, .2);
-	width: 65px;
-	height: 65px;
-	margin-top: 70px;
-	margin-left: 70px;
-}
-
-.stickyBtn span {
-	font-size: 35px;
-	font-weight:200;
-	color:#828c94;
-}
-
-.stickyAtag {
-	position: sticky;
-	top: 20%;
-	left: 80%; 
-	width: 65px;
-	height: 65px;
-}
-.stickyBtn:hover{
-	background-color: rgba(247,248,250);
 }

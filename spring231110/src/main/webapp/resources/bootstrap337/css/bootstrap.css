@@ -1077,7 +1077,7 @@ th {
           box-sizing: border-box;
 }
 html {
-  font-size: 10px;
+/*   font-size: 10px; */
 
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
@@ -5208,7 +5208,7 @@ a.thumbnail.active {
   zoom: 1;
 }
 .media-body {
-  width: 10000px;
+/*   width: 10000px; */ /*jgh231212*/
 }
 .media-object {
   display: block;

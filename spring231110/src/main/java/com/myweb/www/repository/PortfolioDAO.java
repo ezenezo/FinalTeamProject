@@ -4,11 +4,6 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 
-import com.myweb.www.domain.FilterdataVO;
-
-
-import com.myweb.www.domain.CouponVO;
-
 import com.myweb.www.domain.PortfolioDTO;
 import com.myweb.www.domain.PortfolioVO;
 
@@ -18,40 +13,21 @@ public interface PortfolioDAO {
 
 	long selectMaxPno();
 
-	List<PortfolioVO> getListPortfolio(FilterdataVO filter);
-	
-	List<PortfolioVO> getListPortfolio1();
+	List<PortfolioVO> getListPortfolio();
 
 	PortfolioVO getDetailPvo(long pno);
 
-	int portfolioLikeCheck(@Param("pno") long pno, @Param("id") String id);
+	int portfolioLikeCheck(@Param("pno") long pno,@Param("id") String id);
 
-	void updatePortfolioLikeQty(@Param("pno") long pno, @Param("num") int num);
+	void deletePortfolioLike(@Param("pno") long pno,@Param("id") String id);
+
+	void updatePortfolioLikeQty(@Param("pno") long pno,@Param("num") int num);
+
+	void addPortfolioLike(@Param("pno") long pno,@Param("id") String id);
 
 	void updateReadCount(long pno);
 
 	String selectId(long pno);
-
-	List<PortfolioVO> getPvoList(String id);
-
-	int heartCount(String id);
-
-	int deletePortfolio(long pno);
-
-	int updatePortfolio(PortfolioVO pvo);
-
-	List<PortfolioVO> getListFilter(FilterdataVO filterData);
-
-	List<PortfolioVO> getListMyPortfolio(String id);
-
-	List<PortfolioVO> mainPostPdtoList(@Param("sliderOne") int sliderOne,@Param("sliderTwo") int sliderTwo);
-
-//	List<PortfolioDTO> getListFilter(@Param("order") String order,@Param("homeTypeSh") String homeTypeSh,@Param("roomCntSh") String roomCntSh,@Param("familyTypeSh") String familyTypeSh,
-//			@Param("homeStyle") String homeStyle);
-
-	List<PortfolioVO> getHeartList(String id);
-
-	PortfolioVO getPortfolio(long pno);
 
 
 }

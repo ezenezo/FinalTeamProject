@@ -28,7 +28,6 @@ public class MemberVO{
 	private String detailAddress; //상세주소
 	private String extraAddress; //참고주소
 	private Date registerDate; //회원가입일
-	private int point; //포인트
 
 	private List<AuthVO> authVOList;
 	

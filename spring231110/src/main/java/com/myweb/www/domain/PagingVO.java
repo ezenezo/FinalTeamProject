@@ -17,7 +17,7 @@ public class PagingVO {
 	private String keyword; // 검색어
 
 	public PagingVO() {
-		this(1,5);
+		this(1, 10);
 	}
 
 	public PagingVO(int pageNo, int qty) {

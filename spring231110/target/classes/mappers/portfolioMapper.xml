@@ -15,23 +15,6 @@
 	<select id="getListPortfolio"
 		resultType="com.myweb.www.domain.PortfolioVO">
 		select * from portfolio
-		<include refid="filter"></include>
-		order by pno desc
-	</select>
-	<select id="getListPortfolio1"
-		resultType="com.myweb.www.domain.PortfolioVO">
-		select * from portfolio
-		order by pno desc
-	</select>
-	<select id="getListMyPortfolio"
-		resultType="com.myweb.www.domain.PortfolioVO">
-		select * from portfolio where id=#{id} order by pno desc
-	</select>
-	<select id="getListFilter"
-		resultType="com.myweb.www.domain.PortfolioVO">
-		select * from portfolio
-		<include refid="filter"></include>
-		<include refid="order"></include>
 	</select>
 	<select id="getDetailPvo"
 		resultType="com.myweb.www.domain.PortfolioVO">
@@ -41,91 +24,22 @@
 		select count(*) from
 		heart where pno=#{pno} and id=#{id}
 	</select>
-
+	<delete id="deletePortfolioLike">
+		delete from heart where pno=#{pno} and id=#{id}
+	</delete>
 	<update id="updatePortfolioLikeQty">
 		update portfolio set like_qty=like_qty+#{num} where
 		pno=#{pno}
 	</update>
-
+	<insert id="addPortfolioLike">
+		insert into heart(pno,id)
+		values(#{pno},#{id})
+	</insert>
 	<update id="updateReadCount">
-		update portfolio set read_qty=read_qty+1 where
-		pno=#{pno}
+	update portfolio set read_qty=read_qty+1 where pno=#{pno}
 	</update>
 	<select id="selectId" resultType="String">
-		select id from portfolio where
-		pno=#{pno}
+	select id from portfolio where pno=#{pno}
 	</select>
-	<select id="getPvoList"
-		resultType="com.myweb.www.domain.PortfolioVO">
-		select * from portfolio where id=#{id}
-	</select>
-	<select id="heartCount" resultType="int">
-		select sum(like_qty) from
-		portfolio where id=#{id}
-	</select>
-	<delete id="deletePortfolio">
-		delete from portfolio where pno=#{pno}
-	</delete>
-	<update id="updatePortfolio">
-		update portfolio set
-		title=#{title},introduction=#{introduction},home_type=#{homeType},room_cnt=#{roomCnt},family_type=#{familyType},home_size=#{homeSize},home_style=#{homeStyle},mod_date=now()
-		where pno=#{pno}
-	</update>
-	<select id="mainPostPdtoList"
-		resultType="com.myweb.www.domain.PortfolioVO">
-		select * from portfolio where home_size between
-		#{sliderOne} and #{sliderTwo}
-	</select>
-	<select id="getHeartList"
-		resultType="com.myweb.www.domain.PortfolioVO">
-		select p.pno, p.title, p.id, p.user_nm, p.like_qty,
-		p.home_style, p.family_type from heart h right join portfolio p on
-		h.pno = p.pno where h.id = #{id};
-	</select>
-	<select id="getPortfolio"
-		resultType="com.myweb.www.domain.PortfolioVO">
-		select * from portfolio where pno = #{pno}
-	</select>
-
-	<sql id="filter">
-		<trim prefix="where" suffixOverrides="and">
-			<if test="homeTypeSh != null and homeTypeSh !=''">
-				home_type=#{homeTypeSh} and
-			</if>
-			<if test="roomCntSh != null and roomCntSh !=''">
-				room_cnt=#{roomCntSh} and
-			</if>
-			<if test="familyTypeSh != null and familyTypeSh !=''">
-				family_type=#{familyTypeSh} and
-			</if>
-			<if test="homeStyleSh != null and homeStyleSh !=''">
-				home_style=#{homeStyleSh} and
-			</if>
-			<if test="sliderOneVal !=1 and sliderTwoVal !=232">
-				home_size between #{sliderOneVal} and #{sliderTwoVal} and
-			</if>
-		</trim>
-	</sql>
-
-	<sql id="order">
-		<if test="order == null or order ==''">
-			order by pno desc
-		</if>
-		<if test="order != null and order !=''">
-			<choose>
-				<when test="order eq '최신순'.toString()">
-					order by pno desc
-				</when>
-				<when test="order eq '오래된순'.toString()">
-					order by pno
-				</when>
-				<when test="order eq '인기순'.toString()">
-					order by like_qty desc
-				</when>
-			</choose>
-		</if>
-	</sql>
-
-
 
 </mapper>

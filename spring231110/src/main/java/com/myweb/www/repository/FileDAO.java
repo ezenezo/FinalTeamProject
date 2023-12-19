@@ -10,7 +10,7 @@ public interface FileDAO {
 
 	int insertFile(FileVO fvo);
 
-	List<FileVO> getFileList();
+	List<FileVO> getFileList(long bno);
 
 	int removefile(String uuid);
 
@@ -26,20 +26,5 @@ public interface FileDAO {
 
 	FileVO selectMainImg(long pno);//
 
-	int deleteMainImg(long pno);
-
-	int updatePortfolioMainImg(FileVO portfolioMainImg);
-
-	int insertReviewMainImg(FileVO reviewMainImg);
-
-	FileVO getReviewMainImg(long rno);
-
-	void deleteReviewMainImg(long rno);
-
-	int updateReviewMainImg(FileVO reviewMainImg);
-
-
-
-	FileVO getFilePno(long pno);
 
 }

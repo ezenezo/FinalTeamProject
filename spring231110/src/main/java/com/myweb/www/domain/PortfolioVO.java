@@ -18,7 +18,6 @@ public class PortfolioVO {
 	private String title; // 제목
 	private String introduction;// 소개글
 	private String ragDate;// 등록일
-	private String modDate;// 등록일
 	private String homeType;// 주거형태
 	private String roomCnt;// 방개수
 	private String familyType;// 가족형태
