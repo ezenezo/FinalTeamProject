@@ -68,7 +68,7 @@ function handleClick_q(event, requestNm) {
 
 
    
-        li += `<div id="right_div_${rvo.requestNm}" class="right_div"><div class="title_right"><div><img alt="이미지 없당" src="../../../resources/img/프로필지정안함.png" class="p_img"></div><div class="user_info"><div class="user_id">${rvo.requestId}님의 요청서</div><div class="user_email"><span class="material-symbols-outlined">
+        li += `<div id="right_div_${rvo.requestNm}" class="right_div"><div class="title_right"><div><img alt="이미지 없당" src="../../../resources/img/profile_none.png" class="p_img"></div><div class="user_info"><div class="user_id">${rvo.requestId}님의 요청서</div><div class="user_email"><span class="material-symbols-outlined">
                 mail</span>${mvo.email}</div></div>`;
 
       }

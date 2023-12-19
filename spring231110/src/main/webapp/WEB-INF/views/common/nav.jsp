@@ -82,7 +82,7 @@
                                  notifications </span></a></li>
                         <li>
                            <div class="profile">
-                              <img alt="프로필이미지 없음" src="../../resources/img/프로필지정안함.png"
+                              <img alt="프로필이미지 없음" src="../../resources/img/profile_none.png"
                                  style="width: 35px; height: 35px;" class="profile_img">
                            </div>
                            <div class="usermenu-dropdown" style="visibility: hidden;">

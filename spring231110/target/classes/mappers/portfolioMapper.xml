@@ -18,7 +18,6 @@
 		<include refid="filter"></include>
 		order by pno desc
 	</select>
-
 	<select id="getListPortfolio1"
 		resultType="com.myweb.www.domain.PortfolioVO">
 		select * from portfolio
@@ -59,7 +58,6 @@
 	<select id="getPvoList"
 		resultType="com.myweb.www.domain.PortfolioVO">
 		select * from portfolio where id=#{id}
-
 	</select>
 	<select id="heartCount" resultType="int">
 		select sum(like_qty) from
@@ -127,6 +125,7 @@
 			</choose>
 		</if>
 	</sql>
+
 
 
 </mapper>
