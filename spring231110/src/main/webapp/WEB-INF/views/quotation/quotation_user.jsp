@@ -29,7 +29,6 @@
 
 			<nav></nav>
 			<div class="content">
-<<<<<<< HEAD
 
 				<ul class="quo_div">
 					<c:forEach items="${list }" var="qvo">
@@ -38,13 +37,6 @@
 						<input type="text" value="${qvo.quotationNm}" id="quotationNm">
 
 
-=======
-
-				<ul class="quo_div">
-					<c:forEach items="${list }" var="qvo">
-
-						<%-- <input type="number" value="${qvo.quotationNm}" id="quotationNm" hidden="hidden"> --%>
->>>>>>> b966bafc157ce2891b208444bc840799ad24fbd4
 
 						<div class="subject">${company}메이트의견적서</div>
 						<div class="quo_user_total_1">
@@ -87,7 +79,6 @@
 							<div class="quo_user_div">
 								<span class="span_teg">총액:</span>${qvo.budget}원</div>
 						</div>
-<<<<<<< HEAD
 						
 							<div id="btn_div_ok"></div>
 
@@ -110,23 +101,6 @@
 				</ul>
 
 
-=======
-
-						<script type="text/javascript">
-									if(${qvo.approveOk}==1){
-										<div class="quo_user_div">
-										<span class="span_teg"> 결제 완료되었습니다.</div>
-										}
-						</script>
-						<button type="button" onclick="">결제하기</button>
-						<button type="button" onclick="cancel_btn(${qvo.quotationNm})">거래취소</button>
-
-					</c:forEach>
-
-				</ul>
-
-
->>>>>>> b966bafc157ce2891b208444bc840799ad24fbd4
 			</div>
 		</div>
 
