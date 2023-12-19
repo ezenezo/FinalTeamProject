@@ -4,25 +4,143 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.myweb.www.repository.RequestDAO">
 
-	<select id="list" resultType="com.myweb.www.domain.RequestQuestionVO">
-		select * from request_question where question_type= 'main_category';
-		
-	</select>
-	
-	<select id="list2" resultType="com.myweb.www.domain.RequestQuestionVO">
-		select * from request_question where question_type= '주거공간_secound';
-		
-	</select>
-	
-		<select id="list3" resultType="com.myweb.www.domain.RequestQuestionVO">
-		select * from request_question where question_type= '공사범위';
-		
-	</select>
-	
+	<select id="list"
+		resultType="com.myweb.www.domain.RequestQuestionVO">
+		select * from request_question where question_type=
+		'main_category';
 
-	
-		<select id="list3_2" resultType="com.myweb.www.domain.RequestQuestionVO">
-		select * from request_question where question_type= '공사상태';
-		
 	</select>
+
+	<select id="list2"
+		resultType="com.myweb.www.domain.RequestQuestionVO">
+		select * from request_question where question_type=
+		'주거공간_secound';
+
+	</select>
+
+	<select id="list3"
+		resultType="com.myweb.www.domain.RequestQuestionVO">
+		select * from request_question where question_type= '공사범위';
+
+	</select>
+
+
+
+	<select id="list3_2"
+		resultType="com.myweb.www.domain.RequestQuestionVO">
+		select * from request_question where question_type= '공사상태';
+
+	</select>
+
+	<insert id="insert">
+		insert into request (request_id, form, category_type,
+		rang, status, address,
+		zone_code,
+		detail_address,extra_address,aquare_footage, square_meter,
+		wish_budget, request_op,keynum_com)
+		values (#{requestId}, #{form},
+		#{categoryType}, #{rang}, #{status},
+		#{address}, #{zoneCode},
+		#{detailAddress}, #{extraAddress},
+		#{aquareFootage}, #{squareMeter},
+		#{wishBudget},
+		#{requestOp},#{keynumCom});
+	</insert>
+	<update id="req_cancel">
+		update request set ok_type_no=1 where request_nm =
+		#{reqNm}
+
+	</update>
+
+	<select id="selectID">
+		select from request where
+	</select>
+
+
+
+
+	<select id="list2_1"
+		resultType="com.myweb.www.domain.RequestQuestionVO">
+		select * from request_question where question_type=
+		'상업공간_secound';
+
+	</select>
+
+
+
+	<select id="selectNm" resultType="long">
+		select max(request_nm) from
+		request;
+
+	</select>
+
+	<select id="selectrequset" parameterType="String"
+		resultType="com.myweb.www.domain.RequestVO">
+		SELECT * FROM request WHERE keynum_com = #{id} and checked
+		= 0 ORDER BY
+		request_nm DESC
+	</select>
+
+
+
+
+	<select id="selectrequset_read" parameterType="String"
+		resultType="com.myweb.www.domain.RequestVO">
+		SELECT * FROM request WHERE keynum_com = #{id} and checked
+		= 1 ORDER BY
+		request_nm DESC
+	</select>
+
+	<select id="request_alarm" parameterType="String"
+		resultType="int">
+		select count(*) from request where checked=0 and
+		keynum_com=#{userId};
+	</select>
+
+
+	<select id="selectOneRVO" parameterType="String"
+		resultType="com.myweb.www.domain.RequestVO">
+		select * from request where request_id=#{requestId} order
+		by request_nm desc
+		limit 1;
+	</select>
+
+	<select id="getRequest_list" parameterType="long"
+		resultType="com.myweb.www.domain.RequestVO">
+		select * from request where request_nm = #{requestNm} ;
+	</select>
+
+	<update id="checked">
+		update request set checked = 1 where request_nm =
+		#{requestNm};
+	</update>
+
+	<select id="req_check" resultType="boolean">
+		select checked from request
+		where request_nm = #{requestNm};
+	</select>
+
+	<select id="getPorImg" parameterType="long"
+		resultType="com.myweb.www.domain.FileVO">
+		SELECT f.*
+		FROM request r
+		JOIN file f ON r.request_id = f.id
+		WHERE r.request_nm = #{requestNm};
+	</select>
+
+	<select id="memberSelect" parameterType="long"
+		resultType="com.myweb.www.security.MemberVO">
+		SELECT m.*
+		FROM request r
+		JOIN member m ON r.request_id =
+		m.id
+		WHERE r.request_nm = #{requestNm};
+	</select>
+
+
+	<select id="setQutation" parameterType="long"
+		resultType="com.myweb.www.domain.RequestVO">
+		select * from request where request_nm = #{reNm}
+	</select>
+
 </mapper>

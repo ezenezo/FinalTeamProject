@@ -12,6 +12,7 @@
 section {
 	width: 900px;
 	font-family: 'NotoSansKR';
+	margin-left: 80px;
 }
 
 }
@@ -77,6 +78,15 @@ p {
 	margin-top: 15px;
 	width: 60px;
 	font-weight: 600;
+	cursor: pointer;
+}
+
+ul>li {
+	cursor: pointer;
+}
+
+section li a:hover {
+	color: #4abd26;
 }
 
 .couponBox {
@@ -103,14 +113,13 @@ p {
 }
 
 .main {
-	width: 1500px;
+	width: 99vw;
 	display: flex;
-	justify-content: space-around;
+	justify-content: center;
 	align-items: flex-end;
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	translate: -50% -50%;
+	padding: 60px 150px 100px;
+	box-sizing: border-box;
+	min-width: 1600px;
 }
 
 .subMain {
@@ -118,6 +127,7 @@ p {
 	height: 526px;
 	border: 1px solid #8080805c;
 	border-radius: 6px;
+	overflow: auto;
 }
 
 .mypageNav>ul {
@@ -162,6 +172,144 @@ span {
 }
 
 .iconBox>p {
-    margin: 0;
-    font-weight: bold;
+	margin: 0;
+	font-weight: bold;
+}
+
+body {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+/* footer 변경 */
+.footerContainer {
+	padding-top: 30px;
+	padding-bottom: 30px;
+	padding-left: 24%;
+	padding-right: 24%;
+	display: flex;
+	justify-content: space-between;
+	box-sizing: content-box;
+}
+
+footer {
+	background-color: #202020;
+	border: none;
+	width: 100%;
+	font-family: NotoSansKR;
+	color: rgb(130, 140, 148);
+}
+
+.likeDiv {
+	width: auto;
+	background-color: #ffe1e10f;
+	height: calc(100%/ 4);
+	border-bottom: 1px solid #e1e1e1;
+	display: flex;
+	align-items: center;
+	padding: 10px 40px;
+	box-sizing: border-box;
+	justify-content: space-between;
+}
+
+.likeDiv img {
+	width: 90px;
+	height: 90px;
+}
+
+.likeDiv i {
+	color: red;
+	cursor: pointer;
+}
+
+.mainInfo {
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-start;
+	align-items: flex-end;
+}
+
+.mainInfo span {
+	font-size: 13px;
+	margin-left: 10px;
+	color: gray;
+}
+
+.portfolioInfo p {
+	color: #5f5f5f;
+	font-size: 14px;
+	margin-top: 5px;
+}
+
+.portfolioInfo {
+	margin-left: 20px;
+}
+
+.mainInfo h3 {
+	margin: 0px;
+	color: #292929;
+}
+
+.flex {
+	display: flex;
+	align-items: center;
+}
+
+.tbl_col {
+    width: 900px;
+    text-align: center;
+    margin: 20px 0;
+    border-collapse: collapse;
+}
+
+.cno {
+	width: 20%;
+}
+
+.expire {
+	width: 35%;
+}
+
+.name {
+	width: 25%;
+}
+
+.discountAmount {
+	width: 20%;
+}
+
+.countCoupon {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	border: 1px solid #65916545;
+	margin: 20px 60px;
+	padding: 10px;
+	background-color: #dbdbdb4a;
+	border-radius: 6px;
+}
+
+th {
+	padding-bottom: 20px;
+}
+
+.tableBorder {
+	width: 900px;
+	height: 65px;
+	background-color: #3f712e12;
+	position: absolute;
+	border-bottom: 1px solid #4a8d4f52;
+}
+
+td {
+	padding: 15px 10px;
+}
+
+.tr {
+	border-bottom: 1px solid #e3e3e3;
+}
+
+.tr:hover {
+	background-color: #e3e3e3;
 }

@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,204 +12,210 @@
 	href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
 <link rel="stylesheet" href="/resources/css/main.css">
 </head>
-<body>
-	<jsp:include page="../common/nav.jsp"></jsp:include>
+<jsp:include page="../common/nav.jsp"></jsp:include>
 <body class="mainBody">
-	<div class="total">
-		<div class="content">
-			<div class="box">
-				<div class="box2">
-					<div class="event">
-						<div class="eventText">
-							<p>스타일메이트와 함께 따뜻한 겨울을 준비하세요</p>
-							<p>보일러/지역난방</p>
-							<p>시공비 지원 이벤트</p>
-						</div>
-						<img src="/resources/img/event-removebg-preview.png">
-					</div>
-					<div>
-						<div class="menu">
-							<div class="leftText">
-								<p class="miniTitle">이런 인테리어를 찾고 있나요?</p>
-								<p class="secTitle">좋아하실 만한 인테리어 콘텐츠를 추천해드려요</p>
-							</div>
-							<div class="rightText">
-								<a href="/portfolio/list"><p>더보기</p></a>
-							</div>
-						</div>
-						<div class="slide_wrapper">
-							<ul class="slides" id="slides1">
-								<li><a href="#"><img src="/resources/img/tree.jpg"></a></li>
-								<li><a href="#"><img src="/resources/img/tree.jpg"></a></li>
-								<li><a href="#"><img src="/resources/img/tree.jpg"></a></li>
-								<li><a href="#"><img src="/resources/img/tree.jpg"></a></li>
-								<li><a href="#"><img src="/resources/img/indexImg2.jpg"></a></li>
-								<li><a href="#"><img src="/resources/img/tree.jpg"></a></li>
-								<li><a href="#"><div class="mainMoreBtn">
-											<svg xmlns="http://www.w3.org/2000/svg" fill="currentColor"
-												class="bi bi-arrow-right-circle-fill moreBtn"
-												viewBox="0 0 16 16">
-  <path class="moreBtn"
-													d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0zM4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H4.5z" />
-</svg>
-											<p class="moreText">더보기</p>
-										</div> </a></li>
+	<div class="box">
+		<div class="box2">
+			<div class="event">
+				<div class="eventText">
+					<p>스타일메이트와 함께 따뜻한 겨울을 준비하세요</p>
+					<p>보일러/지역난방</p>
+					<p>시공비 지원 이벤트</p>
+				</div>
+				<img src="/resources/img/event-removebg-preview.png">
+			</div>
 
-							</ul>
-							<div class="controls">
-								<div class="prev" id="prev1"></div>
-								<div class="next" id="next1">
-									<span class="material-symbols-outlined">
-										arrow_forward_ios </span>
-								</div>
-							</div>
-						</div>
-						<div class="menu">
-							<div class="leftText">
-								<p class="miniTitle margin10">숨고 커뮤니티에 물어보세요</p>
-							</div>
-							<div class="rightText">
-								<a href="#"><p>더보기</p></a>
-							</div>
-						</div>
-						<div class="comunity"></div>
+			<div class="leftText">
+				<p class="miniTitle">평형대별 인테리어</p>
+			</div>
 
-						<div class="menu">
-							<div class="leftText2">
-								<p class="miniTitle">작은 자취방 나만의 감성 눌러 담기</p>
-								<img src="/resources/img/hand.JPG">
-							</div>
-							<div class="rightText">
-								<a href="#"><p>더보기</p></a>
-							</div>
-						</div>
-						<div class="slide_wrapper">
-							<ul class="slides" id="slides2">
-								<li><a href="#"><img src="/resources/img/tree.jpg"></a></li>
-								<li><a href="#"><img src="/resources/img/tree.jpg"></a></li>
-								<li><a href="#"><img src="/resources/img/tree.jpg"></a></li>
-								<li><a href="#"><img src="/resources/img/tree.jpg"></a></li>
-								<li><a href="#"><img src="/resources/img/indexImg2.jpg"></a></li>
-								<li><a href="#"><img src="/resources/img/tree.jpg"></a></li>
-								<li><a href="#"><div class="mainMoreBtn">
-											<svg xmlns="http://www.w3.org/2000/svg" fill="currentColor"
-												class="bi bi-arrow-right-circle-fill moreBtn"
-												viewBox="0 0 16 16">
-  <path class="moreBtn"
-													d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0zM4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H4.5z" />
-</svg>
-											<p class="moreText">더보기</p>
-										</div> </a></li>
-
-							</ul>
-							<div class="controls">
-								<div class="prev" id="prev2"></div>
-								<div class="next" id="next2">
-									<span class="material-symbols-outlined">
-										arrow_forward_ios </span>
-								</div>
-							</div>
-						</div>
-						<div class="menu">
-							<div class="leftText2">
-								<p class="miniTitle">40평 이상 BEST</p>
-								<img src="/resources/img/best.JPG">
-								<p class="miniTitle">모두 보셨나요?</p>
-								<img id="imgSize" src="/resources/img/finger.JPG">
-							</div>
-							<div class="rightText">
-								<a href="#"><p>더보기</p></a>
-							</div>
-						</div>
-						<div class="slide_wrapper">
-							<ul class="slides" id="slides3">
-								<li><a href="#"><img src="/resources/img/tree.jpg"></a></li>
-								<li><a href="#"><img src="/resources/img/tree.jpg"></a></li>
-								<li><a href="#"><img src="/resources/img/tree.jpg"></a></li>
-								<li><a href="#"><img src="/resources/img/tree.jpg"></a></li>
-								<li><a href="#"><img src="/resources/img/indexImg2.jpg"></a></li>
-								<li><a href="#"><img src="/resources/img/tree.jpg"></a></li>
-								<li><a href="#"><div class="mainMoreBtn">
-											<svg xmlns="http://www.w3.org/2000/svg" fill="currentColor"
-												class="bi bi-arrow-right-circle-fill moreBtn"
-												viewBox="0 0 16 16">
-  <path class="moreBtn"
-													d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0zM4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H4.5z" />
-</svg>
-											<p class="moreText">더보기</p>
-										</div> </a></li>
-
-							</ul>
-							<div class="controls">
-								<div class="prev" id="prev3"></div>
-								<div class="next" id="next3">
-									<span class="material-symbols-outlined">
-										arrow_forward_ios </span>
-								</div>
-							</div>
-
-						</div>
-						<div class="menu margin50">
-							<div class="leftText areaText">
-								<p class="miniTitle">전국 숨은 업체</p>
-								<p class="secTitle">믿을 수 있는 업체를 스타일메이트 단 한 곳에서 찾으세요</p>
-							</div>
-							<div class="rightText atag">
-								<div class="divAtag1">
-								<!-- 카페24배포용webapps -->
-<!-- 									<a class="atag" href="http://aj2002.cafe24.com/findmap/findmap#%EC%84%9C%EC%9A%B8%20%EC%A0%84%EC%B2%B4">서울</a>  -->
-<!-- 									<a href="http://aj2002.cafe24.com/findmap/findmap#%EC%9D%B8%EC%B2%9C%20%EC%A0%84%EC%B2%B4">인천</a>  -->
-									<!-- 로컬용 -->
-									<a class="atag" href="http://localhost:8088/findmap/findmap#%EC%84%9C%EC%9A%B8%20%EC%A0%84%EC%B2%B4">서울</a> 
-									<a href="http://localhost:8088/findmap/findmap#%EC%9D%B8%EC%B2%9C%20%EC%A0%84%EC%B2%B4">인천</a> 
-									
-									<a href="#">세종</a>
-									<a href="#">강원</a> 
-									<a href="#">경기</a> 
-									<a href="#">충북</a> 
-									<a href="#">충남</a> 
-									<a href="#">경북</a> 
-									<a href="#">대전</a>
-								</div>
-								<div class="divAtag divAtag2">
-									<a href="#">대구</a> 
-									<a href="#">전북</a> 
-									<a href="#">경남</a> 
-									<a href="#">울산</a> 
-									<a href="#">광주</a> 
-									<!-- 카페24배포용webapps -->
-<!-- 									<a href="http://aj2002.cafe24.com/findmap/findmap#%EB%B6%80%EC%82%B0%20%EC%A0%84%EC%B2%B4">부산</a> -->
-									<!-- 로컬용 -->
-									<a href="http://localhost:8088/findmap/findmap#%EB%B6%80%EC%82%B0%20%EC%A0%84%EC%B2%B4">부산</a>  
-									
-									<a href="#">전남</a> 
-									<a href="#">제주</a>
-								</div>
-
-							</div>
-						</div>
+			<div class="btnBox">
+				<button class="topBtn topBtn1 clicked" type="button">10평대</button>
+				<button class="topBtn topBtn2" type="button">20평대</button>
+				<button class="topBtn topBtn3" type="button">30평대</button>
+				<button class="topBtn topBtn4" type="button">40평대</button>
+			</div>
 
 
+
+			<!-- 평수별 리스트 시작-->
+			<div class="bodyContainer">
+				<div class="bodyContainer2"></div>
+			</div>
+			<!-- 평수별 리스트 끝 -->
+			<a class="moreA" href="/portfolio/list"><button
+					class="morePortofolioBtn" type="button">인테리어 더보기</button></a>
+
+			<div>
+				<div class="leftText">
+					<p class="miniTitle martop">이런 인테리어를 찾고 있나요?</p>
+					<div class="flexx">
+						<p class="secTitle">인기 있는 인테리어 콘텐츠를 추천해 드려요</p>
+						<a href="/portfolio/list"><p class="blueMore">더보기</p></a>
 
 					</div>
+				</div>
 
+				<div class="slide_wrapper">
+					<ul class="slides" id="slides1">
+						<c:forEach items="${portfolioMainImgList}" var="mainImg" begin="0"
+							end="5">
+							<li><a href="/portfolio/portfolioDetail?pno=${mainImg.pno}">
+									<img class="portfolioMainImg"
+									src="/upload/${mainImg.saveDir}/${fn:replace(fn:replace(mainImg.saveDir, '\\', '-'), '/', '-')}_${mainImg.uuid}_${mainImg.fileName}">
+
+							</a></li>
+						</c:forEach>
+						<li><a href="/portfolio/list"><div class="mainMoreBtn">
+									<svg xmlns="http://www.w3.org/2000/svg" fill="currentColor"
+										class="bi bi-arrow-right-circle-fill moreBtn"
+										viewBox="0 0 16 16">
+  <path class="moreBtn"
+											d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0zM4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H4.5z" />
+</svg>
+									<p class="moreText">더보기</p>
+								</div> </a></li>
+
+					</ul>
+					<div class="controls">
+						<div class="prev" id="prev1"></div>
+						<div class="next" id="next1">
+							<span class="material-symbols-outlined"> arrow_forward_ios
+							</span>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
+		<!--  -->
+
+		<div class="promotion">
+			<div class="leftText centerText">
+				<p class="miniTitle margin30">인테리어, 왜 스타일메이트에 맡겨야 할까요?</p>
+			</div>
+			<div class="promotionBoxContainer">
+				<div class="promotionBox promotionBoxNum1">
+					<p class="absolText2">
+						<span>꼼꼼한</span><span>비교견적</span> <span class="poromotionMiniText">믿을
+							수 있는 업체를</span> <span class="poromotionMiniText">연결해 드려요</span>
+					</p>
+					<img class="absolImg" src="/resources/img/promotion1.png">
+				</div>
+				<div class="promotionBox promotionBoxNum2">
+					<p class="absolText2">
+						<span>상세한</span><span>스타일메이트 플래너</span> <span
+							class="poromotionMiniText">견적서의 분석과 상담을</span> <span
+							class="poromotionMiniText">전담플래너가 관리해드려요</span>
+					</p>
+					<img class="absolImg" src="/resources/img/promotion2.png">
+				</div>
+				<div class="promotionBox promotionBoxNum3">
+					<p class="absolText2">
+						<span>현장케어</span><span>스타일메이트</span> <span
+							class="poromotionMiniText">스타일메이트가 시공현장을</span> <span
+							class="poromotionMiniText">꼼꼼하게 체크해 드려요</span>
+					</p>
+					<img class="absolImg" src="/resources/img/promotion3.png">
+				</div>
+				<div class="promotionBox promotionBoxNum4">
+					<p class="absolText2">
+						<span>든든한</span><span>A/S케어</span> <span
+							class="poromotionMiniText">스타일메이트와 함께하면</span> <span
+							class="poromotionMiniText">3년동안 A/S 해드려요</span>
+					</p>
+					<img class="absolImg" src="/resources/img/promotion4.png">
+				</div>
+			</div>
+		</div>
+
+		<div class="box2">
+
+
+			<div class="leftText">
+				<p class="miniTitle margin30">테마로 보는 인테리어</p>
+			</div>
+			<div class="thema">
+				<a
+					href="/portfolio/list?homeStyleSh=모던&sliderOneVal=1&sliderTwoVal=232">
+					<div class="thema-2 themaImg1">
+						<img src="/resources/img/thema1.png">
+						<p class="absolText">
+							<span>신혼부부가 많이 찾는</span><span>모던 심플 스타일</span>
+						</p>
+					</div>
+				</a> <a
+					href="/portfolio/list?homeTypeSh=상업공간&sliderOneVal=1&sliderTwoVal=232">
+					<div class="thema-2 themaImg2">
+						<img src="/resources/img/thema2.png">
+						<p class="absolText">
+							<span>사진 찍고 싶은</span><span>카페 인테리어</span>
+						</p>
+					</div>
+				</a>
+			</div>
+
+			<div class="thema margin20">
+				<a
+					href="/portfolio/list?homeTypeSh=원룸&sliderOneVal=1&sliderTwoVal=232">
+					<div class="thema-2 themaImg3">
+						<img src="/resources/img/thema3.jpg">
+						<p class="absolText">
+							<span>1.8평 작은 방</span><span>나만의 감성 눌러 담기</span>
+						</p>
+					</div>
+				</a> <a
+					href="/portfolio/list?homeStyleSh=북유럽&sliderOneVal=1&sliderTwoVal=232">
+					<div class="thema-2 themaImg4">
+						<img src="/resources/img/thema4-2.jpg">
+						<p class="absolText">
+							<span>유럽 감성을 더한</span><span>쓰리룸 하우스</span>
+						</p>
+					</div>
+				</a>
+			</div>
+		</div>
+
+		<!-- 리뷰란 시작 -->
+		<div class="promotion reviewBox">
+			<div class="leftText centerText">
+				<a href="#"><p class="miniTitle margin30">따끈따끈한 고객 후기 ></p></a>
+			</div>
+			<div class="promotionBoxContainer reviewContainer">
+
+
+			</div>
+		</div>
+		<!-- 리뷰 끝 -->
+		<div class="box2 mar80">
+			<div class="menu ma">
+				<div class="leftText areaText">
+					<p class="miniTitle">전국 숨은 업체</p>
+					<p class="secTitle">믿을 수 있는 업체를 스타일메이트 단 한 곳에서 찾으세요</p>
+				</div>
+				<div class="rightText atag">
+					<div class="divAtag1">
+						<a class="atag" href="#">서울</a> <a href="#">인천</a> <a href="#">세종</a>
+						<a href="#">강원</a> <a href="#">경기</a> <a href="#">충북</a> <a
+							href="#">충남</a> <a href="#">경북</a> <a href="#">대전</a>
+
+					</div>
+					<div class="divAtag divAtag2">
+						<a href="#">대구</a> <a href="#">전북</a> <a href="#">경남</a> <a
+							href="#">울산</a> <a href="#">광주</a> <a href="#">부산</a> <a href="#">전남</a>
+						<a href="#">제주</a>
+					</div>
+				</div>
+			</div>
+		</div>
+
+
 	</div>
 	<jsp:include page="../common/footer.jsp" />
-<!-- 	231216전경환추가S -->
-	<script>
-	    let fvoJson = '${fvojson}'; // 서버에서 받은 JSON 문자열
-	    // nav.jsp로 데이터 전달
-	    passDataToNav(fvoJson);
-	</script>
-<!-- 	231216전경환추가E -->	
-	<script src="/resources/js/main.js"></script>
-
-
-
-
 
 </body>
+<script src="/resources/js/main.js"></script>
+<script type="text/javascript">
+	homeSizeList(sizeNum);
+	reviewPrint();
+</script>
 </html>

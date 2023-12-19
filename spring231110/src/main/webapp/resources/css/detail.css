@@ -1,0 +1,162 @@
+@font-face {
+	font-family: NotoSansKR;
+	src: url(../font/NotoSansKR-VariableFont_wght.ttf);
+}
+
+body {
+	font-family: NotoSansKR;
+}
+
+.titleh3 {
+	font-weight: 600px;
+	margin-bottom: 15px;
+}
+
+.boardDetailtop {
+	display: flex;
+	justify-content: space-between;
+}
+
+.left1>img {
+	width: 40px;
+	height: 40px;
+	border-radius: 50%;
+}
+
+img {
+	overflow-clip-margin: content-box;
+	overflow: clip;
+}
+
+.text-primary, .bm {
+	margin-bottom: 10px;
+}
+
+.left1 {
+	display: flex;
+	align-items: center;
+	margin-right: 10px;
+}
+
+.left2 {
+	display: flex;
+	align-items: flex-end;
+}
+
+.mag {
+	margin: 0px;
+	padding: 0px;
+}
+
+.contentBox {
+	padding: 40px;
+}
+
+.leftBox, .rightBox {
+	display: flex;
+	align-items: flex-end;
+}
+
+.bubbleIcon, .cmtCnt, .heartIcon {
+	display: flex;
+	align-items: flex-end;
+	
+}
+.colorRed{
+	color: red;
+}
+
+.bubbleIcon {
+	margin-left: 10px;
+}
+
+
+.miniFont {
+	font-size: 12px;
+}
+
+.jwh {
+	padding: 15px;
+}
+
+.cmtPost {
+	height: 100px;
+}
+
+.test222 {
+	border: none;
+	outline: none;
+}
+
+.postCntBox {
+	display: flex;
+	justify-content: space-between;
+	margin-bottom: 20px;
+}
+
+.cmtContainer {
+	display: flex;
+	border: 1px solid rgba(0, 0, 0, 0.125);
+	border-radius: 8px;
+	width: 670px;
+	justify-content: center
+}
+
+.cmtContainer textarea:focus {
+	border: none;
+	outline: none;
+}
+
+#cmtText {
+	height: 63px;
+	overflow: hidden;
+	width: 90%;
+	padding-top: 17px;
+}
+
+.cmtBtnContainer {
+	display: flex;
+	align-items: center
+}
+
+#cmtPostBtn {
+	color: #00c7ae;
+	display: none; 
+	 cursor: pointer;
+}
+.list-group-item{
+	border: none;
+}
+.cmtRow1 {
+	display: flex;
+	justify-content: space-between;
+}
+
+.cmtRow2 {
+	display: flex;
+	justify-content: space-between;
+}
+
+.cmtRow3 {
+	display: flex;
+	justify-content: flex-end;
+}
+
+.trigger {
+	border: none;
+	background-color: white;
+}
+
+.modPostBtn {
+	width: 50px;
+	height: 25px;
+	font-size: 10px;
+	padding: 0px;
+}
+
+.modinput {
+	background-color: white;
+	border: none;
+	width: 90%;
+	margin-right: 5px;
+}

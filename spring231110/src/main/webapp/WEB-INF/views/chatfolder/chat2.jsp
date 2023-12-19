@@ -2,10 +2,65 @@
      pageEncoding="UTF-8"%> 
  <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> 
  <%@ page session="false" %> 
+<!-- <html> -->
+<!-- <head> -->
+<!-- 	<title>Index Page</title> -->
+<!-- </head> -->
+<!-- <body> -->
+<%-- <jsp:include page="common/header.jsp"/> --%>
+<%-- <jsp:include page="common/nav.jsp"/> --%>
 
+<!-- <h3> -->
+<!-- 메인입니다. -->
+<!-- </h3> -->
+
+<%-- <jsp:include page="common/footer.jsp"/> --%>
+<!-- </body> -->
+<!-- </html> -->
 <!DOCTYPE html>
 <html lang="ko">
 <style>
+/* .total {
+    margin: 20px;
+    padding: 20px;
+    border: 1px solid #ddd;
+}
+ */
+/* .subject {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 15px;
+} */
+
+/* .content {
+    background-color: #f9f9f9;
+    padding: 15px;
+    border-radius: 5px;
+} */
+
+/* 채팅 관련 스타일 */
+.media {
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+    height : 70px;
+}
+
+.media img {
+    border-radius: 50%;
+}
+
+.media-heading {
+    font-weight: bold;
+}
+.subject {
+    display: flex; /* Flexbox를 사용하여 아이템들을 가로로 배열 */
+    justify-content: space-between; /* 아이템들 사이에 공간을 균등하게 분배 */
+}
+
+.find-link {
+    margin-left: 20px; /* 원하는 간격을 설정 */
+}
+/* 추가적인 스타일링 필요 */
 
 </style>
 <head>
@@ -14,96 +69,57 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
+
     <title>실시간 채팅 메신저 서비스</title>
 
-<%--     <link href="<c:url value='../resources/bootstrap337/css/custom.css'/>" rel="stylesheet" type="text/css"> --%>
-<%-- 	<link href="<c:url value='../resources/bootstrap337/css/bootstrap.css'/>" rel="stylesheet" type="text/css"> --%>
-<%-- 	<link href="<c:url value='/resources/css/r_side.css'/>" rel="stylesheet"	type="text/css"> --%>
+    <!-- Custom fonts for this template-->
+<%--     <link href="<c:url value='../resources/vendor/fontawesome-free/css/all.min.css'/>" rel="stylesheet" type="text/css"> --%>
+<!--     <link -->
+<!--         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" -->
+<!--         rel="stylesheet"> -->
 
-	<link href="<c:url value='/resources/css/index_all.css'/>" rel="stylesheet" 	type="text/css">
-	<link href="<c:url value='../resources/css/chat2.css'/>" rel="stylesheet" 	type="text/css">
-<!-- 	<link rel="stylesheet" type="text/css" href="경로/chat2.css"> -->
-<!-- <link rel="stylesheet" href="/resources/css/main.css"> -->
+    <!-- Custom styles for this template-->
+<%--     <link href="<c:url value='../resources/css/sb-admin-2.min.css'/>" rel="stylesheet" type="text/css"> --%>
+<%--     <link href="<c:url value='../resources/css/bootstrap.min.css'/>" rel="stylesheet" type="text/css"> --%>
+    <link href="<c:url value='../resources/bootstrap337/css/custom.css'/>" rel="stylesheet" type="text/css">
+	<link href="<c:url value='../resources/bootstrap337/css/bootstrap.css'/>" rel="stylesheet" type="text/css">
+	<link href="<c:url value='/resources/css/r_side.css'/>" rel="stylesheet"
+	type="text/css">
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-
+<link href="<c:url value='/resources/css/index_all.css'/>" rel="stylesheet"
+	type="text/css">
 </head>
 
 <body >
-
+<%-- <jsp:include page="../common/header.jsp"/> --%>
 <jsp:include page="../common/nav.jsp"/>
+<jsp:include page="../common/l_side.jsp" />
+
+
+
+
+
+
 
 
 <div class="total">
 <!-- <div class="subject">채딩페이지</div> -->
-<!-- <div class="subject"> -->
-<!--     <span>일대일 채팅 페이지</span> -->
-<!-- </div> -->
-   <div class="navBorder"></div>
-   
-   <div class="header-container">
-   	<h1 class="title">채팅</h1>
+<div class="subject">
+    <span>일대일 채팅 페이지</span>
+     <a href="/chaturl/find" class="find-link">사원찾기</a> <!--컨트롤러가 잡게 함 -->
+</div>
+
 	<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 	    <ul class="nav navbar-nav">
-	        <li>
-	            <a href="/chaturl/box" class="message-box-link">
-	                메시지함
-	                <span id="unread" class="label label-info"></span>
-	                <i class="fas fa-envelope"></i> <!-- Font Awesome envelope icon -->
-	            </a>
-	        </li>
-	        <li>
-	            <a href="/chaturl/box" class="message-box-link2">
-	                견적서보기
-	                <span id="unread" class="label label-info"></span>
-	                <i class="fas fa-file-alt"></i> <!-- Font Awesome document icon -->
-	            </a>
-	        </li>
+	   		<li><a href="/chaturl/chat">채팅메신저페이지</a> </li>
+		    <li class="active"><a href="/member/index">메인</a></li>
+		    <li><a href="/chaturl/find" class="find-link">사원찾기</a></li> <!-- 컨트롤러가 잡게 함 -->
+		    <li><a href="/chaturl/box">메시지함<span id="unread" class="label label-info"></span></a></li> <!-- 컨트롤러가 잡게 함 -->
 	    </ul>
 	</div>
-   	</div>
-   <div class="border"></div>
 
 
-<!-- 	<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1"> -->
-<!-- 	    <ul class="nav navbar-nav"> -->
-<!-- <!-- 	   		<li><a href="/chaturl/chat">채팅메신저페이지</a> </li> -->
-<!-- <!-- 		    <li class="active"><a href="/member/index">메인</a></li>  -->
-<!-- <!-- 		    <li><a href="/chaturl/find" class="find-link">사원찾기</a></li> 컨트롤러가 잡게 함 -->
-<!-- 		    <li><a href="/chaturl/box">메시지함<span id="unread" class="label label-info"></span></a></li> 컨트롤러가 잡게 함 -->
-<!-- 	    </ul> -->
-<!-- 	</div> -->
-
-<!-- <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1"> -->
-<!--     <ul class="nav navbar-nav"> -->
-<!--         <li> -->
-<!--             <a href="/chaturl/box" class="message-box-link"> -->
-<!--                 메시지함 -->
-<!--                 <span id="unread" class="label label-info"></span> -->
-<!--                 <i class="fas fa-envelope"></i> Font Awesome envelope icon -->
-<!--             </a> -->
-<!--         </li> -->
-<!--         <li> -->
-<!--             <a href="/chaturl/box" class="message-box-link"> -->
-<!--                 황지영추가1요청 -->
-<!--                 <span id="unread" class="label label-info"></span> -->
-<!--                 <i class="fas fa-envelope"></i> Font Awesome envelope icon -->
-<!--             </a> -->
-<!--         </li> -->
-<!--         <li> -->
-<!--         	<a href="/chaturl/box" class="message-box-link"> -->
-<!--                 황지영추가2요청 -->
-<!--                 <span id="unread" class="label label-info"></span> -->
-<!--                 <i class="fas fa-envelope"></i> Font Awesome envelope icon -->
-<!--             </a> -->
-<!--         </li> -->
-<!--     </ul> -->
-<!-- </div> -->
-
-
-
-<div id = "chattotal">
-<!-- 231111_1전경환 채팅창관련해서 뭐 넣기 S -------------------------------------> <!-- class="content" -->
+<div ><!-- 231111_1전경환 채팅창관련해서 뭐 넣기 S -------------------------------------> <!-- class="content" -->
 <!-- https://www.youtube.com/watch?v=8s98IhtgwZ0&list=PLRx0vPvlEmdAlUbX_TGDxaSxKCvfl2isa&index=6 -->
 <div >
     <div >
@@ -116,7 +132,7 @@
                 	<div class="clearfix"></div>
             	</div>
 	            <div id="chat" >
-	                <div id="chatList2" style=""> <!-- portlet-body chat widget -->
+	                <div id="chatList2" style="overflow-y: auto; overflow-x: hidden; width: auto; height:550px;"> <!-- portlet-body chat widget -->
 	                <!--------------- 여기에 뭔가 주루루륵 반복해서 들어가는 부분 같음 S------------------------------------------------------------------->
 					<div>잠시만 기다려주세요</div>
 					<div class="row">
@@ -153,19 +169,17 @@
 					</div>
 	                <!--------------- 여기에 뭔가 주루루륵 반복해서 들어가는 부분 같음 E------------------------------------------------------------------->
 	                </div>
-	                <div id="messageinputboxbigdiv">    
-	                    <div>
-	                        <div>
+	                <div >    
+	                    <div >
+	                        <div >
 <%-- 	                        <input type="text" id="chatName" value="${username}" /> --%>
-
-								<!-- jgh231213 채팅자 이름 안보이게 처리 -->
 	                            <input style="height: 30px; width: 20%;" type="text" id="chatName" class="form-control" value="${username}"  maxlength="8" readonly="readonly">
 	                        </div>
 	                    </div>
-						<div id = "messageinputbox1" style="">
-						    <div style="flex:0.97;">
+						<div style="height: 60px; display: flex; align-items: center;">
+						    <div style="flex:0.5;">
 						    	
-						        <textarea id="chatContent" style=""  class="form-control" placeholder="메시지를 입력하세요" maxlength="100"></textarea>
+						        <textarea style="height: 50px; width: 90%;" id="chatContent" class="form-control" placeholder="메시지를 입력하세요" maxlength="100"></textarea>
 						    	
 						    </div>
 						    <div>
@@ -191,8 +205,7 @@
 
 
 
-<!-- 231111_1전경환 채팅창관련해서 뭐 넣기 E ------------------------------------->
-</div>
+<!-- 231111_1전경환 채팅창관련해서 뭐 넣기 E -------------------------------------></div>
 </div>
 
 

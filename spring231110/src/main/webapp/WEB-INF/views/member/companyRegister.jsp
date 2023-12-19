@@ -70,12 +70,16 @@
 				<div class="mb-3 input-group-lg">
 					<p id="addrP">주소</p>
 					<div class="addrBox">
-						<input type="text" id="zoneCode" class="form-control mb-3"	placeholder="우편번호" name="zoneCode"> 
-						<input type="button" class="form-control mb-3 addrBtn" onclick="inputAddr()" value="우편번호 찾기"><br>
+						<input type="text" id="zoneCode" class="form-control mb-3"
+							placeholder="우편번호"> <input type="button"
+							class="form-control mb-3 addrBtn" onclick="inputAddr()"
+							value="우편번호 찾기"><br>
 					</div>
-					<input type="text" id="address" class="form-control mb-3" placeholder="주소" name="address"><br> 
-					<input type="text" id="detailAddress" class="form-control mb-3"  placeholder="상세주소" name = "detailAddress">
-					<input type="text" id="extraAddress" class="form-control mb-3"	placeholder="참고항목" name="extraAddress">
+					<input type="text" id="address" class="form-control mb-3"
+						placeholder="주소"><br> <input type="text"
+						class="form-control mb-3" id="detailAddress" placeholder="상세주소">
+					<input type="text" id="extraAddress" class="form-control mb-3"
+						placeholder="참고항목">
 				</div>
 				<div class="mb-3 profileBox">
 					<label class="form-label">메이트 대표 이미지</label>

@@ -17,7 +17,7 @@ body {
 	font-family: 'NEXON Lv1 Gothic OTF';
 }
 
-p {
+section p {
 	margin: 20px 0 0 0;
 	color: #15181E;
 }
@@ -66,6 +66,7 @@ input[type=file]::file-selector-button, .form-control {
 	background-color: rgb(255, 255, 255);
 	border-radius: 8px;
 	margin-bottom: 60px;
+	box-sizing: content-box;
 }
 
 section {
@@ -379,7 +380,25 @@ table, td, th {
 	justify-content: center;
 }
 
-.agreeP{
+.agreeP {
 	margin-bottom: 10px;
-    margin-left: 5px;
+	margin-left: 5px;
+}
+
+.comRegisterDiv>a {
+	color: green;
+	margin-left: 10px;
+}
+
+.comRegisterDiv {
+	display: flex;
+	align-items: flex-end;
+}
+
+.moveRegisterPage {
+	margin-top: 10px;
+}
+
+.title_2{
+	margin-bottom: 50px;
 }
