@@ -4,15 +4,21 @@ import java.util.List;
 
 import org.springframework.web.multipart.MultipartFile;
 
+
+import com.myweb.www.domain.CouponVO;
+
 import com.myweb.www.domain.FileVO;
+import com.myweb.www.domain.FilterdataVO;
 import com.myweb.www.domain.PortfolioDTO;
 import com.myweb.www.domain.PortfolioVO;
 
 public interface PortfolioService {
 
 	int add(PortfolioVO pvo, FileVO portfolioMainImg);
+	
+	List<PortfolioDTO> getList1();
 
-	List<PortfolioDTO> getList();
+	List<PortfolioDTO> getList2(FilterdataVO filter);
 
 	PortfolioDTO getDetail(long pno, String authId);
 
@@ -27,6 +33,23 @@ public interface PortfolioService {
 	void updateReadCount(long pno);
 
 	String selectId(long pno);
+
+	int likeQtyAreaInput(long pno);
+
+
+	int deletePortfolio(long pno);
+
+	int postModifyPortfolio(PortfolioVO pvo, FileVO portfolioMainImg);
+
+	List<PortfolioDTO> getListFilter(FilterdataVO filterData);
+
+	List<PortfolioDTO> getMyList(String id);
+
+	int postModifyPortfolioOnlyContent(PortfolioVO pvo);
+
+	List<PortfolioVO> getHeartList(String id);
+
+	PortfolioVO getPortfolio(long pno);
 
 
 

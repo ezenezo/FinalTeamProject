@@ -1,5 +1,11 @@
 package com.myweb.www.repository;
 
-public interface CustomerServiceDao {
+import java.util.List;
+
+import com.myweb.www.domain.CustomerServiceVO;
+
+public interface CustomerServiceDAO {
+
+	List<CustomerServiceVO> getList(String searchValue);
 
 }

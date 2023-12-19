@@ -30,10 +30,7 @@
 .find-link {
     margin-left: 20px; /* 원하는 간격을 설정 */
 }
-
-img {
-    vertical-align: baseline !important;
-}
+/* 추가적인 스타일링 필요 */
 
 </style>
 <head>
@@ -45,64 +42,53 @@ img {
 
     <title>실시간 채팅 메신저 서비스</title>
 
-
+    <link href="<c:url value='../resources/bootstrap337/css/custom.css'/>" rel="stylesheet" type="text/css">
 	<link href="<c:url value='../resources/bootstrap337/css/bootstrap.css'/>" rel="stylesheet" type="text/css">
-	
-<%-- 	<link href="<c:url value='../resources/css/chat2.css'/>" rel="stylesheet" 	type="text/css"> --%>
-	
-	
-<meta name="description" content="">
-<meta name="author" content="">
+	<link href="<c:url value='../resources/css/r_side.css'/>" rel="stylesheet"
+	type="text/css">
 
-<link href="../resources/css/box.css" rel="stylesheet">
-<!-- <link rel="stylesheet" href="/resources/css/main.css"> -->
-
-<link
-	href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.8.1/font/bootstrap-icons.min.css"
-	rel="stylesheet">
-<meta charset="UTF-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport"
-	content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
-
-
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script type="text/javascript"	src="https://oapi.map.naver.com/openapi/v3/maps.js?ncpClientId=82r632girq"></script>
-
-
-<link href="<c:url value='/resources/css/index_all.css'/>"	rel="stylesheet" type="text/css">
-<link	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"	rel="stylesheet">
-	
-	
-	
-	
-	
+<link href="<c:url value='../resources/css/index_all.css'/>" rel="stylesheet"
+	type="text/css">
 </head>
 
-<body class="mainBody" >
+<body >
 
 <jsp:include page="../common/nav.jsp"/>
-<%-- <jsp:include page="../common/l_side.jsp" /> --%>
+<jsp:include page="../common/l_side.jsp" />
 
 
- <div class="total"> 
-<!-- <div class="subject">채팅페이지</div> -->
+
+
+<!-- 	<div class="total"> -->
+<!-- 		<div class="subject">주제입니다.</div> -->
+<!-- 		<div class="content">content 입니다.</div> -->
+<!-- 	</div> -->
+
+
+
+<div class="total">
+<div class="subject">채딩페이지</div>
 
 <div class="content">
 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
     <ul class="nav navbar-nav">
-<!--    		<li><a href="/chaturl/chat">채팅메신저페이지</a> </li> --> <!-- 231212주석처리 -->
-<!-- 	    <li><a href="/member/index">메인</a></li> --> <!-- 231212주석처리 -->
-<!-- 	    <li><a href="/chaturl/find" class="find-link">사원찾기</a></li>-->    <!--컨트롤러가 잡게 함 -->
+   		<li><a href="/chaturl/chat">채팅메신저페이지</a> </li>
+	    <li><a href="/member/index">메인</a></li>
+	    <li><a href="/chaturl/find" class="find-link">사원찾기</a></li> <!-- 컨트롤러가 잡게 함 -->
 	    <li class="active"><a href="/chaturl/box">메시지함<span id="unread" class="label label-info"></span></a></li> <!-- 컨트롤러가 잡게 함 -->
     </ul>
-
 </div>
 
 
 
 
 <!-- 231111_1전경환 채팅창관련해서 뭐 넣기 S -------------------------------------> 
+<div>
+
+<div>
+
+    <div>
+
         <div>
             <div>
                 <div class="portlet-heading">
@@ -151,7 +137,8 @@ img {
 	                </div>
 	                <div>    
 	                    <div>
-	                        <div style="display: none;">
+	                        <div>
+
 	                            <input style="height: 40px; width: 20%;" type="text" id="chatName" class="form-control" value="${username}"  maxlength="8" readonly="readonly">
 	                        </div>
 	                    </div>
@@ -166,16 +153,16 @@ img {
 	            </div>
            </div>
         </div>
-    
+    </div>
+</div>
 
 
-
-
+</div>
 <!-- 231111_1전경환 채팅창관련해서 뭐 넣기 E ------------------------------------->
 </div>
 
 
-</div>
+content 입니다.</div>
 
 
 

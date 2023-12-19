@@ -1,5 +1,34 @@
 console.log("chat2.js진입");
 
+// function autoClosingAlert(selector, delay){
+//     var alert =$(selector).alert();
+//     alert.show();
+//     window.setTimeout(function(){alert.hide()},delay);
+// }
+// function submitFunction(){
+//     var fromID = '<%= userID %>';
+//     var toID = '<%= toID %>';
+//     var chatContent = $('#chatContent').val();
+//     $.ajax({
+//         type : "POST",
+//         url : ".chatSubmitServlet",
+//         data:{
+//             from: encodeURIComponent(fromID),
+//             toID: encodeURIComponent(toID),
+//             chatContent: encodeURIComponent(chatContent)
+//         },
+//         success: function(result){
+//             if(result ==1  ){
+//                 autoClosingAlert('#successMessage',2000);
+//             }else if (result ==0){
+//                 autoClosingAlert('#dangerMessage',2000);
+//             }else{
+//                 autoClosingAlert('#warningMessage', 2000);
+//             }
+//         }
+//     });
+//     $('#chatContent').val('');
+// }
 // 현재 로그인한 사용자 ID를 전역 변수로 저장
 let currentUserID = document.getElementById("chatName").value; //프린시펄 username부터 input으로 넘어온값
 
@@ -62,104 +91,69 @@ async function postComment(chatData) {
     }
 }
 
-//채팅 리스트 출력 함수
+//댓글 리스트 출력 함수
 function printChatList(chatData) {
     spreadChatListFromServer(chatData).then((result) => {
         console.log("printChatList 출력함수 진입");
 
         const ul = document.getElementById("chatList2");
         console.log("printChatListd의 result는 ", result);
-        console.log("result.length는 " + result.length);
+        console.log("result.length는 ", result.length);
         //console.log("result.chatList는 " , result.chatList);
         //console.log("result.chatList.length는 " , result.chatList.length);
         if (result.length > 0) {
             //대소문자 꼭 맞춰야함 위 아래
 
+            //다시 댓글을 뿌릴 때 기존 값 삭제 1page 경우
+            // if (page == 1) {
+            //     ul.innerText = "";
+            // }
             ul.innerText = "";
             let str = "";
             for (let chatdto of result) {
-                let messageClass;
                 let name1;
-                let profileImageUrl;
-                let defaultImageUrl = "/resources/img/profile_none.png"; // 기본 이미지 경로
-
-                // filevo가 존재하면 정상적인 이미지 경로를, 그렇지 않으면 기본 이미지 경로를 사용
-                if (chatdto.filevo) {
-                    profileImageUrl = "http://localhost:8088/upload/" +
-                    //"http://aj2002.cafe24.com/_javaweb/_java/fileUpload/" + //카페24배포용webapps
-                        chatdto.filevo.saveDir + "/" +
-                        chatdto.filevo.uuid + "_" +
-                        chatdto.filevo.fileName;
-                } else {
-                    profileImageUrl = defaultImageUrl;
-                }
-
-
-                // let profileImageUrl =
-                //     "http://localhost:8088/upload/" + //로컬용
-                //     //"http://aj2002.cafe24.com/_javaweb/_java/fileUpload/" + //카페24배포용webapps
-                //     chatdto.filevo.saveDir +
-                //     "/" +
-                //     chatdto.filevo.uuid +
-                //     "_" +
-                //     chatdto.filevo.fileName;
-                // let defaultImageUrl = "/resources/img/anoyicon.png"; // 기본 이미지 경로
-
-                console.log("profileImageUrl는" + profileImageUrl);
-                console.log("defaultImageUrl는" + defaultImageUrl);
-                
-
-                let str = `<div class="row">`;
-
-                // 시간 포맷 변경 (예: '15:30')
-                let formattedTime = new Date(
-                    chatdto.chatTime
-                ).toLocaleTimeString([], {
-                    hour: "2-digit",
-                    minute: "2-digit",
-                });
-
                 if (chatdto.fromID == currentUserID) {
-                    messageClass = "my-message";
                     name1 = "나";
-                    str += `<div class="col-lg-12 ${messageClass}">`;
-                    str += `<div class="media">`;
-                    str += `<div class="message-time-left">${formattedTime}</div>`;
-                    str += `<div class="message-content">${chatdto.chatContent}</div>`;
-                    str += `</div>`; // media 닫기
-                    str += `</div>`; // col-lg-12 닫기
                 } else {
-                    // 상대방 메시지일 때의 레이아웃
-                    messageClass = "other-message";
                     name1 = chatdto.fromID;
-                    str += `<div class="col-lg-12 ${messageClass}">`;
-                    str += `<div class="media">`;
-
-                    // 이미지
-                    //str += `<img class="media-object img-circle" src="${profileImageUrl}" alt="">`; // 프로필 이미지 URL 사용
-                    // 이미지 with onerror 이벤트
-                    str += `<img class="media-object img-circle" src="${profileImageUrl}" onerror="this.onerror=null; this.src='${defaultImageUrl}'" alt="">`;
-
-                    // 오른쪽 컨테이너 (ID와 채팅 내용, 시간 포함)
-                    str += `<div class="right-container">`;
-                    str += `<div class="user-id">${name1}</div>`; // ID 표시
-                    str += `<div class="message-with-time">`; // 메시지와 시간을 위한 컨테이너
-                    str += `<div class="message-content">${chatdto.chatContent}</div>`; // 채팅 내용 표시
-                    str += `<div class="message-time-right">${formattedTime}</div>`; // 시간 표시
-                    str += `</div>`; // message-with-time 닫기
-                    str += `</div>`; // right-container 닫기
-
-                    str += `</div>`; // media 닫기
-                    str += `</div>`; // col-lg-12 닫기
                 }
 
+                str += `<div class="row">`;
+                str += `<div class="col-lg-12">`;
+                str += `<div class="media" >`;
+                str += `<div><a class="pull-left" href="#">`;
+                str += `<img class="media-object img-circle" style="width: 30px; height:30px;" src="/resources/img/anoyicon.png" alt="">`;
+
+                str += `<span class="media-heading">`;
+                str += `${name1}  <span class="small pull-rigth style="left-right: 30px;">  ${chatdto.chatTime}</span>`;
+                str += `</span>`;
+
+                str += `</a></div>`;
+                str += `<div class="media-body" style="float: center">`;
+
+                str += `<div style="text-align: left;">${chatdto.chatContent}</div>`;
                 str += `</div>`;
-                ul.innerHTML += str;
+                str += `</div>`;
+                str += `</div>`;
+                str += `</div>`;
             }
             ul.innerHTML += str;
 
             const chatList = document.getElementById("chatList2");
             chatList.scrollTop = chatList.scrollHeight;
+
+            //str += `</ul>`;
+
+            // //댓글 페이징 코드
+            // let moreBtn = document.getElementById('moreBtn');
+            // console.log(moreBtn, result.pgvo.pageNo, result.endPage);
+            // //db에서 pgvo + list 같이 가져와야 값을 줄 수 있음.
+            // if (result.pgvo.pageNo < result.endPage) {
+            //     moreBtn.style.visibility = 'visible'; //버튼 표시
+            //     moreBtn.dataset.page = page + 1;
+            // } else {
+            //     moreBtn.style.visibility = 'hidden'; //버튼 숨김
+            // }
         } else {
             ul.innerText = "글이 없습니다.";
         }

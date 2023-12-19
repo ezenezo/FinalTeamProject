@@ -5,24 +5,41 @@
 <mapper namespace="com.myweb.www.repository.CompanyDAO">
 
 
-	<select id="selectdetailAll" resultType="com.myweb.www.domain.CompanyDTO" >
+	<select id="selectdetailAll"
+		resultType="com.myweb.www.domain.CompanyDTO">
 		select c.id as id,
-		 m.user_nm, 
-		 c.lat as lat ,
-		 c.lng as lng , 
-		 m.address as address ,
-		 c.phone as phone , 
-		 c.profile_quotepage, 
-		 f.save_dir as save_dir, 
-		 f.file_name as file_name,
-		 f.uuid
+		m.user_nm,
+		c.lat as lat ,
+		c.lng as lng ,
+		m.address as address ,
+		c.phone as phone ,
+		c.profile_quotepage,
+		f.save_dir as save_dir,
+		f.file_name as file_name
 		from member m,
 		company c ,
-		file f 
+		file f
 		where 1=1
-		and m.type = TRUE 
-		and m.id = c.id 
-		and c.id = f.id 
+		and m.type = TRUE
+		and m.id = c.id
+		and c.id = f.id
 	</select>
+
+	<select id="getCvo" resultType="com.myweb.www.domain.CompanyVO">
+		select * from company where
+		id=#{id}
+	</select>
+	
+	<update id="reviewCount">
+		update company set review_count=(select count(*) from review where com_id=company.id)
+	</update>
+	<update id="portfolioCount">
+		update company set
+		portfolio_count=(select count(*) from portfolio where id=company.id)
+		
+	</update>
+	<update id="updateRateAverage">
+		update company set rate_average=(select AVG(rate) as average_rate from review where com_id=company.id)
+	</update>
 
 </mapper>
