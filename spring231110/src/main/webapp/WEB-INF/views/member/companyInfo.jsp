@@ -17,7 +17,7 @@
 </head>
 <body class="companyInfoBody">
 	<jsp:include page="../common/nav.jsp"></jsp:include>
-
+	<a name="basic"></a>
 	<div class="box">
 		<div class="box2">
 			<div class="mainImgBox">
@@ -26,10 +26,14 @@
 
 			</div>
 			<div class="btnBox">
-				<button class="topBtn topBtn1 clicked" type="button">업체정보</button>
-				<button class="topBtn topBtn2" type="button">시공사례(${cdto.cvo.portfolioCount})</button>
-				<button class="topBtn topBtn3" type="button">업체후기(${cdto.cvo.reviewCount})</button>
+				<a class="topBtnA" href="#basic"><button
+						class="topBtn topBtn1 clicked" type="button">업체정보</button></a> <a
+					class="topBtnA" href="#portfolio"><button
+						class="topBtn topBtn2" type="button">시공사례(${cdto.cvo.portfolioCount})</button></a>
+				<a class="topBtnA" href="#review"><button class="topBtn topBtn3"
+						type="button">업체후기(${cdto.cvo.reviewCount})</button></a>
 			</div>
+
 
 			<h3 class="infoTitle">기본 정보</h3>
 			<ul class="basic">
@@ -39,9 +43,11 @@
 					<p>${cdto.mvo.email}</p></li>
 				<li><p class="spantitle">대표전화</p>
 					<p>${cdto.cvo.phone}</p></li>
-				<li><p class="spantitle">주소</p>
+				<li><p class="spantitle">주소</p> <a name="portfolio"></a>
 					<p>${cdto.mvo.address}</p></li>
+
 			</ul>
+
 
 			<h3 class="infoTitle">다양한 시공사례</h3>
 
@@ -62,8 +68,9 @@
 
 				</c:forEach>
 			</div>
-			<a class="moreA" href="#"><button class="morePortofolioBtn"
-					type="button">시공사례 더보기</button></a>
+			<a name="review"></a> <a class="moreA" href="#"><button
+					class="morePortofolioBtn" type="button">시공사례 더보기</button></a>
+
 
 			<div class="reviewBox">
 				<div class="rateAverage">
@@ -147,69 +154,26 @@
 
 			<h3 class="infoTitle">전체 후기(${cdto.cvo.reviewCount})</h3>
 
-			<div class="reviewBottom">
-				<c:forEach items="${cdto.rdtoList}" var="rdto" begin="0" end="2">
-					<div class="review">
-						<div class="rateStar">
-							<div class="starmini">
-							
-								
-							</div>
-							<p>${rdto.rvo.id}|${rdto.rvo.regDate}</p>
-
-						</div>
-
-						<div class="review2col">
-							<div class="imgDiv">
-								<img class="reviewMainImg"
-									src="/upload/${rdto.reviewMainImg.saveDir}/${fn:replace(rdto.reviewMainImg.saveDir,'\\','-')}_${rdto.reviewMainImg.uuid}_${rdto.reviewMainImg.fileName}">
-
-							</div>
-
-							<div class="reviewTitleBox">
-
-								<div>
-									<p>${rdto.rvo.title}</p>
-								</div>
-								<div>
-
-									<div class="portfolioInfo">
-										<p>
-											<span class="span1">주거형태</span><span class="span2">${pdto.pvo.homeType}</span>
-										</p>
-										<p>
-											<span class="span1">전용면적</span><span class="span2">${pdto.pvo.homeSize}</span>
-										</p>
-										<p>
-											<span class="span1">방 개수</span><span class="span2">${pdto.pvo.roomCnt}</span>
-										</p>
-										<p>
-											<span class="span1">가족형태</span><span class="span2">${pdto.pvo.familyType}</span>
-										</p>
-										<p></p>
-										<p>
-											<span class="span1">스타일</span><span class="span2">${pdto.pvo.homeStyle}</span>
-										</p>
-									</div>
-
-								</div>
-
-							</div>
-						</div>
-					</div>
-				</c:forEach>
-			</div>
+			<div class="reviewBottom"></div>
+			<button style="visibility: hidden" data-page="1" id="moreBtn"
+				class="morePortofolioBtn moreBtn" type="button">후기 더보기</button>
 		</div>
 	</div>
-	<a class="moreA" href="#"><button class="morePortofolioBtn"
-			type="button">후기 더보기</button></a>
+
+
 
 
 
 	<!-- 	<script src="/resources/js/portfolioRegister.js"></script> -->
 
 	<jsp:include page="../common/footer.jsp"></jsp:include>
+	<script type="text/javascript">
+		let comId = `<c:out value="${cdto.mvo.id}"/>`;
+	</script>
 	<script type="text/javascript" src="/resources/js/companyInfo.js"></script>
+	<script type="text/javascript">
+		reviewPrint(comId);
+	</script>
 
 
 </body>

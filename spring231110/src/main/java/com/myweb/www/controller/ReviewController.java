@@ -24,11 +24,17 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.myweb.www.domain.FileVO;
+
+import com.myweb.www.domain.PagingVO;
+
 import com.myweb.www.domain.PortfolioDTO;
 import com.myweb.www.domain.PortfolioVO;
 import com.myweb.www.domain.ReviewDTO;
 import com.myweb.www.domain.ReviewVO;
 import com.myweb.www.handler.FileHandler;
+
+import com.myweb.www.handler.PagingHandler;
+
 import com.myweb.www.security.MemberDTO2;
 import com.myweb.www.service.ReviewService;
 
@@ -144,11 +150,23 @@ public class ReviewController {
 	}
 
 	@GetMapping(value = "/printList", produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<List<ReviewDTO>> printListReivewDto(Model model) {
+	public ResponseEntity<List<ReviewDTO>> printListReivewDto() {
 		List<ReviewDTO> rdtoList = rsv.mainRdtoList();
-		model.addAttribute("rdtoList", rdtoList);
 		return new ResponseEntity<List<ReviewDTO>>(rdtoList, HttpStatus.OK);
 	}
+	
+	@GetMapping(value = "/printListCompanyInfo/{id}/{page}", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<PagingHandler> printListReivewDtoCompanyInfo(@PathVariable("id") String id,@PathVariable("page") int page) {
+		log.info("id>>>{}",id);
+		log.info("page>>>{}",page);
+		
+		PagingVO pgvo = new PagingVO(page, 5); // qty=5
+		PagingHandler list = rsv.getList(id, pgvo);
+		
+//		List<ReviewDTO> rdtoList = rsv.companyInfoRdtoList(id);
+		return new ResponseEntity<PagingHandler>(list, HttpStatus.OK);
+	}
+
 
 	// 리뷰 상세페이지 이동
 	@GetMapping("/reviewDetail")
