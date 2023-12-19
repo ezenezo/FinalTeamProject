@@ -7,8 +7,9 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
-
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
@@ -19,20 +20,35 @@ import org.springframework.ui.Model;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+import com.myweb.www.domain.CompanyDTO;
+import com.myweb.www.domain.CompanyDTO2;
 import com.myweb.www.domain.CompanyVO;
 import com.myweb.www.domain.FileVO;
 import com.myweb.www.domain.PagingVO;
+import com.myweb.www.domain.PortfolioDTO;
+import com.myweb.www.domain.PortfolioVO;
+import com.myweb.www.domain.ReviewDTO;
+import com.myweb.www.domain.ReviewVO;
 import com.myweb.www.repository.CompanyDAO;
+
 import com.myweb.www.repository.FileDAO;
 import com.myweb.www.repository.HeartDAO;
 import com.myweb.www.repository.MemberDAO;
+import com.myweb.www.repository.PortfolioDAO;
+import com.myweb.www.repository.ReviewDAO;
 import com.myweb.www.security.AuthVO;
+import com.myweb.www.security.MemberDTO;
 import com.myweb.www.security.MemberVO;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Service
 public class MemberServiceImpl implements MemberService {
+
 	@Inject
 	private MemberDAO mdao;
 
@@ -40,10 +56,19 @@ public class MemberServiceImpl implements MemberService {
 	private FileDAO fdao;
 
 	@Inject
+	private PortfolioDAO pdao;
+
+	@Inject
 	private CompanyDAO cdao;
 
 	@Inject
 	private HeartDAO hdao;
+
+	@Inject
+	private PortfolioService psv;
+
+	@Inject
+	private ReviewDAO rdao;
 
 	@Transactional
 	@Override
@@ -63,10 +88,12 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
+
 	@Transactional
 	public int remove(String id) {
 		mdao.removeAuth(id);
 		return mdao.remove(id);
+
 	}
 
 	@Override
@@ -123,12 +150,11 @@ public class MemberServiceImpl implements MemberService {
 			// 필수 쿼리 파라미터 세팅
 			sb.append("grant_type=authorization_code");
 			sb.append("&client_id=e7f7342b45a67c5286814656c21b3bdd");
-			sb.append("&redirect_uri=http://localhost:8088/member/");
+			sb.append("&redirect_uri=http://localhost:8088/member/"+ok);
 			sb.append("&code=").append(code);
-
 			bw.write(sb.toString());
 			bw.flush();
-
+			
 			int responseCode = conn.getResponseCode();
 			log.info("[KakaoApi.getAccessToken] responseCode = {}", responseCode);
 
@@ -197,31 +223,11 @@ public class MemberServiceImpl implements MemberService {
 			}
 			log.info("response body : " + result);
 
-			/*
-			 * JsonParser parser = new JsonParser(); JsonElement element =
-			 * parser.parse(result);
-			 * 
-			 * JsonObject properties =
-			 * element.getAsJsonObject().get("properties").getAsJsonObject(); JsonObject
-			 * kakao_account =
-			 * element.getAsJsonObject().get("kakao_account").getAsJsonObject();
-			 * 
-			 * String email = kakao_account.getAsJsonObject().get("email").getAsString();
-			 * String id = result.substring(result.indexOf(":"),result.indexOf(","));
-			 * 
-			 * userInfo.put("email", email); userInfo.put("id", id);
-			 */
-
 			user = new ObjectMapper().readTree(result);
 
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-
-		/*
-		 * ObjectMapper mapper = new ObjectMapper(); JsonNode user =
-		 * mapper.valueToTree(userInfo);
-		 */
 
 		return user;
 	}
@@ -297,7 +303,6 @@ public class MemberServiceImpl implements MemberService {
 		ses.setAttribute("id", kakaoId);
 		m.addAttribute("loginMember", member);
 		m.addAttribute("kakaoUser", kakaoUser);
-		// m.setViewName("index");
 
 		return "member/loginWithoutForm"; // 유저 계정 권한
 	}
@@ -426,6 +431,75 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
+
+	public MemberDTO getMdto(String id) {
+
+		MemberVO mvo = mdao.selectEmail(id);
+		CompanyVO cvo = cdao.getCvo(id);
+
+		if (mvo.isType()) {
+			log.info("20231207여기오는지11");
+			List<PortfolioDTO> pdtoList = new ArrayList<PortfolioDTO>();
+			// pvo+mainImg
+
+			List<PortfolioVO> pvoList = pdao.getPvoList(id);
+
+			for (PortfolioVO pvo : pvoList) {
+				PortfolioDTO pdto = new PortfolioDTO();
+				pdto.setPvo(pvo);
+				pdto.setMainImg(fdao.selectMainImg(pvo.getPno()));
+				pdtoList.add(pdto);
+			}
+
+			log.info("pdtoList" + pdtoList);
+			log.info("20231207여기오는지22");
+			MemberDTO mdto = new MemberDTO();
+			mdto.setMvo(mvo);
+			mdto.setPdtoList(pdtoList);
+			mdto.setCvo(cvo);
+			log.info("mdtodddd" + mdto);
+			return mdto;
+		} else {
+			return null;
+		}
+	}
+
+	@Override
+	public int heartCount(String id) {
+		return pdao.heartCount(id);
+	}
+
+	@Override
+	public CompanyDTO2 getCdto(String id) {
+		CompanyDTO2 cdto = new CompanyDTO2();
+
+		CompanyVO cvo = cdao.getCvo(id);
+		MemberVO mvo = mdao.selectEmail(id);
+		List<PortfolioDTO> pdtoList = psv.getMyList(id);
+
+		List<ReviewDTO> rdtoList = new ArrayList<>();
+		List<ReviewVO> rvoList = rdao.getReviewList(id);
+		log.info("rvoList>>{}", rvoList);
+		for (ReviewVO rvo : rvoList) {
+			ReviewDTO rdto = new ReviewDTO();
+			rdto.setRvo(rvo);
+			log.info("rdto1>>{}", rdto);
+			rdto.setReviewMainImg(fdao.getReviewMainImg(rvo.getRno()));
+			rdtoList.add(rdto);
+			log.info("rdto>>{}", rdto);
+		}
+
+		cdto.setCvo(cvo);
+		cdto.setMvo(mvo);
+		cdto.setPdtoList(pdtoList);
+		cdto.setRdtoList(rdtoList);
+
+		log.info("cdto>>{}", cdto);
+
+		return cdto;
+
+	}
+
 	public FileVO getFilePno(long pno) {
 		return fdao.selectMainImg(pno);
 	}
@@ -446,5 +520,4 @@ public class MemberServiceImpl implements MemberService {
 	public CompanyVO getCvo(String id) {
 		return cdao.getCvo(id);
 	}
-
 }

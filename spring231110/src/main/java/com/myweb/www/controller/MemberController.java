@@ -1,5 +1,6 @@
 package com.myweb.www.controller;
 
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,6 +32,9 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.fasterxml.jackson.databind.JsonNode;
+
+import com.myweb.www.domain.CompanyDTO2;
+
 import com.myweb.www.domain.CouponVO;
 import com.myweb.www.domain.CustomerServiceVO;
 import com.myweb.www.domain.FileVO;
@@ -39,6 +43,7 @@ import com.myweb.www.domain.PortfolioVO;
 import com.myweb.www.handler.ProfileFileHandler;
 import com.myweb.www.security.AuthMember;
 import com.myweb.www.security.AuthVO;
+import com.myweb.www.security.MemberDTO;
 import com.myweb.www.security.MemberVO;
 import com.myweb.www.service.CustomerService;
 import com.myweb.www.service.MemberService;
@@ -330,6 +335,28 @@ public class MemberController {
 		m.addAttribute("couponCount", couponCount);
 	}
 
+	// 업체 마이페이지
+	@GetMapping("/companyMyPage")
+	public void myPage(Principal principal, Model m, HttpServletRequest request) {
+		String id = principal.getName().toString();
+		FileVO fvo = msv.getFile(id);
+		MemberDTO mdto = msv.getMdto(id);
+		int heartCount = msv.heartCount(id);
+		m.addAttribute("fvo", fvo);
+		m.addAttribute("mdto", mdto);
+		m.addAttribute("heartCount", heartCount);
+		log.info("mdto>>{}", mdto);
+	}
+
+	// 업체 정보페이지
+	@GetMapping("/companyInfo")
+	public String companyInfo(@RequestParam("id") String id, Model model) {
+		CompanyDTO2 cdto = msv.getCdto(id);
+		log.info("cdto>컨트롤러 >" + cdto);
+		model.addAttribute("cdto", cdto);
+		return "/member/companyInfo";
+	}
+
 	// 아이디 일치하는지 확인
 	@PostMapping(value = "/checkId", consumes = "application/json", produces = MediaType.TEXT_PLAIN_VALUE)
 	public ResponseEntity<String> checkId(@RequestBody MemberVO mvo, Model m) {
@@ -350,17 +377,17 @@ public class MemberController {
 		}
 		return new ResponseEntity<List<PortfolioDTO>>(list, HttpStatus.OK);
 	}
-	
-	//좋아요 취소
-	@PostMapping(value="/heartCancel/{id}/{pno}", produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<String> heartCancel(@PathVariable String id, @PathVariable long pno){
+
+	// 좋아요 취소
+	@PostMapping(value = "/heartCancel/{id}/{pno}", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<String> heartCancel(@PathVariable String id, @PathVariable long pno) {
 		msv.heartCancel(id, pno);
 		return new ResponseEntity<String>("1", HttpStatus.OK);
 	}
-	
-	//좋아요 추가
-	@PostMapping(value="/heartAdd/{id}/{pno}", produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<String> heartAdd(@PathVariable String id, @PathVariable long pno){
+
+	// 좋아요 추가
+	@PostMapping(value = "/heartAdd/{id}/{pno}", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<String> heartAdd(@PathVariable String id, @PathVariable long pno) {
 		msv.heartAdd(id, pno);
 		return new ResponseEntity<String>("1", HttpStatus.OK);
 	}

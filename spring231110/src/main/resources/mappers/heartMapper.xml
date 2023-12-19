@@ -11,6 +11,8 @@
 		values(#{pno},#{id})
 	</insert>
 	<select id="likeQtyAreaInput" resultType="int">
-		select count(*) from heart where pno=#{pno}
+	select count(*) from heart where pno=#{pno}
 	</select>
+
+
 </mapper>

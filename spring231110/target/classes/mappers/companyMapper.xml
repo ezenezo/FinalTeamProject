@@ -29,5 +29,17 @@
 		select * from company where
 		id=#{id}
 	</select>
+	
+	<update id="reviewCount">
+		update company set review_count=(select count(*) from review where com_id=company.id)
+	</update>
+	<update id="portfolioCount">
+		update company set
+		portfolio_count=(select count(*) from portfolio where id=company.id)
+		
+	</update>
+	<update id="updateRateAverage">
+		update company set rate_average=(select AVG(rate) as average_rate from review where com_id=company.id)
+	</update>
 
 </mapper>

@@ -6,7 +6,6 @@ import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
 
-import com.myweb.www.domain.BoardDTO;
 import com.myweb.www.domain.CompanyDTO;
 import com.myweb.www.repository.CompanyDAO;
 

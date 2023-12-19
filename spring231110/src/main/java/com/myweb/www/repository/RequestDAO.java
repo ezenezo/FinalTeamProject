@@ -2,10 +2,14 @@ package com.myweb.www.repository;
 
 import java.util.List;
 
+
+import com.myweb.www.domain.FileVO;
+
 import com.myweb.www.domain.ReqFileVO;
 import com.myweb.www.domain.RequestDTO;
 import com.myweb.www.domain.RequestQuestionVO;
 import com.myweb.www.domain.RequestVO;
+import com.myweb.www.security.MemberVO;
 
 
 public interface RequestDAO {
@@ -48,7 +52,7 @@ void insert(RequestVO rvo);
 
 	List<ReqFileVO> selectOneRVO(String requestId);
 
-	List<RequestVO> getRequest_list(long requestNm);
+	RequestVO getRequest_list(long requestNm);
 
 	void quest_alarm_submit(long reqNm_q);
 
@@ -66,6 +70,11 @@ void checked(long requestNm);
 
 	int request_alarm_user(String userId);
 
+	FileVO getPorImg(long requestNm);
+
+	MemberVO memberSelect(long requestNm);
+
+	List<RequestVO> setQutation(long reNm);
 
 
 

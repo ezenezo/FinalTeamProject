@@ -134,7 +134,8 @@ public class PaymentController {
 	@PostMapping("/refund")
 	public String refund(@RequestBody RefundVO rvo, @RequestParam("id") String id, Model m, RedirectAttributes re) throws IOException {
 		PaymentVO pvo = psv.getPayment(rvo.getMerchantUid());
-		if(pvo.isRefund()) {
+		log.info("pvo:"+pvo);
+		if(!pvo.isRefund()) {
 			m.addAttribute("msg", "이미 환불처리된 건입니다.");
 			m.addAttribute("url", "member/myPage?id="+id);
 			return "/alert";

@@ -13,7 +13,7 @@
 
 <link href="<c:url value='/resources/css/index_all.css'/>"
 	rel="stylesheet" type="text/css">
-<link href="<c:url value='/resources/css/qutation.css'/>"
+<link href="<c:url value='/resources/css/qutation_user.css'/>"
 	rel="stylesheet" type="text/css">
 
 
@@ -29,45 +29,40 @@
 			<div class="subject">받은 견적</div>
 			<nav></nav>
 			<div class="content">
-				<div class="p_left">
-					<ul>
-						<c:forEach items="${list }" var="qvo">
-							<a href="#" onclick="handleClick_q(event,${qvo.quotationNm})">
-								<li class="list_requset" id="list_requset_${qvo.quotationNm}"><input
-									type="hidden" value="${qvo.quotationNm}" id="quotationNm"
-									class="quo_click"> ${qvo.quotationNm}<br>
-									${qvo.form}<br> ${qvo.categoryType}<br>
-									${qvo.address}</li>
-							</a>
-						</c:forEach>
 
-						<c:forEach items="${list_read }" var="qvo">
-							<a href="#" onclick="handleClick_q(event,${qvo.quotationNm})">
-								<li class="list_requset_read"
-								id="list_requset_${qvo.quotationNm}"><input type="hidden"
-									value="${qvo.quotationNm}" id="quotationNm" class="quo_click">
-									${qvo.quotationNm}<br> ${qvo.form}<br>
-									${qvo.categoryType}<br> ${qvo.address}</li>
-							</a>
-						</c:forEach>
-					</ul>
+				<ul class="gride_qvo">
+				
+					<c:forEach items="${list }" var="qvo">
+					
+					
+						<li class="list_requset" id="list_requset_${qvo.quotationNm}">
+						<div class="checked_div" ><input id="checked_ok_${qvo.quotationNm}" type="hidden" value="${qvo.checked }"></div>
+							<input type="hidden" value="${qvo.quotationNm}" id="quotationNm"
+							class="quo_click"> 
+							 메이트 : ${qvo.userNm}<br>
+							${qvo.form}<br>
+							${qvo.categoryType}<br> ${qvo.address}
+
+							<button type="button" onclick="quo_user(${qvo.quotationNm})">견적서
+								보러가기</button>
+						</li>
 
 
-				</div>
 
-				<div class="p_right">
+					</c:forEach>
 
-
-					<ul id="u_right"></ul>
+				</ul>
 
 
-				</div>
 			</div>
 		</div>
+
+
 	</form>
 
 
+
 	<script src="/resources/js/quotation_list_user.js"></script>
-	<jsp:include page="../common/footer.jsp" />
+
 </body>
 </html>

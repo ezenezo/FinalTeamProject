@@ -44,13 +44,19 @@
 	justify-content: center; /* 가로 여백을 균등하게 나누기 위한 설정 */
 }
 
-.bodyContainer2 a {
-	width: 30%;
+.a1 {
+	display: block; /* a 태그를 block으로 설정 */
+	width: 100%;
 	margin: 5px;
 }
-
+.a2 {
+	   display: block; /* a 태그를 block으로 설정 */
+	width: 30%;
+		margin-top: 6px;
+		cursor: pointer;
+}
 .pdtoBox {
-	width: 100%; /* 이미지의 크기 설정. 여백 등의 고려를 하여 조절하세요. */
+	width: 30%; /* 이미지의 크기 설정. 여백 등의 고려를 하여 조절하세요. */
 	margin: 10px; /* 이미지 사이 여백 설정 */
 }
 
@@ -59,7 +65,6 @@
 	height: 200px;
 	border-radius: 7px;
 }
-
 .pdtoBoxTitle {
 	font-family: NotoSansKRSemiBold;
 	font-size: 17px;
@@ -67,6 +72,14 @@
 	text-align: center;
 	margin-top: 18px;
 	left: 0;
+	width: 330px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: normal;
+	word-wrap: break-word;
+	display: -webkit-box;
+	-webkit-line-clamp: 1;
+	-webkit-box-orient: vertical;
 }
 
 .filterBox {
@@ -93,7 +106,7 @@
 	font-family: NotoSansKRSemiBold;
 	margin-right: 10px;
 	margin-top: 5px;
-} 
+}
 
 .filterBtn {
 	display: flex;
@@ -117,7 +130,7 @@
 	display: flex;
 	flex-direction: column;
 	position: relative; /* 상대 위치로 설정 */
-	height: 80px;
+	height: 50px;
 }
 
 .ulTag {
@@ -130,11 +143,11 @@
 	box-shadow: 1px 1px 4px 0px rgba(0, 0, 0, 0.5);
 	display: none;
 	position: absolute; /* 절대 위치로 설정 */
-	top: 50%; /* 상위 컨테이너의 하단에 위치하도록 설정 */
+	top: 79%; /* 상위 컨테이너의 하단에 위치하도록 설정 */
 	left: 0; /* 좌측 정렬, 필요에 따라 수정 가능 */
 	background-color: white;
 	white-space: nowrap; /* 줄 바꿈 방지 설정 */
-	 z-index: 9999; 
+	z-index: 9999;
 }
 
 .ulTag li {
@@ -143,6 +156,7 @@
 	font-size: 15px;
 	width: 200px;
 	padding: 10px;
+	cursor: pointer;
 }
 
 .ulTag li:hover {
@@ -161,12 +175,14 @@
 	width: 400px;
 	padding: 10px;
 	padding-bottom: 20px;
-	/* display: none;  */
-display:block;
+	padding-top: 20px;
+ 	display: none; 
+/*  display : block;  */
 	flex-direction: column;
-	top: 50%; /* 50%로 바꿔 */
+	top: 79%;
 	left: -100%;
-	  z-index: 9999; 
+	z-index: 9999;
+	flex-direction: column;
 }
 
 .rangeBox p {
@@ -180,7 +196,6 @@ display:block;
 	flex-wrap: wrap;
 	justify-content: space-between;
 }
-
 
 /*--------------------------  */
 .container {
@@ -223,7 +238,7 @@ input[type="range"] {
 	bottom: 0;
 	left: 0;
 	border-radius: 5x;
-	background-color: rgb(197,245,255);
+	background-color: rgb(197, 245, 255);
 }
 
 input[type="range"]::-webkit-slider-runnable-track {
@@ -313,16 +328,58 @@ input[type="range"]:active::-webkit-slider-thumb {
 	transform: scale(1.1); /* 확대되는 비율. 1보다 큰 값으로 조절하면 됩니다. */
 }
 
-.pdtoTitle3th{
+.pdtoTitle3th {
 	color: rgb(130, 140, 148);
 	font-size: 13px;
 	line-height: 16px;
 	margin-top: 10px;
 }
-.pdtoTitle2th{
+
+.pdtoTitle2th {
 	font-size: 13px;
-    line-height: 16px;
-    margin-top: 6px;
-    margin-bottom: 0px;
-    margin-top: 6px;
+	line-height: 16px;
+	margin-bottom: 0px;
+
+}
+
+.selectFilterBtn {
+	display: flex;
+	padding: 1px 8px 3px;
+	font-size: 15px;
+	border-radius: 26px;
+	font-weight: 900;
+	background-color: rgb(110, 191, 171);
+	color: #fff;
+	margin: 0 2px;
+	padding: 2px 0;
+	padding-top: 0px;
+	padding-bottom: 0px;
+	line-height: 25px;
+	box-shadow: none;
+	border-radius: 26px;
+	padding-left: 5px;
+	padding-right: 5px;
+	border: 1px solid transparent;
+	font-family: inherit;
+}
+
+.selectFilterBtn span {
+	font-size: 15px;
+	margin-left: 5px;
+	line-height: 25px;
+}
+#selectFilter{
+	display: flex;
+}
+.reset{
+	margin: 0;
+    font-family: inherit;
+    font-size: 15px;
+    font-weight: 700;
+    line-height: 18px;
+    text-align: center;
+    color: rgb(110, 191, 171);
+    cursor: pointer;
+    line-height: 25px;
+    margin-left: 10px;
 }

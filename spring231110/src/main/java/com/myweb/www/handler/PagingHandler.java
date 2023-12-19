@@ -2,8 +2,6 @@ package com.myweb.www.handler;
 
 import java.util.List;
 
-import com.myweb.www.domain.ClubVO;
-import com.myweb.www.domain.CommentVO;
 import com.myweb.www.domain.PagingVO;
 
 import lombok.Getter;
@@ -22,7 +20,7 @@ public class PagingHandler {
 	private PagingVO pgvo;
 	
 	private String order;//정렬기준
-	private List<CommentVO> cmtList;
+	/* private List<CommentVO> cmtList; */
 	
 	// 현재 페이지 값 가져오기 용도 / totalCount DB에서 조회 매개변수로
 	public PagingHandler(int totalCount, PagingVO pgvo) {
@@ -45,10 +43,10 @@ public class PagingHandler {
 		this.next=this.endPage<realEndPage;
 	
 	}
-	public PagingHandler(PagingVO pgvo, int totalCount, List<CommentVO> cmtList) {
+	public PagingHandler(PagingVO pgvo, int totalCount) {
 
 		this(totalCount, pgvo);	
-		this.cmtList = cmtList;
+		/* this.cmtList = cmtList; */
 	
 
 	}		

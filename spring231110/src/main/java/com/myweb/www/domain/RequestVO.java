@@ -2,6 +2,9 @@ package com.myweb.www.domain;
 
 
 
+
+import java.util.Date;
+
 import java.util.Locale.Category;
 
 import javax.xml.crypto.Data;
@@ -22,7 +25,9 @@ public class RequestVO {
 	private long requestNm;
 	private String requestId;
 	private int keynum;
+
 	private Data reqAt;
+
 	/*
 	 * //요청서 질문리스트 테이블 칼럼 private long requestQuestion; private String subject;
 	 * private String questionType; private String region;

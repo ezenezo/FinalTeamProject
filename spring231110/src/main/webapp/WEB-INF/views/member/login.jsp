@@ -24,7 +24,7 @@
 			<!-- 카카오 로그인 -->
 			<a href="/member/kakao?ok=kakaologin" id="kakaoLogin"><img alt=""
 				src="../resources/img/kakao_login.png"></a>
-			<!-- 네이버 회원가입 -->
+			<!-- 네이버 로그인 -->
 			<div class="naver">
 				<a href="/member/naver?ok=naverLogin"> <img alt=""
 					src="../resources/img/naver_logo.png">
