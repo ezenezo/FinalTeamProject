@@ -1,4 +1,4 @@
-    let interval;
+let interval;
 let targetElement;
 
 function fadeIn(element) {
@@ -564,6 +564,7 @@ async function submit_btn_5() {
 
             const checkboxes_choice = document.querySelectorAll("input[type='checkbox']");
             console.log('제ㄹ: ', checkedValue1);
+            final_req();
         } else {
             console.log('선택된 체크박스의 값2: ', checkedValue1);
 

@@ -213,6 +213,7 @@ h1 {
 	margin-top: 20px;
 	margin-bottom: 50px;
 	display: flex;
+
 	position: sticky;
 	top:0;
 }
@@ -222,6 +223,7 @@ h1 {
 .topBtnA:focus{
 	outline: none;
 }
+
 .topBtn {
 	width: 100%;
 	border: none;
@@ -235,6 +237,7 @@ h1 {
 	border-bottom: 4px solid transparent;
 	cursor: pointer;
 	background-color: white;
+
 }
 
 .clicked {
@@ -305,6 +308,7 @@ h1 {
 	color: #1d1d1d;
 	margin: 30px auto;
 	display: block;
+
 }
 
 .morePortofolioBtn:hover {
@@ -398,7 +402,6 @@ svg {
 .greenText {
 	color: green;
 	font-weight: 700;
-
 }
 
 .font16 {
@@ -421,15 +424,16 @@ svg {
 	display: flex;
 	align-items: center;
 	width:100%;
+
 }
 .review2col p{
 	margin: 0px;
 }
 .reviewTitleBox{
 	padding-left: 30px;
-
 	
 }
 html {
     scroll-behavior: smooth;
+
 }

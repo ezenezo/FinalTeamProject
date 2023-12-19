@@ -24,8 +24,6 @@
 		select * from portfolio
 		order by pno desc
 	</select>
-
-
 	<select id="getListMyPortfolio"
 		resultType="com.myweb.www.domain.PortfolioVO">
 		select * from portfolio where id=#{id} order by pno desc
@@ -61,6 +59,7 @@
 	<select id="getPvoList"
 		resultType="com.myweb.www.domain.PortfolioVO">
 		select * from portfolio where id=#{id}
+
 	</select>
 	<select id="heartCount" resultType="int">
 		select sum(like_qty) from

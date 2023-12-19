@@ -29,26 +29,31 @@
 			<div class="subject">받은 견적</div>
 			<nav></nav>
 			<div class="content">
-			
-					<ul class="gride_qvo">
-						<c:forEach items="${list }" var="qvo">
-						
-								<li class="list_requset" id="list_requset_${qvo.quotationNm}"><input
-									type="hidden" value="${qvo.quotationNm}" id="quotationNm"
-									class="quo_click"> 
-									${qvo.form}<br> ${qvo.categoryType}<br>
-									${qvo.address}
-									
-									<button type="button" onclick="quo_user(${qvo.quotationNm})"></button>
-									</li>
-									
-								
+
+				<ul class="gride_qvo">
+				
+					<c:forEach items="${list }" var="qvo">
 					
-						</c:forEach>
+					
+						<li class="list_requset" id="list_requset_${qvo.quotationNm}">
+						<div class="checked_div" ><input id="checked_ok_${qvo.quotationNm}" type="hidden" value="${qvo.checked }"></div>
+							<input type="hidden" value="${qvo.quotationNm}" id="quotationNm"
+							class="quo_click"> 
+							 메이트 : ${qvo.userNm}<br>
+							${qvo.form}<br>
+							${qvo.categoryType}<br> ${qvo.address}
 
-					</ul>
+							<button type="button" onclick="quo_user(${qvo.quotationNm})">견적서
+								보러가기</button>
+						</li>
 
-			
+
+
+					</c:forEach>
+
+				</ul>
+
+
 			</div>
 		</div>
 
@@ -58,28 +63,6 @@
 
 
 	<script src="/resources/js/quotation_list_user.js"></script>
-	<jsp:include page="../common/footer.jsp" />
 
-	<script type="text/javascript">
-    var source = new EventSource("/list");
-    
-    source.addEventListener("list", function(event) {
-        var data = JSON.parse(event.data);
-        data.forEach(function(item) {
-            var listElement = document.createElement("li");
-            listElement.textContent = item.quotationNm + " " + item.form + " " + item.categoryType + " " + item.address;
-            document.querySelector(".p_left ul").appendChild(listElement);
-        });
-    });
-
-    source.addEventListener("list_read", function(event) {
-        var data = JSON.parse(event.data);
-        data.forEach(function(item) {
-            var listElement = document.createElement("li");
-            listElement.textContent = item.quotationNm + " " + item.form + " " + item.categoryType + " " + item.address;
-            document.querySelector(".p_right ul").appendChild(listElement);
-        });
-    });
-	</script>
 </body>
 </html>

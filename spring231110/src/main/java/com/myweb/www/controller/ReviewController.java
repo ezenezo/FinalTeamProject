@@ -24,13 +24,17 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.myweb.www.domain.FileVO;
+
 import com.myweb.www.domain.PagingVO;
+
 import com.myweb.www.domain.PortfolioDTO;
 import com.myweb.www.domain.PortfolioVO;
 import com.myweb.www.domain.ReviewDTO;
 import com.myweb.www.domain.ReviewVO;
 import com.myweb.www.handler.FileHandler;
+
 import com.myweb.www.handler.PagingHandler;
+
 import com.myweb.www.security.MemberDTO2;
 import com.myweb.www.service.ReviewService;
 
@@ -162,6 +166,7 @@ public class ReviewController {
 //		List<ReviewDTO> rdtoList = rsv.companyInfoRdtoList(id);
 		return new ResponseEntity<PagingHandler>(list, HttpStatus.OK);
 	}
+
 
 	// 리뷰 상세페이지 이동
 	@GetMapping("/reviewDetail")

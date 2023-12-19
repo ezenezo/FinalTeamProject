@@ -18,14 +18,11 @@
 		<include refid="filter"></include>
 		order by pno desc
 	</select>
-
 	<select id="getListPortfolio1"
 		resultType="com.myweb.www.domain.PortfolioVO">
 		select * from portfolio
 		order by pno desc
 	</select>
-
-
 	<select id="getListMyPortfolio"
 		resultType="com.myweb.www.domain.PortfolioVO">
 		select * from portfolio where id=#{id} order by pno desc
@@ -128,6 +125,7 @@
 			</choose>
 		</if>
 	</sql>
+
 
 
 </mapper>

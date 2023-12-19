@@ -5,7 +5,7 @@
 
 let quNm = document.getElementById('quotationNm').value;
 console.log(quNm);
-function cancel_btn(quotationNm) {
+function cancel_btn() {
 
 
     Swal.fire({
@@ -19,9 +19,7 @@ function cancel_btn(quotationNm) {
         cancelButtonText: '취소'
     }).then((result) => {
         if (result.isConfirmed) {
-            var url = "/quotation/quotation_user_cancle?quotationNm=" + quNm;
-
-            window.location.replace(url);
+            quotationNmServer();
             Swal.fire({
                 title: '견적서가 취소되었습니다.',
 
@@ -41,3 +39,22 @@ function cancel_btn(quotationNm) {
 
 
 
+async function quotationNmServer() {
+    try {
+        const url = '/quotation/quotation_user_cancle';
+        const config = {
+            method: 'put',
+            body: JSON.stringify({
+                quotationNm: document.getElementById('quotationNm').value
+            }),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        };
+        const resp = await fetch(url, config);
+        const result = await resp.text();
+        return result;
+    } catch (err) {
+        console.log(err);
+    }
+}

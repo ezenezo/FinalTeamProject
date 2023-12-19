@@ -18,7 +18,7 @@
 
 <body>
     <sec:authentication property="principal.mvo.id" var="authEmail" />
-    <jsp:include page="../common/l_side.jsp" />
+    <jsp:include page="l_side.jsp" />
     <div class="top">
         <div class="exit">
             <button class="gosu_btn" id="gosu_btn">나가기</button>

@@ -478,7 +478,9 @@ public class MemberServiceImpl implements MemberService {
 		List<PortfolioDTO> pdtoList = psv.getMyList(id);
 
 		List<ReviewDTO> rdtoList = new ArrayList<>();
+
 		List<ReviewVO> rvoList = rdao.getReviewList2(id);
+
 		log.info("rvoList>>{}", rvoList);
 		for (ReviewVO rvo : rvoList) {
 			ReviewDTO rdto = new ReviewDTO();

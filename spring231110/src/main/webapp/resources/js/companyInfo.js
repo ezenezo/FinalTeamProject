@@ -19,6 +19,7 @@ document.addEventListener('click', (e) => {
         topBtn3.classList.add('clicked');
     }else if(e.target.classList.contains('moreBtn')){
         reviewPrint(comId, parseInt(e.target.dataset.page));
+
     }
 });
 
@@ -129,4 +130,5 @@ function reviewPrint(id,page = 1) {
     })
 
 }
+
 

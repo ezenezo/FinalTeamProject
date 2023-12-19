@@ -59,10 +59,9 @@
 .left_sidemenu_div {
 	width: 13%;
 	min-height: 100vh;
-	background: linear-gradient(to bottom, rgb(19, 151, 213), #1674a1);
+	background-color: white;
 	z-index: 1000;
 	position: fixed;
-
 	padding-top: 16.891px;
 	border-right: 1.5px solid #00000024;
 }
@@ -80,12 +79,13 @@
 	overflow: hidden;
 	list-style: none;
 	padding: 0;
+	margin: 0;
+	margin-top: 50px;
 }
 
 .left_sidemenu>li {
 	text-decoration: none;
 	width: 100%;
-	text-align: center;
 	line-height: 40px;
 	padding-bottom: 5%;
 	transition: background-color 0.5s ease;
@@ -119,18 +119,11 @@
     margin: 20px;
     padding: 10px;
     border-radius: 4px;
-
-
-/* .left_sidemenu .submenu a {
-  color: #fff;
-  display: block;
-  color: rgb(19, 151, 213)
-} */
-.submenu>li {
-	line-height: 50px;
-	background-color: rgb(22, 116, 161);
 }
 
+.left_sidemenu i {
+	margin-right: 8px;
+}
 
 .c_logo a {
 	text-decoration: none;
@@ -164,7 +157,6 @@
 
 .submenu a>li:hover .submenu {
 	height: auto;
-
 }
 
 .submenu {
@@ -212,5 +204,4 @@
 	border-radius: 4px;
 	margin: 20px
 	
-
 }

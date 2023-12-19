@@ -2,6 +2,7 @@ package com.myweb.www.service;
 
 import java.util.List;
 
+import com.myweb.www.domain.QuotationDTO;
 import com.myweb.www.domain.QuotationVO;
 
 import com.myweb.www.domain.RequestDTO;
@@ -22,7 +23,7 @@ public interface QuotationService {
 
 	int request_cancel(long reqNm);
 
-	List<RequestVO> getList_user(String id);
+	List<QuotationDTO> getList_user(String id);
 
 	int request_alarm_user(String userId);
 
@@ -42,6 +43,9 @@ public interface QuotationService {
 
 
 	QuotationVO getQuotation(long quotationNm);
+
+	void cancle_ok(long quotationNm);
+
 
 
 }
