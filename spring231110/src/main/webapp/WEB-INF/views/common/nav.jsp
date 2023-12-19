@@ -53,6 +53,8 @@
 						<sec:authentication property="principal.mvo.id" var="authId" />
 						<sec:authentication property="principal.mvo.authVOList" var="auths" />
 						<input type="hidden" value="${authId}" id="alarm_id">
+										<input type="hidden" value="${auths[0].auth}" id="userRole">
+											
 						<div id="menu_m">
 							<ul class="main_m">
 								<c:choose>
@@ -153,6 +155,7 @@
 						usermenu.style.visibility = 'hidden';
 						profile.style.boxShadow = 'none';
 					});
+
 
 
 				
