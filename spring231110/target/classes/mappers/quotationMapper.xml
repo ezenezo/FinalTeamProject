@@ -55,9 +55,10 @@ select * from quotation where request_id=#{id} ORDER BY  quotation_nm DESC
 	</select>
 
 	
-	
-		
-	
-	
+	<select id="getQuotation"
+		resultType="com.myweb.www.domain.QuotationVO">
+		select * from quotation where quotation_nm =
+		#{quotation_nm};
+	</select>
 
 </mapper>

@@ -47,11 +47,6 @@ public interface PortfolioService {
 
 	int postModifyPortfolioOnlyContent(PortfolioVO pvo);
 
-
-
-
-
-
 	List<PortfolioVO> getHeartList(String id);
 
 	PortfolioVO getPortfolio(long pno);

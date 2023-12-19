@@ -46,12 +46,8 @@ public interface PortfolioDAO {
 
 	List<PortfolioVO> mainPostPdtoList(@Param("sliderOne") int sliderOne,@Param("sliderTwo") int sliderTwo);
 
-
-
 //	List<PortfolioDTO> getListFilter(@Param("order") String order,@Param("homeTypeSh") String homeTypeSh,@Param("roomCntSh") String roomCntSh,@Param("familyTypeSh") String familyTypeSh,
 //			@Param("homeStyle") String homeStyle);
-
-
 
 	List<PortfolioVO> getHeartList(String id);
 

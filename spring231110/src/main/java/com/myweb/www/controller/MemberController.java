@@ -57,7 +57,6 @@ import lombok.extern.slf4j.Slf4j;
 @Controller
 public class MemberController {
 
-
 	@Inject
 	private BCryptPasswordEncoder bcEncoder;
 	@Inject
@@ -71,30 +70,28 @@ public class MemberController {
 	@Inject
 	private PaymentService paysv;
 
+	@GetMapping("/register")
+	public void register() {
+	}
 
-   @GetMapping("/register")
-   public void register() {
-   }
-
-   // 회원 등록
-   @PostMapping("/register")
-   public String register(MemberVO mvo, @RequestParam(name = "profile", required = false) MultipartFile[] files,
-         Model m) {
-      int isOk = 1;
-      if (mvo.getPw() != null) {
-         mvo.setPw(bcEncoder.encode(mvo.getPw())); // 암호화해서 넣음
-      }
-      isOk *= msv.register(mvo);
-      String id = mvo.getId();
-      FileVO fvo = null;
-      if (files[0] != null) {
-         fvo = pfh.uploadFiles(files[0], id);
-      }
-      isOk *= msv.insert(id, fvo);
-      log.info(isOk > 0 ? "성공" : "실패");
-      return "/member/login";
-   }
-
+	// 회원 등록
+	@PostMapping("/register")
+	public String register(MemberVO mvo, @RequestParam(name = "profile", required = false) MultipartFile[] files,
+			Model m) {
+		int isOk = 1;
+		if (mvo.getPw() != null) {
+			mvo.setPw(bcEncoder.encode(mvo.getPw())); // 암호화해서 넣음
+		}
+		isOk *= msv.register(mvo);
+		String id = mvo.getId();
+		FileVO fvo = null;
+		if (files[0] != null) {
+			fvo = pfh.uploadFiles(files[0], id);
+		}
+		isOk *= msv.insert(id, fvo);
+		log.info(isOk > 0 ? "성공" : "실패");
+		return "/member/login";
+	}
 
 	@GetMapping("/companyRegister")
 	public void companyRegister() {
@@ -119,15 +116,13 @@ public class MemberController {
 		return "/member/login";
 	}
 
+	@GetMapping("/login")
+	public void login() {
+	}
 
-   @GetMapping("/login")
-   public void login() {
-   }
-
-   // 로그인 폼을 거치지 않고 바로 로그인
-   @PostMapping("/loginWithoutForm")
-   public String loginWithoutForm(@RequestParam String id) {
-
+	// 로그인 폼을 거치지 않고 바로 로그인
+	@PostMapping("/loginWithoutForm")
+	public String loginWithoutForm(@RequestParam String id) {
 
 		List<GrantedAuthority> roles = new ArrayList<>(1);
 		String roleStr = "ROLE_USER";
@@ -146,94 +141,93 @@ public class MemberController {
 		return "index";
 	}
 
+	// 카카오 인증
+	@RequestMapping(value = "/kakao", method = RequestMethod.GET)
+	public String kakao(@RequestParam(required = false) String code, @RequestParam String ok, Model m) {
+		String kakaoUrl = "https://kauth.kakao.com/oauth/authorize?client_id=e7f7342b45a67c5286814656c21b3bdd&redirect_uri=http://localhost:8088/member/";
+		kakaoUrl += ok;
+		kakaoUrl += "&response_type=code";
+		m.addAttribute("kakaoUrl", kakaoUrl);
+		return "/member/kakaoLogin";
+	}
 
-   // 카카오 인증
-   @RequestMapping(value = "/kakao", method = RequestMethod.GET)
-   public String kakao(@RequestParam(required = false) String code, @RequestParam String ok, Model m) {
-      String kakaoUrl = "https://kauth.kakao.com/oauth/authorize?client_id=e7f7342b45a67c5286814656c21b3bdd&redirect_uri=http://localhost:8088/member/";
-      kakaoUrl += ok;
-      kakaoUrl += "&response_type=code";
-      m.addAttribute("kakaoUrl", kakaoUrl);
-      return "/member/kakaoLogin";
-   }
+	// 카카오 로그인
+	@RequestMapping(value = "kakaologin")
+	public String kakaologin(@RequestParam(required = false) String code, HttpSession ses, Model m,
+			RedirectAttributes re) {
+		String ok = "kakaologin";
 
-   // 카카오 로그인
-   @RequestMapping(value = "kakaologin")
-   public String kakaologin(@RequestParam(required = false) String code, HttpSession ses, Model m,
-         RedirectAttributes re) {
-      String ok = "kakaologin";
+		JsonNode token = msv.getAccessToken(code, ok);
+		JsonNode user = msv.getUserInfo(token, "kakao");
+		log.info("user:" + user);
 
-      JsonNode token = msv.getAccessToken(code, ok);
-      JsonNode user = msv.getUserInfo(token, "kakao");
-      log.info("user:" + user);
+		String url = msv.kakaoLogin(user, ses, m);
 
-      String url = msv.kakaoLogin(user, ses, m);
+		return url;
+	}
 
-      return url;
-   }
+	// 카카오 회원가입
+	@RequestMapping(value = "kakaojoin")
+	public String kakaojoin(@RequestParam(required = false) String code, HttpSession ses, Model m) {
+		String ok = "kakaojoin";
+		JsonNode token = msv.getAccessToken(code, ok);
+		JsonNode user = msv.getUserInfo(token, "kakao");
 
-   // 카카오 회원가입
-   @RequestMapping(value = "kakaojoin")
-   public String kakaojoin(@RequestParam(required = false) String code, HttpSession ses, Model m) {
-      String ok = "kakaojoin";
-      JsonNode token = msv.getAccessToken(code, ok);
-      JsonNode user = msv.getUserInfo(token, "kakao");
+		String url = msv.kakaojoin(user, m);
 
-      String url = msv.kakaojoin(user, m);
+		return url;
+	}
 
-      return url;
-   }
+	// 네이버
+	@RequestMapping(value = "naver")
+	public String naver(@RequestParam(required = false) String code, @RequestParam String ok, Model m) {
+		String naverUrl = "https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=AGtr4pd5S4hkBnMZnEyo&redirect_uri=http://localhost:8088/member/";
+		naverUrl += ok;
+		naverUrl += "&state=" + "test";
 
-   // 네이버
-   @RequestMapping(value = "naver")
-   public String naver(@RequestParam(required = false) String code, @RequestParam String ok, Model m) {
-      String naverUrl = "https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=AGtr4pd5S4hkBnMZnEyo&redirect_uri=http://localhost:8088/member/";
-      naverUrl += ok;
-      naverUrl += "&state=" + "test";
+		log.info(naverUrl);
 
-      log.info(naverUrl);
+		m.addAttribute("naverUrl", naverUrl);
+		return "/member/naverLogin";
+	}
 
-      m.addAttribute("naverUrl", naverUrl);
-      return "/member/naverLogin";
-   }
+	// 네이버 로그인
+	@RequestMapping(value = "naverLogin")
+	public String naverlogin(@RequestParam(required = false) String code, @RequestParam("state") String state,
+			HttpSession ses, Model m) {
+		JsonNode token = msv.getAccessToken(code, state, "naver");
+		JsonNode user = msv.getUserInfo(token, "naver");
+		log.info("user:" + user);
 
-   // 네이버 로그인
-   @RequestMapping(value = "naverLogin")
-   public String naverlogin(@RequestParam(required = false) String code, @RequestParam("state") String state,
-         HttpSession ses, Model m) {
-      JsonNode token = msv.getAccessToken(code, state, "naver");
-      JsonNode user = msv.getUserInfo(token, "naver");
-      log.info("user:" + user);
+		String url = msv.naverLogin(user, ses, m);
 
-      String url = msv.naverLogin(user, ses, m);
+		return url;
+	}
 
-      return url;
-   }
+	// 네이버 회원가입
+	@RequestMapping(value = "naverjoin")
+	public String naverjoin(@RequestParam("code") String code, @RequestParam("state") String state, Model m) {
+		JsonNode token = msv.getAccessToken(code, state, "naver");
+		JsonNode user = msv.getUserInfo(token, "naver");
+		String url = msv.naverjoin(user, m);
+		return url;
+	}
 
-   // 네이버 회원가입
-   @RequestMapping(value = "naverjoin")
-   public String naverjoin(@RequestParam("code") String code, @RequestParam("state") String state, Model m) {
-      JsonNode token = msv.getAccessToken(code, state, "naver");
-      JsonNode user = msv.getUserInfo(token, "naver");
-      String url = msv.naverjoin(user, m);
-      return url;
-   }
+	// 로그인 실패 시
+	@PostMapping("/login")
+	public String loginPost(HttpServletRequest request, RedirectAttributes re) {
+		re.addAttribute("id", request.getAttribute("id"));
+		re.addAttribute("errMsg", request.getAttribute("errMsg"));
+		return "redirect:/member/login";
+	}
 
-   // 로그인 실패 시
-   @PostMapping("/login")
-   public String loginPost(HttpServletRequest request, RedirectAttributes re) {
-      re.addAttribute("id", request.getAttribute("id"));
-      re.addAttribute("errMsg", request.getAttribute("errMsg"));
-      return "redirect:/member/login";
-   }
-
-   @RequestMapping(value = "/logout")
-   public String logout(HttpSession session) {
-      msv.kakaoLogout((String) session.getAttribute("access_Token"));
-      session.removeAttribute("access_Token");
-      session.removeAttribute("userId");
-      return "index";
-   }
+	@RequestMapping(value = "/logout")
+	public String logout(HttpSession session) {
+		msv.kakaoLogout((String) session.getAttribute("access_Token"));
+		session.removeAttribute("access_Token");
+		session.removeAttribute("userId");
+		return "index";
+	}
 
 	@GetMapping({ "/detail" })
 	public void detail(Model model, @RequestParam("id") String id) {
@@ -275,19 +269,18 @@ public class MemberController {
 		m.addAttribute("isOkDel", isOk);
 		return "index";
 
+	}
 
-   }
+	@GetMapping("/index")
+	public String index() {
+		return "index";
+	}
 
-   @GetMapping("/index")
-   public String index() {
-      return "index";
-   }
+	// 비밀번호 변경 전 본인 인증 페이지로 이동
+	@GetMapping("/checkMemberInfo")
+	public void checkMemberInfo() {
 
-   // 비밀번호 변경 전 본인 인증 페이지로 이동
-   @GetMapping("/checkMemberInfo")
-   public void checkMemberInfo() {
-
-   }
+	}
 
 	// 본인 인증 확인
 	@PostMapping("/checkMemberInfo")
@@ -337,40 +330,44 @@ public class MemberController {
 		m.addAttribute("mvo", mvo);
 		List<PortfolioVO> pvo = psv.getHeartList(id);
 		m.addAttribute("heart", pvo.size());
+		log.info("pvo:"+pvo);
+		log.info("port:"+pvo);
 		List<CouponVO> cvo = paysv.getCouponList(id);
 		int couponCount = cvo.size();
+		log.info("cvo:"+cvo);
+		log.info("couponCount:"+couponCount);
 		m.addAttribute("couponCount", couponCount);
 	}
 
-   
-   //업체 마이페이지
-   @GetMapping("/companyMyPage")
-   public void myPage(Principal principal, Model m, HttpServletRequest request) {
-	  String id=principal.getName().toString();
-      FileVO fvo = msv.getFile(id);
-      MemberDTO mdto = msv.getMdto(id);
-      int heartCount=msv.heartCount(id);
-      m.addAttribute("fvo", fvo);
-      m.addAttribute("mdto", mdto);
-      m.addAttribute("heartCount", heartCount);
-      log.info("mdto>>{}",mdto);
-   }
+	// 업체 마이페이지
+	@GetMapping("/companyMyPage")
+	public void myPage(Principal principal, Model m, HttpServletRequest request) {
+		String id = principal.getName().toString();
+		FileVO fvo = msv.getFile(id);
+		MemberDTO mdto = msv.getMdto(id);
+		int heartCount = msv.heartCount(id);
+		m.addAttribute("fvo", fvo);
+		m.addAttribute("mdto", mdto);
+		m.addAttribute("heartCount", heartCount);
+		log.info("mdto>>{}", mdto);
+	}
 
-   //업체 정보페이지
-   @GetMapping("/companyInfo")
-   public String companyInfo(@RequestParam("id") String id,Model model) {
-	   CompanyDTO2 cdto = msv.getCdto(id);
-	   log.info("cdto>컨트롤러 >"+cdto);
-	   model.addAttribute("cdto",cdto);
-	   return "/member/companyInfo";
-   }
-   // 아이디 일치하는지 확인
-   @PostMapping(value = "/checkId", consumes = "application/json", produces = MediaType.TEXT_PLAIN_VALUE)
-   public ResponseEntity<String> checkId(@RequestBody MemberVO mvo, Model m) {
-      int isOk = msv.checkId(mvo.getId());
-      return isOk > 0 ? new ResponseEntity<String>("1", HttpStatus.OK)
-            : new ResponseEntity<String>("0", HttpStatus.INTERNAL_SERVER_ERROR);
-   }
+	// 업체 정보페이지
+	@GetMapping("/companyInfo")
+	public String companyInfo(@RequestParam("id") String id, Model model) {
+		CompanyDTO2 cdto = msv.getCdto(id);
+		log.info("cdto>컨트롤러 >" + cdto);
+		model.addAttribute("cdto", cdto);
+		return "/member/companyInfo";
+	}
+
+	// 아이디 일치하는지 확인
+	@PostMapping(value = "/checkId", consumes = "application/json", produces = MediaType.TEXT_PLAIN_VALUE)
+	public ResponseEntity<String> checkId(@RequestBody MemberVO mvo, Model m) {
+		int isOk = msv.checkId(mvo.getId());
+		return isOk > 0 ? new ResponseEntity<String>("1", HttpStatus.OK)
+				: new ResponseEntity<String>("0", HttpStatus.INTERNAL_SERVER_ERROR);
+	}
 
 	// 좋아요 리스트
 	@RequestMapping(value = "/heart", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -384,17 +381,17 @@ public class MemberController {
 		}
 		return new ResponseEntity<List<PortfolioDTO>>(list, HttpStatus.OK);
 	}
-	
-	//좋아요 취소
-	@PostMapping(value="/heartCancel/{id}/{pno}", produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<String> heartCancel(@PathVariable String id, @PathVariable long pno){
+
+	// 좋아요 취소
+	@PostMapping(value = "/heartCancel/{id}/{pno}", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<String> heartCancel(@PathVariable String id, @PathVariable long pno) {
 		msv.heartCancel(id, pno);
 		return new ResponseEntity<String>("1", HttpStatus.OK);
 	}
-	
-	//좋아요 추가
-	@PostMapping(value="/heartAdd/{id}/{pno}", produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<String> heartAdd(@PathVariable String id, @PathVariable long pno){
+
+	// 좋아요 추가
+	@PostMapping(value = "/heartAdd/{id}/{pno}", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<String> heartAdd(@PathVariable String id, @PathVariable long pno) {
 		msv.heartAdd(id, pno);
 		return new ResponseEntity<String>("1", HttpStatus.OK);
 	}
@@ -410,6 +407,6 @@ public class MemberController {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		new SecurityContextLogoutHandler().logout(req, res, authentication);
 
-   }
+	}
 
 }

@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
-
 import com.myweb.www.domain.CouponVO;
 
 import com.myweb.www.domain.FileVO;
@@ -34,8 +33,6 @@ public class PortfolioServiceImpl implements PortfolioService {
 	private MemberDAO mdao;
 	private HeartDAO hdao;
 	private CompanyDAO codao;
-
-	private HeartDAO hdao;
 
 	@Autowired
 
@@ -122,7 +119,6 @@ public class PortfolioServiceImpl implements PortfolioService {
 		return pdto;
 	}
 
-
 	// 포폴 좋아요 확인(1이면 이미 체크, 0이면 체크안되어있는거)
 	@Override
 	public int portfolioLikeCheck(long pno, String id) {
@@ -162,14 +158,12 @@ public class PortfolioServiceImpl implements PortfolioService {
 	public void updateReadCount(long pno) {
 		pdao.updateReadCount(pno);
 
-
 	}
 
 	@Override
 	public String selectId(long pno) {
 		return pdao.selectId(pno);
 	}
-
 
 	@Override
 	public int likeQtyAreaInput(long pno) {
@@ -251,8 +245,9 @@ public class PortfolioServiceImpl implements PortfolioService {
 	public int postModifyPortfolioOnlyContent(PortfolioVO pvo) {
 		return pdao.updatePortfolio(pvo);
 
+	}
 
-	//좋아요 찍힌 포폴 가져오기
+	// 좋아요 찍힌 포폴 가져오기
 	@Override
 	public List<PortfolioVO> getHeartList(String id) {
 		return pdao.getHeartList(id);
@@ -261,7 +256,5 @@ public class PortfolioServiceImpl implements PortfolioService {
 	@Override
 	public PortfolioVO getPortfolio(long pno) {
 		return pdao.getPortfolio(pno);
-
 	}
-
 }

@@ -5,7 +5,6 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.security.core.userdetails.User;
 
-import com.myweb.www.domain.ClubVO;
 import com.myweb.www.domain.PagingVO;
 import com.myweb.www.security.AuthVO;
 import com.myweb.www.security.MemberVO;
