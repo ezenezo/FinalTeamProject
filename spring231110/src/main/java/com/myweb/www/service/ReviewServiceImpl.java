@@ -8,10 +8,16 @@ import org.springframework.stereotype.Service;
 
 import com.myweb.www.domain.CompanyVO;
 import com.myweb.www.domain.FileVO;
+
+import com.myweb.www.domain.PagingVO;
+
 import com.myweb.www.domain.PortfolioDTO;
 import com.myweb.www.domain.PortfolioVO;
 import com.myweb.www.domain.ReviewDTO;
 import com.myweb.www.domain.ReviewVO;
+
+import com.myweb.www.handler.PagingHandler;
+
 import com.myweb.www.repository.CompanyDAO;
 import com.myweb.www.repository.FileDAO;
 import com.myweb.www.repository.MemberDAO;
@@ -129,8 +135,9 @@ public class ReviewServiceImpl implements ReviewService {
 	@Override
 	public MemberDTO2 getMdto(String comId) {
 		MemberDTO2 mdto = new MemberDTO2();
-		
-		MemberVO mvo=mdao.selectEmail(comId);
+
+		MemberVO mvo = mdao.selectEmail(comId);
+
 		CompanyVO comvo = codao.getCvo(comId);
 		FileVO fvo = fdao.getFile(comId);
 		mdto.setMvo(mvo);
@@ -138,5 +145,30 @@ public class ReviewServiceImpl implements ReviewService {
 		mdto.setFvo(fvo);
 		return mdto;
 	}
+
+	@Override
+	public PagingHandler getList(String id, PagingVO pgvo) {
+		List<ReviewDTO> rdtoList = new ArrayList<>();
+
+		// totalCount 구하기
+		int totalCount = rdao.selectOneIdTotalCount(id);
+		// ReivewVO List 찾아오기
+		List<ReviewVO> rvoList = rdao.getReviewList(id,pgvo);
+		
+		log.info("rvoList>>{}", rvoList);
+		for (ReviewVO rvo : rvoList) {
+			ReviewDTO rdto = new ReviewDTO();
+			rdto.setRvo(rvo);
+			log.info("rdto>>{}", rdto);
+			rdto.setReviewMainImg(fdao.getReviewMainImg(rvo.getRno()));
+			rdtoList.add(rdto);
+		}
+		
+		// pagingHandler 값 완성 후 리턴
+				PagingHandler ph = new PagingHandler(pgvo, totalCount,rdtoList);
+
+		return ph;
+	}
+
 
 }

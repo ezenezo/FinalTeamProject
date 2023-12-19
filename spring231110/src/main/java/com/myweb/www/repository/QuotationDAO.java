@@ -9,22 +9,19 @@ import com.myweb.www.domain.RequestVO;
 
 import com.myweb.www.security.MemberVO;
 
-
 public interface QuotationDAO {
 
 	void submit(QuotationVO avo);
+
 	void quatation_submit(QuotationVO qvo);
 
 	List<QuotationDTO> getList_user(String id);
-
 
 	void checked(long qutationNm);
 
 	List<RequestVO> getRequest_list_user(long qutationNm);
 
 	int request_alarm_user(String userId);
-
-
 
 	List<QuotationVO> getList_read_user(String id);
 
@@ -39,6 +36,5 @@ public interface QuotationDAO {
 	QuotationVO getQuotation(long quotationNm);
 	CompanyVO findKeynum(int keynum);
 	void cancle_ok(long quotationNm);
-
 
 }
