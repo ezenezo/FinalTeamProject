@@ -1,0 +1,567 @@
+@font-face {
+	font-family: NotoSansKR;
+	src: url(../font/NotoSansKR-VariableFont_wght.ttf);
+}
+
+@font-face {
+	font-family: NotoSansKRBold;
+	src: url(../font/NotoSansKR-ExtraBold.ttf);
+}
+
+@font-face {
+	font-family: NotoSansKRSemiBold;
+	src: url(../font/NotoSansKR-SemiBold.ttf);
+}
+
+.mainBody {
+	font-family: NotoSansKR;
+	margin: 0px;
+	padding: 0px;
+}
+
+.mainBody a {
+	color: black;
+	text-decoration: none;
+}
+
+.mainBody a:hover {
+	color: black;
+	text-decoration: none;
+}
+
+.box {
+	width: 100%;
+	height: 100%;
+	padding: 10px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-content: center;
+	flex-wrap: nowrap;
+	align-items: center
+}
+
+.box2 {
+	width: 970px;
+}
+
+.event {
+	width: 970px;
+	height: 280px;
+	background-color: rgb(247, 245, 225);
+	border-radius: 5px, 5px, 5px, 5px;
+	display: flex;
+	justify-content: center;
+	margin-bottom: 30px;
+}
+
+.eventText {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	margin-left: 10px;
+	margin-right: 20px;
+	font-size: 22px;
+	margin-right: 20px;
+}
+
+.eventText>p {
+	font-family: NotoSansKR;
+	color: rgb(2, 82, 82);
+}
+
+.eventText p:first-child {
+	font-family: NotoSansKRSemiBold;
+}
+
+.eventText p:nth-child(2), .eventText p:nth-child(3) {
+	font-family: NotoSansKRBold;
+	margin: 0px;
+	font-size: 30px;
+}
+
+.miniTitle {
+	font-weight: 700;
+	color: rgb(47, 52, 56);
+	font-size: 36px;
+	margin: 0px;
+}
+
+.secTitle {
+	color: rgb(47, 52, 56);
+	font-weight: 400;
+	font-size: 14px;
+}
+
+.poromotionMiniText {
+	color: white;
+	font-weight: 400;
+	font-size: 14px;
+	font-weight: 400;
+}
+
+.slides li>a>img {
+	border-radius: 15px;
+}
+
+.slides li {
+	width: 235px;
+	height: 145px;
+}
+
+.slides li>a>img {
+	width: 100%;
+	height: 100%;
+}
+
+.slides li>a {
+	width: 100%;
+	height: 100%;
+	display: block;
+}
+
+.mainMoreBtn {
+	width: 230px;
+	height: 145px;
+	border: none;
+	display: flex;
+	align-items: center;
+	flex-direction: column;
+	justify-content: center;
+}
+
+.moreBtn {
+	width: 40px;
+	height: 40px;
+	color: #adaeb8;
+}
+
+.moreText {
+	font-size: 14px;
+}
+
+.slide_wrapper {
+	position: relative;
+	width: 970px;
+	margin: 0 auto;
+	height: 170px;
+	overflow: hidden;
+	margin-bottom: 80px;
+}
+
+.slides {
+	position: absolute;
+	width: 1750px;
+	left: 0;
+	top: 0;
+	padding: 0px;
+	transition: left 0.5s ease-out;
+	left: 0;
+}
+
+.slides li {
+	float: left;
+	margin-right: 10px;
+}
+
+.controls div {
+	position: absolute;
+	padding: 10px 20px;
+	margin: 0 10px;
+	top: 50%;
+	transform: translateY(-50%);
+}
+
+.controls div.prev {
+	left: -15px;
+}
+
+.controls div.next {
+	right: -15px;
+}
+
+.material-symbols-outlined {
+	color: white;
+	font-size: 30px;
+	font-weight: 400px;
+}
+
+.material-symbols-outlined:hover {
+	cursor: pointer;
+}
+
+.margin30 {
+	margin-bottom: 30px;
+}
+
+.menu {
+	display: flex;
+	justify-content: space-between;
+}
+
+.rightText {
+	float: right;
+}
+
+.rightText p {
+	color: rgb(53, 197, 240);
+	margin: 0px;
+}
+
+.promotion {
+	width: 100%;
+	padding: 65px 0;
+	background-color: #f8f8f8;
+	margin-bottom: 80px;
+}
+
+.thema {
+	width: 100%;
+	border: 1px solid;
+	margin-bottom: 20px;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	border: none;
+}
+
+.thema a {
+	width: 49%;
+	height: 310px;
+}
+
+.thema-2 {
+	width: 100%;
+	height: 310px;
+	border-radius: 30px;
+	overflow: hidden;
+	position: relative;
+}
+
+.thema-2 img {
+	width: 100%;
+	height: 310px;
+	transition: transform 0.3s ease; /* 변환 효과를 부드럽게 적용 */
+}
+
+.thema-2 img:hover {
+	transform: scale(1.1); /* 확대되는 비율. 1보다 큰 값으로 조절하면 됩니다. */
+}
+
+.absolText {
+	color: white;
+	font-weight: bold;
+	position: absolute;
+	left: 30px;
+	bottom: 5%;
+	font-size: 25px;
+	display: flex;
+	flex-direction: column;
+}
+
+.promotionBox {
+	position: relative;
+}
+
+.absolText2 {
+	color: white;
+	font-weight: bold;
+	position: absolute;
+	left: 30px;
+	top: 5%;
+	font-size: 20px;
+	display: flex;
+	flex-direction: column;
+}
+
+.promotionBoxContainer {
+	display: flex;
+	justify-content: center;
+}
+
+.promotionBox {
+	width: 180px;
+	height: 220px;
+	padding: 30px;
+	border-radius: 20px;
+	text-align: left;
+	margin: 5px;
+}
+
+.promotionBoxNum1 {
+	background-color: #579DFF;
+}
+
+.promotionBoxNum2 {
+	background-color: #37BBAB;
+}
+
+.promotionBoxNum3 {
+	background-color: #A993F8;
+}
+
+.promotionBoxNum4 {
+	background-color: #6E8CF8;
+}
+
+.absolImg {
+	position: absolute;
+	right: 35px;
+	bottom: 8%;
+	width: 85px;
+	height: 85px;
+}
+
+.centerText {
+	text-align: center;
+}
+
+.flexx {
+	display: flex;
+	justify-content: space-between;
+}
+
+.blueMore {
+	color: rgb(53, 197, 240);
+	margin: 0px;
+}
+
+.leftText2 {
+	display: flex;
+}
+
+.leftText2>img {
+	width: 28px;
+	height: 28px;
+	margin: 0px;
+	padding: 0px;
+}
+
+#imgSize {
+	width: 30px;
+	height: 40px;
+	margin: 0px;
+	padding: 0px;
+}
+
+.atag {
+	width: 100%;
+	height: 100px;
+	display: flex;
+	align-items: center;
+	flex-direction: column;
+	justify-content: space-evenly;
+}
+
+.divAtag1 {
+	width: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+}
+
+.divAtag2 {
+	width: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center
+}
+
+.atag>div>a {
+	font-size: .875rem;
+	background-color: #eafaf9;
+	color: #00c7ae;
+	width: 58px;
+	display: block;
+	border-radius: 36px;
+	height: 36px;;
+	line-height: 2.25rem;
+	text-align: center;
+	margin-right: 10px;
+}
+
+.areaText {
+	width: 50%;
+	display: flex;
+	flex-direction: column;
+	justify-content: center
+}
+
+.areaText>.secTitle {
+	margin: 0px;
+}
+
+.margin20 {
+	margin-top: 20px;
+	margin-bottom: 80px;
+}
+
+.ma {
+	margin-bottom: 30px;
+}
+
+.btnBox {
+	width: 100%;
+	margin-top: 20px;
+	display: flex;
+	justify-content: center;
+	border-bottom: 0.5px solid #ddd;
+}
+
+.topBtn {
+	width: 110px;
+	border: none;
+	background: none;
+	height: 58px;
+	font-size: 17px;
+	font-family: inherit;
+	line-height: 1;
+	letter-spacing: -0.5px;
+	white-space: nowrap;
+	border-bottom: 4px solid transparent;
+	cursor: pointer;
+}
+
+.clicked {
+	color: #3085ED;
+	font-weight: bold;
+	border-bottom: 3px solid #3085ED;
+}
+
+.bodyContainer {
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	flex-direction: column;
+}
+
+.bodyContainer2 {
+	width: 100%;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center; /* 가로 여백을 균등하게 나누기 위한 설정 */
+}
+
+.pdtoBox {
+	width: 30%; /* 이미지의 크기 설정. 여백 등의 고려를 하여 조절하세요. */
+	margin: 10px; /* 이미지 사이 여백 설정 */
+}
+
+.a1 {
+	display: block; /* a 태그를 block으로 설정 */
+	width: 100%;
+	margin: 5px;
+}
+
+.a2 {
+	display: block; /* a 태그를 block으로 설정 */
+	width: 30%;
+	margin-top: 6px;
+	cursor: pointer;
+}
+
+.martop {
+	margin-top: 40px;
+}
+
+.overHiddenBox {
+	width: 100%;
+	overflow: hidden;
+}
+
+.portfolioMainImg {
+	transition: transform 0.3s ease; /* 변환 효과를 부드럽게 적용 */
+	width: 100%;
+	height: 200px;
+	border-radius: 20px;
+}
+
+.portfolioMainImg:hover {
+	transform: scale(1.1); /* 확대되는 비율. 1보다 큰 값으로 조절하면 됩니다. */
+}
+
+.pdtoBoxTitle {
+	font-family: NotoSansKRSemiBold;
+	font-size: 17px;
+	line-height: 26px;
+	text-align: center;
+	margin-top: 18px;
+	left: 0;
+	width: 330px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: normal;
+	word-wrap: break-word;
+	display: -webkit-box;
+	-webkit-line-clamp: 1;
+	-webkit-box-orient: vertical;
+	width: 100%;
+}
+
+.pdtoTitle3th {
+	color: rgb(130, 140, 148);
+	font-size: 13px;
+	line-height: 16px;
+	margin-top: 10px;
+}
+
+.moreA {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin-top: 20px; /* 필요한 여백 설정 */
+	margin-bottom: 30px;
+}
+
+.morePortofolioBtn {
+	height: 44px;
+	padding: 0 20px;
+	cursor: pointer;
+	border-radius: 2px;
+	text-align: center;
+	font-size: 14px;
+	background-color: #ffffff;
+	border: 1px solid #dddddd;
+	color: #1d1d1d;
+}
+
+.morePortofolioBtn:hover {
+	background-color: rgb(221, 221, 221);
+}
+
+.reviewBox {
+	background-color: rgb(255, 250, 247);
+}
+
+.promotionBoxContainer {
+	padding-left: 80px 0;
+	padding-top: 20px;
+}
+
+.reviewRate {
+	display: flex;
+}
+
+.reviewItem {
+	width: 300px;
+	margin-left: 10px;
+	margin-right: 10px;
+}
+
+.reviewItem a {
+	width: 100%;
+	
+}
+
+.reviewItem a img {
+	width:100%;
+	height:210px;
+	margin: 10px 0;
+}
+.reviewItem a p{
+	text-align: center;
+	margin: 0px;
+}
+.mar80{
+	margin-bottom: 40px;
+}

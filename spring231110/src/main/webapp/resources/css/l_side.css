@@ -1,0 +1,207 @@
+/* 사이드 메뉴바(왼쪽) */
+
+ .modal {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            padding: 20px;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            z-index: 1000;
+        }
+
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 999;
+        }
+
+.logo {
+	display: flex;
+	height: 4.8em;
+	align-content: center;
+	justify-content: center;
+}
+
+.ezenDesign1 {
+	font-size: 2.5em;
+	background: linear-gradient(to right top, rgb(80, 119, 113),
+		rgb(147, 191, 169));
+	color: transparent;
+	-webkit-background-clip: text;
+	font-family: NotoSansKR;
+	font-weight: 700;
+	float: left;
+	width: 57%;
+	padding-right: 0;
+	padding-left: 8%;
+}
+
+.ezenDesign2 {
+	color: RGB(218, 164, 32);
+	font-family: NotoSansKR;
+	font-size: 1.5em;
+	float: left;
+	padding: 0;
+	margin-top: 19px;
+	display: flex;
+	justify-content: space-around;
+	padding-right: 8%;
+}
+
+.left_sidemenu_div {
+	width: 13%;
+	min-height: 100vh;
+	background-color: white;
+	z-index: 1000;
+	position: fixed;
+	padding-top: 16.891px;
+	border-right: 1.5px solid #00000024;
+}
+
+.member_detail {
+	margin: 0 auto;
+	width: 95%;
+	border: 1px solid black;
+	font-size: 100%;
+	margin-top: 5%;
+	margin-bottom: 5%;
+}
+
+.left_sidemenu {
+	overflow: hidden;
+	list-style: none;
+	padding: 0;
+	margin: 0;
+	margin-top: 50px;
+}
+
+.left_sidemenu>li {
+	text-decoration: none;
+	width: 100%;
+	line-height: 40px;
+	padding-bottom: 5%;
+	transition: background-color 0.5s ease;
+	margin-bottom: 30px;
+}
+#hover_menu1:hover,#hover_menu2:hover,#hover_menu3:hover,#hover_menu4:hover,#hover_menu5:hover,#hover_menu6:hover {
+	transition: background-color 0.5s ease;
+	background-color: rgb(245 247 250 / 70%);
+	
+	
+	
+	
+}
+
+#hover_menu1,#hover_menu2,#hover_menu3,#hover_menu4,#hover_menu5,#hover_menu6{
+	width: 90%;
+	margin-left:5%;
+	border-radius:4px;
+	right: 5%;
+	
+	
+}
+
+
+.left_sidemenu a {
+    text-decoration: none;
+    color: rgb(147, 191, 169);
+
+    text-align: center;
+    font-size: 120%;
+    margin: 20px;
+    padding: 10px;
+    border-radius: 4px;
+}
+
+.left_sidemenu i {
+	margin-right: 8px;
+}
+
+.c_logo a {
+	text-decoration: none;
+	color: black;
+	display: block;
+	font-size: 35px;
+	margin-left: 5px;
+}
+
+.c_logo img {
+	width: 45px;
+	height: 45px;
+	margin-right: 3%;
+	margin-top: 1%;
+}
+
+.c_logo {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.submenu li a:hover {
+	background-color: white;
+	color: #4e73df;
+}
+
+.left_sidemenu>li:hover .submenu {
+	height: auto;
+}
+
+.submenu a>li:hover .submenu {
+	height: auto;
+}
+
+.submenu {
+	height: 0;
+	overflow: hidden;
+	padding: 0;
+	transition: height 0.5s ease;
+	border-radius: 5px;
+	margin: 0 20px;
+}
+
+.left_sidemenu>li>a:focus+.submenu {
+	display: block;
+}
+
+@media ( max-width : 1600px) {
+	.ezenDesign2 {
+		display: none !important;
+	}
+	.ezenDesign1 {
+		margin-left: 0px;
+		padding: 0px;
+		font-size: 170%;;
+	}
+	.logo {
+		width: 100%;
+		padding: 0px;
+	}
+}
+
+@media ( max-width : 1800px) {
+	.ezenDesign2 {
+		display: none !important;
+	}
+	.ezenDesign1 {
+		margin-left: 0px;
+		padding: 0px;
+		font-size: 250%;;
+	}
+}
+
+.main_category {
+	color: #134f2c !important;
+	background-color: rgb(245, 247, 250);
+	border-radius: 4px;
+	margin: 20px
+	
+}

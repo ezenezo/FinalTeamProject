@@ -1,0 +1,72 @@
+@font-face {
+	font-family: NotoSansKR;
+	src: url(../font/NotoSansKR-VariableFont_wght.ttf);
+
+}
+
+html, body {
+	height: 100%;
+	margin: 0;
+	font-family: NotoSansKR;
+}
+*{
+		box-sizing: border-box;
+}
+body {
+/* 	display: flex; */
+
+	min-height: 100vh;
+	margin: 0;
+	flex-direction: column;
+	justify-content: space-between;
+
+	font-family: NotoSansKR;
+}
+
+.total {
+	margin: 0 auto;
+	position: relative;
+	width: 60.625rem;
+	padding-top: 48px !important ;
+	display: flex;
+	min-height: 70vh;
+	font-family: NotoSansKR;
+
+	flex-direction: column;
+		min-height:80vh ;
+}
+
+.subject {
+
+	font-size: 2.5rem;
+	font-weight: 500;
+	line-height: 1.58;
+	letter-spacing: -0.03125rem;
+	padding-top: 0.75rem;
+
+	margin-bottom: 32px;
+
+
+}
+
+.content {
+	width: 100%;
+	height: auto;
+
+	justify-content: center;
+
+}
+
+@media screen and (max-width: 1200px) {
+  .total {
+   height: 95%; 
+  }
+
+   
+}
+
+@media screen and (max-width: 600px) {
+	.total {
+		height: 99%;
+	}
+}

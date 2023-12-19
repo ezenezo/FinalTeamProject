@@ -1,0 +1,10 @@
+@charset "UTF-8";
+
+.quo_div{
+	
+	    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+}
