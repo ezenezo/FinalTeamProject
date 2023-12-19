@@ -38,6 +38,7 @@ public interface QuotationDAO {
 
 	QuotationVO getQuotation(long quotationNm);
 	CompanyVO findKeynum(int keynum);
+	void cancle_ok(long quotationNm);
 
 
 }

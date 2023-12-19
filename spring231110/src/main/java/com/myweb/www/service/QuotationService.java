@@ -44,6 +44,8 @@ public interface QuotationService {
 
 	QuotationVO getQuotation(long quotationNm);
 
+	void cancle_ok(long quotationNm);
+
 
 
 }

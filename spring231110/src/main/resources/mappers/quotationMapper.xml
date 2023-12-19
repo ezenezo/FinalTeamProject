@@ -87,5 +87,10 @@
 		select * from quotation where quotation_nm =
 		#{quotation_nm};
 	</select>
+	
+	<update id="cancle_ok">
+	update quotation set ok_type_no=1 where quotation_nm =
+		#{quotation_nm}
+	</update>
 
 </mapper>

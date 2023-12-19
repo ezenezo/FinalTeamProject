@@ -143,4 +143,10 @@ public class QuotationServiceImpl implements QuotationService {
 		return qdao.getQuotation(quotationNm);
 	}
 
+	@Override
+	public void cancle_ok(long quotationNm) {
+		qdao.cancle_ok(quotationNm);
+		
+	}
+
 }

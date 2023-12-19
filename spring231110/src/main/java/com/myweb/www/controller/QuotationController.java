@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.myweb.www.domain.QuotationDTO;
@@ -72,12 +73,30 @@ public class QuotationController {
 	    return "/quotation/quotation_user";
 	}
 
+	/*
+	 * @PostMapping("/quotation_user_cancle") public String
+	 * quotation_user_cancle(Model model, @RequestParam("quotationNm") String quoNm,
+	 * HttpServletRequest request) { long quotationNm; try { quotationNm =
+	 * Long.parseLong(quoNm); } catch (NumberFormatException e) {
+	 * 
+	 * return "error-page"; }
+	 * 
+	 * // Your method implementation using the converted quotationNm
+	 * 
+	 * return "/quotation/quotation_user"; }
+	 */
 	
-	@PostMapping("/quotation_user_cancle")
-	public String quotation_user_cancle(Model model, @RequestParam("quotationNm") long quoNm, HttpServletRequest request) {
-	  
-	    return "/quotation/quotation_user";
+	@PutMapping(value = "/quotation_user_cancle", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ModelAndView quotationNm_get(@RequestBody QuotationVO qvo) {
+		qsv.cancle_ok(qvo.getQuotationNm());
+
+	    ModelAndView modelAndView = new ModelAndView("/quotation/list_user"); // 경로는 실제로 사용하는 JSP 파일의 경로로 변경
+	    modelAndView.addObject("quotationNm", qvo.getQuotationNm()); // 필요한 경우 모델에 데이터 추가
+
+	    return modelAndView;
 	}
+
+
 	@GetMapping("/list_user")
 	public void request_user(Model model,@RequestParam("id")String id,HttpServletRequest request)  {
 		//RequestDTO rlist = qsv.getRequest_list(requestNm);
