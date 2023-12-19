@@ -16,6 +16,7 @@
 	<select id="getReviewList2"
 		resultType="com.myweb.www.domain.ReviewVO">
 		select * from review where com_id=#{id} order by rno desc
+
 	</select>
 	<select id="selectMaxRno" resultType="long">
 		select max(rno) from review
@@ -40,4 +41,5 @@
 		select count(*)
 		from review where com_id=#{id}
 	</select>
+
 </mapper>

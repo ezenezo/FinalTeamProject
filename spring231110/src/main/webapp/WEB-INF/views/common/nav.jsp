@@ -49,14 +49,16 @@
                   </div>
                </sec:authorize>
 
-               <sec:authorize access="isAuthenticated()">
-                  <sec:authentication property="principal.mvo.id" var="authId" />
-                  <sec:authentication property="principal.mvo.authVOList" var="auths" />
-                  <input type="hidden" value="${authId}" id="alarm_id">
-                  <div id="menu_m">
-                     <ul class="main_m">
-                        <c:choose>
 
+					<sec:authorize access="isAuthenticated()">
+						<sec:authentication property="principal.mvo.id" var="authId" />
+						<sec:authentication property="principal.mvo.authVOList" var="auths" />
+						<input type="hidden" value="${authId}" id="alarm_id">
+										<input type="hidden" value="${auths[0].auth}" id="userRole">
+											
+						<div id="menu_m">
+							<ul class="main_m">
+								<c:choose>
 
                            <c:when
                               test="${auths.stream().anyMatch(authVO -> authVO.auth.equals('ROLE_USER')).get()}">
@@ -80,7 +82,7 @@
                                  notifications </span></a></li>
                         <li>
                            <div class="profile">
-                              <img alt="프로필이미지 없음" src="../../resources/img/프로필지정안함.png"
+                              <img alt="프로필이미지 없음" src="../../resources/img/profile_none.png"
                                  style="width: 35px; height: 35px;" class="profile_img">
                            </div>
                            <div class="usermenu-dropdown" style="visibility: hidden;">
@@ -154,8 +156,6 @@
                   profile.style.boxShadow = 'none';
                });
 
-
-            
 
             </script>
          </body>

@@ -74,7 +74,7 @@
 					</div>
 					<a href="/req/request">
 						<button type="button" class="start_btn">
-							시작하기<span class="material-symbols-outlined">
+							시작하기<span class="material-symbols-outlined" style="COLOR: WHITE;">
 								keyboard_arrow_right </span>
 						</button>
 

@@ -56,6 +56,8 @@ public class RequestServiceImpl implements RequestService{
 	public void insert(RequestVO rvo) {
 	log.info("서비스들어옴 요청서"+rvo);
  rdao.insert(rvo);
+ 
+ 
 
  
 	/*

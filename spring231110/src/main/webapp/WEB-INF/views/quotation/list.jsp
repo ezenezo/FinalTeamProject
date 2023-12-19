@@ -28,7 +28,7 @@
 
 	<sec:authentication property="principal.mvo.id" var="authEmail" />
 	<%-- <input type="text" value="${authEmail}" id="user_id" name="requestId"> --%>
-	<input value="${authEmail }" type="text" id="authIdValue">
+	<input value="${authEmail }" type="hidden" id="authIdValue">
 	<form action="/quotation/quotation" method="post">
 		<div class="total">
 			<div class="subject">받은 요청</div>
