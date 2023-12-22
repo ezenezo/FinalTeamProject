@@ -26,7 +26,7 @@ async function postDataToServer_al(url) {
         const resp = await fetch(url, config);
 
         if (resp.status === 500) {
-            
+
             return;
         }
 
@@ -40,7 +40,7 @@ async function postDataToServer_al(url) {
             badge.style.visibility = "hidden";
         }
     } catch (err) {
-   
+
     }
 }
 
@@ -59,7 +59,7 @@ async function postDataToServer_al_user(url) {
         const resp = await fetch(url, config);
 
         if (resp.status === 500) {
-          
+
             return;
         }
 
@@ -73,9 +73,10 @@ async function postDataToServer_al_user(url) {
             badge.style.visibility = "hidden";
         }
     } catch (err) {
-    
+
     }
 }
+
 
 // 특정 페이지인 경우 getInfiniteChat2 함수를 10분 지연 실행
 if (currentPage.includes('localhost:8088/member/login') || currentPage.includes('aj2002.cafe24.com/member/login') || currentPage.includes('localhost:8088/index')) {
@@ -83,7 +84,7 @@ if (currentPage.includes('localhost:8088/member/login') || currentPage.includes(
         postDataToServer_al("/quotation/alarm/" + userId);
         postDataToServer_al("/quotation/alarm_user/" + userId);
 
-     
+
         setTimeout(function () {
             window.location.href = "/req/main";
         }, 600000); // 10분 지연

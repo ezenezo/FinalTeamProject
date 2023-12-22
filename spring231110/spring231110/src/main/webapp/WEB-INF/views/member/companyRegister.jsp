@@ -71,15 +71,15 @@
 					<p id="addrP">주소</p>
 					<div class="addrBox">
 						<input type="text" id="zoneCode" class="form-control mb-3"
-							placeholder="우편번호"> <input type="button"
+							placeholder="우편번호" name="zoneCode"> <input type="button"
 							class="form-control mb-3 addrBtn" onclick="inputAddr()"
 							value="우편번호 찾기"><br>
 					</div>
 					<input type="text" id="address" class="form-control mb-3"
-						placeholder="주소"><br> <input type="text"
-						class="form-control mb-3" id="detailAddress" placeholder="상세주소">
-					<input type="text" id="extraAddress" class="form-control mb-3"
-						placeholder="참고항목">
+						placeholder="주소" name="address"><br> <input type="text"
+						class="form-control mb-3" id="detailAddress" placeholder="상세주소"
+						name="detailAddress"> <input type="text" id="extraAddress"
+						class="form-control mb-3" placeholder="참고항목" name="extraAddress">
 				</div>
 				<div class="mb-3 profileBox">
 					<label class="form-label">메이트 대표 이미지</label>
@@ -124,7 +124,7 @@
 			<!-- 이미지 정규표현식 확인용 -->
 			<input type='text' id="checkImgResult" hidden="hidden">
 			<!-- 전화번호 정규표현식 확인용 -->
-			<input type='text' id="checkPhoneResult" hidden="hidden">			
+			<input type='text' id="checkPhoneResult" hidden="hidden">
 
 			<!-- 로그인 창으로 넘어가기 -->
 			<div class="LoginPageDiv">

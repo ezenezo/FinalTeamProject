@@ -24,7 +24,7 @@ private boolean completed;
 private boolean requestCancel;
 private boolean quotation_cancel;
 private boolean refund;
-
 private String companyName;
+
 
 }

@@ -260,6 +260,7 @@ public class QuotationController {
 		qvo.setRequestId(requestId);
 		qvo.setKeynum(keynum);
 		qvo.setRequestNm(requestNm);
+
 		qvo.setPno(pno);
 		qsv.quatation_submit(qvo);
 		long quotationNm=qsv.getQuotationNm(keynum);

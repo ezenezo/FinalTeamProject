@@ -22,14 +22,15 @@
 		address, zone_code,
 		detail_address,extra_address, aquare_footage,
 		square_meter,budget
+
 		,request_op,keynum,approve_ok,request_nm,pno)
 		values
 		(#{requestId},#{form}, #{categoryType}, #{rang}, #{status},
 		#{address}, #{zoneCode}, #{detailAddress}, #{extraAddress},
 		#{aquareFootage}, #{squareMeter},#{budget}
 		,#{requestOp},#{keynum},1,#{requestNm},#{pno});
-	</insert>
 
+	</insert>
 
 	<select id="getList_user" parameterType="String"
 		resultType="com.myweb.www.domain.QuotationDTO">
@@ -87,10 +88,7 @@
 		WHERE q.quotation_nm =
 		#{quotation_nm}
 
-
-
 	</select>
-
 
 	<select id="getQuotation"
 		resultType="com.myweb.www.domain.QuotationVO">
@@ -102,6 +100,7 @@
 		update quotation set ok_type_no=1 where quotation_nm =
 		#{quotation_nm}
 	</update>
+
 
 
 	<select id="getQuotationNm" parameterType="int"
@@ -142,5 +141,6 @@
 		WHERE request_nm = #{requestNm};
 
 	</update>
+
 
 </mapper>
