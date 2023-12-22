@@ -172,9 +172,11 @@
 
 		</div>
 		<div class="box2-1">
+
 			<a href="/req/requestStart?pno=${pdto.pvo.pno}" class="stickyAtag"><button class="stickyBtn"
 					type="button">
 					<span class="material-symbols-outlined quotationIcon"> contract_edit </span>
+
 				</button> </a>
 		</div>
 	</div>
