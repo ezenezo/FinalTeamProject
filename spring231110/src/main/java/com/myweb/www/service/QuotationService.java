@@ -53,9 +53,7 @@ public interface QuotationService {
 	void quatation_modify(QuotationVO qvo);
 
 	RequestDTO getRequest_list_detail_user(long requestNm);
-	
-	 QuotationVO selectQuotation(long quoNm);
-	 
+
 
 
 

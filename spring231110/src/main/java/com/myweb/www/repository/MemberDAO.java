@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.security.core.userdetails.User;
 
+import com.myweb.www.domain.Coordinates;
 import com.myweb.www.domain.PagingVO;
 import com.myweb.www.security.AuthVO;
 import com.myweb.www.security.MemberVO;
@@ -63,5 +64,6 @@ public interface MemberDAO {
 
 	int updatePoint(@Param("round") int round, @Param("id") String id);
 
+	int addCoordinates(@Param("id") String id, @Param("coordinates") Coordinates coordinates ); //231207전경환추가
 
 }

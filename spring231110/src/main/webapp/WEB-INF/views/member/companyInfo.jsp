@@ -68,7 +68,7 @@
 
 				</c:forEach>
 			</div>
-			<a name="review"></a> <a class="moreA" href="/portfolio/mylist?id=${cdto.mvo.id}"><button
+			<a name="review"></a> <a class="moreA" href="#"><button
 					class="morePortofolioBtn" type="button">시공사례 더보기</button></a>
 
 

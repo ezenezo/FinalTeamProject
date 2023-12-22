@@ -52,14 +52,8 @@ body {
 }
 
 #regBtn {
-	background-color: #5b975b;
-    color: #fff;
-    text-align: center;
-    padding: 10px 0;
-    width: 100px;
-    border:none;
-    border-radius: 6px;
-    cursor: pointer;
+	background-color: #00c7ae;
+	border-color: #00c7ae;
 }
 .star:hover,
 .star.hovered {

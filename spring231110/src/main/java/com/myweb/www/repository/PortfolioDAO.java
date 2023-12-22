@@ -24,11 +24,15 @@ public interface PortfolioDAO {
 
 	PortfolioVO getDetailPvo(long pno);
 
-	void updatePortfolioLikeQty(@Param("pno") long pno);
+	int portfolioLikeCheck(@Param("pno") long pno, @Param("id") String id);
+
+	void updatePortfolioLikeQty(@Param("pno") long pno, @Param("num") int num);
 
 	void updateReadCount(long pno);
 
 	String selectId(long pno);
+
+	List<PortfolioVO> getPvoList(String id);
 
 	int heartCount(String id);
 

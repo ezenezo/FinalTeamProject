@@ -29,6 +29,8 @@ import com.myweb.www.domain.RequestVO;
 import com.myweb.www.security.MemberVO;
 
 import com.myweb.www.service.QuotationService;
+import com.myweb.www.service.RequestService;
+import com.myweb.www.service.StatusService;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -38,15 +40,22 @@ import lombok.extern.slf4j.Slf4j;
 public class QuotationController {
 	@Inject
 	private QuotationService qsv;
+	@Inject
+	private StatusService ssv;
+	
+	@Inject
+	private RequestService rsv;
 
 	@GetMapping("/list")
 	public void request(Model model, @RequestParam("id") String id, HttpServletRequest request) {
 
-		List<RequestVO> rvo = qsv.getList(id);
+		int keynum = rsv.getKeyNum(id);
+
+		List<RequestVO> rvo = qsv.getList(keynum);
 		log.info("받은요청 리스트 아이디 들어옴" + id);
 		log.info("받은요청 리스트 보기" + rvo);
-		model.addAttribute("list", qsv.getList(id));
-		model.addAttribute("list_read", qsv.getList_read(id));
+		model.addAttribute("list", qsv.getList(keynum));
+		model.addAttribute("list_read", qsv.getList_read(keynum));
 		log.info("받은 요청 리스트들어옴" + rvo);
 	}
 
@@ -56,6 +65,14 @@ public class QuotationController {
 	    log.info("여기들어옴");
 	    return "/quotation/quotation";
 	}
+	
+	@GetMapping("/modify")
+	public String quotation_modify(Model model, @RequestParam("requestNm") long reNm, HttpServletRequest request) {
+	    model.addAttribute("qvo", qsv.setQutation_modify(reNm));
+	    log.info("여기들어옴");
+	    return "/quotation/quotation_mod";
+	}
+	
 	
 	
 	@GetMapping("/quotation_user")
@@ -89,7 +106,8 @@ public class QuotationController {
 	@PutMapping(value = "/quotation_user_cancle", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ModelAndView quotationNm_get(@RequestBody QuotationVO qvo) {
 		qsv.cancle_ok(qvo.getQuotationNm());
-
+		
+		ssv.quotation_status_cancel(qvo.getQuotationNm());
 	    ModelAndView modelAndView = new ModelAndView("/quotation/list_user"); // 경로는 실제로 사용하는 JSP 파일의 경로로 변경
 	    modelAndView.addObject("quotationNm", qvo.getQuotationNm()); // 필요한 경우 모델에 데이터 추가
 
@@ -113,7 +131,19 @@ public class QuotationController {
 
 	}
 	
+	@GetMapping("/list_controller")
+	public String request(Model model, @RequestParam("id")  int keynum, HttpServletRequest request) {
+
 	
+
+		List<RequestVO> rvo = qsv.getList(keynum);
+		log.info("받은요청 리스트 아이디 들어옴" + keynum);
+		log.info("받은요청 리스트 보기" + rvo);
+		model.addAttribute("list", qsv.getList(keynum));
+		model.addAttribute("list_read", qsv.getList_read(keynum));
+		log.info("받은 요청 리스트들어옴" + rvo);
+		 return "/quotation/list";
+	}
 	/*실시간 리스트 비동기용
 	 * @GetMapping(value = "/left/{authEmail}", produces =
 	 * MediaType.APPLICATION_JSON_VALUE) public ResponseEntity<List<RequestVO>>
@@ -128,8 +158,8 @@ public class QuotationController {
 	@GetMapping(value = "/left/read/{authEmail}", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<List<RequestVO>> req_left_read(@PathVariable("authEmail") String id, RedirectAttributes reAttr, Model model) {
 	    log.info("받은견적 리스트 아이디 들어옴" + id);
-
-	    List<RequestVO> quotationList = qsv.getList_read(id);
+	    int keynum = rsv.getKeyNum(id);
+	    List<RequestVO> quotationList = qsv.getList_read(keynum);
 	    log.info("quo왼쪽리스트(읽음)"+quotationList);
 
 	    return new ResponseEntity<List<RequestVO>>(quotationList, HttpStatus.OK);
@@ -138,6 +168,8 @@ public class QuotationController {
 	@PostMapping(value = "/cancel/{reqNm}", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<String> request_reqNm_cancel(@PathVariable("reqNm") long reqNm, RedirectAttributes reAttr) {
 		int alarm_count = qsv.request_cancel(reqNm);
+		
+		ssv.request_status_cancel(reqNm);
 		log.info("취소 컨트롤러 들어옴");
 		return alarm_count > 0 ? new ResponseEntity<String>("1", HttpStatus.OK)
 				: new ResponseEntity<String>("0", HttpStatus.INTERNAL_SERVER_ERROR);
@@ -145,11 +177,13 @@ public class QuotationController {
 
 	@PostMapping(value = "/alarm/{userId}", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<String> request_alarm(@PathVariable("userId") String userId, RedirectAttributes reAttr) {
-		int alarm_count = qsv.request_alarm(userId);
+		
+		int keynum = rsv.getKeyNum(userId);
+		int alarm_count = qsv.request_alarm(keynum);
 		reAttr.addFlashAttribute("alarm_count", alarm_count);
 
-		return alarm_count > 0 ? new ResponseEntity<String>("1", HttpStatus.OK)
-				: new ResponseEntity<String>("0", HttpStatus.INTERNAL_SERVER_ERROR);
+		return alarm_count > 0 ? new ResponseEntity<String>("1", HttpStatus.OK):new ResponseEntity<>(HttpStatus.NO_CONTENT);
+			
 	}
 
 	@PostMapping(value = "/alarm_user/{userId}", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -161,18 +195,18 @@ public class QuotationController {
 
 
 		reAttr.addFlashAttribute("alarm_count", alarm_count);
-		return alarm_count > 0 ? new ResponseEntity<String>("1", HttpStatus.OK)
-				: new ResponseEntity<String>("0", HttpStatus.INTERNAL_SERVER_ERROR);
+		return alarm_count > 0 ? new ResponseEntity<String>("1", HttpStatus.OK):new ResponseEntity<>(HttpStatus.NO_CONTENT);
+			
 	}
 
 	@GetMapping(value = "/{requestNm}", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<RequestDTO> quatation(@PathVariable("requestNm") long requestNm,
 			RedirectAttributes reAttr) {
 
-		log.info("받은요청 리스트 요청페이지 들어옴111111" + requestNm);
+
 		
 	RequestDTO rlist = qsv.getRequest_list(requestNm);
-		log.info("받은요청 개인 리스트 받음" + rlist);
+
 		return new ResponseEntity<RequestDTO>(rlist, HttpStatus.OK);
 	}
 
@@ -189,7 +223,8 @@ public class QuotationController {
 	}
 
 	@PostMapping("/req_ok")
-	public String quatation_submit(@RequestParam(value = "form", required = false) String form,
+	public String quatation_submit(
+			@RequestParam(value = "form", required = false) String form,
 			@RequestParam(value = "rang", required = false) String rang,
 			@RequestParam(value = "categoryType", required = false) String categoryType,
 			@RequestParam(value = "status", required = false) String status,
@@ -197,30 +232,18 @@ public class QuotationController {
 			@RequestParam(value = "address", required = false) String address,
 			@RequestParam(value = "detailAddress", required = false) String detailAddress,
 			@RequestParam(value = "extraAddress", required = false) String extraAddress,
-			@RequestParam(value = "squatMeter", required = false) Float squatMeter,
-			@RequestParam(value = "aquareFootage", required = false) Float aquareFootage,
+			@RequestParam(value = "squareMeter", required = false) float squatMeter,
+			@RequestParam(value = "aquareFootage", required = false) float aquareFootage,
 			@RequestParam(value = "budget", required = false) long budget,
 			@RequestParam(value = "requestOp", required = false) String requestOp,
 			@RequestParam(value = "requestId", required = false) String requestId,
 			@RequestParam(value = "requestNm", required = false) long requestNm,
-			@RequestParam(value = "keynum", required = false) int keynum)
+			@RequestParam(value = "keynum", required = false) int keynum,
+			@RequestParam(value = "pno", required = false) long pno, Model model)
 
 	{
-		log.info("form_값 받음: " + form);
-		log.info("카테고리_값 받음: " + categoryType);
-		log.info("rang_값 받음: " + rang);
-		log.info("status_값 받음: " + status);
-		log.info("zone_값 받음: " + zoneCode);
-		log.info("add_값 받음: " + address);
-		log.info("detail_값 받음: " + detailAddress);
-		log.info("extra_값 받음: " + extraAddress);
-		log.info("평수_값 받음: " + aquareFootage);
-		log.info("squatme_값 받음: " + squatMeter);
-		log.info("견적값_값 받음: " + budget);
-		log.info("마지막 요청사항: " + requestOp);
-		log.info("요청 아이디 (고객): " + requestId);
-		log.info("요청서 고유번호: " + requestNm);
-		log.info("회사이름: " + keynum);
+		
+		log.info("여기들어옴");
 		QuotationVO qvo = new QuotationVO();
 		qvo.setForm(form);
 		qvo.setCategoryType(categoryType);
@@ -237,8 +260,69 @@ public class QuotationController {
 		qvo.setRequestId(requestId);
 		qvo.setKeynum(keynum);
 		qvo.setRequestNm(requestNm);
-		qsv.quatation_submit(qvo);
-		return "/common/main";
-	}
 
+		qvo.setPno(pno);
+		qsv.quatation_submit(qvo);
+		long quotationNm=qsv.getQuotationNm(keynum);
+		qvo.setQuotationNm(quotationNm);
+	   
+		ssv.quotation_status(qvo);
+
+		ssv.quotation_status_ok(qvo); 
+		
+	
+		
+		model.addAttribute("keynum", keynum);
+		return "redirect:/quotation/list_controller?id={keynum}";
+	}
+	
+	
+	@PostMapping("/modify_submit")
+	public String modify_submit(
+			@RequestParam(value = "form", required = false) String form,
+			@RequestParam(value = "rang", required = false) String rang,
+			@RequestParam(value = "categoryType", required = false) String categoryType,
+			@RequestParam(value = "status", required = false) String status,
+			@RequestParam(value = "zoneCode", required = false) int zoneCode,
+			@RequestParam(value = "address", required = false) String address,
+			@RequestParam(value = "detailAddress", required = false) String detailAddress,
+			@RequestParam(value = "extraAddress", required = false) String extraAddress,
+			@RequestParam(value = "squareMeter", required = false) float squatMeter,
+			@RequestParam(value = "aquareFootage", required = false) float aquareFootage,
+			@RequestParam(value = "budget", required = false) long budget,
+			@RequestParam(value = "requestOp", required = false) String requestOp,
+			@RequestParam(value = "requestId", required = false) String requestId,
+			@RequestParam(value = "requestNm", required = false) long requestNm,
+			@RequestParam(value = "keynum", required = false) int keynum,
+			@RequestParam(value = "pno", required = false) long pno, Model model)
+
+	{
+		
+		log.info("여기들어옴");
+		QuotationVO qvo = new QuotationVO();
+		qvo.setForm(form);
+		qvo.setCategoryType(categoryType);
+		qvo.setRang(rang);
+		qvo.setStatus(status);
+		qvo.setZoneCode(zoneCode);
+		qvo.setAddress(address);
+		qvo.setDetailAddress(detailAddress);
+		qvo.setExtraAddress(extraAddress);
+		qvo.setAquareFootage(aquareFootage);
+		qvo.setSquareMeter(squatMeter);
+		qvo.setBudget(budget);
+		qvo.setRequestOp(requestOp);
+		qvo.setRequestId(requestId);
+		qvo.setKeynum(keynum);
+		qvo.setRequestNm(requestNm);
+		qvo.setPno(pno);
+		qsv.quatation_modify(qvo);
+
+	
+		
+		model.addAttribute("keynum", keynum);
+		return "redirect:/quotation/list_controller?id={keynum}";
+	}
+	
+	
 }

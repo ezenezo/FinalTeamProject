@@ -7,12 +7,12 @@ import javax.inject.Inject;
 import org.springframework.stereotype.Service;
 
 import com.myweb.www.domain.CustomerServiceVO;
-import com.myweb.www.repository.CustomerDAO;
+import com.myweb.www.repository.CustomerServiceDAO;
 
 @Service
 public class CustomerServiceImpl implements CustomerService {
 	@Inject
-	private CustomerDAO cdao;
+	private CustomerServiceDAO cdao;
 
 	@Override
 	public List<CustomerServiceVO> getList(String searchValue) {

@@ -177,11 +177,5 @@ public class QuotationServiceImpl implements QuotationService {
 		return dto;
 	}
 
-	@Override
-	public QuotationVO selectQuotation(long quoNm) {
-		// TODO Auto-generated method stub
-		return qdao.selectQuotation(quoNm);
-	}
-
 
 }

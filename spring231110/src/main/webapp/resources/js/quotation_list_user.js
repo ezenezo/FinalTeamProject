@@ -36,12 +36,24 @@ function quo_user(quotationNm) {
 //확인여부
 let quotationNms = document.querySelectorAll('.quo_click'); 
 
-quotationNms.forEach(quotationNm => {
-  let checked = Boolean(document.getElementById(`checked_ok_${quotationNm.value}`).value);
-  if (checked) {
-    console.log("여기들어옴");
-    document.querySelector(`#list_requset_${quotationNm.value} .checked_div`).innerHTML=`확인한 견적서`;
+quotationNms.forEach(quotationInput => {
+  let quotationNm = quotationInput.value;
+  let checked = document.getElementById(`checked_ok_${quotationNm}`).value;
+  console.log(checked);
+
+  // Find the element with the ID #checked_div_${quotationNm}
+  let checkedDiv = document.querySelector(`#checked_div_${quotationNm}`);
+
+  // Check if the element exists before setting its innerHTML
+  if (checkedDiv) {
+    if (checked) {
+      console.log("여기들어옴");
+      checkedDiv.innerHTML = "확인한 견적서";
+    } else {
+      checkedDiv.innerHTML = "미확인 견적서";
+    }
   } else {
-    document.querySelector(`#list_requset_${quotationNm.value} .checked_div`).innerHTML=`미확인 견적서`;
+    console.error(`Element with ID #checked_div_${quotationNm} not found`);
   }
 });
+

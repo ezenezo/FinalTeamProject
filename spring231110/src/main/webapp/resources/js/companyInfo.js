@@ -78,7 +78,7 @@ function reviewPrint(id,page = 1) {
 
             console.log(content);
 
-            str+=`<div style="margin-bottom:30px;"class="review">`;
+            str+=`<div style="margin-bottom:10px;"class="review">`;
             str+=`<div class="rateStar">`;
             str+=`<div class="starmini" style="width:270px;">`;
             for (let j = 0; j < rdto.rvo.rate; j++) {

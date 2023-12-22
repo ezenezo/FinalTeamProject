@@ -41,31 +41,5 @@
 		select count(*)
 		from review where com_id=#{id}
 	</select>
-	<select id="selectAllReviewTotalCount" resultType="int">
-		select
-		count(*)
-		from review
-	</select>
-	<select id="getAllReviewListPh"
-		resultType="com.myweb.www.domain.ReviewVO">
-		select * from review order by rno desc
-		limit
-		#{pageStart},
-		#{qty}
-	</select>
-	<update id="updateReviewLikeQty">
-		update review set like_qty=(select count(*) from
-		heart where rno=review.rno)
-	</update>
-	<update id="updateReadCount">
-		update review set read_qty=read_qty+1 where
-		rno=#{rno}
-	</update>
-	<select id="selectId" resultType="String">
-	select id from review where rno=#{rno}
-	</select>
-	<select id="reviewCount" resultType="int">
-	select count(*) from review where com_id=#{id}
-	</select>
 
 </mapper>

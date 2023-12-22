@@ -27,6 +27,7 @@ import com.google.gson.JsonParser;
 import com.myweb.www.domain.CompanyDTO;
 import com.myweb.www.domain.CompanyDTO2;
 import com.myweb.www.domain.CompanyVO;
+import com.myweb.www.domain.Coordinates;
 import com.myweb.www.domain.FileVO;
 import com.myweb.www.domain.PagingVO;
 import com.myweb.www.domain.PortfolioDTO;
@@ -438,10 +439,11 @@ public class MemberServiceImpl implements MemberService {
 		CompanyVO cvo = cdao.getCvo(id);
 
 		if (mvo.isType()) {
+			log.info("20231207여기오는지11");
 			List<PortfolioDTO> pdtoList = new ArrayList<PortfolioDTO>();
 			// pvo+mainImg
 
-			List<PortfolioVO> pvoList = pdao.getListMyPortfolio(id);
+			List<PortfolioVO> pvoList = pdao.getPvoList(id);
 
 			for (PortfolioVO pvo : pvoList) {
 				PortfolioDTO pdto = new PortfolioDTO();
@@ -521,9 +523,11 @@ public class MemberServiceImpl implements MemberService {
 	public CompanyVO getCvo(String id) {
 		return cdao.getCvo(id);
 	}
-
+	
+	//231220 전경환 재추가
 	@Override
-	public int reviewCount(String id) {
-		return rdao.reviewCount(id);
+	public int addCoordinates(String id, Coordinates coordinates) {
+		return mdao.addCoordinates(id, coordinates);
 	}
+
 }

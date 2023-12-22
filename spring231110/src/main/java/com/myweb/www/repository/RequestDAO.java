@@ -4,7 +4,7 @@ import java.util.List;
 
 
 import com.myweb.www.domain.FileVO;
-
+import com.myweb.www.domain.QuotationVO;
 import com.myweb.www.domain.ReqFileVO;
 import com.myweb.www.domain.RequestDTO;
 import com.myweb.www.domain.RequestQuestionVO;
@@ -38,13 +38,13 @@ void insert(RequestVO rvo);
 	/*
 	 * long selectNm(String userid);
 	 */
-	List<RequestVO> selectrequset(String id);
+	List<RequestVO> selectrequset(int keynum);
 
 	long selectNm();
 
 	List<RequestQuestionVO> list2_1();
 
-	int request_alarm(String userId);
+	int request_alarm(int keynum);
 
 	String selectOneBno(String requestId);
 
@@ -62,7 +62,7 @@ void checked(long requestNm);
 
 	Boolean req_check(long requestNm);
 
-	List<RequestVO> selectrequset_read(String id);
+	List<RequestVO> selectrequset_read(int keynum);
 
 	int req_cancel(long reqNm);
 
@@ -75,6 +75,26 @@ void checked(long requestNm);
 	MemberVO memberSelect(long requestNm);
 
 	List<RequestVO> setQutation(long reNm);
+
+	void setPno(long pno);
+
+	void okTypeYes_ok(long requstNm);
+
+	String selectNm_status();
+
+	long getList_status(String requestId);
+
+	List<RequestVO> req_list(String id);
+
+	List<RequestVO> req_detile(String reqNm);
+
+	String company_name(long pno);
+
+	int company_keynum(long pno);
+
+	int getCompanyNum(String id);
+
+
 
 
 
