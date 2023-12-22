@@ -12,14 +12,16 @@ import lombok.ToString;
 @AllArgsConstructor
 @ToString
 public class ReviewVO {
-	private long rno;//o
+	private long rno;
 	private String id;// 글쓴이(일반유저)
 	private String comId;// 업체 아이디
 	private String comName;//업체 이름
-	private String title; //o
-	private int rate;// 별점 //o
-	private String content; //o
+	private String title; 
+	private int rate;// 별점 
+	private String content; 
 	private String regDate;
 	private String modDate;
-
+	private int likeQty;//좋아요수
+	private boolean likeCheck;// 로그인한 아이디가 한 리뷰 좋아요한 유무
+	private int readQty;//조회수
 }

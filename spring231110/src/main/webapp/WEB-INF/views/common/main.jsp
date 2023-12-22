@@ -184,7 +184,7 @@
 		<!-- 리뷰란 시작 -->
 		<div class="promotion reviewBox">
 			<div class="leftText centerText">
-				<a href="#"><p class="miniTitle margin30">따끈따끈한 고객 후기 ></p></a>
+				<a href="/review/allReviewList"><p class="miniTitle margin30">따끈따끈한 고객 후기 ></p></a>
 			</div>
 			<div class="promotionBoxContainer reviewContainer"></div>
 		</div>

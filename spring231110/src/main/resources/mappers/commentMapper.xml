@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.myweb.www.repository.CommentDAO">
+
+	<insert id="insert">
+		<include refid="insertSql"></include>
+	</insert>
+	<select id="getTotalCount" resultType="int">
+		select count(*) from
+		comment
+		where pno=#{pno}
+	</select>
+	<select id="getReviewCommentTotalCount" resultType="int">
+		select
+		count(*) from
+		comment
+		where rno=#{rno}
+	</select>
+	<select id="getcmtList"
+		resultType="com.myweb.www.domain.CommentVO">
+		select * from comment
+		where pno=#{pno}
+		order by cmt_no desc
+		limit
+		#{pgvo.pageStart},#{pgvo.qty}
+	</select>
+	<select id="getReviewcmtList"
+		resultType="com.myweb.www.domain.CommentVO">
+		select * from comment
+		where rno=#{rno}
+		order by cmt_no desc
+		limit
+		#{pgvo.pageStart},#{pgvo.qty}
+
+	</select>
+	<delete id="remove">
+		delete from comment where cmt_no=#{cmtNo}
+	</delete>
+	<update id="modify">
+		update comment set content=#{content}, mod_date=now()
+		where cmt_no=#{cmtNo}
+	</update>
+	<select id="CommentLikeCheck" resultType="int">
+		select count(*) from
+		heart where cmt_no=#{cmtNo} and id=#{id}
+	</select>
+	<update id="updateCommentLikeQty">
+		update comment set like_qty=(select count(*) from
+		heart where
+		cmt_no=comment.cmt_no)
+	</update>
+	<select id="likeQtyAreaInput" resultType="int">
+		select like_qty from
+		comment where cmt_no=#{cmtNo}
+	</select>
+
+	<sql id="insertSql">
+		<choose>
+			<when test="rno !=null and rno !=''">
+				insert into comment(rno,id,content)
+				values(#{rno},#{id},#{content})
+			</when>
+			<when test="pno !=null and pno !=''">
+				insert into comment(pno,id,content)
+				values(#{pno},#{id},#{content})
+			</when>
+		</choose>
+	</sql>
+
+</mapper>
