@@ -34,7 +34,7 @@ h1 {
 }
 
 .box2 {
-	width: 900px;
+	width: 970px;
 }
 
 .portfolioInfo {
@@ -216,6 +216,7 @@ h1 {
 
 	position: sticky;
 	top:0;
+	z-index: 9999;
 }
 .topBtnA{
 	width: 100%;

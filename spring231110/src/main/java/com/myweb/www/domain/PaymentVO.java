@@ -1,7 +1,5 @@
 package com.myweb.www.domain;
 
-import java.util.Date;
-
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -25,5 +23,4 @@ public class PaymentVO {
 	private int couponNum; //쿠폰 번호
 	private int point; //사용 포인트
 	private boolean refund; //환불여부
-	private Date regAt; //환불날짜
 }

@@ -323,7 +323,7 @@ ul.main_m li:nth-child(4)>a {
 
 .logout {
    justify-content: center;
-
+   display: flex;
    text-align: center;
    align-items: center;
    border: none;
@@ -376,9 +376,4 @@ ul.main_m li:nth-child(4)>a {
     -webkit-font-feature-settings: 'liga';
     -webkit-font-smoothing: antialiased;
     color: black;
-}
-
-#li_member_id{
-	
-	margin-right: 10px;
 }

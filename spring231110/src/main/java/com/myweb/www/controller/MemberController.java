@@ -9,7 +9,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -35,7 +34,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.fasterxml.jackson.databind.JsonNode;
 
 import com.myweb.www.domain.CompanyDTO2;
-import com.myweb.www.domain.Coordinates;
+
 import com.myweb.www.domain.CouponVO;
 import com.myweb.www.domain.CustomerServiceVO;
 import com.myweb.www.domain.FileVO;
@@ -47,7 +46,6 @@ import com.myweb.www.security.AuthVO;
 import com.myweb.www.security.MemberDTO;
 import com.myweb.www.security.MemberVO;
 import com.myweb.www.service.CustomerService;
-import com.myweb.www.service.GeocodingService;
 import com.myweb.www.service.MemberService;
 import com.myweb.www.service.PaymentService;
 import com.myweb.www.service.PortfolioService;
@@ -114,17 +112,6 @@ public class MemberController {
 			fvo = pfh.uploadFiles(files[0], id);
 		}
 		isOk *= msv.insert(id, fvo);
-		
-	      //전경환추가231207---------------------------------------------S
-	      // 주소를 위도와 경도로 변환
-	      log.info("mvo.getAddress()는"+mvo.getAddress());
-	      Coordinates coordinates = geocodingService.getCoordinate(mvo.getAddress());
-	 
-	      log.info("이부분이 관련된 위도경도 "+coordinates.toString());
-	      // 변환된 좌표를 회원 정보에 추가 (이 부분은 데이터베이스에 좌표를 저장하는 로직이 필요)
-	      msv.addCoordinates(id, coordinates);
-	      //전경환추가231207---------------------------------------------E
-		
 		log.info(isOk > 0 ? "성공" : "실패");
 		return "/member/login";
 	}
@@ -335,16 +322,21 @@ public class MemberController {
 	}
 
 	// 마이페이지
-	@GetMapping("/myPage")
-	public void myPage(@RequestParam String id, Model m) {
+	@RequestMapping("/myPage")
+	public void myPage(@RequestParam String id, Model m, HttpServletRequest request) {
 		FileVO fvo = msv.getFile(id);
 		m.addAttribute("fvo", fvo);
 		MemberVO mvo = msv.memberDetail(id);
 		m.addAttribute("mvo", mvo);
 		List<PortfolioVO> pvo = psv.getHeartList(id);
 		m.addAttribute("heart", pvo.size());
+		log.info("일반유저쪽type>>>{}",mvo.isType());
+		log.info("pvo:"+pvo);
+		log.info("port:"+pvo);
 		List<CouponVO> cvo = paysv.getCouponList(id);
 		int couponCount = cvo.size();
+		log.info("cvo:"+cvo);
+		log.info("couponCount:"+couponCount);
 		m.addAttribute("couponCount", couponCount);
 	}
 
@@ -355,9 +347,12 @@ public class MemberController {
 		FileVO fvo = msv.getFile(id);
 		MemberDTO mdto = msv.getMdto(id);
 		int heartCount = msv.heartCount(id);
+		int reviewCount = msv.reviewCount(id);
+		log.info("업체유저쪽type>>>{}",mdto.getMvo().isType());
 		m.addAttribute("fvo", fvo);
 		m.addAttribute("mdto", mdto);
 		m.addAttribute("heartCount", heartCount);
+		m.addAttribute("reviewCount", reviewCount);
 		log.info("mdto>>{}", mdto);
 	}
 
@@ -417,20 +412,5 @@ public class MemberController {
 		new SecurityContextLogoutHandler().logout(req, res, authentication);
 
 	}
-	
-	   //231207전경환추가---------------------------------------S
-	   @Autowired
-	   private GeocodingService geocodingService;
-	   //http://localhost:8088/findmap/get-coordinates?address=인천광역시 연수구 원인재로 88
-	   @GetMapping("/get-coordinates")
-	   public ResponseEntity<?> getCoordinates(@RequestParam String address) {
-	   	log.info("/get-coordinates쪽 진입");
-	       Coordinates coordinates = geocodingService.getCoordinate(address);
-	       // 위도와 경도 정보를 반환하거나 `company` 테이블에 저장하는 로직
-	       log.info("coordinates는 " +coordinates);
-	       return ResponseEntity.ok(coordinates);
-	   }
-	   //231207전경환추가---------------------------------------E
-
 
 }

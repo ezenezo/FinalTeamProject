@@ -29,6 +29,7 @@ import com.myweb.www.domain.PagingVO;
 
 import com.myweb.www.domain.PortfolioDTO;
 import com.myweb.www.domain.PortfolioVO;
+import com.myweb.www.domain.QuotationVO;
 import com.myweb.www.domain.ReviewDTO;
 import com.myweb.www.domain.ReviewVO;
 import com.myweb.www.handler.FileHandler;
@@ -36,6 +37,7 @@ import com.myweb.www.handler.FileHandler;
 import com.myweb.www.handler.PagingHandler;
 
 import com.myweb.www.security.MemberDTO2;
+import com.myweb.www.service.QuotationService;
 import com.myweb.www.service.ReviewService;
 
 import lombok.extern.slf4j.Slf4j;
@@ -46,15 +48,22 @@ import lombok.extern.slf4j.Slf4j;
 public class ReviewController {
 	private ReviewService rsv;
 	private FileHandler fh;
+	private QuotationService qsv;
 
 	@Autowired
-	public ReviewController(ReviewService rsv, FileHandler fh) {
+	public ReviewController(ReviewService rsv, FileHandler fh, QuotationService qsv) {
 		this.rsv = rsv;
 		this.fh = fh;
+		this.qsv = qsv;
 	}
 
 	@GetMapping("/register")
-	public String register() {
+	public String register(@RequestParam("quotationNm") long quoNm, Model model) {
+//		
+		QuotationVO qvo = qsv.selectQuotation(quoNm);
+		log.info("리뷰 qvo" + qvo);
+
+		model.addAttribute("qvo", qvo);
 		return "/review/register";
 	}
 
@@ -154,28 +163,53 @@ public class ReviewController {
 		List<ReviewDTO> rdtoList = rsv.mainRdtoList();
 		return new ResponseEntity<List<ReviewDTO>>(rdtoList, HttpStatus.OK);
 	}
-	
+
+	// 하나의 업체 리뷰리스트
 	@GetMapping(value = "/printListCompanyInfo/{id}/{page}", produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<PagingHandler> printListReivewDtoCompanyInfo(@PathVariable("id") String id,@PathVariable("page") int page) {
-		log.info("id>>>{}",id);
-		log.info("page>>>{}",page);
-		
+	public ResponseEntity<PagingHandler> printListReivewDtoCompanyInfo(@PathVariable("id") String id,
+			@PathVariable("page") int page) {
+		log.info("id>>>{}", id);
+		log.info("page>>>{}", page);
+
 		PagingVO pgvo = new PagingVO(page, 5); // qty=5
 		PagingHandler list = rsv.getList(id, pgvo);
-		
-//		List<ReviewDTO> rdtoList = rsv.companyInfoRdtoList(id);
+
 		return new ResponseEntity<PagingHandler>(list, HttpStatus.OK);
 	}
 
+	// 리뷰전체 리스트(처음)
+	@GetMapping("/allReviewList")
+	public String allReviewList() {
+		return "/review/reviewList";
+	}
+
+	// 리뷰전체 리스트(더보기버튼)
+	@GetMapping(value = "/allReviewListMore/{page}", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<PagingHandler> allReviewListMore(@PathVariable("page") int page) {
+		log.info("page>>>{}", page);
+
+		PagingVO pgvo = new PagingVO(page, 5); // qty=5
+		PagingHandler list = rsv.getAllList(pgvo);
+		log.info("allReivewListPh>>>{}", list);
+		return new ResponseEntity<PagingHandler>(list, HttpStatus.OK);
+	}
 
 	// 리뷰 상세페이지 이동
 	@GetMapping("/reviewDetail")
-	public String portfolioDetail(@RequestParam("rno") long rno, Model model) {
+	public String portfolioDetail(@RequestParam("rno") long rno, Model model, Principal principal) {
+		String id = principal.getName().toString();
+		String writer = rsv.selectId(rno);
 
-		ReviewDTO rdto = rsv.getDetail(rno);
-		String comId=rdto.getRvo().getComId();
-		MemberDTO2 mdto=rsv.getMdto(comId);
-		
+		// 조회수 올리기
+		if (!writer.equals(id)) {
+			rsv.updateReadCount(rno);
+		}
+
+		ReviewDTO rdto = rsv.getDetail(rno, id);
+		log.info("좋아요확인>>{}", rdto.getRvo().isLikeCheck());
+		String comId = rdto.getRvo().getComId();
+		MemberDTO2 mdto = rsv.getMdto(comId);
+
 		model.addAttribute("rdto", rdto);
 		model.addAttribute("mdto", mdto);
 		return "/review/reviewDetail";
@@ -191,8 +225,10 @@ public class ReviewController {
 
 	// 리뷰 수정페이지 이동
 	@GetMapping("modifyReview")
-	public String modifyPortfolio(@RequestParam("rno") long rno, Model model) {
-		ReviewDTO rdto = rsv.getDetail(rno);
+	public String modifyPortfolio(@RequestParam("rno") long rno, Model model, Principal principal) {
+		String id = principal.getName().toString();
+
+		ReviewDTO rdto = rsv.getDetail(rno, id);
 		model.addAttribute("rdto", rdto);
 		log.info("rdto컨트롤러231218>>{}", rdto);
 		log.info("rdto.rvo.content>>{}", rdto.getRvo().getContent());
@@ -200,11 +236,10 @@ public class ReviewController {
 	}
 
 	@PostMapping(value = "/postModifyReview")
-	public ResponseEntity<String> postModifyReview(@RequestParam("rno") long rno,
-			@RequestParam("title") String title, @RequestParam("content") String content,
-			@RequestParam("rate") int rate,
+	public ResponseEntity<String> postModifyReview(@RequestParam("rno") long rno, @RequestParam("title") String title,
+			@RequestParam("content") String content, @RequestParam("rate") int rate,
 			@RequestParam(name = "imageFile", required = false) MultipartFile imageFile) {
-	
+
 		ReviewVO rvo = new ReviewVO();
 		rvo.setRno(rno);
 		log.info("rvo>>" + rvo.getRno());
@@ -212,26 +247,55 @@ public class ReviewController {
 		log.info("title>>" + rvo.getTitle());
 		rvo.setContent(content);
 		rvo.setRate(rate);
-		
-		int isOk=0;
-		if(imageFile==null) {
-			isOk=rsv.postModifyReviewOnlyContent(rvo);
-			
-		}else {
+
+		int isOk = 0;
+		if (imageFile == null) {
+			isOk = rsv.postModifyReviewOnlyContent(rvo);
+
+		} else {
 			log.info("imageFile>>" + imageFile);
 			FileVO reviewMainImg = fh.uploadFiles(imageFile);
 			log.info("reviewMainImg>>" + reviewMainImg.getFileName());
 			isOk = rsv.postModifyReview(rvo, reviewMainImg);
-			
+
 		}
-		
-
-	
-
 
 		return isOk > 0 ? new ResponseEntity<String>("1", HttpStatus.OK)
 				: new ResponseEntity<String>("0", HttpStatus.INTERNAL_SERVER_ERROR);
 
+	}
+
+	// 리뷰 좋아요
+	@PostMapping(value = "/reviewLike/{rno}/{id}", produces = MediaType.TEXT_PLAIN_VALUE)
+	public ResponseEntity<String> boardLike(@PathVariable("rno") long rno, @PathVariable("id") String id) {
+		log.info("rno>>>{}", rno);
+		log.info("id>>>{}", id);
+		// 체크되어있는지 안되어있는지 확인
+		// 1이면 이미 체크, 0이면 아닌거
+		int check = rsv.reviewLikeCheck(rno, id);
+
+		if (check > 0) { // 이미 체크가 되어있으면
+			// like취소
+			log.info("취소할 때 여기오는지1");
+			rsv.deleteReviewLike(rno, id);
+
+			return new ResponseEntity<String>("0", HttpStatus.OK);
+		} else { // 체크가 안되어있다면
+			// like체크
+			rsv.addReviewLike(rno, id);
+			return new ResponseEntity<String>("1", HttpStatus.OK);
+		}
+
+	}
+
+	// 좋아요수 내보내기
+	@GetMapping(value = "/likeQtyAreaInput/{rno}", produces = MediaType.TEXT_PLAIN_VALUE)
+	public ResponseEntity<String> likeQtyAreaInput(@PathVariable("rno") long rno) {
+		int likeQty = rsv.likeQtyAreaInput(rno);
+		log.info("likeQty" + likeQty);
+		String likeQtyStr = String.valueOf(likeQty);
+		log.info("likeQtyStr" + likeQtyStr);
+		return new ResponseEntity<String>(likeQtyStr, HttpStatus.OK);
 	}
 
 }

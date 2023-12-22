@@ -16,7 +16,6 @@ import com.myweb.www.domain.CustomerServiceVO;
 import com.myweb.www.service.CustomerService;
 
 import lombok.extern.slf4j.Slf4j;
-import retrofit2.http.GET;
 
 @Slf4j
 @Controller
@@ -33,11 +32,5 @@ public class CustomerServiceController {
 		List<CustomerServiceVO> list = csv.getList(searchValue);
 		return new ResponseEntity<List<CustomerServiceVO>>(list, HttpStatus.OK);
 	}
-	
-	@GetMapping("/enter")
-	public void enter() {}
-	
-	@GetMapping("/introduce")
-	public void introduce() {}
 	
 }

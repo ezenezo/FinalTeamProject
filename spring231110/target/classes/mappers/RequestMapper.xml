@@ -37,14 +37,14 @@
 		rang, status, address,
 		zone_code,
 		detail_address,extra_address,aquare_footage, square_meter,
-		wish_budget, request_op,keynum_com,pno)
+		wish_budget, request_op,keynum_com)
 		values (#{requestId}, #{form},
 		#{categoryType}, #{rang}, #{status},
 		#{address}, #{zoneCode},
 		#{detailAddress}, #{extraAddress},
 		#{aquareFootage}, #{squareMeter},
 		#{wishBudget},
-		#{requestOp},#{keynumCom},#{pno});
+		#{requestOp},#{keynumCom});
 	</insert>
 	<update id="req_cancel">
 		update request set ok_type_no=1 where request_nm =
@@ -73,23 +73,10 @@
 		request;
 
 	</select>
-	
 
-	<select id="getList_status"  parameterType="String" resultType="long">
-		select max(request_nm) from
-		request where request_id=#{requestId};
-
-	</select>
-	
-		<select id="selectNm_status" resultType="long">
-		select max(request_nm) from
-		request;
-
-	</select>
-
-	<select id="selectrequset" parameterType="int"
+	<select id="selectrequset" parameterType="String"
 		resultType="com.myweb.www.domain.RequestVO">
-		SELECT * FROM request WHERE keynum_com = #{keynum} and checked
+		SELECT * FROM request WHERE keynum_com = #{id} and checked
 		= 0 ORDER BY
 		request_nm DESC
 	</select>
@@ -97,17 +84,17 @@
 
 
 
-	<select id="selectrequset_read" parameterType="int"
+	<select id="selectrequset_read" parameterType="String"
 		resultType="com.myweb.www.domain.RequestVO">
-		SELECT * FROM request WHERE keynum_com = #{keynum} and checked
+		SELECT * FROM request WHERE keynum_com = #{id} and checked
 		= 1 ORDER BY
 		request_nm DESC
 	</select>
 
-	<select id="request_alarm" parameterType="int"
+	<select id="request_alarm" parameterType="String"
 		resultType="int">
 		select count(*) from request where checked=0 and
-		keynum_com=#{keynum};
+		keynum_com=#{userId};
 	</select>
 
 
@@ -155,37 +142,5 @@
 		resultType="com.myweb.www.domain.RequestVO">
 		select * from request where request_nm = #{reNm}
 	</select>
-	<update id="okTypeYes_ok">
-	
-	update request set ok_type_yes =1 where request_nm = #{requestNm};
-	</update>
-	
-	<select id="req_list" parameterType="String" resultType="com.myweb.www.domain.RequestVO">
-	
-	select * from request where request_id =#{id}
-	</select>
 
-
-<select id="req_detile" parameterType="String" resultType="com.myweb.www.domain.RequestVO">
-
-	select * from request where request_nm =#{reqNm}</select>
-	
-<select id="company_name" parameterType="long" resultType="String">
-
-SELECT user_nm 
-FROM portfolio p 
-where pno=#{pno}</select>
-
-<select id="company_keynum" parameterType="long" resultType="int">
-SELECT c.key_num  from company c
-JOIN portfolio p ON c.id =p.id
-where pno=#{pno};
-
-</select>
-
-<select id="getCompanyNum" parameterType="String" resultType="int">
-select key_num
-from company
-where id=#{id}
-</select>
 </mapper>

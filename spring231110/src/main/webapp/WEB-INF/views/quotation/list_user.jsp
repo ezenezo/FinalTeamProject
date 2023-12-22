@@ -36,15 +36,14 @@
 					
 					
 						<li class="list_requset" id="list_requset_${qvo.quotationNm}">
-						<input id="checked_ok_${qvo.quotationNm}" type="text" value="${qvo.checked }">
-						<div class="checked_div_${qvo.quotationNm}" ></div>
+						<div class="checked_div" ><input id="checked_ok_${qvo.quotationNm}" type="hidden" value="${qvo.checked }"></div>
 							<input type="hidden" value="${qvo.quotationNm}" id="quotationNm"
 							class="quo_click"> 
 							 메이트 : ${qvo.userNm}<br>
 							${qvo.form}<br>
 							${qvo.categoryType}<br> ${qvo.address}
 
-							<button type="button" onclick="quo_user(`${qvo.quotationNm}`)">견적서
+							<button type="button" onclick="quo_user(${qvo.quotationNm})">견적서
 								보러가기</button>
 						</li>
 

@@ -56,8 +56,6 @@ public class RequestServiceImpl implements RequestService{
 	public void insert(RequestVO rvo) {
 	log.info("서비스들어옴 요청서"+rvo);
  rdao.insert(rvo);
- 
- 
 
  
 	/*
@@ -127,45 +125,6 @@ public class RequestServiceImpl implements RequestService{
 	   
 		return checkResult;
 	}
-
-	@Override
-	public long getList_status(String requestId) {
-		// TODO Auto-generated method stub
-		return rdao.getList_status(requestId);
-	}
-
-	@Override
-	public List<RequestVO> req_list(String id) {
-		// TODO Auto-generated method stub
-		return rdao.req_list(id);
-	}
-
-	@Override
-	public List<RequestVO> req_detil(String reqNm) {
-		List<RequestVO> list = rdao.req_detile(reqNm);
-		log.info("list들어옴"+list);
-		return list;
-	}
-
-	@Override
-	public String company_name_get(long pno) {
-
-	 return rdao.company_name(pno);
-		
-	}
-
-	@Override
-	public int company_keynum(long pno) {
-		// TODO Auto-generated method stub
-		return rdao.company_keynum(pno);
-	}
-
-	@Override
-	public int getKeyNum(String id) {
-		// TODO Auto-generated method stub
-		return rdao.getCompanyNum(id);
-	}
-
 
 
 }

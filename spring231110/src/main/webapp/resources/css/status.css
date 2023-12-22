@@ -18,17 +18,3 @@
 	
 	
 }
-
-.boxNum1{
-	overflow: auto;
-	
-}
-
-.boxNum1::-webkit-scrollbar {
-    display: none; 
-}
-
-.subMain::-webkit-scrollbar{
-	display: none;
-	
-}

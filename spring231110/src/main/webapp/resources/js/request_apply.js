@@ -824,9 +824,7 @@ async function final_req() {
         tr += `<li id="li_final"><div class="final_ex">공간면적_제곱미터(필수)</div><input value="${latestOptions_4[1]}" id="optionValue" readonly="readonly" name ="squareMeter"class="optionfinal"><div class="wrap"><button type="button"  class="final_btn_mo" onclick="getCommentList_4()"><span class="material-symbols-outlined" >contract_edit</span></button>    <div class="tooltip">수정하러가기</div></div></li>`;
         tr += `<li id="li_final"><div class="final_ex">예산</div><input value="${latestOptions_4[2]}" id="optionValue" readonly="readonly"name ="wishBudget" class="optionfinal"><div class="wrap"><button type="button" class="final_btn_mo" onclick="getCommentList_4()"><span class="material-symbols-outlined" >contract_edit</span></button>    <div class="tooltip">수정하러가기</div></div></li>`;
         tr += `<li id="li_final"><div class="final_ex">상세 의뢰 내용</div><input value="${latestOptions_4[3]}" id="optionValue"  readonly="readonly"name ="requestOp" class=""><div class="wrap"><button type="button" class="final_btn_mo" onclick="getCommentList_4()"><span class="material-symbols-outlined" >contract_edit</span></button>    <div class="tooltip">수정하러가기</div></div></li>`;
-        /*tr += `<li id="li_final"><input value="" id="optionValue"  name ="keynumCom" class="optionfinal"></li>`;
-        */
-        
+        tr += `<li id="li_final"><input value="" id="optionValue"  name ="keynumCom" class="optionfinal"></li>`;
         cards.innerHTML += tr;
 
         let btnBox = '<div class="btn_box"><button type="submit" class="ok_btn" id="final_submit"  onsubmit="final_submit()">확인</button></div>';
@@ -967,7 +965,7 @@ async function getCommentList_4(checkedValue) {
             <input style="width: 250px; margin-bottom: 0px !important;" id="bud" name="area"   maxlength="12" type="text" onkeypress='return checkNumber(event)'> <div color="#ff7631" class="sc-7683fa06-0 eAkweW" id="result_budget">영<div class="unit" id="unitId"></div>
             </div></div>
         
-            <div class="unit_money">원</div>
+            <div class="unit_money">만원</div>
    
         </div>
         <label for="myCheckboxNull"><div class="exp_1">·협의 후 결정을 원하시면 클릭해주세요 <input type="checkbox" class="myCheckboxNull" name="subject" value="nullValue" id="myCheckboxNull" ></div>

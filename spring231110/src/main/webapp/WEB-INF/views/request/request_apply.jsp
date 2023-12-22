@@ -17,12 +17,8 @@
 </head>
 
 <body>
-
     <sec:authentication property="principal.mvo.id" var="authEmail" />
-    
-    
     <jsp:include page="l_side.jsp" />
-    <c:set value="${pno}" var="pno"></c:set>
     <div class="top">
         <div class="exit">
             <button class="gosu_btn" id="gosu_btn">나가기</button>
@@ -33,8 +29,6 @@
     </div>
 
     <form action="/req/request_submit" id="card_form" method="post">
- 
-    <input value="${pno}" name="pno"  type="hidden">
         <input type="hidden" value="${authEmail}" id="user_id" name="requestId">
         <div class="total">
             <div class="content">

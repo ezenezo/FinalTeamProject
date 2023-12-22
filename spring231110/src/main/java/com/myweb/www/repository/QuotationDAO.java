@@ -47,5 +47,7 @@ public interface QuotationDAO {
 
 	void quatation_modify(QuotationVO qvo);
 
+	QuotationVO selectQuotation(long quoNm);
+
 
 }

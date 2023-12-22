@@ -1,17 +1,94 @@
-const slides1 = document.getElementById('slides1');
+
 const preBtn1 = document.getElementById('prev1');
 const nextBtn1 = document.getElementById('next1');
 let currentIdx1 = 0;
 
+console.log("메인js들어오는지")
+
+async function slideImg(){
+    console.log("메인js들어오는지2")
+    try {
+        const url='/common/slideImg';
+        const resp=await fetch(url);
+        const result=await resp.json();
+        console.log(result);
+        return result;
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+function slideImgPrint(){
+    console.log("메인js들어오는지1")
+
+    const slideWrapper = document.querySelector('.slide_wrapper');
+    let str=``;
+    str+=`<ul class="slides" id="slides1">`;
+    slideImg().then(result=>{
+        console.log("slideWrapper>>{} ",slideWrapper);
+
+        for(let i=0;i<5;i++){
+            console.log("메인js들어오는지3")
+        let mainImg=result[i];
+           
+            str+=`<li>`;
+            str+=`<img class="portfolioMainImg slideImg" src="/upload/${mainImg.saveDir}/${mainImg.saveDir.replace(/\\/g, '-')}_${mainImg.uuid}_${mainImg.fileName}">`;
+            str+=`</li>`;
+        }
+        str+=`<li><a href="/portfolio/list"><div class="mainMoreBtn">`;
+        str+=`<svg xmlns="http://www.w3.org/2000/svg" fill="currentColor"
+        class="bi bi-arrow-right-circle-fill moreBtn"
+        viewBox="0 0 16 16">
+<path class="moreBtn"
+            d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0zM4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H4.5z" />
+</svg>
+`;
+        str+=`<p class="moreText">더보기</p>`;
+        str+=`</div> </a></li></ul>`;
+        str+=`<div class="controls">`;
+        str+=`<div class="prev" id="prev1" onclick="preBtn()"></div>`;
+        str+=`<div class="next" id="next1" onclick="nextBtn()">`;
+        str+=`<span class="material-symbols-outlined"> arrow_forward_ios</span>`;
+        str+=`</div></div>`;
+        slideWrapper.innerHTML=str;
+    })
+
+}
+slideImgPrint();
+
+
+
 function moveSlideNext1(num) {
+    const slides1 = document.getElementById('slides1');
     slides1.style.left = -num * 735 + 'px';
     currentIdx1 = num;
 }
 function moveSlidePrev1(num) {
+    const slides1 = document.getElementById('slides1');
     slides1.style.left = num * 735 + 'px';
     currentIdx1 = num;
 }
-nextBtn1.addEventListener('click', () => {
+// nextBtn1.addEventListener('click', () => {
+//     console.log("nextBtn>", nextBtn1);
+//     if (currentIdx1 < 1) { //0이면
+//         moveSlideNext1(currentIdx1 + 1);
+//         console.log(currentIdx1);
+//         document.getElementById('next1').innerHTML = ``;
+//         document.getElementById('prev1').innerHTML = `<span class="material-symbols-outlined"> arrow_back_ios
+//         </span>`;
+//     }
+// });
+// preBtn1.addEventListener('click', () => {
+//     console.log("preBtn>", preBtn1);
+//     if (currentIdx1 > 0) { //1이면
+//         moveSlidePrev1(currentIdx1 - 1);
+//         console.log(currentIdx1);
+//         document.getElementById('next1').innerHTML = `<span class="material-symbols-outlined">
+//         arrow_forward_ios </span>`;
+//         document.getElementById('prev1').innerHTML = ``;
+//     }
+// });
+function nextBtn(){
     console.log("nextBtn>", nextBtn1);
     if (currentIdx1 < 1) { //0이면
         moveSlideNext1(currentIdx1 + 1);
@@ -20,8 +97,8 @@ nextBtn1.addEventListener('click', () => {
         document.getElementById('prev1').innerHTML = `<span class="material-symbols-outlined"> arrow_back_ios
         </span>`;
     }
-});
-preBtn1.addEventListener('click', () => {
+}
+function preBtn(){
     console.log("preBtn>", preBtn1);
     if (currentIdx1 > 0) { //1이면
         moveSlidePrev1(currentIdx1 - 1);
@@ -30,7 +107,9 @@ preBtn1.addEventListener('click', () => {
         arrow_forward_ios </span>`;
         document.getElementById('prev1').innerHTML = ``;
     }
-});
+
+}
+
 // -----------------------------------------
 
 document.addEventListener('click', (e) => {
@@ -88,7 +167,6 @@ function homeSizeList(sizeNum) {
     homeSizelistToServer(sizeNum).then(result => {
 
         let str = '';
-        console.log('result>>{}', result);
 
         // 최대 6개의 항목만 처리
         for (let i = 0; i < Math.min(result.length, 6); i++) {
@@ -120,7 +198,6 @@ async function reviewContainerData() {
         const url = '/review/printList';
         const resp = await fetch(url);
         const result = resp.json();
-        console.log("리뷰 result>>{}", result);
         return result;
     } catch (error) {
         console.log(error);
@@ -143,8 +220,6 @@ function reviewPrint() {
 
             // <p> 태그 사이의 줄바꿈 제거
             content = content.replace(/<\/p>\s*<p>/g, '</p><p>');
-
-            console.log(content);
 
             str += `<a href="/review/reviewDetail?rno=${rdto.rvo.rno}"><div class="reviewItem">`;
             str += `<img class="portfolioMainImg" src="/upload/${rdto.reviewMainImg.saveDir}/${rdto.reviewMainImg.saveDir.replace(/\\/g, '-')}_${rdto.reviewMainImg.uuid}_${rdto.reviewMainImg.fileName}">`;
@@ -203,4 +278,3 @@ function reviewPrint() {
 // document.querySelector('.bodyContainer2').innerHTML = str;
 
 // })
-

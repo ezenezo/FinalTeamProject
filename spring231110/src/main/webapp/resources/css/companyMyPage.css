@@ -1,281 +1,281 @@
 @charset "UTF-8";
 
 @font-face {
-   font-family: NotoSansKR;
-   src: url(../font/NotoSansKR-VariableFont_wght.ttf);
+	font-family: NotoSansKR;
+	src: url(../font/NotoSansKR-VariableFont_wght.ttf);
 }
 
 @font-face {
-   font-family: NotoSansKRSemiBold;
-   src: url(../font/NotoSansKR-SemiBold.ttf);
+	font-family: NotoSansKRSemiBold;
+	src: url(../font/NotoSansKR-SemiBold.ttf);
 }
 
 @font-face {
-   font-family: 'IBMPlexSansKR-Regular';
-   src:
-      url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-07@1.0/IBMPlexSansKR-Regular.woff')
-      format('woff');
-   font-weight: normal;
-   font-style: normal;
+	font-family: 'IBMPlexSansKR-Regular';
+	src:
+		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-07@1.0/IBMPlexSansKR-Regular.woff')
+		format('woff');
+	font-weight: normal;
+	font-style: normal;
 }
 
 section {
-   width: 900px;
-   font-family: 'NotoSansKR';
+	width: 900px;
+	font-family: 'NotoSansKR';
 }
 
 }
 .title {
-   font-family: NotoSansKR-ExtraBold;
-   font-weight: 700;
-   padding: 60px 0;
-   margin-left: 20%;
+	font-family: NotoSansKR-ExtraBold;
+	font-weight: 700;
+	padding: 60px 0;
+	margin-left: 20%;
 }
 
 .profileImg {
-   height: 150px;
-   border-radius: 100%;
-   width: 150px;
-   margin: 25px 0 35px 0;
+	height: 150px;
+	border-radius: 100%;
+	width: 150px;
+	margin: 25px 0 35px 0;
 }
 
 #userInfoBox {
-   display: flex;
-   align-items: center;
-   border: 2px solid #bebebe7d;
-   padding: 20px 40px;
-   flex-direction: column;
-   width: 300px;
-   height: 500px;
-   text-align: center;
-   box-sizing: border-box;
-   border-radius: 5px;
-   margin-bottom: 13px;
+	display: flex;
+	align-items: center;
+	border: 2px solid #bebebe7d;
+	padding: 20px 40px;
+	flex-direction: column;
+	width: 300px;
+	height: 500px;
+	text-align: center;
+	box-sizing: border-box;
+	border-radius: 5px;
+	margin-bottom: 13px;
 }
 
 .nameAndEmail {
-   display: flex;
-   align-items: center;
+	display: flex;
+	align-items: center;
 }
 
 p {
-   margin: 0px;
+	margin: 0px;
 }
 
 .userNm {
-   font-size: 24px;
-   font-family: IBMPlexSansKR-Regular;
-   font-weight: 600;
-   color: #282828;
+	font-size: 24px;
+	font-family: IBMPlexSansKR-Regular;
+	font-weight: 600;
+	color: #282828;
 }
 
 .email {
-   color: gray;
-   font-size: 14px;
-   margin-top: 6px;
-   font-family: 'NotoSansKR';
+	color: gray;
+	font-size: 14px;
+	margin-top: 6px;
+	font-family: 'NotoSansKR';
 }
 
 .modifyUserInfoBtn {
-   border-radius: 4px;
-   border: 1px solid gray;
-   padding: 6px;
-   font-size: 14px;
-   color: #504e4e;
-   font-family: 'NotoSansKR';
-   background-color: white;
-   margin-top: 15px;
-   width: 60px;
-   font-weight: 600;
+	border-radius: 4px;
+	border: 1px solid gray;
+	padding: 6px;
+	font-size: 14px;
+	color: #504e4e;
+	font-family: 'NotoSansKR';
+	background-color: white;
+	margin-top: 15px;
+	width: 60px;
+	font-weight: 600;
 }
 
 .couponBox {
-   height: 50px;
-   background-color: #ececec78;
-   border-radius: 6px;
-   margin: 20px 0px;
-   padding: 10px 20px;
-   box-sizing: border-box;
-   font-size: 14px;
-   line-height: 30px;
+	height: 50px;
+	background-color: #ececec78;
+	border-radius: 6px;
+	margin: 20px 0px;
+	padding: 10px 20px;
+	box-sizing: border-box;
+	font-size: 14px;
+	line-height: 30px;
 }
 
 #userInfoBox>hr {
-   margin: 30px 0 20px 0;
-   height: 1px;
-   background: #80808045;
-   border: 0;
-   width: 100%;
+	margin: 30px 0 20px 0;
+	height: 1px;
+	background: #80808045;
+	border: 0;
+	width: 100%;
 }
 
 .couponBox>i {
-   margin-right: 10px;
+	margin-right: 10px;
 }
 
 .main {
-   display: flex;
-   align-items: flex-end;
-   width: 1500px;
-   justify-content: space-evenly;
-   align-items: flex-end;
-   margin: 100px auto;
+	display: flex;
+	align-items: flex-end;
+	width: 1500px;
+	justify-content: space-evenly;
+	align-items: flex-end;
+	margin: 100px auto;
 }
 
 .rightBoxbox {
-   width: 100%;
-   height: 177px;;
-   border: 1px solid #8080805c;
-   border-radius: 6px;
+	width: 100%;
+	height: 177px;;
+	border: 1px solid #8080805c;
+	border-radius: 6px;
 }
 
 .rightBox>p {
-   font-weight: 600;
-   color: #4d4d4d;
+	font-weight: 600;
+	color: #4d4d4d;
 }
 
 .subUser {
-   width: 100%;
-   display: flex;
-   justify-content: space-around;
+	width: 100%;
+	display: flex;
+	justify-content: space-around;
 }
 
 .iconBox {
-   font-family: 'NotoSansKR';
-   display: flex;
-   flex-direction: column;
-   align-items: center;
+	font-family: 'NotoSansKR';
+	display: flex;
+	flex-direction: column;
+	align-items: center;
 }
 
 .bi {
-   font-size: 20px;
-   color: gray;
+	font-size: 20px;
+	color: gray;
 }
 
 .bi-ticket {
-   height: 29px;
-   line-height: 26px;
-   font-size: 23px;
+	height: 29px;
+	line-height: 26px;
+	font-size: 23px;
 }
 
 span {
-   font-size: 15px;
+	font-size: 15px;
 }
 
 .iconBox>img {
-   height: 26px;
-   width: 26px;
-   margin-bottom: 2px;
+	height: 26px;
+	width: 26px;
+	margin-bottom: 2px;
 }
 
 .iconBox>p {
-   margin: 0;
-   font-weight: bold;
+	margin: 0;
+	font-weight: bold;
 }
 
 .boxNum1 {
-   margin-bottom: 50px;
-   height: 70%;
-   display: flex;
-    align-items: flex-start;
+	margin-bottom: 50px;
+	height: 40%;
 }
 
 .rightSection {
-   width: 60%;
-    height: 660px
+	width: 50%;
+	height: 500px;
 }
 
 .boxNum2 {
-   height: 34%;
-   display: flex;
-   margin: 0px;
-   flex-wrap: nowrap;
-   text-align: center;
-   font-weight: normal;
-   font-size: 13px;
-   border: none;
+	height: 34%;
+	display: flex;
+	margin: 0px;
+	flex-wrap: nowrap;
+	text-align: center;
+	font-weight: normal;
+	font-size: 13px;
+	border: none;
 }
 
-
-
-.tableBorder {
-    width: 900px;
-    height: 1px;
-    background-color: lightgrey;
-    position: absolute;
-    top: 260px !important;
-}
-.main {
-    width: 1500px;
-    display: flex;
-    justify-content: space-around;
-    align-items: flex-end;
-    margin: 70px 0 200px !important;
-}
 .menu {
-   display: flex;
-   justify-content: space-between;
+	display: flex;
+	justify-content: space-between;
 }
 
 .boxNum2>div>a>img {
-   width: 100%;
-   height: 125px;
-   border-radius: 6px;
+	width: 100%;
+	height: 125px;
+	border-radius: 6px;
 }
 
 .boxNum2>div>a {
-   width: 106px;
+	width: 106px;
 }
 
 .boxNum2 div:not(:last-child) {
-   float: left;
-   margin-right: 10px;
+	float: left;
+	margin-right: 10px;
 }
 
 .boxNum2, .boxNum2>div, .boxNum2>div>a {
-   width: 100%;
+	width: 100%;
 }
 
 .miniTitle {
-   color: #000000;
-   font-weight: bold;
-   font-size: 18px;
-   line-height: 1;
-   margin-bottom: 20px;
+	color: #000000;
+	font-weight: bold;
+	font-size: 18px;
+	line-height: 1;
+	margin-bottom: 20px;
 }
 
 .pdtoBoxTitle {
-   font-size: 15px;
-   line-height: 26px;
-   text-align: center;
-   margin-top: 8px;
-   width: 180px;
-   overflow: hidden;
-   text-overflow: ellipsis;
-   white-space: normal;
-   word-wrap: break-word;
-   display: -webkit-box;
-   -webkit-line-clamp: 1;
-   -webkit-box-orient: vertical;
+	font-size: 15px;
+	line-height: 26px;
+	text-align: center;
+	margin-top: 8px;
+	width: 180px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: normal;
+	word-wrap: break-word;
+	display: -webkit-box;
+	-webkit-line-clamp: 1;
+	-webkit-box-orient: vertical;
 }
 
 .rightText>a>p {
-   margin: 0 10px;
-   color: #35c5f0;
-   font-size: 13px;
-   font-weight: bold;
-   -webkit-transition: .1s opacity;
-   transition: .1s opacity;
+	margin: 0 10px;
+	color: #35c5f0;
+	font-size: 13px;
+	font-weight: bold;
+	-webkit-transition: .1s opacity;
+	transition: .1s opacity;
 }
 
 .boxNum2 span {
-   color: rgb(130, 140, 148);
-   font-size: 13px;
-   line-height: 16px;
+	color: rgb(130, 140, 148);
+	font-size: 13px;
+	line-height: 16px;
 }
 
 .reviewIcon {
-   font-size: 30px;
-   color: gray;
-   font-style: normal;
-   font-weight: 220;
+	font-size: 30px;
+	color: gray;
+	font-style: normal;
+	font-weight: 220;
+}
+.writePortfolioBtn {
+	width:300px;
+	height: 44px;
+	padding: 0 20px;
+	cursor: pointer;
+	border-radius: 2px;
+	text-align: center;
+	font-size: 14px;
+	background-color: #ffffff;
+	border: 1px solid #dddddd;
+	color: #1d1d1d;
+	margin: 30px auto;
+	display: block;
+}
+
+.writePortfolioBtn:hover {
+	background-color: rgb(221, 221, 221);
 }

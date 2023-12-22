@@ -32,13 +32,16 @@
 				<span class="ezenDesign1">EZEN</span><span class="ezenDesign2">DESIGN</span>
 			</div>
 			<ul class="boxContainer">
-				<a href="/member/login">
-					<li>What we create(login)</li>
+				<a href="/review/register">
+					<li>Company(register)</li>
+				</a>
+				<a href="/board/departBoardList">
+					<li>What we create(list)</li>
 				</a>
 				<a href="/common/main">
 					<li>Careers(main)</li>
 				</a>
-				<a href="/customer/enter">
+				<a href="/portfolio/register">
 					<li>Investment</li>
 				</a>
 			</ul>

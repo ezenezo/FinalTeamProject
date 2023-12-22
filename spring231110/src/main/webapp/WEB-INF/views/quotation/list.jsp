@@ -28,7 +28,7 @@
 
 	<sec:authentication property="principal.mvo.id" var="authEmail" />
 	<%-- <input type="text" value="${authEmail}" id="user_id" name="requestId"> --%>
-	<input value="${authEmail }" type="hidden" id="authIdValue">
+	<input value="${authEmail }" type="text" id="authIdValue">
 	<form action="/quotation/quotation" method="post">
 		<div class="total">
 			<div class="subject">받은 요청</div>
@@ -62,7 +62,12 @@
 								<li class="list_requset_read" id="list_requset_${qvo.requestNm}">
 									<span class="read_after" id="read_after_${qvo.requestNm}">
 										<script type="text/javascript">
-                 
+                    if(${qvo.okTypeYes}==1){
+                        let read_after= document.getElementById('read_after_${qvo.requestNm}');
+                        read_after.innerText=`승인함`;
+                        read_after.style.color='green';
+                    }
+
                     if(${qvo.okTypeNo}==1){
                         let read_after= document.getElementById('read_after_${qvo.requestNm}');
                         read_after.innerText=`승인취소`;
@@ -89,14 +94,7 @@
 											style="margin-right: 10px;">calendar_month</span>
 										<fmt:formatDate value="${qvo.reqAt}" pattern="yyyy-MM-dd" />
 									</div>
-<script type="text/javascript">
-if(${qvo.okTypeYes}==1){
-    let read_after= document.getElementById('read_after_${qvo.requestNm}');
-    read_after.innerText=`승인함`;
-    read_after.style.color='green';
-}
 
-</script>
 							</li>
 							</a>
 						</c:forEach>

@@ -20,6 +20,7 @@ import com.myweb.www.handler.PagingHandler;
 
 import com.myweb.www.repository.CompanyDAO;
 import com.myweb.www.repository.FileDAO;
+import com.myweb.www.repository.HeartDAO;
 import com.myweb.www.repository.MemberDAO;
 import com.myweb.www.repository.ReviewDAO;
 import com.myweb.www.security.MemberDTO2;
@@ -35,13 +36,15 @@ public class ReviewServiceImpl implements ReviewService {
 	private FileDAO fdao;
 	private CompanyDAO codao;
 	private MemberDAO mdao;
+	private HeartDAO hdao;
 
 	@Autowired
-	public ReviewServiceImpl(ReviewDAO rdao, FileDAO fdao, CompanyDAO codao, MemberDAO mdao) {
+	public ReviewServiceImpl(ReviewDAO rdao, FileDAO fdao, CompanyDAO codao, MemberDAO mdao, HeartDAO hdao) {
 		this.rdao = rdao;
 		this.fdao = fdao;
 		this.codao = codao;
 		this.mdao = mdao;
+		this.hdao = hdao;
 	}
 
 	@Override
@@ -89,10 +92,18 @@ public class ReviewServiceImpl implements ReviewService {
 
 	// detail
 	@Override
-	public ReviewDTO getDetail(long rno) {
+	public ReviewDTO getDetail(long rno,String id) {
 		ReviewDTO rdto = new ReviewDTO();
 
 		ReviewVO rvo = rdao.getDetailRvo(rno);
+		
+		int isOk=hdao.reviewLikeCheck(rno,id);
+		if(isOk>0) {
+			rvo.setLikeCheck(true);
+		}else {
+			rvo.setLikeCheck(false);
+		}
+		
 		FileVO fvo = fdao.getReviewMainImg(rno);
 		rdto.setRvo(rvo);
 		rdto.setReviewMainImg(fvo);
@@ -153,8 +164,8 @@ public class ReviewServiceImpl implements ReviewService {
 		// totalCount 구하기
 		int totalCount = rdao.selectOneIdTotalCount(id);
 		// ReivewVO List 찾아오기
-		List<ReviewVO> rvoList = rdao.getReviewList(id,pgvo);
-		
+		List<ReviewVO> rvoList = rdao.getReviewList(id, pgvo);
+
 		log.info("rvoList>>{}", rvoList);
 		for (ReviewVO rvo : rvoList) {
 			ReviewDTO rdto = new ReviewDTO();
@@ -163,12 +174,67 @@ public class ReviewServiceImpl implements ReviewService {
 			rdto.setReviewMainImg(fdao.getReviewMainImg(rvo.getRno()));
 			rdtoList.add(rdto);
 		}
-		
+
 		// pagingHandler 값 완성 후 리턴
-				PagingHandler ph = new PagingHandler(pgvo, totalCount,rdtoList);
+		PagingHandler ph = new PagingHandler(pgvo, totalCount, rdtoList);
 
 		return ph;
 	}
 
+	@Override
+	public PagingHandler getAllList(PagingVO pgvo) {
+		List<ReviewDTO> rdtoList = new ArrayList<>();
+
+		// totalCount 구하기
+		int totalCount = rdao.selectAllReviewTotalCount();
+		// ReivewVO List 찾아오기
+		List<ReviewVO> rvoList = rdao.getAllReviewListPh(pgvo);
+
+		log.info("rvoList>>{}", rvoList);
+		for (ReviewVO rvo : rvoList) {
+			ReviewDTO rdto = new ReviewDTO();
+			rdto.setRvo(rvo);
+			log.info("rdto>>{}", rdto);
+			rdto.setReviewMainImg(fdao.getReviewMainImg(rvo.getRno()));
+			rdtoList.add(rdto);
+		}
+
+		// pagingHandler 값 완성 후 리턴
+		PagingHandler ph = new PagingHandler(pgvo, totalCount, rdtoList);
+
+		return ph;
+	}
+
+	@Override
+	public int reviewLikeCheck(long rno, String id) {
+		return hdao.reviewLikeCheck(rno, id);
+	}
+
+	@Override
+	public void deleteReviewLike(long rno, String id) {
+		hdao.deleteReviewLike(rno, id);
+		rdao.updateReviewLikeQty(rno);
+	}
+
+	@Override
+	public void addReviewLike(long rno, String id) {
+		hdao.addReviewLike(rno, id);
+		rdao.updateReviewLikeQty(rno);
+	}
+
+	@Override
+	public int likeQtyAreaInput(long rno) {
+		return hdao.reviewlikeQtyAreaInput(rno);
+	}
+
+	@Override
+	public void updateReadCount(long rno) {
+		rdao.updateReadCount(rno);
+	}
+
+	@Override
+	public String selectId(long rno) {
+		return rdao.selectId(rno);
+	}
 
 }

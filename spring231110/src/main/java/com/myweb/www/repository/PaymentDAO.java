@@ -25,7 +25,4 @@ public interface PaymentDAO {
 
 	void refund(String merchantUid);
 
-	PaymentVO getPaymentByQno(String quotationNm);
-
-	List<PaymentVO> getPaymentNoRefund(@Param("qno")int qno, @Param("id")String id);
 }
