@@ -1,0 +1,141 @@
+@charset "UTF-8";
+
+body {
+	font-family: "NotoSansKR";
+}
+
+.mainTitle {
+	height: 70px;
+	font-size: 18px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	border-bottom: 1px solid #80808029;
+	font-weight: bold;
+}
+
+section {
+	padding: 30px;
+	margin-bottom: 100px;
+}
+
+img {
+	width: 80px;
+	height: 80px;
+}
+
+.style {
+	margin-left: 20px;
+	font-size: 15px;
+}
+
+.imgBox {
+	display: flex;
+	align-items: center;
+}
+
+.grayBox {
+	background-color: #e7e7e74a;
+	display: flex;
+	align-items: center;
+	justify-content: space-around;
+	padding: 10px;
+	box-sizing: border-box;
+	height: 100px;
+	margin: 20px 0;
+	border-radius: 5px;
+}
+
+.spanP {
+	font-size: 13px;
+}
+
+h3 {
+	margin-top: 0;
+}
+
+.red {
+	color: red;
+}
+
+.green {
+	color: #0bb175;
+	border: 1px solid #0bb175;
+	border-radius: 5px;
+}
+
+.first {
+	border: 1px solid #f1f1f1;
+	border-radius: 5px;
+	color: #000000b8;
+}
+
+.coupon {
+	height: 50px;
+	padding: 12px;
+	display: flex;
+	box-sizing: border-box;
+	align-items: center;
+	margin-bottom: 10px;
+	cursor: pointer;
+}
+
+.won {
+	margin-right: 30px;
+	font-size: 16px;
+}
+
+.wonSpan {
+	font-size: 14px;
+}
+
+.bold {
+	font-weight: bold;
+}
+
+button {
+	background-color: #599959;
+	width: 230px;
+	height: 50px;
+	border: none;
+	border-radius: 4px;
+	color: white;
+	font-size: 16px;
+	font-weight: bold;
+	cursor: pointer;
+}
+
+.buttonBox {
+	width: 100%;
+	position: fixed;
+	border-top: 1px solid #8585854d;
+	padding: 10px 0;
+	display: flex;
+	justify-content: center;
+	bottom: 0;
+	left: 0;
+}
+
+.material-symbols-outlined{
+	margin-right: 5px;
+	color: green;
+}
+
+#none{
+	display: none;
+}
+
+#discount:before  {
+  content: attr(data-price) "원";
+}
+
+#finalPrice:after  {
+  content: attr(data-final-price) "원";
+}
+
+.noCoupon {
+    display: flex;
+    justify-content: center;
+    height: 240px;
+    align-items: center;
+    font-weight: 700;

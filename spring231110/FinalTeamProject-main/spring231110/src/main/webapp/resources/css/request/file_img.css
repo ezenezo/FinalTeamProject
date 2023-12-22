@@ -1,0 +1,17 @@
+@charset "UTF-8";
+
+.img_div{
+	width:500xp;
+	height: 500px;
+}
+
+ .upload_img{
+ width:300px;
+ height:300px;
+ }
+ 
+ upload_img_1,upload_img_2,upload_img_3,upload_img_4,upload_img_5,upload_img_6{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+}

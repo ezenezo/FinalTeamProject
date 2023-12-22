@@ -1,0 +1,439 @@
+@font-face {
+	font-family: NotoSansKR;
+	src: url(../font/NotoSansKR-VariableFont_wght.ttf);
+}
+
+@font-face {
+	font-family: NotoSansKRSemiBold;
+	src: url(../font/NotoSansKR-SemiBold.ttf);
+}
+
+.companyInfoBody {
+	font-family: NotoSansKR;
+}
+
+.box {
+	height: 100%;
+	padding: 10px;
+	display: flex;
+	justify-content: center;
+	align-content: center;
+	font-family: NotoSansKR;
+}
+
+h1 {
+	font-family: NotoSansKRSemiBold;
+	margin-bottom: 24px;
+}
+
+.dateP {
+	font-size: 16px;
+	line-height: 20px;
+	color: #656E75;
+	margin: 0px;
+}
+
+.box2 {
+	width: 900px;
+}
+
+.portfolioInfo {
+	width: 100%;
+	display: flex;
+	border: 1px solid #eaebef;
+	box-sizing: border-box;
+	border-radius: 4px;
+	justify-content: center;
+	flex-wrap: wrap;
+}
+
+.introductionDiv {
+	width: 100%;
+	margin-top: 50px;
+}
+
+.portfolioInfo p {
+	margin-top: 0px;
+	margin-bottom: 0px;
+	margin-right: 10px;
+	margin-left: 10px;
+}
+
+#hrId {
+	color: #eaebef;
+}
+
+.span1 {
+	color: rgb(197, 197, 197);
+	font-size: 14px;
+	line-height: 30px;
+}
+
+.span2 {
+	margin-left: 5px;
+	font-size: 14px;
+	line-height: 30px;
+}
+
+.top {
+	display: flex;
+	justify-content: space-between;
+	margin-top: 50px;
+}
+
+.leftBox {
+	display: flex;
+	align-items: flex-end;
+}
+
+.left1>img {
+	width: 40px;
+	height: 40px;
+	border-radius: 50%;
+}
+
+.left2 {
+	margin-left: 9px;
+	display: flex;
+	align-items: flex-end;
+	flex-direction: column;
+	align-items: flex-start;
+	display: flex;
+}
+
+.left2 p {
+	margin: 0px;
+}
+
+}
+.miniFont {
+	font-size: 12px;
+}
+
+.heartIcon {
+	display: flex;
+	align-items: flex-end;
+	margin: 0px;
+}
+
+.heartIcon * {
+	font-size: 16px;
+	line-height: 20px;
+	color: #656E75;
+}
+
+.heartIcon span {
+	margin-right: 3px;
+}
+
+.topTitle {
+	margin-bottom: 20px;
+	margin-top: 0px;
+}
+
+.colorRed {
+	color: red;
+}
+
+.mainImgBox {
+	width: 100%;
+	height: 250px;
+	margin: 0 auto;
+	border-radius: 15px;
+}
+
+.introductionDiv p>img {
+	width: 100%;
+}
+
+.mar {
+	margin-right: 8px;
+}
+
+.modDel {
+	display: flex;
+	justify-content: flex-end
+}
+
+#modBtn, #delBtn {
+	color: rgb(130, 140, 148);
+}
+
+.classify {
+	margin-left: 3px;
+	margin-right: 3px;
+	color: rgb(234, 237, 239);
+}
+
+.modDel * {
+	cursor: pointer;
+}
+
+.he56 {
+	width: 50px;
+	height: 56px;
+}
+
+.stickyBtn {
+	padding: 12px;
+	margin: 0;
+	box-sizing: border-box;
+	background: #fff;
+	border: 1px solid #dadce0;
+	color: #828c94;
+	border-radius: 100%;
+	font-size: 24px;
+	line-height: 0;
+	box-shadow: 1px 3px 4px 0 rgba(209, 213, 217, .2);
+	width: 65px;
+	height: 65px;
+	margin-top: 70px;
+	margin-left: 70px;
+}
+
+.stickyBtn span {
+	font-size: 35px;
+	font-weight: 200;
+	color: #828c94;
+}
+
+.stickyAtag {
+	position: sticky;
+	top: 20%;
+	left: 80%;
+	width: 65px;
+	height: 65px;
+}
+
+.stickyBtn:hover {
+	background-color: rgba(247, 248, 250);
+}
+
+.btnBox {
+	margin-top: 20px;
+	margin-bottom: 50px;
+	display: flex;
+	z-index:999999;
+	position: sticky;
+	top:0;
+}
+.topBtnA{
+	width: 100%;
+}
+.topBtnA:focus{
+	outline: none;
+}
+
+.topBtn {
+	width: 100%;
+	border: none;
+	background: none;
+	height: 58px;
+	font-weight: bold;
+	font-size: 16px;
+	line-height: 1;
+	letter-spacing: -0.5px;
+	white-space: nowrap;
+	border-bottom: 4px solid transparent;
+	cursor: pointer;
+	background-color: white;
+
+}
+
+.clicked {
+	border-bottom: 3px solid;
+}
+
+.infoTitle {
+	margin-bottom: 30px;
+	font-weight: 700;
+	font-size: 22px;
+	line-height: 1;
+	color: #1d1d1d;
+}
+
+.basic {
+	margin-bottom: 50px;
+}
+
+.basic li {
+	display: flex;
+	height: 30px;
+}
+
+.spantitle {
+	width: 85px;
+}
+
+.basic li p {
+	margin: 0px;
+}
+
+.portfolioList6 {
+	width: 100%;
+	display: flex;
+	flex-wrap: wrap
+}
+
+.pdtoBox {
+	width: 30%;
+	height: 250px;
+	margin: 15px;
+}
+
+.portfolioMainImg {
+	width: 100%;
+	height: 200px;
+	border-radius: 15px;
+}
+
+.pdtoBoxTitle {
+	margin: 0px;
+	text-align: center;
+}
+
+.boldText {
+	font-family: NotoSansKRSemiBold;
+}
+
+.morePortofolioBtn {
+	height: 44px;
+	padding: 0 20px;
+	cursor: pointer;
+	border-radius: 2px;
+	text-align: center;
+	font-size: 14px;
+	background-color: #ffffff;
+	border: 1px solid #dddddd;
+	color: #1d1d1d;
+	margin: 30px auto;
+	display: block;
+
+}
+
+.morePortofolioBtn:hover {
+	background-color: rgb(221, 221, 221);
+}
+
+.moreA {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin-top: 20px; /* 필요한 여백 설정 */
+	margin-bottom: 30px;
+}
+
+.reviewBox {
+	width: 100%;
+	border-top: 1px solid #ddd;
+	padding-top: 45px;
+}
+
+.rateAverage {
+	
+	width: 100%;
+	height: 160px;
+	width: 100%;
+	border: 1px solid #ddd;
+	border-radius: 6px;
+	text-align: center;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	margin-bottom: 40px;
+}
+
+.rate {
+	display: flex;
+	width: 100%;
+	align-items: center;
+	justify-content: center;
+}
+
+.grayFont {
+	color: #aaa;
+}
+
+.starBox {
+	width: 300px;
+	height: 100%;
+	position: relative;
+}
+
+.Star1 {
+	width: 300px;
+	height: 50px;
+	top: 0px;
+	left: 0px;
+	left: 0px;
+	display: flex;
+	position: absolute;
+	color: rgb(221, 221, 221);
+}
+
+.Star2 {
+	overflow: hidden;
+	height: 50px;
+	display: flex;
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	z-index: 99;
+	color: #f7f77e;
+}
+
+.st1 {
+	width: 60px;
+	height: 50px;
+}
+
+.st2 {
+	width: 60px;
+	height: 50px;
+	flex: 0 0 auto;
+}
+
+svg {
+	margin: 0;
+	padding: 0;
+}
+
+.greenText {
+	color: green;
+	font-weight: 700;
+}
+
+.font16 {
+	font-size: 25px;
+	margin: 0px;
+	margin-top: 10px;
+}
+.review{
+	display: flex;
+	margin-bottom: 20px;
+	flex-direction: column;
+}
+.review2col-1{
+	display: flex;
+}
+.rateStar{
+	display: flex;
+}
+.review2col{
+	display: flex;
+	align-items: center;
+	width:100%;
+
+}
+.review2col p{
+	margin: 0px;
+}
+.reviewTitleBox{
+	padding-left: 30px;
+	
+}
+html {
+    scroll-behavior: smooth;
+
+}

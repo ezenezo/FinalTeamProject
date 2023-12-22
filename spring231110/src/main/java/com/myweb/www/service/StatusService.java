@@ -21,11 +21,14 @@ public interface StatusService {
 
 	List<StatusDTO> getStatus(String id);
 
+	
+
+
+	List<StatusDTO> getStatus_com(int keynum);
+
 	void quotation_status_setCompanyNm(StatusVO svo);
 
-
-
-	List<StatusDTO> getStatus_com(String id);
+	StatusVO getStatus_list(String id);
 
 
 

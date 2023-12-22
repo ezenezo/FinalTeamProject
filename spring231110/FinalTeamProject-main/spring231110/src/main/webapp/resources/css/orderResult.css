@@ -1,0 +1,449 @@
+@charset "UTF-8";
+
+body {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+section {
+	width: 1200px;
+	font-family: 'NotoSansKR';
+	display: flex;
+	justify-content: space-between;
+	align-items: flex-start;
+	margin-bottom: 150px;
+}
+
+section p {
+	margin: 0;
+}
+
+.title {
+	padding: 22px 0;
+	box-sizing: border-box;
+	font-size: 32px;
+	margin: 0;
+	height: 88px;
+	display: flex;
+	justify-content: flex-start;
+	width: 1200px;
+}
+
+.border {
+	width: 100%;
+	height: 10px;
+	position: absolute;
+	top: 150px;
+	box-shadow: 0 6px 4px -4px rgb(179 179 179/ 76%);
+	left: 50%;
+	translate: -50%;
+}
+
+.addressTitle {
+	margin: 0;
+	font-size: 20px;
+	height: 83px;
+	box-sizing: border-box;
+	display: flex;
+	align-items: center;
+	border-bottom: 1px solid #a5a5a5;
+	width: 850px;
+}
+
+.sticky {
+	position: sticky;
+	width: 320px;
+	box-sizing: border-box;
+	padding: 30px 10px 30px 20px;
+	border-left: 1px solid #ebebeb;
+	top: 0;
+}
+
+.rightWon {
+	display: flex;
+	justify-content: space-between;
+	margin-bottom: 10px;
+	align-items: center;
+}
+
+.agree {
+	font-size: 13px;
+	color: #666666;
+	border-top: 1px dashed #d1d1d1;
+	margin: 0;
+	padding: 20px 0;
+	margin-top: 20px;
+}
+
+.stickyTitle {
+	margin: 0;
+	font-size: 18px;
+	padding-bottom: 30px;
+}
+
+.final {
+	margin-top: 20px;
+}
+
+.bold {
+	font-weight: bold;
+}
+
+.red {
+	color: red;
+}
+
+.finalPrice {
+	font-size: 30px;
+}
+
+.payBtn {
+	border: none;
+	background-color: #71b371;
+	width: 100%;
+	height: 50px;
+	color: white;
+	font-weight: bold;
+	font-size: 18px;
+	border-radius: 4px;
+	cursor: pointer;
+}
+
+.agreeTitle {
+    color: #666666;
+    font-size: 15px;
+    margin: 20px 0;
+}
+
+.agreeList {
+	margin-top: 80px;
+}
+
+.navBorder {
+	height: 1px;
+	width: 100%;
+	background-color: #cdcdcd57;
+}
+
+.userInfo {
+	margin-top: 20px;
+	display: flex;
+	padding-bottom: 80px;
+	flex-direction: row;
+}
+
+.userNm {
+	font-size: 18px;
+}
+
+.email {
+	color: #666666;
+}
+
+.seventeen {
+	font-size: 17px;
+}
+
+.portTitle {
+	margin: 0;
+	border-bottom: 1px solid #a5a5a5;
+	padding: 20px 0;
+	font-size: 20px;
+	margin-bottom: 20px;
+	display: flex;
+	align-items: center;
+}
+
+.portfolioMainImg {
+	width: 120px;
+	height: 120px;
+	margin-right: 20px;
+}
+
+.companyNm {
+	padding-bottom: 20px;
+	border-bottom: 1px solid #80808024;
+	padding-left: 20px;
+	display: flex;
+}
+
+.companyNm span {
+	margin-right: 5px;
+}
+
+.portNm {
+	font-size: 17px;
+}
+
+.portInfo {
+	display: flex;
+	align-items: center;
+	border-bottom: 1px solid #80808024;
+	margin-bottom: 60px;
+	height: 160px;
+}
+
+.portDetail {
+	font-size: 15px;
+	margin-top: 10px;
+}
+
+.discountDiv {
+	width: 40%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
+
+.portfolio {
+	width: 60%;
+	display: flex;
+	align-items: center;
+	border-right: 1px solid #80808024;
+	height: 100%;
+	justify-content: center;
+}
+
+.budget {
+	text-decoration: line-through;
+	font-size: 16px;
+	color: #666666;
+	margin-right: 10px;
+}
+
+.finalPrice {
+	font-size: 20px;
+	font-weight: bold;
+	margin-left: 10px;
+}
+
+.priceDiv {
+	display: flex;
+	align-items: center;
+	margin-top: 10px;
+}
+
+.priceDiv span {
+	color: #494949;
+}
+
+.discountTitle {
+	font-size: 20px;
+	margin-top: 100px;
+	padding-bottom: 20px;
+	border-bottom: 1px solid #a5a5a5;
+}
+
+.couponDiscount {
+	font-size: 18px;
+	font-weight: bold;
+	display: flex;
+	align-items: center;
+	margin-bottom: 20px;
+}
+
+.couponDiscount>span {
+	margin-right: 10px;
+	color: #ff3f3f;
+}
+
+.coupon {
+	padding: 0 25px;
+	display: flex;
+	align-items: center;
+	padding-bottom: 50px;
+	border-bottom: 1px solid #e5e5e5;
+	margin-bottom: 20px;
+}
+
+.discountCoupon {
+	font-size: 17px;
+	margin-right: 50px;
+}
+
+.couponChange {
+	border: 1px solid #3da53d;
+	background-color: white;
+	color: #2daf2d;
+	font-size: 15px;
+	height: 40px;
+	width: 80px;
+	margin-left: 20px;
+	font-weight: bold;
+	cursor: pointer;
+}
+
+.payList {
+	display: flex;
+	justify-content: space-between;
+	border: 1px solid #e1e1e1;
+}
+
+.payTitle {
+	font-size: 20px;
+	margin-top: 100px;
+	border-bottom: 1px solid #a5a5a5;
+	margin-bottom: 0;
+}
+
+.pay {
+	display: flex;
+	border-left: 1px solid #efefef;
+	padding: 20px;
+}
+
+.pay span, .pay input {
+	margin-right: 10px;
+}
+
+.pay img {
+	height: 20px;
+	margin-right: 5px;
+	padding-top: 2px;
+}
+
+.center {
+	display: flex;
+	align-items: center;
+}
+
+#smile {
+	height: 26px;
+	margin: 0;
+}
+
+#toss {
+	height: 14px;
+}
+
+#normal {
+	width: 150px;
+	display: flex;
+	justify-content: center;
+}
+
+.leftSection {
+	margin-top: 40px;
+}
+
+.pointDiv {
+	border: 1px solid #e3e3e3;
+	border-radius: 4px;
+	display: flex;
+	justify-content: space-between;
+	padding: 20px 60px 20px 40px;
+	align-items: center;
+}
+
+#text {
+	font-size: 14px;
+	color: gray;
+	font-weight: normal;
+	margin-left: 30px;
+}
+
+.pointBox {
+	height: 50px;
+	width: 300px;
+	display: flex;
+}
+
+.pointBox input {
+	border: 1px solid #cfcfcf;
+	width: 210px;
+	outline: none;
+	padding-left: 20px;
+	padding-right: 40px;
+	box-sizing: border-box;
+	font-size: 18px;
+	font-weight: bold;
+	font-family: 'NotoSansKR';
+}
+
+.pointBox input:focus {
+	outline: 1px solid gray;
+}
+
+.pointBox button {
+	background-color: white;
+	border: 1px solid #818181;
+	width: 86px;
+	cursor: pointer;
+}
+
+.profileImg {
+	width: 120px;
+	height: 120px;
+}
+
+.exceptImg {
+	margin-left: 20px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+}
+
+.pointBox span {
+	position: absolute;
+	width: 46px;
+	height: 48px;
+	font-size: 15px;
+	line-height: 48px;
+	color: #999;
+	text-align: center;
+	display: flex;
+	margin-left: 180px;
+	box-sizing: border-box;
+}
+
+input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-inner-spin-button
+	{
+	-webkit-appearance: none;
+	margin: 0;
+}
+
+.id_agrmt {
+	overflow: auto;
+	overflow-x: hidden;
+	width: 286px;
+	height: 88px;
+	border: 1px solid #d8dce5;
+}
+
+.id_agrmt p {
+	padding: 7px 10px;
+	color: #666;
+	font-size: 12px;
+	line-height: 180%;
+	letter-spacing: -1px;
+}
+
+.id_agrmt table {
+	width: 250px;
+	border: 1px solid #ececec;
+	border-width: 0 1px 1px 0;
+	margin-left: 10px;
+	margin-bottom: 10px;
+	letter-spacing: -1px;
+	border-collapse: collapse;
+	border-spacing: 0;
+	empty-cells: show;
+}
+
+.id_agrmt table th {
+    border: 1px solid #ececec;
+    border-width: 1px 0 0 1px;
+    font-weight: normal;
+    text-align: left;
+    font-size: 12px;
+    padding-left: 4px;
+}
+
+.id_agrmt table td {
+    border: 1px solid #ececec;
+    border-width: 1px 0 0 1px;
+    padding: 4px;
+    font-size: 12px;
+}

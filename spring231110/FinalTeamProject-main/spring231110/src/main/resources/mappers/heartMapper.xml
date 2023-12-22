@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.myweb.www.repository.HeartDAO">
+	<delete id="deletePortfolioLike">
+		delete from heart where pno=#{pno} and id=#{id}
+	</delete>
+	<insert id="addPortfolioLike">
+		insert into heart(pno,id)
+		values(#{pno},#{id})
+	</insert>
+	<select id="likeQtyAreaInput" resultType="int">
+		select count(*) from
+		heart where pno=#{pno}
+	</select>
+	<select id="reviewlikeQtyAreaInput" resultType="int">
+		select count(*) from
+		heart where rno=#{rno}
+	</select>
+	<delete id="deleteCommentLike">
+		delete from heart where cmt_no=#{cmtNo} and id=#{id}
+	</delete>
+	<insert id="addCommentLike">
+		insert into heart(cmt_no,id)
+		values(#{cmtNo},#{id})
+	</insert>
+	<select id="reviewLikeCheck" resultType="int">
+		select count(*) from
+		heart where rno=#{rno} and id=#{id}
+	</select>
+
+	<select id="portfolioLikeCheck" resultType="int">
+		select count(*) from
+		heart where pno=#{pno} and id=#{id}
+	</select>
+	<delete id="deleteReviewLike">
+		delete from heart where rno=#{rno} and id=#{id}
+	</delete>
+	<insert id="addReviewLike">
+		insert into heart(rno,id)
+		values(#{rno},#{id})
+	</insert>
+
+
+
+
+
+</mapper>
