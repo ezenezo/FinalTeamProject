@@ -52,5 +52,4 @@ public class RequestVO {
 	private String cancellationReason;
 	private boolean okTypeYes;
 
-	
 }

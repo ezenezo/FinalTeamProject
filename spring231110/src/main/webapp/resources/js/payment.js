@@ -97,19 +97,45 @@ async function insertPay(data) {
 }
 
 //환불요청
-function cancelPay(id) {
-    jQuery.ajax({
-        "url": "/payment/refund?id="+id, // 예: http://www.myservice.com/payments/cancel
-        "type": "POST",
-        "contentType": "application/json",
-        "data": JSON.stringify({
-            "merchantUid": 'IMP828', // 주문번호
-            "cancel_request_amount": 2000, // 환불금액
-            "reason": "테스트 결제 환불", // 환불사유
-            "refund_holder": "홍길동", // [가상계좌 환불시 필수입력] 환불 수령계좌 예금주
-            "refund_bank": "88", // [가상계좌 환불시 필수입력] 환불 수령계좌 은행코드(예: KG이니시스의 경우 신한은행은 88번)
-            "refund_account": "56211105948400" // [가상계좌 환불시 필수입력] 환불 수령계좌 번호
-        }),
-        "dataType": "json"
+function cancelPay(id, quotationNm) {
+    getPayment(quotationNm).then(result => {
+        console.log(result.merchantUid);
+        if (result.merchantUid == null) {
+            Swal.fire({
+                icon: "error",
+                text: "이미 환불된 거래입니다."
+            });
+            return;
+        }
+        jQuery.ajax({
+            "url": "/payment/refund?id=" + id, // 예: http://www.myservice.com/payments/cancel
+            "type": "POST",
+            "contentType": "application/json",
+            "data": JSON.stringify({
+                "merchantUid": result.merchantUid, // 주문번호
+                "cancel_request_amount": result.amount, // 환불금액
+                "reason": "테스트 결제 환불", // 환불사유
+                "refund_holder": "홍길동", // [가상계좌 환불시 필수입력] 환불 수령계좌 예금주
+                "refund_bank": "88", // [가상계좌 환불시 필수입력] 환불 수령계좌 은행코드(예: KG이니시스의 경우 신한은행은 88번)
+                "refund_account": "56211105948400" // [가상계좌 환불시 필수입력] 환불 수령계좌 번호
+            }),
+            "dataType": "json"
+        });
+        Swal.fire({
+            icon: "success",
+            text: "환불이 완료되었습니다."
+        });
     });
+};
+
+//결제 정보 가져오기
+async function getPayment(quotationNm) {
+    try {
+        const url = '/payment/getPayment?quotationNm=' + quotationNm;
+        const resp = await fetch(url);
+        const result = await resp.json();
+        return result;
+    } catch (error) {
+        console.log(error);
+    }
 }

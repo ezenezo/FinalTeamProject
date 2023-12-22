@@ -148,8 +148,8 @@ public class QuotationController {
 		int alarm_count = qsv.request_alarm(userId);
 		reAttr.addFlashAttribute("alarm_count", alarm_count);
 
-		return alarm_count > 0 ? new ResponseEntity<String>("1", HttpStatus.OK)
-				: new ResponseEntity<String>("0", HttpStatus.INTERNAL_SERVER_ERROR);
+		return alarm_count > 0 ? new ResponseEntity<String>("1", HttpStatus.OK):new ResponseEntity<>(HttpStatus.NO_CONTENT);
+			
 	}
 
 	@PostMapping(value = "/alarm_user/{userId}", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -161,8 +161,8 @@ public class QuotationController {
 
 
 		reAttr.addFlashAttribute("alarm_count", alarm_count);
-		return alarm_count > 0 ? new ResponseEntity<String>("1", HttpStatus.OK)
-				: new ResponseEntity<String>("0", HttpStatus.INTERNAL_SERVER_ERROR);
+		return alarm_count > 0 ? new ResponseEntity<String>("1", HttpStatus.OK):new ResponseEntity<>(HttpStatus.NO_CONTENT);
+			
 	}
 
 	@GetMapping(value = "/{requestNm}", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -189,7 +189,8 @@ public class QuotationController {
 	}
 
 	@PostMapping("/req_ok")
-	public String quatation_submit(@RequestParam(value = "form", required = false) String form,
+	public String quatation_submit(
+			@RequestParam(value = "form", required = false) String form,
 			@RequestParam(value = "rang", required = false) String rang,
 			@RequestParam(value = "categoryType", required = false) String categoryType,
 			@RequestParam(value = "status", required = false) String status,
@@ -197,30 +198,18 @@ public class QuotationController {
 			@RequestParam(value = "address", required = false) String address,
 			@RequestParam(value = "detailAddress", required = false) String detailAddress,
 			@RequestParam(value = "extraAddress", required = false) String extraAddress,
-			@RequestParam(value = "squatMeter", required = false) Float squatMeter,
-			@RequestParam(value = "aquareFootage", required = false) Float aquareFootage,
+			@RequestParam(value = "squareMeter", required = false) float squatMeter,
+			@RequestParam(value = "aquareFootage", required = false) float aquareFootage,
 			@RequestParam(value = "budget", required = false) long budget,
 			@RequestParam(value = "requestOp", required = false) String requestOp,
 			@RequestParam(value = "requestId", required = false) String requestId,
 			@RequestParam(value = "requestNm", required = false) long requestNm,
-			@RequestParam(value = "keynum", required = false) int keynum)
+			@RequestParam(value = "keynum", required = false) int keynum,
+			@RequestParam(value = "pno", required = false) long pno, Model model)
 
 	{
-		log.info("form_값 받음: " + form);
-		log.info("카테고리_값 받음: " + categoryType);
-		log.info("rang_값 받음: " + rang);
-		log.info("status_값 받음: " + status);
-		log.info("zone_값 받음: " + zoneCode);
-		log.info("add_값 받음: " + address);
-		log.info("detail_값 받음: " + detailAddress);
-		log.info("extra_값 받음: " + extraAddress);
-		log.info("평수_값 받음: " + aquareFootage);
-		log.info("squatme_값 받음: " + squatMeter);
-		log.info("견적값_값 받음: " + budget);
-		log.info("마지막 요청사항: " + requestOp);
-		log.info("요청 아이디 (고객): " + requestId);
-		log.info("요청서 고유번호: " + requestNm);
-		log.info("회사이름: " + keynum);
+		
+		log.info("여기들어옴");
 		QuotationVO qvo = new QuotationVO();
 		qvo.setForm(form);
 		qvo.setCategoryType(categoryType);
@@ -237,8 +226,10 @@ public class QuotationController {
 		qvo.setRequestId(requestId);
 		qvo.setKeynum(keynum);
 		qvo.setRequestNm(requestNm);
+		qvo.setPno(pno);;
 		qsv.quatation_submit(qvo);
-		return "/common/main";
+		model.addAttribute("keynum", keynum);
+		return "redirect:/quotation/list?id={keynum}";
 	}
 
 }

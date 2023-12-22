@@ -108,6 +108,11 @@
 	<update id="updatePoint">
 		update member set point = point + #{round} where id = #{id}
 	</update>
+	
+	<insert id="addCoordinates"><!-- 전경환추가231207 -->
+    INSERT INTO company (id, lat, lng)
+    VALUES (#{id}, #{coordinates.latitude}, #{coordinates.longitude})
+	</insert>
 
 	<sql id="search">
 		<if test="type != null">
