@@ -24,9 +24,8 @@ import lombok.extern.slf4j.Slf4j;
 @Component
 @EnableScheduling
 public class FileSweeper { 
-	//장원희대문자바꿔라
-//	private final String BASE_PATH = "/aj2002/tomcat/webapps/_javaweb/_java/fileUpload/";//231120전경환
-	private final String BASE_PATH = "D:\\_myweb\\_java\\fileUpload\\";
+
+	private final String BASE_PATH = "D:\\_myweb\\_java\\fileupload\\";
 	
 	@Inject
 	private FileDAO fdao;

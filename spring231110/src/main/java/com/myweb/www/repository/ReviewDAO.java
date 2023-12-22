@@ -33,25 +33,5 @@ public interface ReviewDAO {
 
 	List<ReviewVO> getReviewList2(String id);
 
-	int selectAllReviewTotalCount();
-
-
-	List<ReviewVO> getAllReviewListPh(PagingVO pgvo);
-
-
-	void updateReviewLikeQty(long rno);
-
-
-	void updateReadCount(long rno);
-
-
-	String selectId(long rno);
-
-
-	int reviewCount(String id);
-
-
-
-
 
 }

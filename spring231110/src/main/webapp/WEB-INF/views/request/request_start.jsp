@@ -35,8 +35,7 @@
 <body>
 
 	<jsp:include page="../common/nav.jsp" />
-<c:set value="${pno}" var="pno"></c:set>
-<input value="${pno}" type="hidden">
+
 	<div class="total">
 		<!-- 		<div class="subject">주제입니다.</div> -->
 		<div class="content">
@@ -73,7 +72,7 @@
 						</div>
 
 					</div>
-					<a href="/req/request?pno=${pno}">
+					<a href="/req/request">
 						<button type="button" class="start_btn">
 							시작하기<span class="material-symbols-outlined" style="COLOR: WHITE;">
 								keyboard_arrow_right </span>

@@ -37,10 +37,14 @@
 		resultType="com.myweb.www.domain.PortfolioVO">
 		select * from portfolio where pno=#{pno}
 	</select>
+	<select id="portfolioLikeCheck" resultType="int">
+		select count(*) from
+		heart where pno=#{pno} and id=#{id}
+	</select>
 
 	<update id="updatePortfolioLikeQty">
-		update portfolio set like_qty=(select count(*) from
-		heart where pno=portfolio.pno)
+		update portfolio set like_qty=like_qty+#{num} where
+		pno=#{pno}
 	</update>
 
 	<update id="updateReadCount">
@@ -50,6 +54,10 @@
 	<select id="selectId" resultType="String">
 		select id from portfolio where
 		pno=#{pno}
+	</select>
+	<select id="getPvoList"
+		resultType="com.myweb.www.domain.PortfolioVO">
+		select * from portfolio where id=#{id}
 	</select>
 	<select id="heartCount" resultType="int">
 		select sum(like_qty) from
@@ -81,9 +89,6 @@
 
 	<sql id="filter">
 		<trim prefix="where" suffixOverrides="and">
-			<if test="id != null and id !=''">
-				id=#{id} and
-			</if>
 			<if test="homeTypeSh != null and homeTypeSh !=''">
 				home_type=#{homeTypeSh} and
 			</if>

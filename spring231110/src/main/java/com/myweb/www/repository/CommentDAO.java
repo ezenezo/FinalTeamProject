@@ -9,25 +9,35 @@ import com.myweb.www.domain.PagingVO;
 
 public interface CommentDAO {
 
-	int insert(CommentVO cvo);
+	int insert(CommentVO cvo);  //o
 
-	int getTotalCount(long pno);
+//	List<CommentVO> selectAll(long bno);
 
-	List<CommentVO> getcmtList(@Param("pno") long pno,@Param("pgvo") PagingVO pgvo);
+	int delete(long cmtNo); //O
 
-	int remove(long cno);
+	int deleteCommentAll(long bno);
 
-	int modify(CommentVO cvo);
+	int update(CommentVO cvo); //o
 
-	int CommentLikeCheck(@Param("cmtNo") long cmtNo, @Param("id") String id);
+	int selectOneBnoTotalCount(long bno); //o
 
-	void updateCommentLikeQty(long cmtNo);
+	List<CommentVO> selectListPaging(@Param("bno") long bno,@Param("pgvo") PagingVO pgvo);//o
 
-	int likeQtyAreaInput(long cmtNo);
+	int commentLikeCheck(@Param("cmtNo") long cmtNo,@Param("authId") String authId);
 
-	int getReviewCommentTotalCount(long rno);
+	void deleteCommentLike(@Param("cmtNo") long cmtNo,@Param("id") String id);
 
-	List<CommentVO> getReviewcmtList(@Param("rno") long rno,@Param("pgvo") PagingVO pgvo);
+	void updateLikeQty(@Param("cmtNo") long cmtNo,@Param("num") int num);
+
+	void addCommentLike(@Param("cmtNo") long cmtNo,@Param("id") String id);
+
+	int selectCmtCount(long bno);
+
+	int cmtLikeQty(long cmtNo);
+
+
+ 
+
 
 
 }

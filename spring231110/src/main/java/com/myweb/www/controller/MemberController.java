@@ -335,16 +335,20 @@ public class MemberController {
 	}
 
 	// 마이페이지
-	@GetMapping("/myPage")
-	public void myPage(@RequestParam String id, Model m) {
+	@RequestMapping("/myPage")
+	public void myPage(@RequestParam String id, Model m, HttpServletRequest request) {
 		FileVO fvo = msv.getFile(id);
 		m.addAttribute("fvo", fvo);
 		MemberVO mvo = msv.memberDetail(id);
 		m.addAttribute("mvo", mvo);
 		List<PortfolioVO> pvo = psv.getHeartList(id);
 		m.addAttribute("heart", pvo.size());
+		log.info("pvo:"+pvo);
+		log.info("port:"+pvo);
 		List<CouponVO> cvo = paysv.getCouponList(id);
 		int couponCount = cvo.size();
+		log.info("cvo:"+cvo);
+		log.info("couponCount:"+couponCount);
 		m.addAttribute("couponCount", couponCount);
 	}
 
@@ -355,12 +359,9 @@ public class MemberController {
 		FileVO fvo = msv.getFile(id);
 		MemberDTO mdto = msv.getMdto(id);
 		int heartCount = msv.heartCount(id);
-		int reviewCount = msv.reviewCount(id);
-		log.info("업체유저쪽type>>>{}",mdto.getMvo().isType());
 		m.addAttribute("fvo", fvo);
 		m.addAttribute("mdto", mdto);
 		m.addAttribute("heartCount", heartCount);
-		m.addAttribute("reviewCount", reviewCount);
 		log.info("mdto>>{}", mdto);
 	}
 

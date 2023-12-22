@@ -19,6 +19,5 @@ public class FilterdataVO {
 	private String homeStyleSh;
 	private int sliderOneVal;
 	private int sliderTwoVal;
-	private String id;
 
 }

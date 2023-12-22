@@ -11,13 +11,10 @@
 <title>Insert title here</title>
 <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
-<link href="../resources/css/status.css" rel="stylesheet">
-
 </head>
 <body>
 	<jsp:include page="../common/nav.jsp" />
 	<sec:authorize access="isAuthenticated()">
-	<script type="text/javascript" src="../resources/js/status.js"></script>
 		<sec:authentication property="principal.mvo" var="user" />
 		<!-- 왼쪽 구역 프로필 -->
 		<div class="main">
@@ -51,19 +48,14 @@
 			<!-- 오른쪽 구역 -->
 
 			<section class="rightSection">
-	
-				<nav class="mypageNav">
-					<ul>
-						<li onclick="spreadStatusList(${user.id})">진행상황</li>
-
-
-						<li>내가 쓴 리뷰</li>
-						<li onclick="spreadCouponList(${user.id})">쿠폰함</li>
-						<li onclick="spreadHeartList(${user.id})">좋아요</li>
-					</ul>
-				</nav>
-
-				<script type="text/javascript">spreadStatusList(${user.id});</script>
+				<div class="menu">
+					<div class="leftText">
+						<p class="miniTitle">받은 견적서</p>
+					</div>
+					<div class="rightText">
+						<a href="/portfolio/list"><p>더보기</p></a>
+					</div>
+				</div>
 				<div class="rightBoxbox boxNum1"></div>
 
 				<div class="menu">
@@ -97,5 +89,5 @@
 
 </body>
 <link href="../resources/css/companyMyPage.css" rel="stylesheet">
-<link href="../resources/css/myPage.css" rel="stylesheet">
+
 </html>

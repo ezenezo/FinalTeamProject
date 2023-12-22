@@ -23,11 +23,8 @@ import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.myweb.www.domain.CouponVO;
 import com.myweb.www.domain.PaymentVO;
-import com.myweb.www.domain.QuotationVO;
 import com.myweb.www.repository.MemberDAO;
 import com.myweb.www.repository.PaymentDAO;
-import com.myweb.www.repository.QuotationDAO;
-import com.myweb.www.repository.StatusDAO;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -39,10 +36,6 @@ public class PaymentServiceImpl implements PaymentService {
 	private PaymentDAO pdao;
 	@Inject
 	private MemberDAO mdao;
-	@Inject
-	private QuotationDAO qdao;
-	@Inject
-	private StatusDAO sdao;
 
 	@Override
 	public List<CouponVO> getCouponList(String id) {
@@ -68,8 +61,6 @@ public class PaymentServiceImpl implements PaymentService {
 		isOk *= mdao.usePoint(pvo.getPoint(), pvo.getUserId());
 		// 포인트 적립
 		isOk *= mdao.updatePoint(Math.round(pvo.getAmount() / 100), pvo.getUserId());
-		//결제로 상태 처리
-		isOk *= sdao.payStatus(pvo.getQuotationNm());
 		return isOk;
 	}
 
@@ -121,7 +112,6 @@ public class PaymentServiceImpl implements PaymentService {
 	}
 
 	@Override
-	@Transactional
 	public void refund(String access_token, PaymentVO pvo) throws IOException {
 		URL url = new URL("https://api.iamport.kr/payments/cancel");
 		HttpsURLConnection conn = (HttpsURLConnection) url.openConnection();
@@ -146,17 +136,6 @@ public class PaymentServiceImpl implements PaymentService {
         conn.disconnect();
         
         pdao.refund(pvo.getMerchantUid());
-        sdao.refundStatus(pvo.getQuotationNm());
-	}
-
-	@Override
-	public PaymentVO getPaymentByQno(String quotationNm) {
-		return pdao.getPaymentByQno(quotationNm);
-	}
-
-	@Override
-	public List<PaymentVO> getPaymentNoRefund(int qno, String id) {
-		return pdao.getPaymentNoRefund(qno, id);
 	}
 
 }

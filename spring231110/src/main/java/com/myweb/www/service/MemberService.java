@@ -48,6 +48,7 @@ public interface MemberService {
 
 	JsonNode getAccessToken(String code, String state, String provider);
 
+
 	String naverjoin(JsonNode user, Model m);
 
 	String naverLogin(JsonNode user, HttpSession ses, Model m);
@@ -60,10 +61,8 @@ public interface MemberService {
 
 	CompanyDTO2 getCdto(String id);
 
-	FileVO getFile(String id);
-
-	int companyRegister(MemberVO mvo);
-
+   FileVO getFile(String id);
+int companyRegister(MemberVO mvo);
 	FileVO getFilePno(long pno);
 
 	void heartCancel(String id, long pno);
@@ -72,8 +71,6 @@ public interface MemberService {
 
 	CompanyVO getCvo(String id);
 
-	int addCoordinates(String id, Coordinates coordinates); // 231207전경환 추가 위경도
-
-	int reviewCount(String id);
+	 int addCoordinates(String id, Coordinates coordinates); //231207전경환 추가 위경도
 
 }

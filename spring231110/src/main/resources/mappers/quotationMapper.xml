@@ -17,42 +17,35 @@
 	<select id=""></select>
 
 	<insert id="quatation_submit">
-		insert into quotation (request_id, form,
-		category_type, rang, status,
-		address, zone_code,
-		detail_address,extra_address, aquare_footage,
-		square_meter,budget
-
-		,request_op,keynum,approve_ok,request_nm,pno)
-		values
-		(#{requestId},#{form}, #{categoryType}, #{rang}, #{status},
+		insert into quotation (request_id, form, category_type, rang, status,
+		address, zone_code, detail_address,extra_address, aquare_footage,
+		square_meter,budget ,request_op,keynum,approve_ok,request_nm)
+		values (#{requestId},#{form}, #{categoryType}, #{rang}, #{status},
 		#{address}, #{zoneCode}, #{detailAddress}, #{extraAddress},
 		#{aquareFootage}, #{squareMeter},#{budget}
-		,#{requestOp},#{keynum},1,#{requestNm},#{pno});
-
+		,#{requestOp},#{keynum},1,#{requestNm});
 	</insert>
+
 
 	<select id="getList_user" parameterType="String"
 		resultType="com.myweb.www.domain.QuotationDTO">
-
-		SELECT m.user_nm, q.*
+		
+				SELECT m.user_nm, q.*
 		FROM quotation q
 		JOIN company c ON q.keynum = c.key_num
 		JOIN member m ON c.id = m.id
 		WHERE request_id = #{id}
-
+	
 		ORDER BY q.quotation_nm DESC, q.checked DESC
-
+		
 
 	</select>
 	<select id="req_check" resultType="boolean">
-		select checked from quotation
-		where request_nm = #{requestNm};
+		select checked from quotation where request_nm = #{requestNm};
 	</select>
 
 	<update id="checked">
-		update quotation set checked= 1 where quotation_nm=
-		#{quotationNm};
+		update quotation set checked= 1 where quotation_nm= #{quotationNm};
 	</update>
 
 	<select id="request_alarm_user" parameterType="String"
@@ -63,14 +56,13 @@
 
 	<select id="getRequest_list_user" parameterType="long"
 		resultType="com.myweb.www.domain.QuotationVO">
-		select * from quotation where quotation_nm =
-		#{quotation_nm} ;
+		select * from quotation where quotation_nm = #{quotation_nm} ;
+
 	</select>
 
 	<select id="getList_read_user" parameterType="String"
 		resultType="com.myweb.www.domain.QuotationVO">
-		select * from quotation where request_id=#{id} and checked
-		= 1 ORDER BY
+		select * from quotation where request_id=#{id} and checked = 1 ORDER BY
 		quotation_nm DESC
 	</select>
 	<select id="setQutation_user" parameterType="long"
@@ -81,64 +73,24 @@
 		resultType="com.myweb.www.security.MemberVO">
 		SELECT m.user_nm
 		FROM quotation q
-		JOIN company c ON q.keynum
-		= c.key_num
+		JOIN company c ON q.keynum = c.key_num
 		JOIN member m ON c.id = m.id
-		WHERE q.quotation_nm =
-		#{quotation_nm}
+		WHERE q.quotation_nm = #{quotation_nm}
+
+
+
 	</select>
+
 
 	<select id="getQuotation"
 		resultType="com.myweb.www.domain.QuotationVO">
 		select * from quotation where quotation_nm =
 		#{quotation_nm};
 	</select>
-
+	
 	<update id="cancle_ok">
-		update quotation set ok_type_no=1 where quotation_nm =
+	update quotation set ok_type_no=1 where quotation_nm =
 		#{quotation_nm}
 	</update>
 
-	<select id="getQuotationNm" parameterType="int"
-		resultType="long">
-		select max(quotation_nm) from quotation where keynum=#{keynum}
-
-	</select>
-
-	<select id="quotation_modify" parameterType="long"
-		resultType="com.myweb.www.domain.QuotationVO">
-
-		SELECT *
-		FROM quotation q
-		JOIN request r ON q.request_nm = r.request_nm
-
-		WHERE r.request_nm = #{request_nm} limit 1
-
-	</select>
-
-	<update id="quatation_modify">
-		UPDATE quotation
-		SET
-		form = #{form},
-		category_type = #{categoryType},
-		rang = #{rang},
-		status = #{status},
-		address = #{address},
-		zone_code = #{zoneCode},
-		detail_address = #{detailAddress},
-		extra_address = #{extraAddress},
-		aquare_footage = #{aquareFootage},
-		square_meter = #{squareMeter},
-		budget = #{budget},
-		request_op = #{requestOp}
-		
-	
-		
-		WHERE request_nm = #{requestNm};
-
-	</update>
-	
-	<select id="selectQuotation" parameterType="long" resultType="com.myweb.www.domain.QuotationVO">
-	select * from quotation where quotation_nm = #{quoNm}
-	</select>
 </mapper>

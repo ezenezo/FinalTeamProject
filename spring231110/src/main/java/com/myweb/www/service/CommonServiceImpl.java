@@ -9,27 +9,28 @@ import org.springframework.stereotype.Service;
 import com.myweb.www.domain.FileVO;
 import com.myweb.www.domain.PortfolioDTO;
 import com.myweb.www.domain.PortfolioVO;
-import com.myweb.www.domain.ReviewDTO;
-import com.myweb.www.domain.ReviewVO;
+import com.myweb.www.repository.CommonDAO;
 import com.myweb.www.repository.FileDAO;
 import com.myweb.www.repository.PortfolioDAO;
 import com.myweb.www.repository.ReviewDAO;
+import com.myweb.www.security.CommonService;
 
-import lombok.extern.slf4j.Slf4j;
-
-@Slf4j
 @Service
-public class CommonServiceImpl implements CommonService {
+public class CommonServiceImpl implements CommonService{
+
+	private CommonDAO comDAO;
 
 	private FileDAO fdao;
 	private PortfolioDAO pdao;
 	private ReviewDAO rdao;
 
+
 	@Autowired
-	public CommonServiceImpl(FileDAO fdao, PortfolioDAO pdao,ReviewDAO rdao) {
+	public CommonServiceImpl(FileDAO fdao, PortfolioDAO pdao,ReviewDAO rdao , CommonDAO comDAO) {
 		this.fdao = fdao;
 		this.pdao = pdao;
 		this.rdao = rdao;
+		this.comDAO = comDAO;
 	}
 
 	@Override
@@ -54,6 +55,6 @@ public class CommonServiceImpl implements CommonService {
 		return pdtoList;
 	}
 
-
-
+	
+	
 }

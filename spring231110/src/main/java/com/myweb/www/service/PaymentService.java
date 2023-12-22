@@ -5,7 +5,6 @@ import java.util.List;
 
 import com.myweb.www.domain.CouponVO;
 import com.myweb.www.domain.PaymentVO;
-import com.myweb.www.domain.QuotationVO;
 
 public interface PaymentService {
 
@@ -25,7 +24,4 @@ public interface PaymentService {
 
 	void refund(String access_token, PaymentVO pvo) throws IOException;
 
-	PaymentVO getPaymentByQno(String quotationNm);
-
-	List<PaymentVO> getPaymentNoRefund(int qno, String id);
 }

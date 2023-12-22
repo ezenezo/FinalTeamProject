@@ -38,19 +38,4 @@ public interface RequestService {
 
 	Boolean req_check(long requestNm);
 
-	long getList_status(String requestId);
-
-	List<RequestVO> req_list(String id);
-
-	List<RequestVO> req_detil(String reqNm);
-
-	String company_name_get(long pno);
-
-	int company_keynum(long pno);
-
-	int getKeyNum(String id);
-
-
-
-
 }

@@ -24,5 +24,4 @@ public class CouponVO {
 	private boolean used; //사용여부
 	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy년 MM월 dd일")
 	private Date expire; //만료날짜
-	private int maxAmount; //최대할인금액
 }

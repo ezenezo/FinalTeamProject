@@ -33,32 +33,31 @@ public class QuotationServiceImpl implements QuotationService {
 	@Override
 	public void submit(QuotationVO avo) {
 		qdao.submit(avo);
-		
 
 	}
 
 	@Override
-	public List<RequestVO> getList(int keynum) {
-
-		return rdao.selectrequset(keynum);
+	public List<RequestVO> getList(String id) {
+		log.info("서비스임플 아이디 들어옴" + id);
+		return rdao.selectrequset(id);
 	}
 
 	@Override
-	public List<RequestVO> getList_read(int keynum) {
+	public List<RequestVO> getList_read(String id) {
 
-		return rdao.selectrequset_read(keynum);
+		return rdao.selectrequset_read(id);
 	}
 
 	@Override
-	public int request_alarm(int keynum) {
+	public int request_alarm(String userId) {
 
-		return rdao.request_alarm(keynum);
+		return rdao.request_alarm(userId);
 	}
 
 	@Override
 
 	public RequestDTO getRequest_list(long requestNm) {
-
+		log.info("request 서비스 임필 리스트 개인" + requestNm);
 		RequestDTO dto = new RequestDTO();
 		dto.setRvo(rdao.getRequest_list(requestNm));
 		dto.setFlist(fdao.req_file(requestNm));
@@ -72,11 +71,13 @@ public class QuotationServiceImpl implements QuotationService {
 	@Override
 	public void quatation_submit(QuotationVO qvo) {
 		qdao.quatation_submit(qvo);
-		RequestVO rvo = new RequestVO();
-		long requstNm =qvo.getRequestNm();
+		RequestVO req = new RequestVO();
 
-		log.info("quatation_submit reqNm"+ requstNm);
-		rdao.okTypeYes_ok(requstNm);
+		long reqNm_q = qvo.getRequestNm();
+
+		// rdao.quest_alarm_submit(reqNm_q);
+		// rdao.quest_alarm_submit(reqNm_q);
+
 	}
 
 	@Override
@@ -91,7 +92,7 @@ public class QuotationServiceImpl implements QuotationService {
 	    
 	 
 	    List<QuotationDTO> qdto = qdao.getList_user(id);
-	
+	    log.info("값 들어옴"+qdto);
 	return qdto;
 	   
 	    
@@ -125,7 +126,7 @@ public class QuotationServiceImpl implements QuotationService {
 
 	@Override
 	public List<QuotationVO> setQutation_user(long quoNm) {
-	
+		log.info("견적서 보러 들러옴(사용자)");
 		qdao.checked(quoNm);
 		return qdao.setQutation_user(quoNm);
 		
@@ -147,41 +148,5 @@ public class QuotationServiceImpl implements QuotationService {
 		qdao.cancle_ok(quotationNm);
 		
 	}
-
-	@Override
-	public long getQuotationNm(int keynum) {
-		long quotationNm=qdao.getQuotationNm(keynum);
-		return quotationNm;
-		
-	}
-
-	@Override
-	public QuotationVO setQutation_modify(long reNm) {
-		QuotationVO qvo = qdao.quotation_modify(reNm);
-		return qvo;
-	}
-
-	@Override
-	public void quatation_modify(QuotationVO qvo) {
-		// TODO Auto-generated method stub
-		qdao.quatation_modify(qvo);
-	}
-
-	@Override
-	public RequestDTO getRequest_list_detail_user(long requestNm) {
-		RequestDTO dto = new RequestDTO();
-		dto.setRvo(rdao.getRequest_list(requestNm));
-		dto.setFlist(fdao.req_file(requestNm));
-		dto.setFile_img(rdao.getPorImg(requestNm));
-		dto.setMvo(rdao.memberSelect(requestNm));
-		return dto;
-	}
-
-	@Override
-	public QuotationVO selectQuotation(long quoNm) {
-		// TODO Auto-generated method stub
-		return qdao.selectQuotation(quoNm);
-	}
-
 
 }

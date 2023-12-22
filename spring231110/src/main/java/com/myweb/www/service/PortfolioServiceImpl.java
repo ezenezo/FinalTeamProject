@@ -21,7 +21,6 @@ import com.myweb.www.repository.HeartDAO;
 
 import com.myweb.www.repository.MemberDAO;
 import com.myweb.www.repository.PortfolioDAO;
-import com.myweb.www.security.MemberDTO2;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -108,7 +107,7 @@ public class PortfolioServiceImpl implements PortfolioService {
 
 		PortfolioVO pvo = pdao.getDetailPvo(pno);
 
-		int isOk = hdao.portfolioLikeCheck(pno, authId);
+		int isOk = pdao.portfolioLikeCheck(pno, authId);
 		if (isOk > 0) {
 			pvo.setLikeCheck(true);
 		} else {
@@ -123,22 +122,28 @@ public class PortfolioServiceImpl implements PortfolioService {
 	// 포폴 좋아요 확인(1이면 이미 체크, 0이면 체크안되어있는거)
 	@Override
 	public int portfolioLikeCheck(long pno, String id) {
-		return hdao.portfolioLikeCheck(pno, id);
+		return pdao.portfolioLikeCheck(pno, id);
 	}
 
 	// 포폴 좋아요 취소
 	@Override
 	public void deletePortfolioLike(long pno, String id) {
+		int num = -1;
+		log.info("취소할 때 여기오는지2");
+		log.info("서비스임플pno>> " + pno);
+		log.info("서비스임플id>> " + id);
 		hdao.deletePortfolioLike(pno, id);// heart테이블에 delete
-		pdao.updatePortfolioLikeQty(pno); // portfolio테이블의 likeQty에 -1해주기
+		log.info("취소할 때 여기오는지3");
+		pdao.updatePortfolioLikeQty(pno, num); // portfolio테이블의 likeQty에 -1해주기
 
 	}
 
 	// 포폴 좋아요
 	@Override
 	public void addPortfolioLike(long pno, String id) {
+		int num = 1;
 		hdao.addPortfolioLike(pno, id); // heart테이블에 insert
-		pdao.updatePortfolioLikeQty(pno); // portfolio테이블의 likeQty에 +1해주기
+		pdao.updatePortfolioLikeQty(pno, num); // portfolio테이블의 likeQty에 +1해주기
 	}
 
 	// 컴퍼니 이름 찾아오기
@@ -251,15 +256,5 @@ public class PortfolioServiceImpl implements PortfolioService {
 	@Override
 	public PortfolioVO getPortfolio(long pno) {
 		return pdao.getPortfolio(pno);
-	}
-
-	@Override
-	public MemberDTO2 getMdto(String id) {
-		MemberDTO2 mdto = new MemberDTO2();
-		mdto.setMvo(mdao.selectEmail(id));
-		mdto.setCvo(codao.getCvo(id));
-		mdto.setFvo(fdao.getFile(id));
-		
-		return mdto;
 	}
 }

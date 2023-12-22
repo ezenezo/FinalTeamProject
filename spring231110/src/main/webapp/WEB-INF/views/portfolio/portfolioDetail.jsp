@@ -10,7 +10,6 @@
 <meta charset="UTF-8">
 <title>PortfolioDetail Page</title>
 <link rel="stylesheet" href="../resources/css/portfolioDetail.css">
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
 <!-- TUI 에디터 CSS CDN -->
 <!-- <link rel="stylesheet"
 	href="https://uicdn.toast.com/editor/latest/toastui-editor.min.css" />
@@ -53,9 +52,7 @@
 				<div>
 					<div class="leftBox">
 						<div class="left1">
-							<img
-								src="/upload/${mdto.fvo.saveDir}/${mdto.fvo.uuid}_${mdto.fvo.fileName}"
-								class="profileImg">
+							<img alt="프로필 사진 없음" src="../../../resources/img/profile.jpg">
 
 						</div>
 						<div class="left2">
@@ -123,56 +120,9 @@
 
 			<div class="introductionDiv">${pdto.pvo.introduction}</div>
 
-			<div class="portfolioInfo2 marTop">
-				<div class="portfolioInfo3">
-					<img
-						src="/upload/${mdto.fvo.saveDir}/${mdto.fvo.uuid}_${mdto.fvo.fileName}"
-						class="profileImg">
-					<div class="comInfo">
-						<p class="userNm">${mdto.mvo.userNm}</p>
-						<p>${mdto.mvo.address}</p>
-
-					</div>
-				</div>
-				<a href="/member/companyInfo?id=${mdto.mvo.id}" class="infoMore"><button>보러가기</button></a>
-			</div>
-
-			<!-- 댓글 -->
-			<sec:authorize access="isAuthenticated()">
-				<sec:authentication property="principal.mvo.id" var="authId" />
-				<input type="hidden" id="authId" value="${authId}">
-				<div class="postCntBox">
-					<div class="cmtContainer">
-						<textarea placeholder="댓글을 남겨보세요." rows="1" wrap="soft"
-							id="cmtText" maxlength="500"></textarea>
-						<!-- div를 position: absolute로 설정하여 textarea 내부에 위치시킴 -->
-						<div class="cmtBtnContainer">
-							<div id="cmtPostBtn">등록</div>
-						</div>
-					</div>
-				</div>
-				<!-- 댓글 표시 라인 -->
-				<div id="cmtListArea">
-					<ul class="ulTag">
-					
-					
-					</ul>
-				</div>
-
-				<!-- 댓글 더보기 버튼 -->
-				<div>
-					<div class="d-grid gap-2">
-						<button type="button" id="moreBtn" data-page="1"
-							class="morePortofolioBtn" style="visibility: hidden">MORE+</button>
-					</div>
-				</div>
-
-			</sec:authorize>
-			<!-- 댓글 끝 -->
-
 		</div>
 		<div class="box2-1">
-			<a href="/req/requestStart?pno=${pdto.pvo.pno}" class="stickyAtag"><button class="stickyBtn"
+			<a href="#" class="stickyAtag"><button class="stickyBtn"
 					type="button">
 					<span class="material-symbols-outlined quotationIcon"> contract_edit </span>
 				</button> </a>
@@ -187,13 +137,10 @@
 	<script type="text/javascript">
 		let pnoVal = `<c:out value="${pdto.pvo.pno}"/>`;
 		let portfolioWriter = `<c:out value="${pdto.pvo.id}"/>`;
-		let companyNm = `<c:out value="${mdto.mvo.userNm}"/>`;
 		console.log("pnoVal>>> " + pnoVal);
 	</script>
 	<script type="text/javascript" src="/resources/js/portfolioDetail.js"></script>
-	<script type="text/javascript">
-		printCommentList(pnoVal);
-	</script>
+
 
 </body>
 </html>
