@@ -16,14 +16,7 @@
 <body class="mainBody">
 	<div class="box">
 		<div class="box2">
-			<div class="event">
-				<div class="eventText">
-					<p>스타일메이트와 함께 따뜻한 겨울을 준비하세요</p>
-					<p>보일러/지역난방</p>
-					<p>시공비 지원 이벤트</p>
-				</div>
-				<img src="/resources/img/event-removebg-preview.png">
-			</div>
+			<jsp:include page="../common/slider.jsp"></jsp:include>
 
 			<div class="leftText">
 				<p class="miniTitle">평형대별 인테리어</p>
@@ -94,36 +87,49 @@
 				<p class="miniTitle margin30">인테리어, 왜 스타일메이트에 맡겨야 할까요?</p>
 			</div>
 			<div class="promotionBoxContainer">
-				<div class="promotionBox promotionBoxNum1">
-					<p class="absolText2">
-						<span>꼼꼼한</span><span>비교견적</span> <span class="poromotionMiniText">믿을
-							수 있는 업체를</span> <span class="poromotionMiniText">연결해 드려요</span>
-					</p>
-					<img class="absolImg" src="/resources/img/promotion1.png">
+				<div
+					class="promotionBox promotionBoxNum1 wow animate__animated animate__fadeInUpBig"
+					data-wow-offset="280">
+					<a href="/customer/introduce">
+						<p class="absolText2">
+							<span>꼼꼼한</span><span>비교견적</span> <span
+								class="poromotionMiniText">믿을 수 있는 업체를</span> <span
+								class="poromotionMiniText">연결해 드려요</span>
+						</p> <img class="absolImg" src="/resources/img/promotion1.png">
+					</a>
 				</div>
-				<div class="promotionBox promotionBoxNum2">
-					<p class="absolText2">
-						<span>상세한</span><span>스타일메이트 플래너</span> <span
-							class="poromotionMiniText">견적서의 분석과 상담을</span> <span
-							class="poromotionMiniText">전담플래너가 관리해드려요</span>
-					</p>
-					<img class="absolImg" src="/resources/img/promotion2.png">
+				<div
+					class="promotionBox promotionBoxNum2 wow animate__animated animate__fadeInUpBig"
+					data-wow-offset="300" data-wow-delay="0.3s">
+					<a href="/customer/introduce">
+						<p class="absolText2">
+							<span>상세한</span><span>스타일메이트 플래너</span> <span
+								class="poromotionMiniText">견적서의 분석과 상담을</span> <span
+								class="poromotionMiniText">전담플래너가 관리해드려요</span>
+						</p> <img class="absolImg" src="/resources/img/promotion2.png">
+					</a>
 				</div>
-				<div class="promotionBox promotionBoxNum3">
-					<p class="absolText2">
-						<span>현장케어</span><span>스타일메이트</span> <span
-							class="poromotionMiniText">스타일메이트가 시공현장을</span> <span
-							class="poromotionMiniText">꼼꼼하게 체크해 드려요</span>
-					</p>
-					<img class="absolImg" src="/resources/img/promotion3.png">
+				<div
+					class="promotionBox promotionBoxNum3  wow animate__animated animate__fadeInUpBig"
+					data-wow-offset="300" data-wow-delay="0.5s">
+					<a href="/customer/introduce">
+						<p class="absolText2">
+							<span>현장케어</span><span>스타일메이트</span> <span
+								class="poromotionMiniText">스타일메이트가 시공현장을</span> <span
+								class="poromotionMiniText">꼼꼼하게 체크해 드려요</span>
+						</p> <img class="absolImg" src="/resources/img/promotion3.png">
+					</a>
 				</div>
-				<div class="promotionBox promotionBoxNum4">
-					<p class="absolText2">
-						<span>든든한</span><span>A/S케어</span> <span
-							class="poromotionMiniText">스타일메이트와 함께하면</span> <span
-							class="poromotionMiniText">3년동안 A/S 해드려요</span>
-					</p>
-					<img class="absolImg" src="/resources/img/promotion4.png">
+				<div
+					class="promotionBox promotionBoxNum4  wow animate__animated animate__fadeInUpBig"
+					data-wow-offset="300" data-wow-delay="1s">
+					<a href="/customer/introduce">
+						<p class="absolText2">
+							<span>든든한</span><span>A/S케어</span> <span
+								class="poromotionMiniText">스타일메이트와 함께하면</span> <span
+								class="poromotionMiniText">3년동안 A/S 해드려요</span>
+						</p> <img class="absolImg" src="/resources/img/promotion4.png">
+					</a>
 				</div>
 			</div>
 		</div>
@@ -180,10 +186,7 @@
 			<div class="leftText centerText">
 				<a href="#"><p class="miniTitle margin30">따끈따끈한 고객 후기 ></p></a>
 			</div>
-			<div class="promotionBoxContainer reviewContainer">
-
-
-			</div>
+			<div class="promotionBoxContainer reviewContainer"></div>
 		</div>
 		<!-- 리뷰 끝 -->
 		<div class="box2 mar80">
@@ -214,8 +217,12 @@
 
 </body>
 <script src="/resources/js/main.js"></script>
+<script src="/resources/js/wow.min.js"></script>
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
 <script type="text/javascript">
 	homeSizeList(sizeNum);
 	reviewPrint();
+	new WOW().init();
 </script>
 </html>

@@ -59,13 +59,6 @@
 					</ul>
 				</nav>
 				<div class="subMain">
-					<!-- 결제하기 버튼 생성 -->
-					<a href="/payment/orderResult?cno=-1&pno=41&qno=19"><button
-							type="button">결제하기</button></a>
-					<!-- 환불하기 버튼 -->
-					<a href="#"><button type="button" onclick="cancelPay(${user.id})">환불받기</button></a>
-					<!-- 쿠폰  버튼 생성 -->
-					<a href="/payment/coupon"><button type="button">쿠폰 받기</button></a>
 				</div>
 			</section>
 		</div>

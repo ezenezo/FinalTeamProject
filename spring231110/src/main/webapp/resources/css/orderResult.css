@@ -111,8 +111,9 @@ section p {
 }
 
 .agreeTitle {
-	color: #666666;
-	font-size: 15px;
+    color: #666666;
+    font-size: 15px;
+    margin: 20px 0;
 }
 
 .agreeList {
@@ -401,4 +402,48 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
 	{
 	-webkit-appearance: none;
 	margin: 0;
+}
+
+.id_agrmt {
+	overflow: auto;
+	overflow-x: hidden;
+	width: 286px;
+	height: 88px;
+	border: 1px solid #d8dce5;
+}
+
+.id_agrmt p {
+	padding: 7px 10px;
+	color: #666;
+	font-size: 12px;
+	line-height: 180%;
+	letter-spacing: -1px;
+}
+
+.id_agrmt table {
+	width: 250px;
+	border: 1px solid #ececec;
+	border-width: 0 1px 1px 0;
+	margin-left: 10px;
+	margin-bottom: 10px;
+	letter-spacing: -1px;
+	border-collapse: collapse;
+	border-spacing: 0;
+	empty-cells: show;
+}
+
+.id_agrmt table th {
+    border: 1px solid #ececec;
+    border-width: 1px 0 0 1px;
+    font-weight: normal;
+    text-align: left;
+    font-size: 12px;
+    padding-left: 4px;
+}
+
+.id_agrmt table td {
+    border: 1px solid #ececec;
+    border-width: 1px 0 0 1px;
+    padding: 4px;
+    font-size: 12px;
 }

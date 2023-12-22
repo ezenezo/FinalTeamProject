@@ -16,10 +16,13 @@ public class StatusVO {
 private long sno;
 private String requestId;
 private boolean requestOk;
-private long requestNm;
-private boolean quotationOk;
+private long requestNmStatus;
+
 private long quotationNm;
 private boolean paymentOk;
-
-
+private boolean completed;
+private boolean requestCancel;
+private boolean quotation_cancel;
+private boolean refund;
+private String companyName;
 }
