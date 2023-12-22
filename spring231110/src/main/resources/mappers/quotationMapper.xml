@@ -65,7 +65,6 @@
 		resultType="com.myweb.www.domain.QuotationVO">
 		select * from quotation where quotation_nm =
 		#{quotation_nm} ;
-
 	</select>
 
 	<select id="getList_read_user" parameterType="String"
@@ -87,7 +86,6 @@
 		JOIN member m ON c.id = m.id
 		WHERE q.quotation_nm =
 		#{quotation_nm}
-
 	</select>
 
 	<select id="getQuotation"
@@ -100,8 +98,6 @@
 		update quotation set ok_type_no=1 where quotation_nm =
 		#{quotation_nm}
 	</update>
-
-
 
 	<select id="getQuotationNm" parameterType="int"
 		resultType="long">
@@ -141,6 +137,4 @@
 		WHERE request_nm = #{requestNm};
 
 	</update>
-
-
 </mapper>
