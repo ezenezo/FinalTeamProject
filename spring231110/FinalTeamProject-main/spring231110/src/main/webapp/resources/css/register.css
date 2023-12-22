@@ -1,0 +1,404 @@
+@charset "UTF-8";
+
+
+@font-face {
+	font-family: 'NEXON Lv1 Gothic OTF';
+	src:
+		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/NEXON Lv1 Gothic OTF.woff')
+		format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
+
+body {
+	font-size: .8rem;
+	box-sizing: border-box;
+	margin: 0px;
+	font-family: 'NEXON Lv1 Gothic OTF';
+}
+
+section p {
+	margin: 20px 0 0 0;
+	color: #15181E;
+}
+
+.form-control {
+	width: 100%;
+	box-sizing: border-box;
+	padding: 0.75rem;
+	border-radius: 4px;
+	border: 1px solid #aeaeae;
+	outline: none;
+}
+
+input[type=file]::file-selector-button, .form-control {
+	font-family: 'NEXON Lv1 Gothic OTF';
+}
+
+.form-control:focus {
+	box-shadow: 0px 0px 6px rgb(19, 126, 213);
+	border: none;
+}
+
+.joinBtn {
+	font-size: 1rem;
+	border-radius: 4px;
+	padding: 0.75rem;
+	display: block;
+	width: 300px;
+	color: #fff;
+	background-color: #306c30;
+	border: none;
+	margin: 20px 0 5px;
+	font-family: 'NEXON Lv1 Gothic OTF';
+	cursor: pointer;
+}
+
+
+.jb-container {
+	width: 300px;
+	background-color: white;
+	padding: 40px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	margin-top: 60px;
+	background-color: rgb(255, 255, 255);
+	border-radius: 8px;
+	margin-bottom: 60px;
+	box-sizing: content-box;
+}
+
+section {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	/* 숲그림 */
+	background-image: linear-gradient(rgb(0 0 0/ 65%), rgb(0 0 0/ 25%)),
+		url(https://i0.wp.com/picjumbo.com/wp-content/uploads/morning-fog-beautiful-nature-scenery-free-photo.jpg?w=2210&quality=70);
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+
+.title {
+	font-size: 30px;
+	font-weight: 700;
+	line-height: 125%;
+	margin-bottom: 100px;
+}
+
+.LoginPageDiv>a {
+	color: green;
+	text-decoration: none;
+	margin-left: 10px;
+}
+
+.LoginPageDiv>p {
+	color: #4a4a4a;
+}
+
+.LoginPageDiv {
+	display: flex;
+	align-items: center;
+	margin-top: 60px;
+}
+
+.mb-3 {
+	width: 100%;
+	margin-top: 10px;
+}
+
+.profileBox {
+	margin-top: 20px;
+}
+
+#checkId, #selectFile, .addrBtn {
+	border: 1px solid green;
+	background-color: white;
+	color: green;
+	font-family: 'NEXON Lv1 Gothic OTF';
+	padding: 0 14px;
+	margin: 10px 0 0 5px;
+	border-radius: 4px;
+}
+
+
+.idBox, .fileUploadDiv, .addrBox {
+	display: flex;
+}
+
+
+.idInput, #file {
+	width: 70%;
+}
+
+#checkId {
+	width: 30%;
+}
+
+.addrBtn {
+	width: 40%;
+}
+
+.checkBoxDiv {
+	margin-top: 100px;
+	font-size: 13px;
+}
+
+.allRead {
+	background-color: white;
+	border: none;
+
+	font-family: 'NEXON Lv1 Gothic OTF';
+}
+
+
+.agree1, .agree2 {
+	border: 1px solid #306c307a;
+	padding: 12px 18px;
+	display: flex;
+	justify-content: space-between;
+}
+
+.agree1 {
+	border-bottom: none;
+}
+
+.agree1 {
+	border-radius: 4px 4px 0 0;
+}
+
+.agree2 {
+	border-top-color: #afafaf7a;
+	border-radius: 0 0 4px 4px;
+}
+
+.checkbox {
+	margin-right: 10px;
+}
+
+.agreeBox {
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+}
+
+.agree1>button, .agree2>button {
+	color: #dd1e1e;
+}
+
+.moveLoginPage {
+	margin: 0px;
+}
+
+#agree1, #agree2 {
+	padding: 12px 24px 24px;
+	width: 600px;
+	color: #3b4859;
+	font-family: "Noto Sans KR";
+	border: 1px solid rgba(0, 0, 0, 0.2);
+	border-radius: 6px;
+	box-shadow: 0 3px 9px rgba(0, 0, 0, 0.5);
+	position: absolute;
+	top: 20px;
+	left: 50%;
+	translate: -50%;
+	background-color: white;
+	line-height: 23px;
+	font-size: 16px;
+}
+
+#agree1 li, #agree2 li {
+	font-size: 14px;
+}
+
+.block {
+	display: block;
+}
+
+.none {
+	display: none;
+}
+
+button {
+	cursor: pointer;
+}
+
+.allAgree {
+	display: flex;
+	align-items: center;
+	margin-bottom: 10px;
+	color: #007bfffc;
+}
+
+.modalHeader {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+}
+
+#modalExit {
+	border: none;
+	background-color: white;
+	font-size: 18px;
+}
+
+li {
+	margin-bottom: 15px;
+}
+
+.black {
+	background-image: linear-gradient(rgb(0 0 0/ 65%), rgb(0 0 0/ 67%)),
+		url(https://i0.wp.com/picjumbo.com/wp-content/uploads/morning-fog-beautiful-nature-scenery-free-photo.jpg?w=2210&quality=70);
+	background-size: cover;
+}
+
+.agree1Btn, .agree2Btn {
+	display: flex;
+	justify-content: center;
+	padding: 60px 0 20px 0;
+}
+
+.agree1Btn>button, .agree2Btn>button {
+	background-color: white;
+	color: rgb(13, 95, 34);
+	border: 1px solid rgb(13, 95, 34);
+	border-radius: 4px;
+	padding: 8px 16px;
+}
+
+.swal2-styled.swal2-confirm {
+	background-color: #225922;
+}
+
+.swal2-styled.swal2-confirm:focus {
+	box-shadow: none;
+}
+
+input[type=file]::file-selector-button {
+	display: none;
+}
+
+#swal2-title {
+	font-size: 20px;
+	margin-top: 20px;
+}
+
+.red {
+	color: red;
+	font-size: 12px;
+}
+
+.green {
+	color: green;
+	font-size: 12px;
+}
+
+.bi {
+	display: block;
+	height: 0px;
+	position: relative;
+	top: -28px;
+	right: -88%;
+	font-size: 17px;
+	color: gray;
+	cursor: pointer;
+}
+
+.password, .passwordOk, .passwordCheck, .passwordCheckOk {
+	margin: 10px 0 20px;
+}
+
+table, td, th {
+	border: 1px solid gray;
+	border-collapse: collapse;
+	padding: 10px 20px;
+	font-size: 14px;
+	margin: 10px 0;
+}
+
+.divider {
+	display: flex;
+	align-items: center;
+	width: 300px;
+	justify-content: space-around;
+	padding: 50px;
+}
+
+.border {
+	width: 110px;
+	background: #a3a3a385;
+	height: 1px;
+}
+
+#providerBox {
+	width: 300px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.google, .naver {
+	height: 45px;
+	width: 300px;
+	display: flex;
+	align-items: center;
+	justify-content: flex-start;
+	border: 1px solid lightgrey;
+	border-radius: 4px;
+	box-sizing: border-box;
+}
+
+.google, #kakaoRegister {
+	margin-bottom: 10px;
+}
+
+.google img {
+	height: 26px;
+	margin-left: 9px;
+}
+
+.naver img {
+	height: 32px;
+	margin-left: 5px;
+}
+
+.google a, .naver a {
+	display: flex;
+	align-items: center;
+	color: black;
+	font-weight: bold;
+	font-size: 13.6px;
+}
+
+.google p, .naver p {
+	margin: 0;
+	width: 240px;
+	display: flex;
+	justify-content: center;
+}
+
+.agreeP {
+	margin-bottom: 10px;
+	margin-left: 5px;
+}
+
+.comRegisterDiv>a {
+	color: green;
+	margin-left: 10px;
+}
+
+.comRegisterDiv {
+	display: flex;
+	align-items: flex-end;
+}
+
+.moveRegisterPage {
+	margin-top: 10px;
+}
+
+.title_2{
+	margin-bottom: 50px;
+}

@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.myweb.www.repository.StatusDAO">
+   <insert id="insert"
+      parameterType="com.myweb.www.domain.StatusVO">
+      insert into status (request_nm_status,request_id) values
+      (#{requestNmStatus},#{requestId})
+   </insert>
+
+
+   <update id="request_status_cancel">
+      update status set request_cancel=1 where
+      request_nm_status =#{requestNm};
+   </update>
+   <update id="quotation_status">
+      update status set quotation_nm = #{quotationNm} where
+      request_nm_status
+      =#{requestNm};
+
+   </update>
+   <update id="quotation_status_cancel">
+      update status set quotation_cancel=1 where
+      quotation_nm =#{quotationNm};
+   </update>
+   <update id="quotation_status_ok">
+
+      update status set request_ok=1 where quotation_nm
+      =#{quotationNm};
+   </update>
+
+
+   <select id="status" parameterType="String"
+      resultType="com.myweb.www.domain.StatusDTO">
+      SELECT r.*, s.*
+      FROM request r
+      JOIN status s ON r.request_nm
+      = s.request_nm_status
+      WHERE r.request_id = 3
+      GROUP BY
+      s.request_nm_status ORDER BY s.request_nm_status desc;
+
+   </select>
+
+   <select id="status_com" parameterType="int"
+      resultType="com.myweb.www.domain.StatusDTO">
+      SELECT r.*, s.*
+      FROM request r
+      JOIN status s ON r.request_nm
+      = s.request_nm_status
+      WHERE r.keynum_com = #{keynum}
+      GROUP BY
+      s.request_nm_status ORDER BY s.request_nm_status desc;
+
+
+
+   </select>
+
+   <update id="quotation_status_setCompanyNm">
+
+      UPDATE status
+      SET company_name = #{companyName}
+      WHERE
+      request_nm_status=#{requestNmStatus}
+
+   </update>
+
+   <select id="status_list" parameterType="String"
+      resultType="com.myweb.www.domain.StatusVO">
+      select * form status where request_id =#{id}
+
+
+   </select>
+
+   <update id="payStatus"> update status set payment_ok = true where
+      quotation_nm = #{quotationNm} </update>
+      
+   <update id="refundStatus"> update status set refund = true where quotation_nm =
+      #{quotationNm} </update>
+
+</mapper>

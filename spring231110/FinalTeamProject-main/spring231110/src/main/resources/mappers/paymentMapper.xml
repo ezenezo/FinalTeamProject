@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.myweb.www.repository.PaymentDAO">
+	<select id="getCouponList"
+		resultType="com.myweb.www.domain.CouponVO">
+		select * from coupon where id = #{id} and used = 0
+	</select>
+	<select id="getCoupon"
+		resultType="com.myweb.www.domain.CouponVO">
+		select * from coupon where coupon_num = #{cno}
+	</select>
+	<insert id="insert">
+		insert into payment(merchant_uid, pg, pay_method,
+		amount, user_name, name, user_id, quotation_nm, coupon_num, point, reg_at)
+		values
+		(#{merchantUid}, #{pg}, #{payMethod}, #{amount}, #{userName},
+		#{name},
+		#{userId}, #{quotationNm}, #{couponNum}, #{point}, now())
+	</insert>
+	<update id="useCoupon">
+		update coupon set used = true where coupon_num =
+		#{couponNum}
+	</update>
+	<insert id="addCoupon">
+		insert into coupon(id, name, percent, discount, used,
+		expire, max_amount) values (#{id}, #{name}, #{percent}, #{discount}, #{used}, #{expire}, #{maxAmount})
+	</insert>
+	<select id="getSameCoupon" resultType="com.myweb.www.domain.CouponVO">
+		select * from coupon where id = #{id} and name = #{name}
+	</select>
+	<select id="getPayment" resultType="com.myweb.www.domain.PaymentVO">
+		select * from payment where merchant_uid = #{merchantUid} 
+	</select>
+	<update id="refund">
+		update payment set refund = true where merchant_uid = #{merchantUid}
+	</update>
+	<select id="getPaymentByQno" resultType="com.myweb.www.domain.PaymentVO">
+		select * from payment where quotation_nm = #{quotationNm} and refund = false;
+	</select>
+	<select id="getPaymentNoRefund" resultType="com.myweb.www.domain.PaymentVO">
+		select * from payment where quotation_nm = #{qno} and user_id = #{id}
+	</select>
+</mapper>
