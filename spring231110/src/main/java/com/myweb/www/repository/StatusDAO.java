@@ -10,24 +10,26 @@ import com.myweb.www.security.MemberVO;
 
 public interface StatusDAO {
 
-	void insert(StatusVO svo);
+   void insert(StatusVO svo);
 
-	void request_status_cancel(long reqNm);
+   void request_status_cancel(long reqNm);
 
-	void quotation_status_cancel(long quotationNm);
+   void quotation_status_cancel(long quotationNm);
 
-	void quotation_status(QuotationVO qvo);
+   void quotation_status(QuotationVO qvo);
 
-	void quotation_status_ok(QuotationVO qvo);
+   void quotation_status_ok(QuotationVO qvo);
 
-	List<StatusDTO> status(String id);
+   List<StatusDTO> status(String id);
 
+   void quotation_status_setCompanyNm(StatusVO svo);
 
+   List<StatusDTO> status_com(int keynum);
 
-void quotation_status_setCompanyNm(StatusVO svo);
+   StatusVO status_list(String id);
+   
+   int payStatus(int quotationNm);
 
-List<StatusDTO> status_com(int keynum);
-
-StatusVO status_list(String id);
+   void refundStatus(int quotationNm);
 
 }

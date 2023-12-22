@@ -96,7 +96,7 @@ function spreadStatusList(id) {
                         str += `<td >결제가 완료되었습니다.</td>`;
                     } else if (list.requestOk && list.paymentOk && list.completed && !list.refund && !list.requestCancel && !list.quotationCancel) {
 
-                        str += `<td >시공이 완료되었습니다.</td>`;
+                        str += `<td >시공이 완료되었습니다.<a href="http://localhost:8088/review/register?quotationNm=${list.quotationNm}"><button type="button" class="status_btn" >리뷰쓰기</button></a></td>`;
                     } else if (list.requestOk && list.paymentOk && !list.completed && list.refund && !list.requestCancel && !list.quotationCancel) {
 
                         str += `<td >환불이 완료되었습니다.</td>`;

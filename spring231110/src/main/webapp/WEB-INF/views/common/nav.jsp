@@ -54,8 +54,8 @@
 				<ul class="main1">
 					<li><a href="/req/requestStart">견적요청</a></li>
 					<li><a href="#">메이트찾기</a></li>
-					<li><a href="#">시공사례</a></li>
-					<li><a href="#">시공후기</a></li>
+					<li><a href="/portfolio/list">시공사례</a></li>
+					<li><a href="/review/allReviewList">시공후기</a></li>
 				</ul>
 			</div>
 		</div>

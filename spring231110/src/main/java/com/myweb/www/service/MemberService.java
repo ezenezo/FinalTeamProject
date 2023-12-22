@@ -71,7 +71,9 @@ public interface MemberService {
 	void heartAdd(String id, long pno);
 
 	CompanyVO getCvo(String id);
+
 	int addCoordinates(String id, Coordinates coordinates); // 231207전경환 추가 위경도
 
+	int reviewCount(String id);
 
 }

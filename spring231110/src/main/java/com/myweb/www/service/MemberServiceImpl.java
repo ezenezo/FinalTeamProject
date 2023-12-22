@@ -151,11 +151,11 @@ public class MemberServiceImpl implements MemberService {
 			// 필수 쿼리 파라미터 세팅
 			sb.append("grant_type=authorization_code");
 			sb.append("&client_id=e7f7342b45a67c5286814656c21b3bdd");
-			sb.append("&redirect_uri=http://localhost:8088/member/"+ok);
+			sb.append("&redirect_uri=http://localhost:8088/member/" + ok);
 			sb.append("&code=").append(code);
 			bw.write(sb.toString());
 			bw.flush();
-			
+
 			int responseCode = conn.getResponseCode();
 			log.info("[KakaoApi.getAccessToken] responseCode = {}", responseCode);
 
@@ -439,11 +439,10 @@ public class MemberServiceImpl implements MemberService {
 		CompanyVO cvo = cdao.getCvo(id);
 
 		if (mvo.isType()) {
-			log.info("20231207여기오는지11");
 			List<PortfolioDTO> pdtoList = new ArrayList<PortfolioDTO>();
 			// pvo+mainImg
 
-			List<PortfolioVO> pvoList = pdao.getPvoList(id);
+			List<PortfolioVO> pvoList = pdao.getListMyPortfolio(id);
 
 			for (PortfolioVO pvo : pvoList) {
 				PortfolioDTO pdto = new PortfolioDTO();
@@ -523,11 +522,16 @@ public class MemberServiceImpl implements MemberService {
 	public CompanyVO getCvo(String id) {
 		return cdao.getCvo(id);
 	}
-	
-	//231220 전경환 재추가
+
+	// 231220 전경환 재추가
 	@Override
 	public int addCoordinates(String id, Coordinates coordinates) {
 		return mdao.addCoordinates(id, coordinates);
+	}
+
+	@Override
+	public int reviewCount(String id) {
+		return rdao.reviewCount(id);
 	}
 
 }

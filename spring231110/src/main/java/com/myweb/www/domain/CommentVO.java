@@ -13,9 +13,9 @@ import lombok.ToString;
 @Getter
 public class CommentVO {
 	private long cmtNo; //댓글번호
-	private long bno; //글번호
-	private int empNo; //사번 
-	private String empId; //댓글쓴이
+	private long pno; //포폴번호
+	private long rno; //리뷰번호
+	private String Id; //댓글쓴이
 	private String content; //댓글내용
 	private String regDate;
 	private String modDate;

@@ -137,4 +137,8 @@
 		WHERE request_nm = #{requestNm};
 
 	</update>
+	
+	<select id="selectQuotation" parameterType="long" resultType="com.myweb.www.domain.QuotationVO">
+	select * from quotation where quotation_nm = #{quoNm}
+	</select>
 </mapper>

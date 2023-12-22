@@ -355,9 +355,12 @@ public class MemberController {
 		FileVO fvo = msv.getFile(id);
 		MemberDTO mdto = msv.getMdto(id);
 		int heartCount = msv.heartCount(id);
+		int reviewCount = msv.reviewCount(id);
+		log.info("업체유저쪽type>>>{}",mdto.getMvo().isType());
 		m.addAttribute("fvo", fvo);
 		m.addAttribute("mdto", mdto);
 		m.addAttribute("heartCount", heartCount);
+		m.addAttribute("reviewCount", reviewCount);
 		log.info("mdto>>{}", mdto);
 	}
 
