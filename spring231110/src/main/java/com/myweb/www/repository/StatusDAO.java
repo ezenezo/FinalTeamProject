@@ -22,12 +22,12 @@ public interface StatusDAO {
 
 	List<StatusDTO> status(String id);
 
-	void quotation_status_setCompanyNm(StatusVO svo);
 
-	List<StatusDTO> status_com(String id);
 
-	int payStatus(int quotationNm);
+void quotation_status_setCompanyNm(StatusVO svo);
 
-	void refundStatus(int quotationNm);
+List<StatusDTO> status_com(int keynum);
+
+StatusVO status_list(String id);
 
 }

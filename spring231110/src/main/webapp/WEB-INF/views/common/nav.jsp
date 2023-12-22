@@ -26,20 +26,22 @@
 <body>
 
 
-<script type="text/javascript">
-// 특정 페이지인 경우 getInfiniteChat2 함수를 10분 지연 실행
-if (currentPage.includes('localhost:8088/member/login') || currentPage.includes('aj2002.cafe24.com/member/login') || currentPage.includes('localhost:8088/index')) {
-    setTimeout(function () {
-        postDataToServer_al("/quotation/alarm/" + userId);
-        postDataToServer_al("/quotation/alarm_user/" + userId);
+	<script type="text/javascript">
+		const currentPage = window.location.href;
+		// 특정 페이지인 경우 getInfiniteChat2 함수를 10분 지연 실행
+		if (currentPage.includes('localhost:8088/member/login')
+				|| currentPage.includes('aj2002.cafe24.com/member/login')
+				|| currentPage.includes('localhost:8088/index')) {
+			setTimeout(function() {
+				postDataToServer_al("/quotation/alarm/" + userId);
+				postDataToServer_al("/quotation/alarm_user/" + userId);
 
-     
-        setTimeout(function () {
-            window.location.href = "/req/main";
-        }, 600000); // 10분 지연
-    }, 5000000000000000000);
-}
-</script>
+				setTimeout(function() {
+					window.location.href = "/req/main";
+				}, 600000); // 10분 지연
+			}, 5000000000000000000000000000000000000000000000000);
+		}
+	</script>
 
 	<div class="total_nav">
 		<div class="left_nav">
@@ -52,8 +54,8 @@ if (currentPage.includes('localhost:8088/member/login') || currentPage.includes(
 				<ul class="main1">
 					<li><a href="/req/requestStart">견적요청</a></li>
 					<li><a href="#">메이트찾기</a></li>
-					<li><a href="#">업체포토폴리오</a></li>
-					<li><a href="#">커뮤니티</a></li>
+					<li><a href="#">시공사례</a></li>
+					<li><a href="#">시공후기</a></li>
 				</ul>
 			</div>
 		</div>
@@ -73,7 +75,10 @@ if (currentPage.includes('localhost:8088/member/login') || currentPage.includes(
 		<sec:authorize access="isAuthenticated()">
 			<sec:authentication property="principal.mvo.id" var="authId" />
 			<sec:authentication property="principal.mvo.authVOList" var="auths" />
-			<input type="hidden" value="${authId}" id="alarm_id">
+
+			<sec:authentication property="principal.mvo.type" var="type" />
+
+			<input type="hidden" value="${authId}" id="alarm_id" name="authId">
 			<input type="hidden" value="${auths[0].auth}" id="userRole">
 
 			<div id="menu_m">
@@ -82,76 +87,85 @@ if (currentPage.includes('localhost:8088/member/login') || currentPage.includes(
 
 						<c:when
 							test="${auths.stream().anyMatch(authVO -> authVO.auth.equals('ROLE_USER')).get()}">
-							<li><a href="/quotation/list_user?id=${authId}">받은견적<span
+							<li id="li_member_id"><a
+								href="/quotation/list_user?id=${authId}">받은견적<span
 									id="badge" style="visibility: hidden;"></span></a></li>
 
-	<script type="text/javascript">
-							
-							window.onload = function() {
-							
-							        if (userRole == "ROLE_COM") {
-							            postDataToServer_al("/quotation/alarm/" + userId);
-							        } else {
-							            postDataToServer_al("/quotation/alarm_user/" + userId);
-							        }
-							    }
-							  
-							    
-							    setTimeout(function() {
-							        if (userRole == "ROLE_COM") {
-							            intervalId = setInterval(function () {
-							                postDataToServer_al("/quotation/alarm/" + userId);
-							            }, 3100);
-							        } else {
-							            intervalId = setInterval(function () {
-							                postDataToServer_al("/quotation/alarm_user/" + userId);
-							            }, 3100);
-							        }
-							    }, 500);
-							}
+							<script type="text/javascript">
+								window.onload = function() {
 
+									if (userRole == "ROLE_COM") {
+										postDataToServer_al("/quotation/alarm/"
+												+ userId);
+									} else {
+										postDataToServer_al("/quotation/alarm_user/"
+												+ userId);
+									}
+								}
 
+								setTimeout(
+										function() {
+											if (userRole == "ROLE_COM") {
+												intervalId = setInterval(
+														function() {
+															postDataToServer_al("/quotation/alarm/"
+																	+ userId);
+														}, 3100);
+											} else {
+												intervalId = setInterval(
+														function() {
+															postDataToServer_al("/quotation/alarm_user/"
+																	+ userId);
+														}, 3100);
+											}
+										}, 500);
 							</script>
 
 						</c:when>
 						<c:when
 							test="${auths.stream().anyMatch(authVO -> authVO.auth.equals('ROLE_COM')).get()}">
-							<li><a href="/quotation/list?id=${authId}">받은요청<span
+							<li id="li_member_id"><a href="/quotation/list?id=${authId}">받은요청<span
 									id="badge" style="visibility: hidden;"></span></a></li>
 
-							 <script type="text/javascript">
-							
-							window.onload = function() {
-							
-							        if (userRole == "ROLE_COM") {
-							            postDataToServer_al("/quotation/alarm/" + userId);
-							        } else {
-							            postDataToServer_al("/quotation/alarm_user/" + userId);
-							        }
-							    }
-							  
-							    setTimeout(function() {
-							        if (userRole == "ROLE_COM") {
-							            intervalId = setInterval(function() {
-							                postDataToServer_al("/quotation/alarm/" + userId);
-							            }, 3100);
-							        } else {
-							            intervalId = setInterval(function() {
-							                postDataToServer_al("/quotation/alarm_user/" + userId);
-							            }, 3100);
-							        }
-							    }, 500);
-					
+							<script type="text/javascript">
+								window.onload = function() {
+
+									if (userRole == "ROLE_COM") {
+										postDataToServer_al("/quotation/alarm/"
+												+ userId);
+									} else {
+										postDataToServer_al("/quotation/alarm_user/"
+												+ userId);
+									}
+								}
+
+								setTimeout(
+										function() {
+											if (userRole == "ROLE_COM") {
+												intervalId = setInterval(
+														function() {
+															postDataToServer_al("/quotation/alarm/"
+																	+ userId);
+														}, 3100);
+											} else {
+												intervalId = setInterval(
+														function() {
+															postDataToServer_al("/quotation/alarm_user/"
+																	+ userId);
+														}, 3100);
+											}
+										}, 500);
 							</script>
 
 						</c:when>
 
 					</c:choose>
 
-					<li><a href="/member/list" class="chat_class">채팅<span
-							id="chat_badge">1</span></a></li>
-					<li id="bell_icon"><a href="/member/list"><span
-							class="material-symbols-outlined"> notifications </span></a></li>
+					<li class="message-icon" id="li_member_id"><a
+						href="/chaturl/box" class="chat_class">메시지함 <span id="badge"
+							style="visibility: visibility:;"></span>
+					</a></li>
+
 					<li>
 						<div class="profile">
 							<img alt="프로필이미지 없음" src="../../resources/img/profile_none.png"
@@ -168,12 +182,48 @@ if (currentPage.includes('localhost:8088/member/login') || currentPage.includes(
 								<li class="row" style="display: none;">
 									<div class="col">프로필 관리</div>
 								</li>
-								<li class="row1">
-									<div class="col">받은 견적</div>
-								</li>
+								<c:choose>
+									<c:when
+										test="${auths.stream().anyMatch(authVO -> authVO.auth.equals('ROLE_USER')).get()}">
+										<li class="row1">
+											<div class="col">
+												<a href="/req/request_list?id=${authId}">보낸요청<span
+													id="badge" style="visibility: hidden;"></span></a>
+											</div>
+										</li>
+
+
+
+									</c:when>
+
+									<c:when
+										test="${auths.stream().anyMatch(authVO -> authVO.auth.equals('ROLE_COM')).get()}">
+										<li class="row1">
+											<div class="col">
+												<a href="/quotation/list?id=${authId}">받은요청<span
+													id="badge" style="visibility: hidden;"></span></a>
+											</div>
+										</li>
+
+
+
+
+
+									</c:when>
+
+								</c:choose>
 								<li class="row2">
 									<div class="col">
-										<a href="/member/myPage?id=${authId}">마이페이지</a>
+										<c:choose>
+
+
+											<c:when test="${type}">
+												<a href="/member/companyMyPage">마이페이지</a>
+											</c:when>
+											<c:otherwise>
+												<a href="/member/myPage?id=${authId}">마이페이지</a>
+											</c:otherwise>
+										</c:choose>
 									</div>
 								</li>
 								<li>
@@ -181,19 +231,20 @@ if (currentPage.includes('localhost:8088/member/login') || currentPage.includes(
 								</li>
 							</ul>
 
-							<button type="button" class="_btn">
-								<a href="/customer/customerService"> <span
-									class="material-symbols-outlined" id="icon_drop">
+							<a href="/customer/customerService">
+								<button type="button" class="_btn">
+									<span class="material-symbols-outlined" id="icon_drop">
 										headset_mic </span>고객센터
-								</a>
 
-							</button>
+
+								</button>
+							</a>
 
 							<div class="logout">
-								<button type="button" class="logout_btn"
-									id="id_usermenu-dropdown_btn">
-									<a href="/member/logout"> 로그아웃</a>
-								</button>
+								<a href="/member/logout">
+									<button type="button" class="logout_btn"
+										id="id_usermenu-dropdown_btn">로그아웃</button>
+								</a>
 							</div>
 
 

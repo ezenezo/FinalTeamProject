@@ -62,7 +62,7 @@ public class StatusServiceImpl implements StatusService {
 		// TODO Auto-generated method stub
 		
 		 List<StatusDTO> sdto = sdao.status(id);
-
+log.info("sdto들어오심ㅎㅎ"+sdto);
 		return sdto;
 	}
 
@@ -73,11 +73,17 @@ public class StatusServiceImpl implements StatusService {
 	}
 
 	@Override
-	public List<StatusDTO> getStatus_com(String id) {
+	public List<StatusDTO> getStatus_com(int keynum) {
 
-		 List<StatusDTO> sdto = sdao.status_com(id);
+		 List<StatusDTO> sdto = sdao.status_com(keynum);
 
 		return sdto;
+	}
+
+	@Override
+	public StatusVO getStatus_list(String id) {
+	StatusVO svo =sdao.status_list(id);
+		return  svo;
 	}
 
 	
