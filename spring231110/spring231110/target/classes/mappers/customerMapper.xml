@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.myweb.www.repository.CustomerServiceDAO">
+	<select id="getList"
+		resultType="com.myweb.www.domain.CustomerServiceVO">
+		select * from customerService
+		<include refid="searchButton"></include>
+	</select>
+
+	<sql id="searchButton">
+		<trim prefix="where">
+			<choose>
+				<when test="searchValue == '주문/결제'">
+					search_value = '주문/결제'
+				</when>
+				<when test="searchValue == '취소/환불'">
+					search_value = '취소/환불'
+				</when>
+				<when test="searchValue == '증빙서류발급'">
+					search_value = '증빙서류발급'
+				</when>
+				<when test="searchValue == '로그인/회원정보'">
+					search_value = '로그인/회원정보'
+				</when>
+				<when test="searchValue == '서비스/기타'">
+					search_value = '서비스/기타'
+				</when>
+			</choose>
+		</trim>
+	</sql>
+</mapper>
