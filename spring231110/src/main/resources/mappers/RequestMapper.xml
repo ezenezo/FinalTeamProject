@@ -34,15 +34,15 @@
 
 	<insert id="insert">
 		insert into request (request_id, form, category_type,
-		rang, status, address,
+		extent, status, address,
 		zone_code,
-		detail_address,extra_address,aquare_footage, square_meter,
+		detail_address,extra_address,square_footage, square_meter,
 		wish_budget, request_op,keynum_com,pno)
 		values (#{requestId}, #{form},
-		#{categoryType}, #{rang}, #{status},
+		#{categoryType}, #{extent}, #{status},
 		#{address}, #{zoneCode},
 		#{detailAddress}, #{extraAddress},
-		#{aquareFootage}, #{squareMeter},
+		#{squareFootage}, #{squareMeter},
 		#{wishBudget},
 		#{requestOp},#{keynumCom},#{pno});
 	</insert>
@@ -188,4 +188,21 @@ select key_num
 from company
 where id=#{id}
 </select>
+
+<select id="getCompany_name_req" parameterType="long" resultType="String">
+select user_nm from member m 
+	JOIN company c ON c.id = m.id
+	join request r on r.keynum_com = c.key_num
+	where r.request_nm = #{requestNm}
+</select>
+
+
+<update id="cancel_user">
+
+update request set ok_type_no=1 where request_nm =#{reqNm)}
+</update>
+
+<update id="cancel_r">
+update request set cancellation_reason=#{cancellationReason} where request_nm =#{requestNm}
+</update>
 </mapper>

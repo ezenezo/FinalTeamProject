@@ -33,7 +33,7 @@
 				<div class="infoLeft">
 					<p>닉네임</p>
 				</div>
-				<input type="text" value="${mvo.userNm }" name="userNm">
+				<input type="text" value="${mvo.userNm }">
 			</div>
 			<div class="info">
 				<div class="infoLeft">

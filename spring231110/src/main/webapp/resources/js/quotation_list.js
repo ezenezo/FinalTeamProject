@@ -61,7 +61,7 @@ function handleClick_q(event, requestNm) {
 
         console.log(filePath_img);
         li += `<div id="right_div_${rvo.requestNm}" class="right_div"><div class="title_right"><div><img alt="그림 없당" src="${filePath_img}" class="p_img"></div><div class="user_info"><div class="user_id">${rvo.requestId}님의 요청서</div><div class="user_email"><span class="material-symbols-outlined">
-                mail</span>${mvo.email}</div><a href="http://localhost:8088/chaturl/chat2?toID=${rvo.requestId}&fromID=${rvo.keynumCom}"><button type="button" >채팅하기</button></a></div>`;
+                mail</span>${mvo.email}</div><a href="http://localhost:8088/chaturl/chat2?toID=${rvo.requestId}&fromID=${rvo.keynumCom}"><button type="button" class="chat_url" >채팅하기</button></a></div>`;
       } else {
 
 
@@ -69,7 +69,7 @@ function handleClick_q(event, requestNm) {
 
 
         li += `<div id="right_div_${rvo.requestNm}" class="right_div"><div class="title_right"><div><img alt="이미지 없당" src="../../../resources/img/profile_none.png" class="p_img"></div><div class="user_info"><div class="user_id">${rvo.requestId}님의 요청서</div><div class="user_email"><span class="material-symbols-outlined">
-                mail</span>${mvo.email}</div><a href="http://localhost:8088/chaturl/chat2?toID=${rvo.requestId}&fromID=${rvo.keynumCom}"><button type="button" >채팅하기</button></a></div>`;
+                mail</span>${mvo.email}</div><a href="http://localhost:8088/chaturl/chat2?toID=${rvo.requestId}&fromID=${rvo.keynumCom}"><button type="button"class="chat_url" >채팅하기</button></a></div>`;
 
       }
       li += `</div><div><ul>`;
@@ -80,14 +80,14 @@ function handleClick_q(event, requestNm) {
 
       li += `<div class="value_row"><span class="label"></span> <span class="value"><input value="${rvo.requestNm}" type="hidden" class="requestNm" name="requestNm"></span></div>`;
       li += `<div class="value_row"><span class="label">요청업체 : </span> <span class="value">${rvo.keynumCom}</span></div>`;
-      li += `<div class="value_row"><span class="label">범위   : </span> <span class="value">${rvo.rang}</span></div>`;
+      li += `<div class="value_row"><span class="label">범위   : </span> <span class="value">${rvo.extent}</span></div>`;
       li += `<div class="value_row"><span class="label">상태   :</span> <span class="value">${rvo.status}</span></div></div>`;
       li += `<div class="b_div_right"><div class="value_row"><span class="label">우편번호:</span> <span class="value">${rvo.zoneCode}</span></div>`;
       li += `<div class="value_row"><span class="label">주소:</span> <span class="value">${rvo.address}</span></div>`;
       li += `<div class="value_row"><span class="label">상세주소:</span> <span class="value">${rvo.detailAddress}</span></div>`;
       li += `<div class="value_row">참조주소:${rvo.extraAddress}</div></div>`;
       li += `<div class="b_div_right"><div class="value_row">제곱미터:${rvo.squareMeter}m<sup>2</sup></div>`;
-      li += `<div class="value_row">평수:${rvo.aquareFootage}평</div>`;
+      li += `<div class="value_row">평수:${rvo.squareFootage}평</div>`;
       if (`${rvo.wishBudget}` == "협의결정") {
         li += `<div class="value_row">희망비용:${rvo.wishBudget}</div>`;
 
@@ -96,9 +96,7 @@ function handleClick_q(event, requestNm) {
       }
 
       li += `<div class="value_row">요청사항${rvo.requestOp}</div></div>`;
-      /* li += `<div class="value_row"><span class="label">돈</span>: <span class="value">${rvo.budget}</span></div>`;
-       li += `<div class="value_row"><span class="label">회사 요청사항</span>: <span class="value">${rvo.requestOp}</span></div>`;*/
-
+     
 
       if (fvo) {
 
@@ -121,9 +119,10 @@ function handleClick_q(event, requestNm) {
         li += `<div class="btn_box"><button type="button" class="btn"  id="btn" onclick="ok_btn(${rvo.requestNm})"><span>승인</span></button>`;
         li += `<button type="button" id="cancel_r" onclick="cancel_btn()" class="btn" id="btn" >반려</button></div>`;
         li += `</ul></div>`;
-      }else    if (rvo.okTypeNo != true && rvo.okTypeYes == true){
-         li += `<button type="button" class="btn"  id="btn" onclick="modify(${rvo.requestNm})" style="width: 180px;"><span>견적서수정</span>`;
-      }
+      }else   if (rvo.okTypeNo != true && rvo.okTypeYes == true){
+         li += `<div class="btn_box"><button type="button" class="btn"  id="btn" onclick="modify(${rvo.requestNm})" style="width: 180px;"><span>견적서수정</span></button>`;
+          li += `<div class="btn_box"><button type="button" class="btn"  id="btn" onclick="completed(${rvo.requestNm})" style="width: 180px;"><span>시공완료</span></button>`;
+        }
 
       u_right.innerHTML += li;
 
@@ -292,6 +291,55 @@ async function postDataToServer_left(url) {
 
 
 
+function cancel_btn() {
+  let reqNm = document.querySelector('.requestNm').value;
+
+
+  Swal.fire({
+  title: '요청서를 거절하시면<br> 다시 복구할 수 없습니다.',
+  // text: "다른 페이지로 이동하면 다시 복구시킬 수 없습니다.",
+  icon: 'warning',
+  showCancelButton: true,
+  confirmButtonColor: '#3085d6',
+  cancelButtonColor: '#d33',
+  confirmButtonText: '거절',
+  cancelButtonText: '취소'
+  }).then((result) => {
+  if (result.value) {
+  postToServer_cancel(reqNm).then(result => {
+  console.log(result);
+  if (result == 1) {
+  
+        Swal.fire({
+          title: '요청서가 취소되었습니다.',
+  
+          icon: 'success',
+          timer: 2000,
+          showConfirmButton: false,
+        });
+  
+        setTimeout(function () {
+          cancellation_reason(reqNm)
+        }, 2100);
+      }
+    });
+  }
+  })
+  }
+function cancellation_reason(reqNm) {
+
+  var url = "/req/cancellation_reason?requestNm=" + reqNm;
+
+  window.location.replace(url);
+}
+function cancellation_reason(reqNm) {
+
+  var url = "/req/cancellation_reason?requestNm=" + reqNm;
+
+  window.location.replace(url);
+}
+
+
 async function postDataToServer_req(url) {
   try {
     const resp = await fetch(url);
@@ -315,46 +363,36 @@ function modify(requestNm) {
   window.location.replace(url);
 }
 
-
-
-function cancel_btn() {
-  let reqNm = document.querySelector('.requestNm').value;
-
+function completed(requestNm) {
   Swal.fire({
-    title: '요청서를 거절하시면 다시 복구할 수 없습니다.',
-    // text: "다른 페이지로 이동하면 다시 복구시킬 수 없습니다.",
-    icon: 'warning',
-    showCancelButton: true,
-    confirmButtonColor: '#3085d6',
-    cancelButtonColor: '#d33',
-    confirmButtonText: '거절',
-    cancelButtonText: '취소'
+      title: '시공이 완료되었습니끼??',
+      icon: 'question',
+      showCancelButton: true,
+      confirmButtonColor: '#11a441a8',
+      cancelButtonColor: 'rgb(108 86 86)',
+      confirmButtonText: '전송',
+      cancelButtonText: '취소'
   }).then((result) => {
-    if (result.value) {
-      postToServer_cancel(reqNm).then(result => {
-        console.log(result);
-        if (result == 1) {
-
+      if (result.isConfirmed) {
+        
           Swal.fire({
-            title: '요청서가 취소되었습니다.',
-
-            icon: 'success',
-            timer: 2000,
-            showConfirmButton: false,
+              title: '시공 완료 처리되었습니다.',
+              icon:"success",
+              timer: 2000,
+              showConfirmButton: false,
           });
 
-          setTimeout(function () {
-            window.location.reload(true);
+          setTimeout(() => {
+          var url = "/quotation/completed?requestNm=" + requestNm;
+
+        window.location.replace(url);
           }, 2100);
-        }
-      });
-    }
-  })
+      }
+  });
 }
 
 
-
-async function postToServer_cancel(reqNm) {
+async function postToServer_cancel(reqNm, cancellationReason) {
   try {
     const url = "/quotation/cancel/" + reqNm;
     const config = {
@@ -362,7 +400,7 @@ async function postToServer_cancel(reqNm) {
       headers: {
         'content-type': 'application/json; charset=utf-8'
       },
-
+      body: JSON.stringify({ reason: cancellationReason }) // 취소 사유를 body에 추가
     };
 
     const resp = await fetch(url, config);
@@ -372,6 +410,7 @@ async function postToServer_cancel(reqNm) {
     console.log(err);
   }
 }
+
 /*
 async function ok_btn(requestNm) {
   try {

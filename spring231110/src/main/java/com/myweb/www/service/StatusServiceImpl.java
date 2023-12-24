@@ -6,6 +6,7 @@ import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
 
+import com.myweb.www.domain.QuotationDTO;
 import com.myweb.www.domain.QuotationVO;
 import com.myweb.www.domain.StatusDTO;
 import com.myweb.www.domain.StatusVO;
@@ -38,8 +39,6 @@ public class StatusServiceImpl implements StatusService {
 
 	@Override
 	public void quotation_status_cancel(long quotationNm) {
-		
-		log.info("사용자 취소 들어옴(견적서 취소)"+quotationNm);
 		sdao.quotation_status_cancel(quotationNm);
 		
 	}
@@ -59,10 +58,7 @@ public class StatusServiceImpl implements StatusService {
 
 	@Override
 	public List<StatusDTO> getStatus(String id) {
-		// TODO Auto-generated method stub
-		
 		 List<StatusDTO> sdto = sdao.status(id);
-log.info("sdto들어오심ㅎㅎ"+sdto);
 		return sdto;
 	}
 
@@ -86,7 +82,90 @@ log.info("sdto들어오심ㅎㅎ"+sdto);
 		return  svo;
 	}
 
+	@Override
+	public StatusVO getStatus_list_ing(String id) {
+		return null;
+	}
+
+	@Override
+	public List<StatusDTO> getStatus_ing(String id) {
+		log.info("id"+id);
+		List<StatusDTO> list =sdao.get_ing(id);
+		log.info("list"+list);
+		return sdao.get_ing(id);
+	}
+
+	@Override
+	public List<StatusDTO> getStatus_completed(String id) {
+		return sdao.get_completed(id);
+	}
+
+	@Override
+	public List<StatusDTO> getStatus_start(String id) {
+		return sdao.get_start(id);
+	}
+
+	@Override
+	public List<StatusDTO> getcancel(String id) {
+		return sdao.get_cancel(id);
+	}
+
+	@Override
+	public long getQuotationNm(long reqNm) {
+	    long quoNm = sdao.existence(reqNm);
+	    if(quoNm != 0) {
+	        return quoNm;
+	    }
+	    return 0;
+	}
+
+	@Override
+	public void cancel_user(long reqNm) {
+		sdao.cancel_user(reqNm);
+	}
+	@Override
+	public boolean getStatus_cancel(long requestNm) {
+	    try {
+	        boolean ok = sdao.cancel_get_user(requestNm);
+	        return ok;
+	    } catch (Exception e) {
+	      
+	        e.printStackTrace();
+	        return false; 
+	    }
+	}
+
+	@Override
+	public List<StatusDTO> getStatus_request_no(String id) {
+		return sdao.getStatus_request_no(id);
+	}
+
+	@Override
+	public List<QuotationDTO> completed_review(String id) {
 	
+		return sdao.completed_review(id);
+	}
+
+	@Override
+	public boolean payment(long quoNm) {
+		   try {
+		        boolean ok = sdao.payment(quoNm);
+		        return ok;
+		    } catch (Exception e) {
+		      
+		        e.printStackTrace();
+		        return false; 
+		    }
+	}
+
+	@Override
+	public void completed(long requestNm) {
+		sdao.completed(requestNm);		
+	}
+
+	
+
+
 
 }
 

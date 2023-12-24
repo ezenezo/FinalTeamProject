@@ -82,3 +82,49 @@ commentInput.addEventListener('input', function() {
 counter.style.visibility='visible';
 });
 
+document.querySelector('.form').addEventListener("submit", (e) => {
+    console.log("Form submitted");
+
+    let bud = document.getElementById('bud').value;
+    console.log("Value of bud:", bud);
+
+    if (bud === 'false' || bud === "") {
+        console.log("Condition not met. Preventing form submission.");
+
+        Swal.fire({
+            icon: 'warning',
+            title: '예산은 계약서에서 필요 작성 요소입니다.',
+        }).then(() => {
+          
+        });
+
+        e.preventDefault();
+    } else {
+            e.preventDefault();
+        Swal.fire({
+            title: '견적서를 고객님께 전달하겠습니까?',
+            icon: 'question',
+            showCancelButton: true,
+            confirmButtonColor: '#11a441a8',
+            cancelButtonColor: 'rgb(108 86 86)',
+            confirmButtonText: '전송',
+            cancelButtonText: '취소'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                Swal.fire({
+                    title: '고객님께 성공적으로 <br>견적서가 전송되었습니다.',
+                    icon:"success",
+                    timer: 2000,
+                    showConfirmButton: false,
+                });
+
+                setTimeout(() => {
+                     document.querySelector('form').submit();
+                }, 2100);
+            }
+        });
+
+    
+
+    }
+});

@@ -1,6 +1,7 @@
 package com.myweb.www.domain;
 
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import lombok.AllArgsConstructor;
@@ -29,13 +30,13 @@ public class StatusDTO {
 
 	private String form;
 	private String categoryType;
-	private String rang;
+	private String extent;
 	private String status;
 	private String address;
 	private int zoneCode;
 	private String detailAddress;
 	private String extraAddress;
-	private float aquareFootage;
+	private float squareFootage;
 	private float squareMeter;
 	private String wishBudget;
 	private String requestOp;
@@ -47,5 +48,11 @@ public class StatusDTO {
 	private boolean refund;
 	private Date reqAt;
 	private String companyName; //회원명
+	
+
+    public String getFormattedReqAt() {
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        return formatter.format(reqAt);
+    }
 	
 }

@@ -151,11 +151,11 @@ public class MemberServiceImpl implements MemberService {
 			// 필수 쿼리 파라미터 세팅
 			sb.append("grant_type=authorization_code");
 			sb.append("&client_id=e7f7342b45a67c5286814656c21b3bdd");
-			sb.append("&redirect_uri=http://localhost:8088/member/" + ok);
+			sb.append("&redirect_uri=http://localhost:8088/member/"+ok);
 			sb.append("&code=").append(code);
 			bw.write(sb.toString());
 			bw.flush();
-
+			
 			int responseCode = conn.getResponseCode();
 			log.info("[KakaoApi.getAccessToken] responseCode = {}", responseCode);
 
@@ -439,10 +439,11 @@ public class MemberServiceImpl implements MemberService {
 		CompanyVO cvo = cdao.getCvo(id);
 
 		if (mvo.isType()) {
+			log.info("20231207여기오는지11");
 			List<PortfolioDTO> pdtoList = new ArrayList<PortfolioDTO>();
 			// pvo+mainImg
 
-			List<PortfolioVO> pvoList = pdao.getListMyPortfolio(id);
+			List<PortfolioVO> pvoList = pdao.getPvoList(id);
 
 			for (PortfolioVO pvo : pvoList) {
 				PortfolioDTO pdto = new PortfolioDTO();
@@ -451,10 +452,13 @@ public class MemberServiceImpl implements MemberService {
 				pdtoList.add(pdto);
 			}
 
+			log.info("pdtoList" + pdtoList);
+			log.info("20231207여기오는지22");
 			MemberDTO mdto = new MemberDTO();
 			mdto.setMvo(mvo);
 			mdto.setPdtoList(pdtoList);
 			mdto.setCvo(cvo);
+			log.info("mdtodddd" + mdto);
 			return mdto;
 		} else {
 			return null;
@@ -478,11 +482,14 @@ public class MemberServiceImpl implements MemberService {
 
 		List<ReviewVO> rvoList = rdao.getReviewList2(id);
 
+		log.info("rvoList>>{}", rvoList);
 		for (ReviewVO rvo : rvoList) {
 			ReviewDTO rdto = new ReviewDTO();
 			rdto.setRvo(rvo);
+			log.info("rdto1>>{}", rdto);
 			rdto.setReviewMainImg(fdao.getReviewMainImg(rvo.getRno()));
 			rdtoList.add(rdto);
+			log.info("rdto>>{}", rdto);
 		}
 
 		cdto.setCvo(cvo);
@@ -490,6 +497,7 @@ public class MemberServiceImpl implements MemberService {
 		cdto.setPdtoList(pdtoList);
 		cdto.setRdtoList(rdtoList);
 
+		log.info("cdto>>{}", cdto);
 
 		return cdto;
 
@@ -515,16 +523,11 @@ public class MemberServiceImpl implements MemberService {
 	public CompanyVO getCvo(String id) {
 		return cdao.getCvo(id);
 	}
-
-	// 231220 전경환 재추가
+	
+	//231220 전경환 재추가
 	@Override
 	public int addCoordinates(String id, Coordinates coordinates) {
 		return mdao.addCoordinates(id, coordinates);
-	}
-
-	@Override
-	public int reviewCount(String id) {
-		return rdao.reviewCount(id);
 	}
 
 }

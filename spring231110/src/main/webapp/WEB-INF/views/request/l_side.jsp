@@ -55,7 +55,7 @@
         </a></div></li>
           <li id=""><div id="hover_menu6">
         <a href="#" onclick="final_req()" id="choice_5" class="hover_menu">
-            <i class="bi bi-5-square-fill"></i>추가 질문
+            <i class="bi bi-5-square-fill"></i>견적서 확인하기
         </a></div></li>
 		</ul>
 

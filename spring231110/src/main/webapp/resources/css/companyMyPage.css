@@ -181,7 +181,7 @@ span {
 
 .rightSection {
    width: 60%;
-    height: 660px;
+  /*   height: 660px; */
     display: flex;
     flex-direction: column;
 }
@@ -282,20 +282,20 @@ span {
    font-weight: 220;
 }
 .writePortfolioBtn {
-	width: 300px;
-	height: 44px;
-	padding: 0 20px;
-	cursor: pointer;
-	border-radius: 2px;
-	text-align: center;
-	font-size: 14px;
-	background-color: #ffffff;
-	border: 1px solid #dddddd;
-	color: #1d1d1d;
-	margin: 30px auto;
-	display: block;
+   width: 300px;
+   height: 44px;
+   padding: 0 20px;
+   cursor: pointer;
+   border-radius: 2px;
+   text-align: center;
+   font-size: 14px;
+   background-color: #ffffff;
+   border: 1px solid #dddddd;
+   color: #1d1d1d;
+   margin: 30px auto;
+   display: block;
 }
 
 .writePortfolioBtn:hover {
-	background-color: rgb(221, 221, 221);
+   background-color: rgb(221, 221, 221);
 }

@@ -18,8 +18,6 @@ import org.springframework.security.web.savedrequest.RequestCache;
 import org.springframework.security.web.savedrequest.SavedRequest;
 import org.springframework.stereotype.Component;
 
-import com.myweb.www.service.ChatService;
-import com.myweb.www.domain.FileVO;
 import com.myweb.www.service.MemberService;
 
 import lombok.Getter;
@@ -46,9 +44,6 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler {
 	
 	@Inject
 	private MemberService msv;
-	
-	@Inject
-	private ChatService chatsv; //231223전경환추가
 	
 	@Override
 	public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
@@ -78,39 +73,6 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler {
 		//로그인 안하고 이것저것 클릭해서 볼때 관련 클릭했던 경로페이지가 있냐없냐 등을보는듯
 		// 처음이면 리스트를 넣고  이것저거것 있다면 로그인후 그페이지로 보내려고 getRedirectUrl가 있는듯 (로그인 값 이나 리스트 값으로 데이터를 보내줌)
 		rdstg.sendRedirect(request, response, (saveReq != null)? saveReq.getRedirectUrl() : getAuthUrl()  );
-		
-		//231216전경환추가------S
-//	    HttpSession session = request.getSession();
-	    if (authentication != null) {
-	        String username = authentication.getName();
-
-	        // 사용자의 프로필 이미지 정보 가져오기
-	        FileVO profileImage = msv.getFile(username);
-	        if (profileImage != null) {
-	            // 이미지 URL 생성
-	            String profileImageUrl = 
-	            						"http://localhost:8088/upload/" + //로컬용
-//	            						"http://aj2002.cafe24.com/_javaweb/_java/fileUpload/" + //카페24배포용webapps
-	            						
-	                                      profileImage.getSaveDir() + "/" +
-	                                      profileImage.getUuid() + "_" +
-	                                      profileImage.getFileName();
-
-	            log.info("로그인석세스핸들러의 profileImageUrl은"+profileImageUrl);
-	            // 세션에 이미지 URL 저장
-	            ses.setAttribute("profileImagePath", profileImageUrl);
-	        }        
-	        
-	        // 안 읽은 메시지 수 조회
-	        int AllUnreadChat = chatsv.getAllUnreadChatID(username);
-	        log.info("username는"+username);        
-	        log.info("로그인석세스핸들러의 AllUnreadChat은 "+AllUnreadChat);
-	        
-	        // 세션에 안 읽은 메시지 수 저장
-	        ses.setAttribute("AllUnreadChat", AllUnreadChat);
-	        log.info("ses.setAttribute(\"AllUnreadChat\"부분 지나침");
-	    }
-		//231216전경환추가------E
 	}
 
 

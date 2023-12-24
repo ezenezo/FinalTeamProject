@@ -6,7 +6,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 import com.myweb.www.domain.PagingVO;
-import com.myweb.www.domain.ReviewDTO;
+
 import com.myweb.www.domain.ReviewVO;
 
 public interface ReviewDAO {
@@ -32,29 +32,6 @@ public interface ReviewDAO {
 	int selectOneIdTotalCount(String id);
 
 	List<ReviewVO> getReviewList2(String id);
-
-	int selectAllReviewTotalCount();
-
-
-	List<ReviewVO> getAllReviewListPh(PagingVO pgvo);
-
-
-	void updateReviewLikeQty(long rno);
-
-
-	void updateReadCount(long rno);
-
-
-	String selectId(long rno);
-
-
-	int reviewCount(String id);
-
-
-	List<ReviewVO> getMyReviewList(String id);
-
-
-
 
 
 }

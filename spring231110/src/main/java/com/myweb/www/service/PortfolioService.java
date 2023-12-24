@@ -11,7 +11,6 @@ import com.myweb.www.domain.FileVO;
 import com.myweb.www.domain.FilterdataVO;
 import com.myweb.www.domain.PortfolioDTO;
 import com.myweb.www.domain.PortfolioVO;
-import com.myweb.www.security.MemberDTO2;
 
 public interface PortfolioService {
 
@@ -51,9 +50,6 @@ public interface PortfolioService {
 	List<PortfolioVO> getHeartList(String id);
 
 	PortfolioVO getPortfolio(long pno);
-
-	MemberDTO2 getMdto(String id);
-
 
 
 

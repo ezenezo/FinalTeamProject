@@ -5,80 +5,139 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.myweb.www.repository.StatusDAO">
-   <insert id="insert"
-      parameterType="com.myweb.www.domain.StatusVO">
-      insert into status (request_nm_status,request_id) values
-      (#{requestNmStatus},#{requestId})
-   </insert>
+<insert id="insert" parameterType="com.myweb.www.domain.StatusVO">
+insert into status (request_nm_status,request_id) values (#{requestNmStatus},#{requestId})
+</insert>
 
 
-   <update id="request_status_cancel">
-      update status set request_cancel=1 where
-      request_nm_status =#{requestNm};
-   </update>
-   <update id="quotation_status">
-      update status set quotation_nm = #{quotationNm} where
-      request_nm_status
-      =#{requestNm};
+<update id="request_status_cancel">
+update status set request_cancel=1  where request_nm_status =#{requestNm};
+</update>
+<update id="quotation_status">
+update status set quotation_nm = #{quotationNm} where request_nm_status =#{requestNm};
 
-   </update>
-   <update id="quotation_status_cancel">
-      update status set quotation_cancel=1 where
-      quotation_nm =#{quotationNm};
-   </update>
-   <update id="quotation_status_ok">
+</update>
+<update id="quotation_status_cancel">
+update status set quotation_cancel=1  where quotation_nm =#{quotationNm};
+</update>
+<update id="quotation_status_ok">
 
-      update status set request_ok=1 where quotation_nm
-      =#{quotationNm};
-   </update>
+update status set request_ok=1  where quotation_nm =#{quotationNm};</update>
 
 
-   <select id="status" parameterType="String"
-      resultType="com.myweb.www.domain.StatusDTO">
-      SELECT r.*, s.*
-      FROM request r
-      JOIN status s ON r.request_nm
-      = s.request_nm_status
-      WHERE r.request_id = 3
-      GROUP BY
-      s.request_nm_status ORDER BY s.request_nm_status desc;
+<select id="status" parameterType="String" resultType="com.myweb.www.domain.StatusDTO">
+SELECT r.*, s.*
+FROM request r
+JOIN status s ON r.request_nm = s.request_nm_status 
+WHERE r.request_id = #{id}
+GROUP BY s.request_nm_status  ORDER BY s.request_nm_status desc;
 
-   </select>
+</select>
 
-   <select id="status_com" parameterType="int"
-      resultType="com.myweb.www.domain.StatusDTO">
-      SELECT r.*, s.*
-      FROM request r
-      JOIN status s ON r.request_nm
-      = s.request_nm_status
-      WHERE r.keynum_com = #{keynum}
-      GROUP BY
-      s.request_nm_status ORDER BY s.request_nm_status desc;
+<select id="status_com" parameterType="int" resultType="com.myweb.www.domain.StatusDTO">
+SELECT r.*, s.*
+FROM request r
+JOIN status s ON r.request_nm = s.request_nm_status
+WHERE r.keynum_com  = #{keynum}
+GROUP BY s.request_nm_status ORDER BY s.request_nm_status desc;
 
 
 
-   </select>
+</select>
 
-   <update id="quotation_status_setCompanyNm">
+<update id="quotation_status_setCompanyNm">
+	
+UPDATE status
+SET company_name = #{companyName}
+WHERE request_nm_status=#{requestNmStatus}
 
-      UPDATE status
-      SET company_name = #{companyName}
-      WHERE
-      request_nm_status=#{requestNmStatus}
+</update>
 
-   </update>
-
-   <select id="status_list" parameterType="String"
-      resultType="com.myweb.www.domain.StatusVO">
-      select * form status where request_id =#{id}
+<select id="status_list" parameterType="String" resultType="com.myweb.www.domain.StatusVO" >
+select * form status where request_id =#{id}
 
 
-   </select>
+</select>
+<select id="get_ing" parameterType="String" resultType="com.myweb.www.domain.StatusDTO" >
+SELECT *
+FROM status s
+JOIN request r ON s.request_nm_status = r.request_nm
+WHERE s.request_id = #{id} AND 	s.completed = 0 and s.payment_OK = 0 AND s.request_ok = 1 and s.quotation_cancel =0 and s.request_cancel=0
+GROUP BY s.request_nm_status
+ORDER BY s.request_nm_status DESC;
 
-   <update id="payStatus"> update status set payment_ok = true where
-      quotation_nm = #{quotationNm} </update>
-      
-   <update id="refundStatus"> update status set refund = true where quotation_nm =
-      #{quotationNm} </update>
 
+</select>
+
+<select id="get_start" parameterType="String" resultType="com.myweb.www.domain.StatusDTO" >
+SELECT *
+FROM status s
+join request r on request_nm_status = request_nm
+WHERE s.request_id = #{id} AND payment_ok = 1  and completed =0 and refund=0
+GROUP BY s.request_nm_status  ORDER BY s.request_nm_status desc;
+
+
+</select>
+
+<select id="get_completed" parameterType="String" resultType="com.myweb.www.domain.StatusDTO" >
+SELECT *
+FROM status s
+join request r on request_nm_status = request_nm
+WHERE s.request_id = #{id} AND completed =1
+GROUP BY s.request_nm_status  ORDER BY s.request_nm_status desc
+
+
+</select>
+
+<select id="get_cancel" parameterType="String" resultType="com.myweb.www.domain.StatusDTO">
+SELECT *
+FROM status s
+JOIN request r ON s.request_nm_status = r.request_nm
+WHERE s.request_id = #{id}
+  AND (s.request_cancel = 1 XOR s.refund = 1 XOR s.quotation_cancel = 1)
+GROUP BY s.request_nm_status
+ORDER BY s.request_nm_status DESC
+</select>
+
+<select id="existence" parameterType="long" resultType="long">
+select quotation_nm from status where request_nm_status=#{reqNm}
+</select>
+
+<update id="cancel_user">
+update status set request_cancel=1 where  request_nm_status=#{reqNm}
+
+</update>
+
+<select id="cancel_get_user" parameterType="long" resultType="boolean">
+select request_cancel from status where  request_nm_status=#{requestNm}
+</select>
+
+<select id="getStatus_request_no" parameterType="String" resultType="com.myweb.www.domain.StatusDTO">
+SELECT *
+FROM status s
+JOIN request r ON s.request_nm_status = r.request_nm
+WHERE s.request_id = #{id} AND 	s.completed = 0 and s.payment_OK = 0 AND s.request_ok = 0 and s.quotation_cancel =0 and s.refund=0 and request_cancel=0
+GROUP BY s.request_nm_status
+ORDER BY s.request_nm_status DESC;
+
+
+</select>
+
+	<select id="completed_review" parameterType="String" resultType="com.myweb.www.domain.StatusDTO">
+	SELECT *
+FROM status s
+JOIN quotation q ON s.quotation_nm = q.quotation_nm
+WHERE s.request_id = #{id} and completed=1
+	</select>
+
+
+<select id="payment">
+select payment_ok from status where quotation_nm=#{quoNm}
+</select>
+
+
+<update id="completed">
+update status set completed=1 where request_nm_status = #{requestNm}
+</update>
 </mapper>
+

@@ -1,7 +1,34 @@
 console.log("chat2.js진입");
-let lastMessagechatID = null; // 마지막 메시지의 chatID를 저장할 변수
-let lastMessagechatRead = null; // 마지막 메시지의 chatRead를 저장할 변수
 
+// function autoClosingAlert(selector, delay){
+//     var alert =$(selector).alert();
+//     alert.show();
+//     window.setTimeout(function(){alert.hide()},delay);
+// }
+// function submitFunction(){
+//     var fromID = '<%= userID %>';
+//     var toID = '<%= toID %>';
+//     var chatContent = $('#chatContent').val();
+//     $.ajax({
+//         type : "POST",
+//         url : ".chatSubmitServlet",
+//         data:{
+//             from: encodeURIComponent(fromID),
+//             toID: encodeURIComponent(toID),
+//             chatContent: encodeURIComponent(chatContent)
+//         },
+//         success: function(result){
+//             if(result ==1  ){
+//                 autoClosingAlert('#successMessage',2000);
+//             }else if (result ==0){
+//                 autoClosingAlert('#dangerMessage',2000);
+//             }else{
+//                 autoClosingAlert('#warningMessage', 2000);
+//             }
+//         }
+//     });
+//     $('#chatContent').val('');
+// }
 // 현재 로그인한 사용자 ID를 전역 변수로 저장
 let currentUserID = document.getElementById("chatName").value; //프린시펄 username부터 input으로 넘어온값
 
@@ -62,6 +89,75 @@ async function postComment(chatData) {
     } catch (error) {
         console.log(error);
     }
+}
+
+//댓글 리스트 출력 함수
+function printChatList(chatData) {
+    spreadChatListFromServer(chatData).then((result) => {
+        console.log("printChatList 출력함수 진입");
+
+        const ul = document.getElementById("chatList2");
+        console.log("printChatListd의 result는 ", result);
+        console.log("result.length는 ", result.length);
+        //console.log("result.chatList는 " , result.chatList);
+        //console.log("result.chatList.length는 " , result.chatList.length);
+        if (result.length > 0) {
+            //대소문자 꼭 맞춰야함 위 아래
+
+            //다시 댓글을 뿌릴 때 기존 값 삭제 1page 경우
+            // if (page == 1) {
+            //     ul.innerText = "";
+            // }
+            ul.innerText = "";
+            let str = "";
+            for (let chatdto of result) {
+                let name1;
+                if (chatdto.fromID == currentUserID) {
+                    name1 = "나";
+                } else {
+                    name1 = chatdto.fromID;
+                }
+
+                str += `<div class="row">`;
+                str += `<div class="col-lg-12">`;
+                str += `<div class="media" >`;
+                str += `<div><a class="pull-left" href="#">`;
+                str += `<img class="media-object img-circle" style="width: 30px; height:30px;" src="/resources/img/anoyicon.png" alt="">`;
+
+                str += `<span class="media-heading">`;
+                str += `${name1}  <span class="small pull-rigth style="left-right: 30px;">  ${chatdto.chatTime}</span>`;
+                str += `</span>`;
+
+                str += `</a></div>`;
+                str += `<div class="media-body" style="float: center">`;
+
+                str += `<div style="text-align: left;">${chatdto.chatContent}</div>`;
+                str += `</div>`;
+                str += `</div>`;
+                str += `</div>`;
+                str += `</div>`;
+            }
+            ul.innerHTML += str;
+
+            const chatList = document.getElementById("chatList2");
+            chatList.scrollTop = chatList.scrollHeight;
+
+            //str += `</ul>`;
+
+            // //댓글 페이징 코드
+            // let moreBtn = document.getElementById('moreBtn');
+            // console.log(moreBtn, result.pgvo.pageNo, result.endPage);
+            // //db에서 pgvo + list 같이 가져와야 값을 줄 수 있음.
+            // if (result.pgvo.pageNo < result.endPage) {
+            //     moreBtn.style.visibility = 'visible'; //버튼 표시
+            //     moreBtn.dataset.page = page + 1;
+            // } else {
+            //     moreBtn.style.visibility = 'hidden'; //버튼 숨김
+            // }
+        } else {
+            ul.innerText = "글이 없습니다.";
+        }
+    });
 }
 
 //채팅글 요청 함수
@@ -132,194 +228,7 @@ function getInfiniteChat() {
 }
 
 document.addEventListener("DOMContentLoaded", (event) => {
-    const currentPage = window.location.href;
-    console.log("currentPage는", currentPage);
-    // 특정 페이지인 경우 100분 지연 실행
-    if (
-        currentPage.includes("localhost:8088/member/login") ||
-        currentPage.includes("aj2002.cafe24.com/member/login")
-    ) {
-        setTimeout(function () {
-            printChatList(chatData);
-            getInfiniteChat();
-            getUnread(currentUserID);
-        }, 6000000); // 100분 지연
-    } else {
-        printChatList(chatData);
-        getInfiniteChat();
-        getUnread(currentUserID);
-    }
+    printChatList(chatData);
+    getInfiniteChat();
+    getUnread(currentUserID);
 });
-
-// 두 날짜가 다른 날짜인지 확인하는 함수
-function isDateDifferent(date1, date2) {
-    return (
-        date1.getFullYear() !== date2.getFullYear() ||
-        date1.getMonth() !== date2.getMonth() ||
-        date1.getDate() !== date2.getDate()
-    );
-}
-
-let lastMessageChatRead = 0;
-function isNewMessage(newMessages) {
-    // 새 메시지가 있는지 확인
-    if (newMessages.length === 0) {
-        return false;
-    }
-
-    const latestMessagechatID = newMessages[newMessages.length - 1].chatID; // 예시로 id 사용
-    const latestMessageChatRead = newMessages[newMessages.length - 1].chatRead;
-    if (
-        lastMessagechatID !== latestMessagechatID ||
-        lastMessageChatRead !== latestMessageChatRead
-    ) {
-        // if (lastMessagechatID !== latestMessagechatID) {
-        lastMessagechatID = latestMessagechatID; // 마지막 메시지 ID 업데이트
-        lastMessageChatRead = latestMessageChatRead;
-        return true;
-    }
-    return false;
-}
-
-function printChatList(chatData) {
-    console.log("printChatList 출력함수 진입");
-    spreadChatListFromServer(chatData).then((result) => {
-        console.log("수시로 받아오는 결과값 ", result);
-        if (isNewMessage(result)) {
-            // 새 메시지가 있을 경우에만 DOM 업데이트
-            updateChatListDOM(result);
-        }
-    });
-}
-
-function updateChatListDOM(result) {
-    console.log("updateChatListDOM 함수 진입");
-
-    const ul = document.getElementById("chatList2");
-    console.log("updateChatListDOM의 result는 ", result);
-
-    // 이전 채팅의 날짜를 저장하는 변수
-    let prevDate = null;
-    //console.log("result.chatList는 " , result.chatList);
-    //console.log("result.chatList.length는 " , result.chatList.length);
-    if (result.length > 0) {
-        //대소문자 꼭 맞춰야함 위 아래
-
-        ul.innerText = "";
-        let str = "";
-        for (let chatdto of result) {
-            let messageClass;
-            let name1;
-            let profileImageUrl;
-            let defaultImageUrl = "/resources/img/profile_none.png"; // 기본 이미지 경로
-
-            // 날짜를 가져오기 (년, 월, 일)-------------------------231221S
-            const chatDate = new Date(chatdto.chatTime);
-            const chatYear = chatDate.getFullYear();
-            const chatMonth = chatDate.getMonth() + 1; // 월은 0부터 시작하므로 1을 더함
-            const chatDay = chatDate.getDate();
-            const chatDayOfWeek = chatDate.toLocaleDateString("ko-KR", {
-                weekday: "long",
-            }); // 추가: 요일
-            // 날짜를 가져오기 (년, 월, 일)-------------------------231221E
-            // filevo가 존재하면 정상적인 이미지 경로를, 그렇지 않으면 기본 이미지 경로를 사용
-            if (chatdto.filevo) {
-                profileImageUrl =
-                    "http://localhost:8088/upload/" +
-                    //"http://aj2002.cafe24.com/_javaweb/_java/fileUpload/" + //카페24배포용webapps
-                    chatdto.filevo.saveDir +
-                    "/" +
-                    chatdto.filevo.uuid +
-                    "_" +
-                    chatdto.filevo.fileName;
-            } else {
-                profileImageUrl = defaultImageUrl;
-            }
-
-            console.log("profileImageUrl는" + profileImageUrl);
-            console.log("defaultImageUrl는" + defaultImageUrl);
-
-            let str = `<div class="row">`;
-
-            // 시간 포맷 변경 (예: '15:30')
-            let formattedTime = new Date(chatdto.chatTime).toLocaleTimeString(
-                [],
-                {
-                    hour: "2-digit",
-                    minute: "2-digit",
-                }
-            );
-            chatdto.chatContent = chatdto.chatContent.replace(/\n/g, "<br>"); //줄바꿈 테스트중
-            if (chatdto.fromID == currentUserID) {
-                messageClass = "my-message";
-
-                name1 = "나";
-                // 날짜가 변경된 경우에만 날짜 정보를 출력231221-------------S
-                if (!prevDate || isDateDifferent(prevDate, chatDate)) {
-                    str += `<div class="row date-divider  date-container text-center"><span class="material-symbols-outlined"> calendar_month</span> ${chatYear}년 ${chatMonth}월 ${chatDay}일 ${chatDayOfWeek}</div>`;
-                    prevDate = chatDate;
-                    prevDayOfWeek = chatDayOfWeek;
-                }
-                // 날짜가 변경된 경우에만 날짜 정보를 출력231221-------------E
-                str += `<div class="col-lg-12 ${messageClass}">`;
-                str += `<div class="media">`;
-                // 231221 전경환 -------------S
-                if (chatdto.chatRead === 0) {
-                    str += `<div class="message-read1">1&nbsp;</div>`; // chatRead가 0이면 1로 표시
-                } else if (chatdto.chatRead === 1) {
-                    str += `<div class="message-read1"></div>`; // chatRead가 1이면 아무것도 표시하지 않음
-                }
-                // 231221 전경환 -------------E
-                str += `<div class="message-time-left">${formattedTime}</div>`;
-                str += `<div class="message-content">${chatdto.chatContent}</div>`;
-                str += `</div>`; // media 닫기
-                str += `</div>`; // col-lg-12 닫기
-            } else {
-                // 상대방 메시지일 때의 레이아웃
-                messageClass = "other-message";
-                name1 = chatdto.fromID;
-                // 날짜가 변경된 경우에만 날짜 정보를 출력231221-------------S
-                if (!prevDate || isDateDifferent(prevDate, chatDate)) {
-                    str += `<div class="row date-divider  date-container text-center"><span class="material-symbols-outlined"> calendar_month</span> ${chatYear}년 ${chatMonth}월 ${chatDay}일 ${chatDayOfWeek}</div>`;
-                    prevDate = chatDate;
-                    prevDayOfWeek = chatDayOfWeek;
-                }
-                // 날짜가 변경된 경우에만 날짜 정보를 출력231221-------------E
-                str += `<div class="col-lg-12 ${messageClass}">`;
-                str += `<div class="media">`;
-
-                // 이미지
-                //str += `<img class="media-object img-circle" src="${profileImageUrl}" alt="">`; // 프로필 이미지 URL 사용
-                // 이미지 with onerror 이벤트
-                str += `<img class="media-object img-circle" src="${profileImageUrl}" onerror="this.onerror=null; this.src='${defaultImageUrl}'" alt="">`;
-
-                // 오른쪽 컨테이너 (ID와 채팅 내용, 시간 포함)
-                str += `<div class="right-container">`;
-                str += `<div class="user-id">${name1}</div>`; // ID 표시
-                str += `<div class="message-with-time">`; // 메시지와 시간을 위한 컨테이너
-                str += `<div class="message-content">${chatdto.chatContent}</div>`; // 채팅 내용 표시
-
-                str += `<div class="message-time-right">${formattedTime}</div>`; // 시간 표시
-                str += `</div>`; // message-with-time 닫기
-                str += `</div>`; // right-container 닫기
-
-                str += `</div>`; // media 닫기
-                str += `</div>`; // col-lg-12 닫기
-            }
-
-            str += `</div>`;
-            ul.innerHTML += str;
-        }
-        ul.innerHTML += str;
-
-        const chatList = document.getElementById("chatList2");
-        // chatList.scrollTop = chatList.scrollHeight;
-        // 스크롤을 최하단으로 이동하는 부분을 setTimeout으로 감싸줍니다.
-        setTimeout(() => {
-            const chatList = document.getElementById("chatList2");
-            chatList.scrollTop = chatList.scrollHeight;
-        }, 30); // 0.03초(아주약간) 지연시간을 주어, 브라우저가 DOM 업데이트를 완료할 수 있도록....
-    } else {
-        ul.innerText = "글이 없습니다.";
-    }
-}

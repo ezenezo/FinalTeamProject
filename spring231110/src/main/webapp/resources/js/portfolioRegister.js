@@ -140,7 +140,7 @@ document.addEventListener('click', function (event) {
                 });
           
                 const postId = await response.json();
-                alert("게시글이 저장되었습니다.");
+                alert(postId + '번 게시글이 저장되었습니다.');
                 window.location.href = '/common/main';
               } catch (error) {
                 console.error('저장 실패: ', error);

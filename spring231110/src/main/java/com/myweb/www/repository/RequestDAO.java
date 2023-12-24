@@ -94,6 +94,15 @@ void checked(long requestNm);
 
 	int getCompanyNum(String id);
 
+	String getCompany_name_req(long requestNm);
+
+	
+
+	void cancel_user(long reqNm);
+
+	void cancel_r(RequestVO rvo);
+
+	
 
 
 

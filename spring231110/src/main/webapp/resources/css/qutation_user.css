@@ -1,7 +1,26 @@
 @charset "UTF-8";
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
 
+.content{
+  animation-name: fade-in;
+  animation-duration: 1s;
+  animation-timing-function: ease-in-out;
+  animation-fill-mode: forwards;
+}
 
-
+.list_requset {
+    margin-bottom: 20px;
+    width: 300px;
+}
 .p_left {
 	width: 31%;
 	/*   border: 1px solid red; */
@@ -43,10 +62,10 @@
 	    line-height: 40px;
     /* background-color: #eeeeee; */
     margin: 10px;
-    border: 1px solid rgb(244, 245, 239);
+      border: 1px solid rgb(211 212 205);
     border-radius: 20px;
     padding: 20px;
-    width: 90%;
+    width: 300px;
 }
 /* 
 .list_requset:hover {
@@ -192,5 +211,98 @@ img {
 	    display: grid;
     grid-template-columns: 1fr 1fr 1fr
 }
+.gride_qvo {
+  display: flex;
+  overflow: auto;
+  white-space: nowrap;
+}
+
+.gride_qvo .list_requset {
+  flex: 0 0 auto;
+      width: 300px;
+      ma
+}
 
 
+
+.gride_qvo::-webkit-scrollbar {
+  width: 4px;
+}
+.gride_qvo::-webkit-scrollbar-track {
+  background: transparent;
+  border-radius: 10px;
+  border: 1px solid rgb(206 208 200);; 
+}
+.gride_qvo::-webkit-scrollbar-thumb {
+  background: #008040;
+    border-radius: 10px;
+}
+
+
+
+.gride_qvo_secound::-webkit-scrollbar {
+  width: 4px;
+}
+.gride_qvo_secound::-webkit-scrollbar-track {
+  background: transparent;
+  border-radius: 10px;
+  border: 1px solid rgb(206 208 200);; 
+}
+.gride_qvo_secound::-webkit-scrollbar-thumb {
+  background: rgb(246,196,31);
+    border-radius: 10px;
+}
+
+.total {
+    margin: 0 auto;
+    position: relative;
+    width: 60.625rem;
+    padding-top: 48px !important;
+    display: flex;
+    min-height: 70vh;
+    font-family: NotoSansKR;
+    flex-direction: column;
+    min-height: 100vh;
+}
+.content{
+	
+	    border: 1px solid rgb(206 208 200);
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 40px;}
+.list_requset{
+	margin-bottom: 20px;
+}
+
+.btn {
+	    margin: 0 auto;
+    border: none;
+    background-color: #1e5c1e91;
+    padding: 10px;
+    color: white;
+    font-size: 15px;
+    border-radius: 10px;
+}
+
+
+.btn_secound{
+	   margin: 0 auto;
+    border: none;
+    background-color: rgb(246,196,31);
+    padding: 10px;
+    color: white;
+    font-size: 15px;
+    border-radius: 10px;
+    margin-top: 20px;
+	
+	
+}
+
+.btn_secound:hover {
+	background-color: #848400;
+}
+
+.btn:hover{
+		background-color: #004600;
+	
+}

@@ -7,9 +7,8 @@ function spreadStatusList(id) {
 
             let html = document.getElementsByClassName('rightBoxbox boxNum1')[0];
             html.innerHTML = '';
-            html.innerHTML += `<div class="tableBorder" style="
-                    width: 900px;"></div><table class="tbl_col" style="width: 900px;"><thead><tr><th class="rno">번호</th><th class="form/categoryType">형태/유형</th>
-                                  <th class="company">고객ID</th><th class="ing">진행상황</th><th class="req">요청서서보기</th><th class="req">견적서</th></tr></thead><tbody id="insert"></tbody></table>`;
+            html.innerHTML += `<table class="tbl_col" style="width: 900px;"><thead><tr><th class="rno">번호</th><th class="form">형태/유형</th>
+                                  <th class="company">고객ID</th><th class="ing">진행상황</th><th class="req">요청서보기</th><th class="req">견적서</th></tr></thead><tbody id="insert"></tbody></table>`;
             if (result.length > 0) {
                 for (let list of result) {
 
@@ -56,8 +55,7 @@ function spreadStatusList(id) {
 
                 let html = document.getElementsByClassName('rightBoxbox boxNum1')[0];
                 html.innerHTML = '';
-                html.innerHTML += `<div class="tableBorder" style="
-                    width: 900px;"></div><table class="tbl_col" style="width: 900px;"><thead><tr><th class="rno">번호</th><th class="form/categoryType">형태/유형</th>
+                html.innerHTML += `<table class="tbl_col" style="width: 900px;"><thead><tr><th class="rno">번호</th><th class="form">형태/유형</th>
                                   <th class="company">고객ID</th><th class="ing">진행상황</th><th class="req">요청서보기</th><th class="req">견적서서보기</th></tr></thead><tbody id="insert"></tbody></table>`;
 
                 let str = ``;
@@ -81,8 +79,8 @@ function spreadStatusList(id) {
 
             let html = document.getElementsByClassName('subMain')[0];
             html.innerHTML = '';
-            html.innerHTML += `<div class="tableBorder"></div><table class="tbl_col"><thead><tr><th class="rno">번호</th><th class="form/categoryType">형태/유형</th>
-                                  <th class="company">시공할 메이트</th><th class="ing">진행상황</th><th class="req">요청서서</th><th class="req">견적서</th></tr></thead><tbody id="insert"></tbody></table>`;
+            html.innerHTML += `<table class="tbl_col"><thead><tr><th class="rno">번호</th><th class="form">형태/유형</th>
+                                  <th class="company">시공할 메이트</th><th class="ing">진행상황</th><th class="req">요청서</th><th class="req">견적서</th></tr></thead><tbody id="insert"></tbody></table>`;
             if (result.length > 0) {
                 for (let list of result) {
                     let str = ``;
@@ -96,7 +94,7 @@ function spreadStatusList(id) {
                         str += `<td >결제가 완료되었습니다.</td>`;
                     } else if (list.requestOk && list.paymentOk && list.completed && !list.refund && !list.requestCancel && !list.quotationCancel) {
 
-                        str += `<td >시공이 완료되었습니다.<a href="http://localhost:8088/review/register?quotationNm=${list.quotationNm}"><button type="button" class="status_btn" >리뷰쓰기</button></a></td>`;
+                        str += `<td >시공이 완료되었습니다.</td>`;
                     } else if (list.requestOk && list.paymentOk && !list.completed && list.refund && !list.requestCancel && !list.quotationCancel) {
 
                         str += `<td >환불이 완료되었습니다.</td>`;
@@ -128,8 +126,8 @@ function spreadStatusList(id) {
 
                 let html = document.getElementsByClassName('subMain')[0];
                 html.innerHTML = '';
-                html.innerHTML += `<div class="tableBorder"></div><table class="tbl_col"><thead><tr><th class="rno">번호</th><th class="form/categoryType">형태/유형</th>
-                                      <th class="company">시공할 메이트</th><th class="ing">진행상황</th><th class="req">요청서서보기</th><th class="req">견적서서보기</th></tr></thead><tbody id="insert"></tbody></table>`;
+                html.innerHTML += `<table class="tbl_col"><thead><tr><th class="rno">번호</th><th class="form">형태/유형</th>
+                                      <th class="company">시공할 메이트</th><th class="ing">진행상황</th><th class="req">요청서보기</th><th class="req">견적서서보기</th></tr></thead><tbody id="insert"></tbody></table>`;
 
                 let str = ``;
                 str += `<td class="text_div"colspan="6" style="padding: 60px;" >메이트와 거래가 없습니다.</td>`;

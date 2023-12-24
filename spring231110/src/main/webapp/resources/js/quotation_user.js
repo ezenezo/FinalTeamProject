@@ -4,6 +4,9 @@
 
 
 let quNm = document.getElementById('quotationNm').value;
+
+
+
 console.log(quNm);
 function cancel_btn() {
 
@@ -58,3 +61,8 @@ async function quotationNmServer() {
         console.log(err);
     }
 }
+var ul = document.querySelector('.gride_qvo');
+setInterval(function() {
+  var firstChild = ul.firstElementChild;
+  ul.appendChild(firstChild);
+}, 2000);

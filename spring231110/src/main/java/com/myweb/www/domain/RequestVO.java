@@ -35,13 +35,13 @@ public class RequestVO {
 	 */
 	private String form;
 	private String categoryType;
-	private String rang;
+	private String extent;
 	private String status;
 	private String address;
 	private int zoneCode;
 	private String detailAddress;
 	private String extraAddress;
-	private float aquareFootage;
+	private float squareFootage;
 	private float squareMeter;
 	private String wishBudget;
 	private String requestOp;

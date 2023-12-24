@@ -72,7 +72,7 @@ public class PaymentController {
 	public String checkPay(@RequestParam("pno") long pno, @RequestParam("qno") int qno, @RequestParam("id") String id,
 			Model m, RedirectAttributes re) {
 		List<PaymentVO> payvo = psv.getPaymentNoRefund(qno, id);
-		if (payvo.size() != 0) { //결제한 적이 한 번이라도 있다면
+		if (payvo.size() != 0) {
 			for (int i = 0; i < payvo.size(); i++) {
 				if (!payvo.get(i).isRefund()) {
 					m.addAttribute("msg", "이미 결제가 완료되었습니다.");

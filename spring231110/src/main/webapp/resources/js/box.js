@@ -36,44 +36,17 @@ async function getUnread1(currentUserID) {
         const resp = await fetch(url, config);
         const result = await resp.text(); //isOk
         // return result;
-
-        // updateBadgeVisibility(result); // DOM 업데이트 함수 호출
-
         console.log("전체 안읽은 글 개수는 " + result);
-
         if (result >= 1) {
             showUnread(result);
         } else {
             // showUnread("총 안읽은 글개수 파악불가");
         }
-
-        // 서버에 안 읽은 메시지 수를 세션에 저장하도록 요청
-        // await fetch('chaturl/updateUnreadCount', {
-        //     method: 'POST',
-        //     headers: {
-        //         'Content-Type': 'application/json'
-        //     },
-        //     body: JSON.stringify({ unreadCount: result })
-        // });
-
         console.log(" getUnread(currentUserID) 정상동작완료");
     } catch (error) {
         console.log(error);
     }
 }
-// function updateBadgeVisibility(unreadCount) {
-//     console.log('updateBadgeVisibility함수 탐');
-//     const badgeElement = document.getElementById("badge");
-//     if (badgeElement) {
-//         if (unreadCount > 0) {
-//             console.log("보이게 진입");
-//             badgeElement.style.display = 'inline'; // 빨간점 보이기
-//         } else {
-//             console.log("안 보이게...");
-//             badgeElement.style.display = 'none'; // 빨간점 숨기기
-//         }
-//     }
-// }
 
 // 각 사원별 읽지 않은 메시지 관련 함수
 async function getUnread2(currentUserID) {
@@ -181,29 +154,14 @@ function getInfiniteChat() {
         chatBoxFunction(currentUserID);
         getUnread1(currentUserID);
         getUnread2(currentUserID);
-    }, 3950000);
+    }, 3000);
 }
 
 document.addEventListener("DOMContentLoaded", (event) => {
-    const currentPage = window.location.href;
-    console.log("currentPage는", currentPage);
-    // 특정 페이지인 경우 100분 지연 실행
-    if (
-        currentPage.includes("localhost:8088/member/login") ||
-        currentPage.includes("aj2002.cafe24.com/member/login")
-    ) {
-        setTimeout(function () {
-            chatBoxFunction(currentUserID);
-            getUnread1(currentUserID);
-            getUnread2(currentUserID);
-            getInfiniteChat();
-        }, 6000000); // 100분 지연
-    } else {
-        chatBoxFunction(currentUserID);
-        getUnread1(currentUserID);
-        getUnread2(currentUserID);
-        getInfiniteChat();
-    }
+    chatBoxFunction(currentUserID);
+    getUnread1(currentUserID);
+    getUnread2(currentUserID);
+    getInfiniteChat();
 });
 
 // 누가누가 나한테 메시지 보냈나 //내가 아직 확인 못한 메시지 확인용
@@ -238,70 +196,38 @@ async function chatBoxFunction(currentUserID) {
             // }
             u.innerText = "";
             let str = "";
-            console.log("box.js의 chatBoxFunction의 내부 result는 ", result);
+            console.log("chatBoxFunction의 내부 result는 " + result);
             for (let chatdto of result) {
-                //let name1;
-                let unreadCount = unreadMessages[chatdto.fromID] || 0; // 안 읽은 메시지 수
-
-                let defaultImageUrl = "/resources/img/profile_none.png"; // 기본 이미지 경로
-
-                // 시간 형식 변경
-                let chatTime = new Date(chatdto.chatTime);
-                let formattedDate = chatTime.toLocaleString("ko-KR", {
-                    year: "numeric",
-                    month: "2-digit",
-                    day: "2-digit",
-                    hour: "2-digit",
-                    minute: "2-digit",
-                });
-                let userIdToShow;
+                let name1;
+                //아래 ||는 null을 대비해서 0을 쓴 것
+                let unreadCount = unreadMessages[chatdto.fromID] || 0; // 해당 발신자의 안 읽은 메시지 수를 가져옴
                 if (chatdto.fromID == currentUserID) {
-                    userIdToShow = chatdto.toID;
+                    name1 = "나";
                 } else {
-                    userIdToShow = chatdto.fromID;
+                    name1 = chatdto.fromID;
                 }
 
-                // userIdToShow를 기반으로 사진 URL 설정
-                let imgurl = await getProfileImageUrlpost(userIdToShow);
-                console.log("let imgurl은 " + imgurl);
-                let profileImageUrl2 = "http://localhost:8088/upload/" + imgurl;
-                //let profileImageUrl2 ="http://aj2002.cafe24.com/_javaweb/_java/fileUpload/" + imgurl; //카페24배포용webapps
-
-                console.log("profileImageUrl2는 ", profileImageUrl2);
-                let chatLink =
-                    chatdto.fromID == currentUserID
-                        ? `chat2?toID=${chatdto.toID}&fromID=${currentUserID}`
-                        : `chat2?toID=${chatdto.fromID}&fromID=${currentUserID}`;
-
-                str += `<tr onclick="location.href='${chatLink}'" style="color: white;">`;
-                str += `    <td style="width: 40px; height: 40px;">`;
-                /////////////////////////////////////////////////////////////
-                str += `<img id="icon1" class="media-object img-circle" src="${profileImageUrl2}" onerror="this.onerror=null; this.src='${defaultImageUrl}'" alt="">`;
-                //////////////////////////////////////////////////////////////
-                // str += `        <span id="icon1" class="material-symbols-outlined">person</span>`; // 사람 아이콘
+                if (chatdto.fromID == currentUserID) {
+                    str += `<tr onclick="location.href='chat2?toID=${chatdto.toID}&fromID=${currentUserID}'">`;
+                } else {
+                    str += `<tr onclick="location.href='chat2?toID=${chatdto.fromID}&fromID=${currentUserID}'">`;
+                }
+                str += `    <td style="width: 150px;">`;
+                if (chatdto.fromID == currentUserID) {
+                    str += `        <h5 class='targClass'>${chatdto.toID}</h5>`;
+                } else {
+                    str += `        <h5 class='targClass'>${chatdto.fromID}</h5>`;
+                }
                 str += `    </td>`;
-                str += `    <td style="width: 370px;">`;
-                str += `        <div class="smallmesbox">`;
-
-                if (chatdto.fromID == currentUserID) {
-                    str += `        <h5 class='targClass'>${chatdto.toID}&nbsp;</h5>`;
-                } else {
-                    str += `        <h5 class='targClass'>${chatdto.fromID}&nbsp;</h5>`;
-                }
-
+                str += `    <td>`;
+                str += `        <h5>${chatdto.chatContent}</h5>`;
+                str += `    </td>`;
+                str += `    <td>`;
                 if (unreadCount != 0) {
-                    str += `   <div><span id="unread2" class="label label-info">  ${unreadCount}</span></div>`;
+                    str += `        <div class="pull-right"><span id="unread2" class="label label-info">${unreadCount}</span>${chatdto.chatTime}</div>`;
+                } else {
+                    str += `        <div class="pull-right">${chatdto.chatTime}</div>`;
                 }
-                str += `        </div>`;
-                str += `        <p style="height: 30px; width: 400px; display: flex; margin: 0px 0px 0px 7px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">${chatdto.chatContent}</p>`; // 채팅 내용
-                str += `    </td>`;
-                str += `    <td style="text-align: center;">`; // 날짜 및 알림
-                str += `        ${formattedDate}`;
-                // if (unreadCount != 0) {
-                //     str += `        <span id="unread2" class="label label-info">${unreadCount}</span>${formattedDate}`;
-                // } else {
-                //     str += `        ${formattedDate}`;
-                // }
                 str += `    </td>`;
                 str += `</tr>`;
             }
@@ -315,42 +241,5 @@ async function chatBoxFunction(currentUserID) {
         // getUnread2(currentUserID);
     } catch (error) {
         console.log(error);
-    }
-}
-
-// 사용자 ID에 따라 프로필 이미지 URL을 반환하는 함수 (GET 방식)
-// async function getProfileImageUrlget(userId) {
-//     try {
-//         const response = await fetch(`/getProfileImage?userId=${userId}`);
-//         if (!response.ok) {
-//             throw new Error("Network response was not ok.");
-//         }
-//         const data = await response.json();
-//         return data.imageUrl; // 서버에서 'imageUrl' 필드로 이미지 경로를 보내준다고 가정
-//     } catch (error) {
-//         console.error("Error fetching profile image:", error);
-//         return "/resources/img/profile_none.png"; // 에러 발생시 기본 이미지
-//     }
-// }
-
-// 사용자 ID에 따라 프로필 이미지 URL을 반환하는 함수 (POST 방식)
-async function getProfileImageUrlpost(userId) {
-    try {
-        const response = await fetch("/chaturl/getProfileImagepost", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({ toID: userId }),
-        });
-        if (!response.ok) {
-            throw new Error("Network response was not ok.");
-        }
-        const imageUrl = await response.text(); // 응답을 텍스트로 받음
-        console.log("imageUrl은 " + imageUrl);
-        return imageUrl; // 서버에서 직접 문자열로 이미지 경로를 반환
-    } catch (error) {
-        console.error("Error fetching profile image:", error);
-        return "/resources/img/profile_none.png"; // 에러 발생시 기본 이미지
     }
 }

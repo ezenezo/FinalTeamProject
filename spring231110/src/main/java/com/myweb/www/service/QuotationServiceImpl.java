@@ -74,21 +74,17 @@ public class QuotationServiceImpl implements QuotationService {
 		qdao.quatation_submit(qvo);
 		RequestVO rvo = new RequestVO();
 		long requstNm =qvo.getRequestNm();
-
-		log.info("quatation_submit reqNm"+ requstNm);
 		rdao.okTypeYes_ok(requstNm);
 	}
 
 	@Override
 	public int request_cancel(long reqNm) {
-		// TODO Auto-generated method stub
 		return rdao.req_cancel(reqNm);
 	}
 
 	@Override
 	public List<QuotationDTO> getList_user(String id) {
-	   // List<QuotationDTO> list = new ArrayList<>();
-	    
+	
 	 
 	    List<QuotationDTO> qdto = qdao.getList_user(id);
 	
@@ -163,7 +159,7 @@ public class QuotationServiceImpl implements QuotationService {
 
 	@Override
 	public void quatation_modify(QuotationVO qvo) {
-		// TODO Auto-generated method stub
+
 		qdao.quatation_modify(qvo);
 	}
 
@@ -179,7 +175,7 @@ public class QuotationServiceImpl implements QuotationService {
 
 	@Override
 	public QuotationVO selectQuotation(long quoNm) {
-		// TODO Auto-generated method stub
+	
 		return qdao.selectQuotation(quoNm);
 	}
 

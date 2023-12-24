@@ -5,7 +5,6 @@
 <mapper namespace="com.myweb.www.repository.CompanyDAO">
 
 
-	<!-- 231219 전경환 uuid추가 -->
 	<select id="selectdetailAll"
 		resultType="com.myweb.www.domain.CompanyDTO">
 		select c.id as id,
@@ -16,8 +15,7 @@
 		c.phone as phone ,
 		c.profile_quotepage,
 		f.save_dir as save_dir,
-		f.file_name as file_name,
-		f.uuid
+		f.file_name as file_name
 		from member m,
 		company c ,
 		file f

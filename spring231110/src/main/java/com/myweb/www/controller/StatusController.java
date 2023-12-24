@@ -43,12 +43,8 @@ public class StatusController {
 	// 고객진행상황
 	@GetMapping(value = "/sts", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<List<StatusDTO>> status(@RequestParam String id) {
-	
-	//	String auth = ssv.get
-		log.info("회사 svo들어옴ㅋㅋ");
-//if
+
 		List<StatusDTO> svo = ssv.getStatus(id);
-log.info("svo들어오심"+svo);
 		return new ResponseEntity<List<StatusDTO>>(svo, HttpStatus.OK);
 	}
 
@@ -56,11 +52,21 @@ log.info("svo들어오심"+svo);
 
 	@GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<List<StatusDTO>> status_com(@PathVariable("id") String id) {
-		log.info("회사 svo들어옴"+id);
 		int keynum = rsv.getKeyNum(id);
 		List<StatusDTO> svo = ssv.getStatus_com(keynum);
-		log.info("회사 svo들어옴"+svo);
-
+		
 		return new ResponseEntity<List<StatusDTO>>(svo, HttpStatus.OK);
 	}
+	
+	
+
+	
+	@GetMapping(value = "/cancel_get_user", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<Boolean> status_cancel_req(@RequestParam long requestNm ) {
+
+		boolean cancel_req= ssv.getStatus_cancel(requestNm);
+
+			return new ResponseEntity<Boolean>(cancel_req, HttpStatus.OK);
+		}
+
 }

@@ -2,6 +2,7 @@ package com.myweb.www.service;
 
 import java.util.List;
 
+import com.myweb.www.domain.QuotationDTO;
 import com.myweb.www.domain.QuotationVO;
 import com.myweb.www.domain.StatusDTO;
 import com.myweb.www.domain.StatusVO;
@@ -30,6 +31,29 @@ public interface StatusService {
 
 	StatusVO getStatus_list(String id);
 
+	StatusVO getStatus_list_ing(String id);
+
+	List<StatusDTO> getStatus_ing(String id);
+
+	List<StatusDTO> getStatus_completed(String id);
+
+	List<StatusDTO> getStatus_start(String id);
+
+	List<StatusDTO> getcancel(String id);
+
+	long getQuotationNm(long reqNm);
+
+	void cancel_user(long reqNm);
+
+	boolean getStatus_cancel(long requestNm);
+
+	List<StatusDTO> getStatus_request_no(String id);
+
+	List<QuotationDTO> completed_review(String id);
+
+	boolean payment(long quoNm);
+
+	void completed(long requestNm);
 
 
 	

@@ -1,6 +1,5 @@
 package com.myweb.www.controller;
 
-import java.io.Console;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -52,24 +51,23 @@ public class QuotationController {
 		int keynum = rsv.getKeyNum(id);
 
 		List<RequestVO> rvo = qsv.getList(keynum);
-		log.info("받은요청 리스트 아이디 들어옴" + id);
-		log.info("받은요청 리스트 보기" + rvo);
+		
 		model.addAttribute("list", qsv.getList(keynum));
 		model.addAttribute("list_read", qsv.getList_read(keynum));
-		log.info("받은 요청 리스트들어옴" + rvo);
+	
 	}
 
 	@GetMapping("/quotation")
 	public String quotation(Model model, @RequestParam("requestNm") long reNm, HttpServletRequest request) {
 	    model.addAttribute("list", qsv.setQutation(reNm));
-	    log.info("여기들어옴");
+	   
 	    return "/quotation/quotation";
 	}
 	
 	@GetMapping("/modify")
 	public String quotation_modify(Model model, @RequestParam("requestNm") long reNm, HttpServletRequest request) {
 	    model.addAttribute("qvo", qsv.setQutation_modify(reNm));
-	    log.info("여기들어옴");
+	
 	    return "/quotation/quotation_mod";
 	}
 	
@@ -86,6 +84,10 @@ public class QuotationController {
 	    MemberVO mvo = qsv.getCompany_name(quoNm);
 	    
 	    String userNm = mvo.getUserNm();
+	    boolean payment = ssv.payment(quoNm);
+	    
+	 		model.addAttribute("pay", payment );
+	    
 		model.addAttribute("company", userNm );
 	    return "/quotation/quotation_user";
 	}
@@ -108,8 +110,8 @@ public class QuotationController {
 		qsv.cancle_ok(qvo.getQuotationNm());
 		
 		ssv.quotation_status_cancel(qvo.getQuotationNm());
-	    ModelAndView modelAndView = new ModelAndView("/quotation/list_user"); // 경로는 실제로 사용하는 JSP 파일의 경로로 변경
-	    modelAndView.addObject("quotationNm", qvo.getQuotationNm()); // 필요한 경우 모델에 데이터 추가
+	    ModelAndView modelAndView = new ModelAndView("/quotation/list_user"); 
+	    modelAndView.addObject("quotationNm", qvo.getQuotationNm()); 
 
 	    return modelAndView;
 	}
@@ -125,10 +127,20 @@ public class QuotationController {
 		 * model.addAttribute("list", rvo);
 		 */
 		List<QuotationDTO> rvo = qsv.getList_user(id);
-		log.info("받은요청 리스트 아이디 들어옴"+id);
-		 log.info("받은요청 리스트 보기"+rvo);
+		List<QuotationDTO> qvo = ssv.completed_review(id);
+		
 		 model.addAttribute("list", rvo);
+		 model.addAttribute("list_com", qvo);
 
+	}
+	
+	@GetMapping("/completed")
+	public String completed(Model model, @RequestParam("requestNm")long requestNm) {
+
+	
+ssv.completed(requestNm);
+	
+		 return "/quotation/list";
 	}
 	
 	@GetMapping("/list_controller")
@@ -137,11 +149,10 @@ public class QuotationController {
 	
 
 		List<RequestVO> rvo = qsv.getList(keynum);
-		log.info("받은요청 리스트 아이디 들어옴" + keynum);
-		log.info("받은요청 리스트 보기" + rvo);
+		
 		model.addAttribute("list", qsv.getList(keynum));
 		model.addAttribute("list_read", qsv.getList_read(keynum));
-		log.info("받은 요청 리스트들어옴" + rvo);
+	
 		 return "/quotation/list";
 	}
 	/*실시간 리스트 비동기용
@@ -157,11 +168,10 @@ public class QuotationController {
 	 */
 	@GetMapping(value = "/left/read/{authEmail}", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<List<RequestVO>> req_left_read(@PathVariable("authEmail") String id, RedirectAttributes reAttr, Model model) {
-	    log.info("받은견적 리스트 아이디 들어옴" + id);
+	
 	    int keynum = rsv.getKeyNum(id);
 	    List<RequestVO> quotationList = qsv.getList_read(keynum);
-	    log.info("quo왼쪽리스트(읽음)"+quotationList);
-
+	 
 	    return new ResponseEntity<List<RequestVO>>(quotationList, HttpStatus.OK);
 	}
 
@@ -170,7 +180,7 @@ public class QuotationController {
 		int alarm_count = qsv.request_cancel(reqNm);
 		
 		ssv.request_status_cancel(reqNm);
-		log.info("취소 컨트롤러 들어옴");
+
 		return alarm_count > 0 ? new ResponseEntity<String>("1", HttpStatus.OK)
 				: new ResponseEntity<String>("0", HttpStatus.INTERNAL_SERVER_ERROR);
 	}
@@ -213,11 +223,7 @@ public class QuotationController {
 	@GetMapping(value = "/user/{qutationNm}", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<List<RequestVO>> quatation_user(@PathVariable("qutationNm") long qutationNm,
 			RedirectAttributes reAttr, Model model) {
-
-		log.info("받은요청 리스트 견적페이지 들어옴111111" + qutationNm);
 		List<RequestVO> rlist = qsv.getRequest_list_user(qutationNm);
-		log.info("받은요청 개인 리스트 받음" + rlist);
-		
 		return new ResponseEntity<List<RequestVO>>(rlist, HttpStatus.OK);
 
 	}
@@ -225,7 +231,7 @@ public class QuotationController {
 	@PostMapping("/req_ok")
 	public String quatation_submit(
 			@RequestParam(value = "form", required = false) String form,
-			@RequestParam(value = "rang", required = false) String rang,
+			@RequestParam(value = "extent", required = false) String extent,
 			@RequestParam(value = "categoryType", required = false) String categoryType,
 			@RequestParam(value = "status", required = false) String status,
 			@RequestParam(value = "zoneCode", required = false) int zoneCode,
@@ -233,7 +239,7 @@ public class QuotationController {
 			@RequestParam(value = "detailAddress", required = false) String detailAddress,
 			@RequestParam(value = "extraAddress", required = false) String extraAddress,
 			@RequestParam(value = "squareMeter", required = false) float squatMeter,
-			@RequestParam(value = "aquareFootage", required = false) float aquareFootage,
+			@RequestParam(value = "squareFootage", required = false) float squareFootage,
 			@RequestParam(value = "budget", required = false) long budget,
 			@RequestParam(value = "requestOp", required = false) String requestOp,
 			@RequestParam(value = "requestId", required = false) String requestId,
@@ -243,17 +249,17 @@ public class QuotationController {
 
 	{
 		
-		log.info("여기들어옴");
+	
 		QuotationVO qvo = new QuotationVO();
 		qvo.setForm(form);
 		qvo.setCategoryType(categoryType);
-		qvo.setRang(rang);
+		qvo.setExtent(extent);
 		qvo.setStatus(status);
 		qvo.setZoneCode(zoneCode);
 		qvo.setAddress(address);
 		qvo.setDetailAddress(detailAddress);
 		qvo.setExtraAddress(extraAddress);
-		qvo.setAquareFootage(aquareFootage);
+		qvo.setSquareFootage(squareFootage);
 		qvo.setSquareMeter(squatMeter);
 		qvo.setBudget(budget);
 		qvo.setRequestOp(requestOp);
@@ -280,7 +286,7 @@ public class QuotationController {
 	@PostMapping("/modify_submit")
 	public String modify_submit(
 			@RequestParam(value = "form", required = false) String form,
-			@RequestParam(value = "rang", required = false) String rang,
+			@RequestParam(value = "extent", required = false) String extent,
 			@RequestParam(value = "categoryType", required = false) String categoryType,
 			@RequestParam(value = "status", required = false) String status,
 			@RequestParam(value = "zoneCode", required = false) int zoneCode,
@@ -288,7 +294,7 @@ public class QuotationController {
 			@RequestParam(value = "detailAddress", required = false) String detailAddress,
 			@RequestParam(value = "extraAddress", required = false) String extraAddress,
 			@RequestParam(value = "squareMeter", required = false) float squatMeter,
-			@RequestParam(value = "aquareFootage", required = false) float aquareFootage,
+			@RequestParam(value = "squareFootage", required = false) float squareFootage,
 			@RequestParam(value = "budget", required = false) long budget,
 			@RequestParam(value = "requestOp", required = false) String requestOp,
 			@RequestParam(value = "requestId", required = false) String requestId,
@@ -298,17 +304,17 @@ public class QuotationController {
 
 	{
 		
-		log.info("여기들어옴");
+
 		QuotationVO qvo = new QuotationVO();
 		qvo.setForm(form);
 		qvo.setCategoryType(categoryType);
-		qvo.setRang(rang);
+		qvo.setExtent(extent);
 		qvo.setStatus(status);
 		qvo.setZoneCode(zoneCode);
 		qvo.setAddress(address);
 		qvo.setDetailAddress(detailAddress);
 		qvo.setExtraAddress(extraAddress);
-		qvo.setAquareFootage(aquareFootage);
+		qvo.setSquareFootage(squareFootage);
 		qvo.setSquareMeter(squatMeter);
 		qvo.setBudget(budget);
 		qvo.setRequestOp(requestOp);
@@ -319,7 +325,7 @@ public class QuotationController {
 		qsv.quatation_modify(qvo);
 
 	
-		
+
 		model.addAttribute("keynum", keynum);
 		return "redirect:/quotation/list_controller?id={keynum}";
 	}

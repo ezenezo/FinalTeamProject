@@ -88,7 +88,7 @@
 			</div>
 			<div class="ChangePwDiv">
 				<p class="moveChangePw" id="modifyPwdATag">비밀번호를 잊으셨나요?</p>
-				<a href="/member/checkMemberInfo">변경</a>
+				<a href="/member/checkMemberInfo">찾기</a>
 			</div>
 		</div>
 	</section>

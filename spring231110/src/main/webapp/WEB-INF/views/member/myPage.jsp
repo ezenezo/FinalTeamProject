@@ -12,6 +12,8 @@
 <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
 <link href="../resources/css/status.css" rel="stylesheet">
+
+
 </head>
 <body>
 
@@ -42,7 +44,7 @@
 				<hr>
 				<div class="subUser">
 					<div class="iconBox">
-						<i class="bi bi-heart noClick" data-id="${user.id }"></i><span>좋아요</span>
+						<i class="bi bi-heart" data-id="${user.id }"></i> <span>좋아요</span>
 						<p>${heart }</p>
 					</div>
 					<div class="iconBox">
@@ -59,9 +61,8 @@
 					<ul>
 						<li onclick="spreadStatusList(${user.id})">진행상황</li>
 
-						
-						<li onclick="spreadReviewList(${user.id})">내가 쓴 리뷰</li>
-						
+
+						<li>내가 쓴 리뷰</li>
 						<li onclick="spreadCouponList(${user.id})">쿠폰함</li>
 						<li onclick="spreadHeartList(${user.id})">좋아요</li>
 					</ul>
@@ -79,5 +80,14 @@
 </body>
 
 <link href="../resources/css/myPage.css" rel="stylesheet">
+
 <script type="text/javascript" src="../resources/js/mypage.js"></script>
+<script type="text/javascript" src="../resources/js/payment.js"></script>
+
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"
+	integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+	crossorigin="anonymous"></script>
+
+
+
 </html>
