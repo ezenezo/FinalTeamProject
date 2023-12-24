@@ -9,35 +9,25 @@ import com.myweb.www.domain.PagingVO;
 
 public interface CommentDAO {
 
-	int insert(CommentVO cvo);  //o
+	int insert(CommentVO cvo);
 
-//	List<CommentVO> selectAll(long bno);
+	int getTotalCount(long pno);
 
-	int delete(long cmtNo); //O
+	List<CommentVO> getcmtList(@Param("pno") long pno,@Param("pgvo") PagingVO pgvo);
 
-	int deleteCommentAll(long bno);
+	int remove(long cno);
 
-	int update(CommentVO cvo); //o
+	int modify(CommentVO cvo);
 
-	int selectOneBnoTotalCount(long bno); //o
+	int CommentLikeCheck(@Param("cmtNo") long cmtNo, @Param("id") String id);
 
-	List<CommentVO> selectListPaging(@Param("bno") long bno,@Param("pgvo") PagingVO pgvo);//o
+	void updateCommentLikeQty(long cmtNo);
 
-	int commentLikeCheck(@Param("cmtNo") long cmtNo,@Param("authId") String authId);
+	int likeQtyAreaInput(long cmtNo);
 
-	void deleteCommentLike(@Param("cmtNo") long cmtNo,@Param("id") String id);
+	int getReviewCommentTotalCount(long rno);
 
-	void updateLikeQty(@Param("cmtNo") long cmtNo,@Param("num") int num);
-
-	void addCommentLike(@Param("cmtNo") long cmtNo,@Param("id") String id);
-
-	int selectCmtCount(long bno);
-
-	int cmtLikeQty(long cmtNo);
-
-
- 
-
+	List<CommentVO> getReviewcmtList(@Param("rno") long rno,@Param("pgvo") PagingVO pgvo);
 
 
 }

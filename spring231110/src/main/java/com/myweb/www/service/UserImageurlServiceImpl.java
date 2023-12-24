@@ -5,7 +5,6 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Service;
 
 import com.myweb.www.domain.FileVO;
-import com.myweb.www.repository.BoardDAO;
 import com.myweb.www.repository.CommentDAO;
 import com.myweb.www.repository.FileDAO;
 import com.myweb.www.repository.MemberDAO;

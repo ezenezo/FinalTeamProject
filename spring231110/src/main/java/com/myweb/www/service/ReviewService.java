@@ -20,7 +20,7 @@ public interface ReviewService {
 
 	List<ReviewDTO> mainRdtoList();
 
-	ReviewDTO getDetail(long rno);
+	ReviewDTO getDetail(long rno, String id);
 
 	int deleteReview(long rno);
 
@@ -31,6 +31,22 @@ public interface ReviewService {
 	MemberDTO2 getMdto(String comId);
 
 	PagingHandler getList(String id, PagingVO pgvo);
+
+	PagingHandler getAllList(PagingVO pgvo);
+
+	int reviewLikeCheck(long rno, String id);
+
+	void deleteReviewLike(long rno, String id);
+
+	void addReviewLike(long rno, String id);
+
+	int likeQtyAreaInput(long rno);
+
+	void updateReadCount(long rno);
+
+	String selectId(long rno);
+
+	List<ReviewDTO> getRdtoList(String id);
 
 
 }

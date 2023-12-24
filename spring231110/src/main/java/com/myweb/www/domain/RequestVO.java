@@ -24,9 +24,8 @@ public class RequestVO {
 	//요청서 칼럼
 	private long requestNm;
 	private String requestId;
-	private int keynum;
 
-	private Data reqAt;
+	private Date reqAt;
 
 	/*
 	 * //요청서 질문리스트 테이블 칼럼 private long requestQuestion; private String subject;
@@ -51,6 +50,8 @@ public class RequestVO {
 	private boolean okTypeNo;
 	private String cancellationReason;
 	private boolean okTypeYes;
-
 	
+	private long pno;
+	
+
 }

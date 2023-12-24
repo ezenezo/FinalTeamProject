@@ -29,12 +29,25 @@ public interface QuotationDAO {
 
 	MemberVO getCompany_name(long quoNm);
 
-
-
-
-
 	QuotationVO getQuotation(long quotationNm);
+
 	CompanyVO findKeynum(int keynum);
+
 	void cancle_ok(long quotationNm);
+
+
+
+
+
+	long getQuotationNm_status();
+
+	long getQuotationNm(int keynum);
+
+	QuotationVO quotation_modify(long reNm);
+
+	void quatation_modify(QuotationVO qvo);
+
+	QuotationVO selectQuotation(long quoNm);
+
 
 }

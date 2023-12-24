@@ -123,6 +123,9 @@ async function savePost() {
   const introduction = editor.getHTML();
   const fileInput = document.getElementById('chooseFile');
   const imageFile = fileInput.files[0];
+  const homeSizeVal = document.getElementById("homeSizeVal").value;
+  const formVal = document.getElementById("formVal").value;
+  const categoryTypeVal = document.getElementById("categoryTypeVal").value;
 
   const formData = new FormData();
   formData.append('id',authId);
@@ -130,7 +133,14 @@ async function savePost() {
   formData.append('title',titleVal);
   formData.append('content',introduction);
   formData.append('rate',rate);
+  formData.append('homeSize',homeSizeVal);
+  formData.append('form',formVal);
+  formData.append('categoryType',categoryTypeVal);
   formData.append('imageFile',imageFile);
+  console.log("fomData>>{}",formData);
+  console.log("homeSizeVal>>{}",homeSizeVal);
+  console.log("formVal>>{}",formVal);
+  console.log("categoryTypeVal>>{}",categoryTypeVal);
 
   // const reviewData = {
   //   id: authId, 

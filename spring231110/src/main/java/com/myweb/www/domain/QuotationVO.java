@@ -37,4 +37,5 @@ private boolean checked;
 private boolean okTypeNo;//취소
 
 private boolean okTypeYes;// 승인함
+private long pno;
 }

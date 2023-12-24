@@ -32,8 +32,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.myweb.www.domain.BoardDTO;
-import com.myweb.www.domain.BoardVO;
+
 import com.myweb.www.domain.ChatDTO;
 import com.myweb.www.domain.ChatDTO2;
 import com.myweb.www.domain.CommentVO;
@@ -44,9 +43,9 @@ import com.myweb.www.handler.FileHandler;
 import com.myweb.www.handler.PagingHandler;
 import com.myweb.www.security.AuthMember;
 import com.myweb.www.security.MemberVO;
-import com.myweb.www.service.BoardService;
+
 import com.myweb.www.service.ChatService;
-import com.myweb.www.service.CommentService;
+import com.myweb.www.service.commentService;
 
 import lombok.extern.slf4j.Slf4j;
 

@@ -4,6 +4,7 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.myweb.www.repository.CompanyDAO">
 
+
 	<!-- 231219 전경환 uuid추가 -->
 	<select id="selectdetailAll"
 		resultType="com.myweb.www.domain.CompanyDTO">

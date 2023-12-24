@@ -1,32 +1,27 @@
 package com.myweb.www.service;
 
-import java.util.List;
-
 import com.myweb.www.domain.CommentVO;
 import com.myweb.www.domain.PagingVO;
 import com.myweb.www.handler.PagingHandler;
 
-public interface CommentService {
+public interface commentService {
 
-	int addComment(CommentVO cvo); //O
+	int commentWrite(CommentVO cvo);
 
-//	List<CommentVO> getList(long bno);
+	PagingHandler getList(long pno, PagingVO pgvo, String authId);
 
-	int remove(long cmtNo); //o
+	int remove(long cno);
 
-	void deleteCommentAll(long bno);
+	int modify(CommentVO cvo);
 
-	int modify(CommentVO cvo); //o
+	int CommentLikeCheck(long cmtNo, String id);
 
-	PagingHandler getList(long bno, PagingVO pgvo, String authId); //0
+	void deleteCommentLike(long cmtNo, String id);
 
-	int boardLikeCheck(long cmtNo, String id);
+	void addCommentLike(long cmtNo, String id);
 
-	void deleteBoardLike(long cmtNo, String id);
+	int likeQtyAreaInput(long cmtNo);
 
-	void addBoardLike(long cmtNo, String id);
-
-	int getCmtLikeQty(long cmtNo);
-
+	PagingHandler getReviewCommentList(long rno, PagingVO pgvo, String authId);
 
 }

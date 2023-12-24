@@ -1,108 +1,145 @@
 package com.myweb.www.service;
 
+import java.security.Principal;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
+import com.myweb.www.domain.CommentDTO;
 import com.myweb.www.domain.CommentVO;
 import com.myweb.www.domain.PagingVO;
 import com.myweb.www.handler.PagingHandler;
 import com.myweb.www.repository.CommentDAO;
+import com.myweb.www.repository.FileDAO;
+import com.myweb.www.repository.HeartDAO;
 
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Service
-public class CommentServiceImpl implements CommentService{
+public class commentServiceImpl implements commentService {
+
 	private CommentDAO cdao;
-	
+	private FileDAO fdao;
+	private HeartDAO hdao;
+
 	@Autowired
-	public CommentServiceImpl(CommentDAO cdao) {
-		this.cdao =cdao;
+	public commentServiceImpl(CommentDAO cdao, FileDAO fdao, HeartDAO hdao) {
+		this.cdao = cdao;
+		this.fdao = fdao;
+		this.hdao = hdao;
 	}
 
+	// 등록
 	@Override
-	public int addComment(CommentVO cvo) {
-//		cdao.cmt_update(cvo.getBno());
+	public int commentWrite(CommentVO cvo) {
 		return cdao.insert(cvo);
 	}
 
-//	@Override
-//	public List<CommentVO> getList(long bno) {
-//		return cdao.selectAll(bno);
-//	}
-
+	// 리스트
 	@Override
-	public int remove(long cmtNo) {
-		return cdao.delete(cmtNo);
+	public PagingHandler getList(long pno, PagingVO pgvo, String authId) {
+		// pgvo
+
+		// totalCount
+		int totalCount = cdao.getTotalCount(pno);
+		// cmtList
+		List<CommentDTO> cdtoList = new ArrayList<CommentDTO>();
+
+		List<CommentVO> list = cdao.getcmtList(pno, pgvo);
+
+		for (CommentVO cvo : list) {
+			int isOk = cdao.CommentLikeCheck(cvo.getCmtNo(), authId);
+			if (isOk > 0) {
+				cvo.setLikeCheck(true);
+			} else {
+				cvo.setLikeCheck(false);
+			}
+		}
+
+		for (CommentVO cvo : list) {
+			CommentDTO cdto = new CommentDTO();
+
+			cdto.setCvo(cvo);
+			cdto.setFvo(fdao.getFile(cvo.getId()));
+			cdtoList.add(cdto);
+		}
+
+		// PagingHandler
+		PagingHandler ph = new PagingHandler(cdtoList, pgvo, totalCount);
+
+		return ph;
 	}
 
 	@Override
-	public void deleteCommentAll(long bno) {
-		cdao.deleteCommentAll(bno);
+	public int remove(long cno) {
+		return cdao.remove(cno);
 	}
 
 	@Override
 	public int modify(CommentVO cvo) {
-		return cdao.update(cvo);
+		return cdao.modify(cvo);
 	}
 
-	@Transactional
+	// 좋아요 확인
 	@Override
-	public PagingHandler getList(long bno, PagingVO pgvo,String authId) {
-		// totalCount 구하기
-		int totalCount = cdao.selectOneBnoTotalCount(bno);
-		// Comment List 찾아오기
-		List<CommentVO> list = cdao.selectListPaging(bno,pgvo);
-		// list에 likeCheck set	
-		for(CommentVO cvo : list) {
-			int isOk=0;
-			isOk=cdao.commentLikeCheck(cvo.getCmtNo(),authId);
-			if(isOk>0){
+	public int CommentLikeCheck(long cmtNo, String id) {
+		return cdao.CommentLikeCheck(cmtNo, id);
+	}
+
+	// 좋아요 취소
+	@Override
+	public void deleteCommentLike(long cmtNo, String id) {
+		hdao.deleteCommentLike(cmtNo, id); // heart테이블에 delete
+		cdao.updateCommentLikeQty(cmtNo); // Comment테이블에 likeQty update
+	}
+
+	// 좋아요 등록
+	@Override
+	public void addCommentLike(long cmtNo, String id) {
+		hdao.addCommentLike(cmtNo, id);
+		cdao.updateCommentLikeQty(cmtNo);
+	}
+
+	@Override
+	public int likeQtyAreaInput(long cmtNo) {
+		return cdao.likeQtyAreaInput(cmtNo);
+	}
+
+	@Override
+	public PagingHandler getReviewCommentList(long rno, PagingVO pgvo, String authId) {
+		// pgvo
+
+		// totalCount
+		int totalCount = cdao.getReviewCommentTotalCount(rno);
+		// cmtList
+		List<CommentDTO> cdtoList = new ArrayList<CommentDTO>();
+
+		List<CommentVO> list = cdao.getReviewcmtList(rno, pgvo);
+
+		for (CommentVO cvo : list) {
+			int isOk = cdao.CommentLikeCheck(cvo.getCmtNo(), authId);
+			if (isOk > 0) {
 				cvo.setLikeCheck(true);
-			}else {
+			} else {
 				cvo.setLikeCheck(false);
-			}			
-			
-			cvo.setLikeQty(cdao.cmtLikeQty(cvo.getCmtNo())); //좋아요 수 set
+			}
 		}
-	log.info("pgvo>>{} ",pgvo);
-	log.info("totalCount>>{} ",totalCount);
-	log.info("list>>{} ",list);
-		// pagingHandler 값 완성 후 리턴
-		PagingHandler ph = new PagingHandler(pgvo, totalCount,list);
-		
+
+		for (CommentVO cvo : list) {
+			CommentDTO cdto = new CommentDTO();
+
+			cdto.setCvo(cvo);
+			cdto.setFvo(fdao.getFile(cvo.getId()));
+			cdtoList.add(cdto);
+		}
+
+		// PagingHandler
+		PagingHandler ph = new PagingHandler(cdtoList, pgvo, totalCount);
+
 		return ph;
-	}
-
-	//댓글 좋아요 확인(1이면 이미 체크, 0이면 체크안되어있는거)
-	@Override
-	public int boardLikeCheck(long cmtNo, String id) {
-		return cdao.commentLikeCheck(cmtNo,id);
-	}
-
-	//댓글 좋아요 취소
-	@Override
-	public void deleteBoardLike(long cmtNo, String id) {
-		int num=-1;
-		cdao.deleteCommentLike(cmtNo,id);//board_like테이블에 delete
-		cdao.updateLikeQty(cmtNo,num);//comment 테이블의 likeQty에 -1해주기
-	}
-
-	//댓글 좋아요
-	@Override
-	public void addBoardLike(long cmtNo, String id) {
-		int num=1;
-		cdao.addCommentLike(cmtNo,id);//board_like테이블에 add
-		cdao.updateLikeQty(cmtNo,num);//comment 테이블의 likeQty에 +1해주기
-	
-	}
-
-	@Override
-	public int getCmtLikeQty(long cmtNo) {
-		return cdao.cmtLikeQty(cmtNo);
 	}
 
 }

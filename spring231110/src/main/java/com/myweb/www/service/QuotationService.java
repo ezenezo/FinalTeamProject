@@ -13,13 +13,13 @@ public interface QuotationService {
 
 	void submit(QuotationVO avo);
 
-	List<RequestVO> getList(String id);
+	List<RequestVO> getList(int keynum);
 
-	int request_alarm(String userId);
+	int request_alarm(int keynum);
 	RequestDTO  getRequest_list(long requestNm);
 	void quatation_submit(QuotationVO qvo);
 
-	List<RequestVO> getList_read(String id);
+	List<RequestVO> getList_read(int keynum);
 
 	int request_cancel(long reqNm);
 
@@ -45,6 +45,22 @@ public interface QuotationService {
 	QuotationVO getQuotation(long quotationNm);
 
 	void cancle_ok(long quotationNm);
+
+	long getQuotationNm(int keynum);
+
+	QuotationVO setQutation_modify(long reNm);
+
+	void quatation_modify(QuotationVO qvo);
+
+	RequestDTO getRequest_list_detail_user(long requestNm);
+	
+	 QuotationVO selectQuotation(long quoNm);
+	 
+
+
+
+
+
 
 
 

@@ -18,8 +18,8 @@ import org.springframework.security.web.savedrequest.RequestCache;
 import org.springframework.security.web.savedrequest.SavedRequest;
 import org.springframework.stereotype.Component;
 
-import com.myweb.www.domain.FileVO;
 import com.myweb.www.service.ChatService;
+import com.myweb.www.domain.FileVO;
 import com.myweb.www.service.MemberService;
 
 import lombok.Getter;
@@ -48,16 +48,15 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler {
 	private MemberService msv;
 	
 	@Inject
-	private ChatService chatsv;
+	private ChatService chatsv; //231223전경환추가
 	
 	@Override
 	public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
 			Authentication authentication) throws IOException, ServletException {
 		// TODO Auto-generated method stub
 		
-
 		setAuthEmail(authentication.getName()); //여기오면 이미 로그인 성공했다는뜻
-		setAuthUrl("/member/index");
+		setAuthUrl("/common/main");
 		
 		//쭈욱 메퍼.xml까지 갔따옴
 
@@ -76,7 +75,6 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler {
 			ses.removeAttribute(WebAttributes.AUTHENTICATION_EXCEPTION);			
 		}*/
 		SavedRequest saveReq = reqCache.getRequest(request, response);
-		log.info("saveReq 확인" + saveReq);
 		//로그인 안하고 이것저것 클릭해서 볼때 관련 클릭했던 경로페이지가 있냐없냐 등을보는듯
 		// 처음이면 리스트를 넣고  이것저거것 있다면 로그인후 그페이지로 보내려고 getRedirectUrl가 있는듯 (로그인 값 이나 리스트 값으로 데이터를 보내줌)
 		rdstg.sendRedirect(request, response, (saveReq != null)? saveReq.getRedirectUrl() : getAuthUrl()  );
@@ -113,7 +111,7 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler {
 	        log.info("ses.setAttribute(\"AllUnreadChat\"부분 지나침");
 	    }
 		//231216전경환추가------E
-		
 	}
+
 
 }

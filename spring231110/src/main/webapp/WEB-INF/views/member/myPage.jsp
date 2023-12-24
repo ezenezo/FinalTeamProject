@@ -11,10 +11,15 @@
 <title>Insert title here</title>
 <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+<link href="../resources/css/status.css" rel="stylesheet">
 </head>
 <body>
+
+
 	<jsp:include page="../common/nav.jsp" />
 	<sec:authorize access="isAuthenticated()">
+	
+	<script type="text/javascript" src="../resources/js/status.js"></script>
 		<sec:authentication property="principal.mvo" var="user" />
 		<!-- 왼쪽 구역 프로필 -->
 		<div class="main">
@@ -37,7 +42,7 @@
 				<hr>
 				<div class="subUser">
 					<div class="iconBox">
-						<i class="bi bi-heart" data-id="${user.id }"></i> <span>좋아요</span>
+						<i class="bi bi-heart noClick" data-id="${user.id }"></i><span>좋아요</span>
 						<p>${heart }</p>
 					</div>
 					<div class="iconBox">
@@ -52,20 +57,19 @@
 			<section>
 				<nav class="mypageNav">
 					<ul>
-						<li>진행상황</li>
-						<li>내가 쓴 리뷰</li>
+						<li onclick="spreadStatusList(${user.id})">진행상황</li>
+
+						
+						<li onclick="spreadReviewList(${user.id})">내가 쓴 리뷰</li>
+						
 						<li onclick="spreadCouponList(${user.id})">쿠폰함</li>
 						<li onclick="spreadHeartList(${user.id})">좋아요</li>
 					</ul>
 				</nav>
+
+				<script type="text/javascript">spreadStatusList(${user.id});</script>
 				<div class="subMain">
-					<!-- 결제하기 버튼 생성 -->
-					<a href="/payment/orderResult?cno=-1&pno=41&qno=19"><button
-							type="button">결제하기</button></a>
-					<!-- 환불하기 버튼 -->
-					<a href="#"><button type="button" onclick="cancelPay(${user.id})">환불받기</button></a>
-					<!-- 쿠폰  버튼 생성 -->
-					<a href="/payment/coupon"><button type="button">쿠폰 받기</button></a>
+
 				</div>
 			</section>
 		</div>
@@ -73,10 +77,7 @@
 	<jsp:include page="../common/footer.jsp"></jsp:include>
 
 </body>
+
 <link href="../resources/css/myPage.css" rel="stylesheet">
 <script type="text/javascript" src="../resources/js/mypage.js"></script>
-<script type="text/javascript" src="../resources/js/payment.js"></script>
-<script src="https://code.jquery.com/jquery-3.3.1.min.js"
-	integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-	crossorigin="anonymous"></script>
 </html>

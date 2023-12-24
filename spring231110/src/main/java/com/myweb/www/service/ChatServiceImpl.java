@@ -8,11 +8,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.myweb.www.domain.BoardVO;
+
 import com.myweb.www.domain.ChatDTO;
 import com.myweb.www.domain.ChatDTO2;
 import com.myweb.www.domain.FileVO;
-import com.myweb.www.repository.BoardDAO;
+
 import com.myweb.www.repository.ChatDAO;
 import com.myweb.www.repository.CommentDAO;
 import com.myweb.www.repository.FileDAO;

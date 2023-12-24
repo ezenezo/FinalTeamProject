@@ -32,10 +32,13 @@ import com.myweb.www.domain.ReqFileVO;
 import com.myweb.www.domain.RequestDTO;
 import com.myweb.www.domain.RequestQuestionVO;
 import com.myweb.www.domain.RequestVO;
-
-
+import com.myweb.www.domain.StatusDTO;
+import com.myweb.www.domain.StatusVO;
 import com.myweb.www.handler.FileHandler_img;
+import com.myweb.www.security.MemberVO;
+import com.myweb.www.service.QuotationService;
 import com.myweb.www.service.RequestService;
+import com.myweb.www.service.StatusService;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -45,12 +48,22 @@ import lombok.extern.slf4j.Slf4j;
 public class RequestController {
 	@Inject
 	private RequestService rsv;
-	
+	@Inject
+	private QuotationService qsv;
+	@Inject
+	private StatusService ssv;
+	/*
+	 * @GetMapping("/requestStart") public String requestStart() {
+	 * log.info("requestStart 컨트롤러 들어옴"); return "/request/request_start"; }
+	 */
+
 	@GetMapping("/requestStart")
-	public String requestStart() {
-		log.info("requestStart 컨트롤러 들어옴");
-		return "/request/request_start";
+	public String requestStart(Model model, @RequestParam("pno") long pno, HttpServletRequest request) {
+//	  log.info("pno들어오심"+pno);
+		model.addAttribute("pno", pno);
+	    return "/request/request_start";
 	}
+	
 
 	@GetMapping("/main")
 	public String main() {
@@ -59,10 +72,14 @@ public class RequestController {
 	}
 
 	@GetMapping("/request")
-	public String request(Model model) {
+	public String request(Model model, @RequestParam("pno") long pno) {
 		model.addAttribute("list", rsv.getList());
+		model.addAttribute("pno", pno);
 		return "/request/request_apply";
 	}
+	
+
+	
 
 	@GetMapping(value = "/mainCategory", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<List<RequestQuestionVO>> mainCategory(Model model) {
@@ -74,7 +91,7 @@ public class RequestController {
 
 	@GetMapping(value = "/{checkedValue}", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<List<RequestQuestionVO>> club(@PathVariable("checkedValue") String checkedValue) {
-		log.info("String subject값11111111111111111111111:" + checkedValue);
+		
 
 		List<RequestQuestionVO> list = new ArrayList<>();
 
@@ -99,7 +116,44 @@ public class RequestController {
 		log.info("list_seocund" + list);
 		return new ResponseEntity<List<RequestQuestionVO>>(list, HttpStatus.OK);
 	}
+	@GetMapping("/request_list")
+	public String req_list(Model model, @RequestParam("id") String id) {
+		List<StatusDTO> list = ssv.getStatus(id);
+				model.addAttribute("list", list);
+		
+		
+		/*
+		 * ' MemberVO mvo = qsv.getCompany_name(quoNm);
+		 * 
+		 * String userNm = mvo.getUserNm(); model.addAttribute("company", userNm );
+		 */
+		log.info("id로 들어옴"+id);
+		return "/request/request_list";
+	}
+	
+	
 
+	@GetMapping(value = "/req_list/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<List<RequestVO>> req_list(@RequestParam("id") String id) {
+	
+		StatusVO svo = new StatusVO();
+		 svo= ssv.getStatus_list(id);
+		
+		List<RequestVO> list = new ArrayList<>();
+
+		return new ResponseEntity<List<RequestVO>>(list, HttpStatus.OK);
+	}
+	
+	@GetMapping("/request_detil")
+	public String req_detail(Model model, @RequestParam("requestNm") long requestNm) {
+		
+		
+		RequestDTO rlist = qsv.getRequest_list_detail_user(requestNm);
+
+			log.info("rlist"+rlist);
+		model.addAttribute("qvo", rlist);
+		return "/request/request_detail";
+	}
 	@GetMapping(value = "/req2_2/{checkedValue}", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<List<RequestQuestionVO>> club3(@PathVariable("checkedValue") String checkedValue) {
 		log.info("String subject값:" + checkedValue);
@@ -111,11 +165,25 @@ public class RequestController {
 	}
 
 	@PostMapping("/req/request_submit")
-	public String request(RequestVO rvo, RedirectAttributes re) {
+	public String request(RequestVO rvo, RedirectAttributes re,@RequestParam("requestId") String requestId
+			) {
 
 		log.info("아이디좀 들어와라" + rvo);
-		
+		int comkey =rsv.company_keynum(rvo.getPno());
+		String comNm =rsv.company_name_get(rvo.getPno());
+		rvo.setKeynumCom(comkey);
 		rsv.insert(rvo);
+		long reqNm =rvo.getRequestNm();
+		log.info("reqnM들어오심"+reqNm);
+		long rvo_status = rsv.getList_status(requestId);
+		StatusVO svo = new StatusVO();
+		
+		svo.setRequestNmStatus(rvo_status);
+		svo.setRequestId(requestId);
+svo.setCompanyName(comNm);
+		log.info("ssv들어오삼"+svo);
+		ssv.insert_ssv(svo);
+		ssv.quotation_status_setCompanyNm(svo);
 		return "redirect:/rfc/file_img_start";
 
 	}

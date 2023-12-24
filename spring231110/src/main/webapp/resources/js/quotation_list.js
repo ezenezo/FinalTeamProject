@@ -103,7 +103,7 @@ function handleClick_q(event, requestNm) {
       if (fvo) {
 
         li += `<div class="">${rvo.requestId}님의 추구하는 인테리어 분위기 </div>`;
-        let filePath = `/req_upload/${fvo.saveDir.replace(/\\/g, '/')}/${fvo.uuid}_${fvo.fileName}`;
+        let filePath = `/upload/${fvo.saveDir.replace(/\\/g, '/')}/${fvo.uuid}_${fvo.fileName}`;
         console.log(filePath);
 
         console.log(filePath);
@@ -119,8 +119,10 @@ function handleClick_q(event, requestNm) {
       console.log(rvo.okTypeYes);
       if (rvo.okTypeNo != true && rvo.okTypeYes != true) {
         li += `<div class="btn_box"><button type="button" class="btn"  id="btn" onclick="ok_btn(${rvo.requestNm})"><span>승인</span></button>`;
-        li += `<button type="button" class="btn"  id="btn" onclick="ok_btn(${rvo.requestNm})" style="width: 180px;"><span>견적서수정</span><button type="button" id="cancel_r" onclick="cancel_btn()" class="btn" id="btn" >반려</button></div>`;
+        li += `<button type="button" id="cancel_r" onclick="cancel_btn()" class="btn" id="btn" >반려</button></div>`;
         li += `</ul></div>`;
+      }else    if (rvo.okTypeNo != true && rvo.okTypeYes == true){
+         li += `<button type="button" class="btn"  id="btn" onclick="modify(${rvo.requestNm})" style="width: 180px;"><span>견적서수정</span>`;
       }
 
       u_right.innerHTML += li;
@@ -142,14 +144,14 @@ function handleClick_q(event, requestNm) {
   postDataToServer_left("/quotation/left/" + authEmail).then(result => {
     console.log("값가져오기" + result);
 
-    // 현재 보여지는 요소들을 투명하게 만들고 숨기기
+
     Array.from(uLeft.children).forEach(child => {
       child.style.opacity = 0;
       child.style.visibility = "hidden";
       child.style.transition = "opacity 0.5s ease-out"; // 트랜지션 효과 추가
     });
 
-    // 모든 자식 요소들 삭제
+   
     uLeft.innerHTML = '';
 
     result.forEach(rvo => {
@@ -164,7 +166,6 @@ function handleClick_q(event, requestNm) {
 
       uLeft.appendChild(li);
 
-      // 새로운 요소를 투명에서 불투명으로 만들기 (페이드 인)
       li.style.opacity = 1;
       li.style.visibility = "visible";
     });
@@ -189,14 +190,14 @@ function handleClick_q(event, requestNm) {
       li.innerHTML += `  <input type="hidden" value="${rvo.requestNm}" id="requestNm" class="quo_click">`;
       li.innerHTML += `  ${rvo.requestId}<br>${rvo.form}<br>${rvo.categoryType}<br>${rvo.address}</a>`;
     
-      // 새로운 요소를 추가하기 전에 높이를 0으로 설정
+    
       li.style.height = '0';
       uLeft.appendChild(li);
     
-      // 레이아웃 계산을 위해 잠시 기다림
+    
       getComputedStyle(li).height;
     
-      // 높이를 원래 값으로 변경하고, 이를 애니메이션화
+ 
       li.style.height = '';
       li.style.transition = 'height 0.5s';
     
@@ -247,7 +248,6 @@ function left_list() {
   postDataToServer_left("/quotation/left/read/" + authEmail).then(result => {
     console.log("값가져오기" + result);
 
-    // 현재 보여지는 요소들을 투명하게 만들고 숨기기
     Array.from(uLeft.children).forEach(child => {
       child.style.opacity = 0;
       child.style.visibility = "hidden";
@@ -266,7 +266,6 @@ function left_list() {
 
       uLeft.appendChild(li);
 
-      // 새로운 요소를 투명에서 불투명으로 만들기 (페이드 인)
       li.style.opacity = 1;
       li.style.visibility = "visible";
     });
@@ -309,6 +308,13 @@ function ok_btn(requestNm) {
 
   window.location.replace(url);
 }
+function modify(requestNm) {
+
+  var url = "/quotation/modify?requestNm=" + requestNm;
+
+  window.location.replace(url);
+}
+
 
 
 function cancel_btn() {
@@ -393,7 +399,7 @@ let source = new EventSource("/list?id=" + authEmail);
 source.addEventListener('message', function (event) {
   let data = JSON.parse(event.data);
   console.log(data);
-  // 데이터를 받아와서 사용하는 로직을 여기에 작성하시면 됩니다.
+
 }, false);
 
 source.addEventListener('error', function (event) {

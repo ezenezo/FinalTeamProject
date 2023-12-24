@@ -9,9 +9,10 @@ document.addEventListener('click', (e) => {
         e.target.classList.add('green');
         e.target.querySelector('span').removeAttribute('id');
         //할인금액 반영
-        document.getElementById('discount').dataset.price = e.target.querySelector('.won').dataset.price;
+        console.log(document.getElementsByClassName('won')[0].dataset.price);
+        document.getElementById('discount').dataset.price = e.target.querySelector('.won').dataset.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
         //최종금액
-        document.getElementById('finalPrice').dataset.finalPrice = document.getElementById('budget').dataset.budget - document.getElementById('discount').dataset.price;
+        document.getElementById('finalPrice').dataset.finalPrice = (document.getElementById('budget').dataset.budget - document.getElementById('discount').dataset.price.replace(/,/g, "")).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
         document.getElementById('finalPrice').innerText = '';
         //쿠폰번호값 넘기기
         document.getElementById('couponNum').value = e.target.dataset.index;
@@ -21,9 +22,10 @@ document.addEventListener('click', (e) => {
         e.target.closest('.coupon').classList.add('green');
         e.target.closest('.coupon').querySelector('span').removeAttribute('id');
         //할인금액 반영
-        document.getElementById('discount').dataset.price = e.target.closest('.coupon').querySelector('.won').dataset.price;
+        console.log(document.getElementsByClassName('won')[0].dataset.price);
+        document.getElementById('discount').dataset.price = e.target.closest('.coupon').querySelector('.won').dataset.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
         //최종금액
-        document.getElementById('finalPrice').dataset.finalPrice = document.getElementById('budget').dataset.budget - document.getElementById('discount').dataset.price;
+        document.getElementById('finalPrice').dataset.finalPrice = (document.getElementById('budget').dataset.budget - document.getElementById('discount').dataset.price.replace(/,/g, "")).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
         document.getElementById('finalPrice').innerText = '';
         //쿠폰번호값 넘기기
         document.getElementById('couponNum').value = e.target.closest('.coupon').dataset.index;
@@ -48,6 +50,7 @@ document.getElementById('closeBtn').addEventListener('click', () => {
     var pno = document.getElementById('pno').value;
     var qno = document.getElementById('qno').value;
     var finalPrice = document.getElementById('finalPrice').value;
-    window.opener.location = "/payment/orderResult?cno="+cno+"&pno="+pno+"&qno="+qno;
+    var id = document.getElementById('id').value;
+    window.opener.location = "/payment/orderResult?cno="+cno+"&pno="+pno+"&qno="+qno+"&id="+id;
     window.close();
 })
