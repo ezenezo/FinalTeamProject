@@ -19,49 +19,51 @@
 	<sec:authorize access="isAuthenticated()">
 	<script type="text/javascript" src="../resources/js/status.js"></script>
 		<sec:authentication property="principal.mvo" var="user" />
-		<!-- 왼쪽 구역 프로필 -->
+			<!-- 왼쪽 구역 프로필 -->
 		<div class="main">
-			<div id="userInfoBox">
-				<c:if test="${fvo ne null }">
-					<img alt=""
-						src="/upload/${fvo.saveDir}/${fvo.uuid}_${fvo.fileName}"
-						class="profileImg">
-				</c:if>
-				<c:if test="${fvo eq null }">
-					<img alt="" src="../resources/img/profile_none.png"
-						class="profileImg">
-				</c:if>
-				<div class="userInfo">
-					<p class="userNm">${user.userNm }</p>
-					<p class="email">${user.email }</p>
-					<a href="/member/modify?id=${user.id }"><button type="button"
-							class="modifyUserInfoBtn">설정</button></a>
-				</div>
-				<hr>
-				<div class="subUser">
-					<div class="iconBox">
-
-						<i class="bi bi-heart"></i> <span>좋아요 누적 수</span>
-						<p>${heartCount}</p>
-
+			<div class="userContainer">
+				<div id="userInfoBox">
+					<c:if test="${fvo ne null }">
+						<img alt=""
+							src="/upload/${fvo.saveDir}/${fvo.uuid}_${fvo.fileName}"
+							class="profileImg">
+					</c:if>
+					<c:if test="${fvo eq null }">
+						<img alt="" src="../resources/img/profile_none.png"
+							class="profileImg">
+					</c:if>
+					<div class="userInfo">
+						<p class="userNm">${user.userNm }</p>
+						<p class="email">${user.email }</p>
+						<a href="/member/modify?id=${user.id }"><button type="button"
+								class="modifyUserInfoBtn">설정</button></a>
+					</div>
+					<hr>
+					<div class="subUser">
+						<div class="iconBox">
+							<i class="bi bi-heart"></i> <span>받은 좋아요</span>
+							<p>${heartCount}</p>
+						</div>
+						<div class="iconBox">
+							<span class="material-symbols-outlined reviewIcon">
+								rate_review </span><span>받은 리뷰</span>
+							<p>${reviewCount}</p>
+						</div>
 					</div>
 				</div>
-			</div>
 
-			<!-- 오른쪽 구역 -->
+				<a href="/portf	olio/register"><button id="moreBtn" class="writePortfolioBtn moreBtn" type="button">포트폴리오 작성하기</button></a>
+				<a href="/member/companyInfo?id=${user.id}"><button id="moreBtn" class="writePortfolioBtn moreBtn" type="button">기업정보 더보기</button></a>
+				
+			</div>
 
 			<section class="rightSection">
 	
-				<nav class="mypageNav">
-					<ul>
-						<li onclick="spreadStatusList(${user.id})">진행상황</li>
-
-
-						<li>내가 쓴 리뷰</li>
-						<li onclick="spreadCouponList(${user.id})">쿠폰함</li>
-						<li onclick="spreadHeartList(${user.id})">좋아요</li>
-					</ul>
-				</nav>
+				<div class="menu">
+					<div class="leftText">
+						<p class="miniTitle">진행 상황</p>
+					</div>
+				</div>
 
 				<script type="text/javascript">spreadStatusList(${user.id});</script>
 				<div class="rightBoxbox boxNum1"></div>
@@ -71,7 +73,7 @@
 						<p class="miniTitle">나의 포트폴리오</p>
 					</div>
 					<div class="rightText">
-						<a href="/portfolio/mylist?"><p>더보기</p></a>
+						<a href="/portfolio/mylist?id=${user.id}"><p>더보기</p></a>
 					</div>
 				</div>
 				<div class="rightBoxbox boxNum2">

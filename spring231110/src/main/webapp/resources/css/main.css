@@ -467,6 +467,7 @@
 .overHiddenBox {
 	width: 100%;
 	overflow: hidden;
+	border-radius: 20px;
 }
 
 .portfolioMainImg22 {

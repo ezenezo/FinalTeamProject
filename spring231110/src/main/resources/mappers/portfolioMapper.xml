@@ -96,7 +96,7 @@
 			<if test="homeStyleSh != null and homeStyleSh !=''">
 				home_style=#{homeStyleSh} and
 			</if>
-			<if test="sliderOneVal !=1 and sliderTwoVal !=232">
+			<if test="sliderOneVal !=1 or sliderTwoVal !=232">
 				home_size between #{sliderOneVal} and #{sliderTwoVal} and
 			</if>
 		</trim>

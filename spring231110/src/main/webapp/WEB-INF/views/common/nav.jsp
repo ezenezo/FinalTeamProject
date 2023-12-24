@@ -20,6 +20,14 @@
 .navHr {
 	display: none;
 }
+/*231223 전경환 추가 S*/
+.message-icon .label:empty {
+     display: inline; 
+}
+.message-icon .label {
+	padding: 0px !important;
+}
+/*231223 전경환 추가 E*/
 </style>
 </head>
 
@@ -39,7 +47,7 @@
 				setTimeout(function() {
 					window.location.href = "/req/main";
 				}, 600000); // 10분 지연
-			}, 5000000000000000000000000000000000000000000000000);
+			}, 500000000);
 		}
 	</script>
 
@@ -53,7 +61,7 @@
 			<div id="menu">
 				<ul class="main1">
 					<li><a href="/req/requestStart">견적요청</a></li>
-					<li><a href="#">메이트찾기</a></li>
+					<li><a href="/findmap/findmap">메이트찾기</a></li>
 					<li><a href="/portfolio/list">시공사례</a></li>
 					<li><a href="/review/allReviewList">시공후기</a></li>
 				</ul>
@@ -160,17 +168,32 @@
 						</c:when>
 
 					</c:choose>
-
-					<li class="message-icon" id="li_member_id"><a
-						href="/chaturl/box" class="chat_class">메시지함 <span id="badge"
-							style="visibility: visibility:;"></span>
-					</a></li>
-
+<!-- 231223전경환 변경S -->
+			<li class="message-icon"  id="li_member_id">
+				<a href="/chaturl/box" class="chat_class">메시지함
+					<% if ((Integer)session.getAttribute("AllUnreadChat") > 0) { %>
+					    <span id="badge1" class="label label-info"></span>
+					<% } else { %>
+					    <span id="badge1" style="display: none;"></span>
+					<% } %>
+				</a>
+			</li>
+<!-- 231223전경환 변경E -->
 					<li>
-						<div class="profile">
-							<img alt="프로필이미지 없음" src="../../resources/img/profile_none.png"
-								style="width: 35px; height: 35px;" class="profile_img">
-						</div>
+			<!-- 231223전경환 재추가S -->
+            <div class="profile">
+			    <c:choose>
+			        <c:when test="${not empty sessionScope.profileImagePath}">
+			            <!-- 이미지가 로드되지 않으면 onerror 이벤트가 실행 -->
+			            <img src="${sessionScope.profileImagePath}" alt="User Profile" style="width: 35px; height: 35px;" class="profile_img" 
+			                 onerror="this.onerror=null; this.src='../../resources/img/profile_none.png'">
+			        </c:when>
+			        <c:otherwise>
+			            <img alt="프로필이미지 없음" src="../../resources/img/profile_none.png" style="width: 35px; height: 35px;" class="profile_img">
+			        </c:otherwise>
+			    </c:choose>
+			</div>
+			<!-- 231223전경환 재추가E -->
 						<div class="usermenu-dropdown" style="visibility: hidden;">
 							<div data-name="user-info">
 								<h4 data-name="name" class="usermenu-dropdown-name">${authId}
@@ -279,6 +302,15 @@
 			profile.style.boxShadow = 'none';
 		});
 	</script>
+	<!-- 	231216 전경환 추가S -->
+	<script>
+// 	let userinfo = JSON.parse('${userinfoJson}');
+	let idid = '${authId}'; //일반문자열
+	let fvofvo = 222222222;
+	let fvojsonlet = '${fvoJson}'; // fvoJson은 fvo 객체를 JSON 문자열로 변환한 것
+	</script>
+	<script type="text/javascript" src="/resources/js/nav.js"></script>
+	<!-- 	231216 전경환 추가E -->	
 </body>
 
 </html>

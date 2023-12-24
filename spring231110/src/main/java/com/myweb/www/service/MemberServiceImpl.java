@@ -451,13 +451,10 @@ public class MemberServiceImpl implements MemberService {
 				pdtoList.add(pdto);
 			}
 
-			log.info("pdtoList" + pdtoList);
-			log.info("20231207여기오는지22");
 			MemberDTO mdto = new MemberDTO();
 			mdto.setMvo(mvo);
 			mdto.setPdtoList(pdtoList);
 			mdto.setCvo(cvo);
-			log.info("mdtodddd" + mdto);
 			return mdto;
 		} else {
 			return null;
@@ -481,14 +478,11 @@ public class MemberServiceImpl implements MemberService {
 
 		List<ReviewVO> rvoList = rdao.getReviewList2(id);
 
-		log.info("rvoList>>{}", rvoList);
 		for (ReviewVO rvo : rvoList) {
 			ReviewDTO rdto = new ReviewDTO();
 			rdto.setRvo(rvo);
-			log.info("rdto1>>{}", rdto);
 			rdto.setReviewMainImg(fdao.getReviewMainImg(rvo.getRno()));
 			rdtoList.add(rdto);
-			log.info("rdto>>{}", rdto);
 		}
 
 		cdto.setCvo(cvo);
@@ -496,7 +490,6 @@ public class MemberServiceImpl implements MemberService {
 		cdto.setPdtoList(pdtoList);
 		cdto.setRdtoList(rdtoList);
 
-		log.info("cdto>>{}", cdto);
 
 		return cdto;
 

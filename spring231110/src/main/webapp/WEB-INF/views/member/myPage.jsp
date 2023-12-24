@@ -42,7 +42,7 @@
 				<hr>
 				<div class="subUser">
 					<div class="iconBox">
-						<i class="bi bi-heart" data-id="${user.id }"></i><span>좋아요</span>
+						<i class="bi bi-heart noClick" data-id="${user.id }"></i><span>좋아요</span>
 						<p>${heart }</p>
 					</div>
 					<div class="iconBox">
@@ -60,7 +60,7 @@
 						<li onclick="spreadStatusList(${user.id})">진행상황</li>
 
 						
-						<li>내가 쓴 리뷰</li>
+						<li onclick="spreadReviewList(${user.id})">내가 쓴 리뷰</li>
 						
 						<li onclick="spreadCouponList(${user.id})">쿠폰함</li>
 						<li onclick="spreadHeartList(${user.id})">좋아요</li>

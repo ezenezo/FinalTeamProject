@@ -6,7 +6,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 import com.myweb.www.domain.PagingVO;
-
+import com.myweb.www.domain.ReviewDTO;
 import com.myweb.www.domain.ReviewVO;
 
 public interface ReviewDAO {
@@ -49,6 +49,9 @@ public interface ReviewDAO {
 
 
 	int reviewCount(String id);
+
+
+	List<ReviewVO> getMyReviewList(String id);
 
 
 

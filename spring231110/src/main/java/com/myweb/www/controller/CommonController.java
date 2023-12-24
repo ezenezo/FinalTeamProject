@@ -46,7 +46,6 @@ public class CommonController {
 	@GetMapping(value = "/slideImg",produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<List<FileVO>> slideImg(){
 		List<FileVO> portfolioMainImgList=comsv.portfolioMainImgList();
-		log.info("portfolioMainImgList"+portfolioMainImgList);
 		
 		return new ResponseEntity<List<FileVO>>(portfolioMainImgList,HttpStatus.OK);
 	}
@@ -56,7 +55,6 @@ public class CommonController {
 		int sliderTwo=sliderOne+9;
 		
 		List<PortfolioDTO> portfolioDTOList = comsv.mainPostPdtoList(sliderOne,sliderTwo);
-		log.info("portfolioDTOList common컨트롤러?>>>{}",portfolioDTOList);
 		return new ResponseEntity<List<PortfolioDTO>>(portfolioDTOList,HttpStatus.OK);
 		
 	}

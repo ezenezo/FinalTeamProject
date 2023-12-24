@@ -112,10 +112,13 @@
 						<span class="span1">업체명</span>${mdto.mvo.userNm}
 					</p>
 					<p>
-						<span class="span1">주거형태</span>주거형태~
+						<span class="span1">주거형태</span>${rdto.rvo.form}
 					</p>
 					<p>
-						<span class="span1">전용면적</span>전용면적~
+						<span class="span1">주거유형</span>${rdto.rvo.categoryType}
+					</p>
+					<p>
+						<span class="span1">전용면적</span>${rdto.rvo.homeSize}
 					</p>
 				</div>
 			</div>

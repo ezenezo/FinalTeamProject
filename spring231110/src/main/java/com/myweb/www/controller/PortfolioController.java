@@ -64,19 +64,15 @@ public class PortfolioController {
 		if (image.isEmpty()) {
 			return new ResponseEntity<>("", HttpStatus.OK);
 		}
-		log.info("image>>" + image.getSize() + image.getName());
 
 		FileVO fvo = fh.uploadFiles(image);
-		log.info("fvo>>" + fvo);
 
 		LocalDate date = LocalDate.now();
 		String today = date.toString();
 
 		String fullFileName = today + "_" + fvo.getUuid() + "_" + fvo.getFileName();
-		log.info("fullFileName11>>" + fullFileName);
 
 		String saveDir = fvo.getSaveDir();
-		log.info("saveDir>>" + saveDir);
 
 		return new ResponseEntity<>(fullFileName, HttpStatus.OK);
 
@@ -94,7 +90,6 @@ public class PortfolioController {
 			MediaType.IMAGE_PNG_VALUE })
 	@ResponseBody
 	public byte[] printEditorImage(@PathVariable("filename") String filename) {
-		log.info("filename>>" + filename);
 
 		// '_'를 기준으로 나누기
 		String[] parts = filename.split("_");
@@ -102,7 +97,6 @@ public class PortfolioController {
 		// today 추출
 		String today = parts[0];
 
-		log.info("today>>" + today);
 		String todaySe = today.replace("-", File.separator);
 
 //		LocalDate date = LocalDate.now();
@@ -111,7 +105,6 @@ public class PortfolioController {
 
 		// 업로드된 파일의 전체 경로saveDir
 		String fileFullPath = Paths.get(fh.getUP_DIR() + todaySe + File.separator + filename).toString();
-		log.info("fileFullPath>>" + fileFullPath);
 
 		// 파일이 없는 경우 예외 throw
 		File uploadedFile = new File(fileFullPath);
@@ -166,7 +159,6 @@ public class PortfolioController {
 		model.addAttribute("id", id);
 		model.addAttribute("portfolioDTOList", portfolioDTOList);
 		model.addAttribute("mdto", mdto);
-		log.info("portfolioDTOList>>{}", portfolioDTOList);
 
 		return "/portfolio/myPortfolioList";
 	}
@@ -181,7 +173,12 @@ public class PortfolioController {
 		if (filter.getSliderTwoVal() == 0) {
 			filter.setSliderTwoVal(232);
 		}
-
+		
+		int sliderOne = (int)Math.round(filter.getSliderOneVal()*0.3025);
+		int sliderTwo = (int)Math.round(filter.getSliderTwoVal()*0.3025);
+		filter.setSliderOneVal(sliderOne);
+		filter.setSliderTwoVal(sliderTwo);
+		
 		List<PortfolioDTO> portfolioDTOList = new ArrayList<PortfolioDTO>();
 		if (filter.getOrder() == null && filter.getHomeTypeSh() == null && filter.getRoomCntSh() == null
 				&& filter.getFamilyTypeSh() == null && filter.getHomeStyleSh() == null
@@ -202,7 +199,11 @@ public class PortfolioController {
 	@PostMapping(value = "/postList", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<List<PortfolioDTO>> portfolioDTOList(@RequestBody FilterdataVO filterData) {
 
-		log.info("filterData>>{}", filterData);
+		int sliderOne = (int)Math.round(filterData.getSliderOneVal()*0.3025);
+		int sliderTwo = (int)Math.round(filterData.getSliderTwoVal()*0.3025);
+		filterData.setSliderOneVal(sliderOne);
+		filterData.setSliderTwoVal(sliderTwo);
+		
 		List<PortfolioDTO> portfolioDTOList = psv.getListFilter(filterData);
 		log.info("portfolioDTOList컨트롤러>>{}", portfolioDTOList);
 
@@ -230,15 +231,12 @@ public class PortfolioController {
 	// 포폴 좋아요
 	@PostMapping(value = "/portfolioLike/{pno}/{id}", produces = MediaType.TEXT_PLAIN_VALUE)
 	public ResponseEntity<String> boardLike(@PathVariable("pno") long pno, @PathVariable("id") String id) {
-		log.info("pno>>>{}", pno);
-		log.info("id>>>{}", id);
 		// 체크되어있는지 안되어있는지 확인
 		// 1이면 이미 체크, 0이면 아닌거
 		int check = psv.portfolioLikeCheck(pno, id);
 
 		if (check > 0) { // 이미 체크가 되어있으면
 			// like취소
-			log.info("취소할 때 여기오는지1");
 			psv.deletePortfolioLike(pno, id);
 
 			return new ResponseEntity<String>("0", HttpStatus.OK);
@@ -253,12 +251,9 @@ public class PortfolioController {
 	// 좋아요수 내보내기
 	@GetMapping(value = "/likeQtyAreaInput/{pno}", produces = MediaType.TEXT_PLAIN_VALUE)
 	public ResponseEntity<String> likeQtyAreaInput(@PathVariable("pno") long pno) {
-		log.info("여기오는지 컨트롤러");
 		int likeQty = psv.likeQtyAreaInput(pno);
 		log.info("likeQty" + likeQty);
-		log.info("여기오는지 컨트롤러");
 		String likeQtyStr = String.valueOf(likeQty);
-		log.info("여기오는지 컨트롤러3");
 		log.info("likeQtyStr" + likeQtyStr);
 		return new ResponseEntity<String>(likeQtyStr, HttpStatus.OK);
 	}
@@ -277,8 +272,6 @@ public class PortfolioController {
 		String authId = principal.getName().toString();
 		PortfolioDTO pdto = psv.getDetail(pno, authId);
 		model.addAttribute("pdto", pdto);
-		log.info("pdto컨트롤러231208>>{}", pdto);
-		log.info("pdto.pvo.introdution>>{}", pdto.getPvo().getIntroduction());
 		return "/portfolio/portfolioModify";
 	}
 
@@ -289,13 +282,10 @@ public class PortfolioController {
 			@RequestParam("familyType") String familyType, @RequestParam("homeSize") int homeSize,
 			@RequestParam("homeStyle") String homeStyle,
 			@RequestParam(name = "imageFile", required = false) MultipartFile imageFile) {
-		log.info("20231211여기오는지1");
 
 		PortfolioVO pvo = new PortfolioVO();
 		pvo.setPno(pno);
-		log.info("pno>>" + pvo.getPno());
 		pvo.setTitle(title);
-		log.info("title>>" + pvo.getTitle());
 		pvo.setIntroduction(introduction);
 
 		pvo.setHomeType(homeType);
@@ -303,7 +293,6 @@ public class PortfolioController {
 		pvo.setFamilyType(familyType);
 		pvo.setHomeSize(homeSize);
 		pvo.setHomeStyle(homeStyle);
-		log.info("pvo>>" + pvo);
 
 		int isOk = 0;
 		if (imageFile == null) {
@@ -311,10 +300,8 @@ public class PortfolioController {
 
 		} else {
 
-			log.info("imageFile>>" + imageFile);
 
 			FileVO portfolioMainImg = fh.uploadFiles(imageFile);
-			log.info("portfolioMainImg>>" + portfolioMainImg.getFileName());
 
 			isOk = psv.postModifyPortfolio(pvo, portfolioMainImg);
 		}

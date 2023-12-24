@@ -356,19 +356,16 @@ public class MemberController {
 		MemberDTO mdto = msv.getMdto(id);
 		int heartCount = msv.heartCount(id);
 		int reviewCount = msv.reviewCount(id);
-		log.info("업체유저쪽type>>>{}",mdto.getMvo().isType());
 		m.addAttribute("fvo", fvo);
 		m.addAttribute("mdto", mdto);
 		m.addAttribute("heartCount", heartCount);
 		m.addAttribute("reviewCount", reviewCount);
-		log.info("mdto>>{}", mdto);
 	}
 
 	// 업체 정보페이지
 	@GetMapping("/companyInfo")
 	public String companyInfo(@RequestParam("id") String id, Model model) {
 		CompanyDTO2 cdto = msv.getCdto(id);
-		log.info("cdto>컨트롤러 >" + cdto);
 		model.addAttribute("cdto", cdto);
 		return "/member/companyInfo";
 	}

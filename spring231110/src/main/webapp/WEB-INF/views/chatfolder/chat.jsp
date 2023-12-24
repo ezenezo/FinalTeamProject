@@ -135,7 +135,7 @@
 						<div class="col-lg-12">
 							<div class="media">
 								<a class="pull-left" href="#">
-									<img class="media-object img-circle" style="width: 30px; height:30px;" src="/resources/img/anoyicon.png" alt="">
+									<img class="media-object img-circle" style="width: 30px; height:30px;" src="/resources/img/profile_none.png" alt="">
 								</a>
 							</div>
 							<div class="media-body">
@@ -152,7 +152,7 @@
 						<div class="col-lg-12">
 							<div class="media">
 								<a class="pull-left" href="#">
-									<img class="media-object img-circle" style="width: 30px; height:30px;" src="/resources/img/anoyicon.png" alt="">
+									<img class="media-object img-circle" style="width: 30px; height:30px;" src="/resources/img/profile_none.png" alt="">
 								</a>
 							<div class="media-body">
 								<h4 class="media-heading">

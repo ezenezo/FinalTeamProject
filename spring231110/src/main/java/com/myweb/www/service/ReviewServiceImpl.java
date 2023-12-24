@@ -78,11 +78,9 @@ public class ReviewServiceImpl implements ReviewService {
 	public List<ReviewDTO> mainRdtoList() {
 		List<ReviewDTO> rdtoList = new ArrayList<>();
 		List<ReviewVO> rvoList = rdao.allReviewList();
-		log.info("rvoList>>{}", rvoList);
 		for (ReviewVO rvo : rvoList) {
 			ReviewDTO rdto = new ReviewDTO();
 			rdto.setRvo(rvo);
-			log.info("rdto>>{}", rdto);
 			rdto.setReviewMainImg(fdao.getReviewMainImg(rvo.getRno()));
 			rdtoList.add(rdto);
 		}
@@ -123,16 +121,11 @@ public class ReviewServiceImpl implements ReviewService {
 	@Override
 	public int postModifyReview(ReviewVO rvo, FileVO reviewMainImg) {
 		int isOk = rdao.updateReview(rvo); // 내용 업데이트
-		log.info("reviewMainImg>>" + reviewMainImg.getFileName());
 
 		reviewMainImg.setRno(rvo.getRno());
-		log.info("reviewMainImg>>" + reviewMainImg.getRno());
 
 		if (isOk > 0) {
-			log.info("isOk>>" + isOk);
-			log.info("파일 테이블 저장 부분 오는지");
 			isOk = fdao.updateReviewMainImg(reviewMainImg);
-			log.info("isOk2>>" + isOk);
 		}
 		return isOk;
 	}
@@ -166,11 +159,9 @@ public class ReviewServiceImpl implements ReviewService {
 		// ReivewVO List 찾아오기
 		List<ReviewVO> rvoList = rdao.getReviewList(id, pgvo);
 
-		log.info("rvoList>>{}", rvoList);
 		for (ReviewVO rvo : rvoList) {
 			ReviewDTO rdto = new ReviewDTO();
 			rdto.setRvo(rvo);
-			log.info("rdto>>{}", rdto);
 			rdto.setReviewMainImg(fdao.getReviewMainImg(rvo.getRno()));
 			rdtoList.add(rdto);
 		}
@@ -190,11 +181,9 @@ public class ReviewServiceImpl implements ReviewService {
 		// ReivewVO List 찾아오기
 		List<ReviewVO> rvoList = rdao.getAllReviewListPh(pgvo);
 
-		log.info("rvoList>>{}", rvoList);
 		for (ReviewVO rvo : rvoList) {
 			ReviewDTO rdto = new ReviewDTO();
 			rdto.setRvo(rvo);
-			log.info("rdto>>{}", rdto);
 			rdto.setReviewMainImg(fdao.getReviewMainImg(rvo.getRno()));
 			rdtoList.add(rdto);
 		}
@@ -235,6 +224,20 @@ public class ReviewServiceImpl implements ReviewService {
 	@Override
 	public String selectId(long rno) {
 		return rdao.selectId(rno);
+	}
+
+	@Override
+	public List<ReviewDTO> getRdtoList(String id) {
+		List<ReviewDTO> rdtoList = new ArrayList<ReviewDTO>();
+		
+		List <ReviewVO> rvoList = rdao.getMyReviewList(id);
+		for(ReviewVO rvo : rvoList) {
+		ReviewDTO rdto = new ReviewDTO();
+		rdto.setRvo(rvo);
+		rdto.setReviewMainImg(fdao.getFile(id));
+		rdtoList.add(rdto);
+		}
+		return rdtoList;
 	}
 
 }

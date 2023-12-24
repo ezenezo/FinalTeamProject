@@ -103,7 +103,7 @@ function cancelPay(id, quotationNm) {
         if (result.merchantUid == null) {
             Swal.fire({
                 icon: "error",
-                text: "이미 환불된 거래입니다."
+                text: "결제 내역이 존재하지 않습니다."
             });
             return;
         }

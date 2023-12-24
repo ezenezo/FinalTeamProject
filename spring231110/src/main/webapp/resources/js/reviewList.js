@@ -62,9 +62,9 @@ function reviewPrint(page = 1) {
                 str += `<p class="title" style="font-size: 18px;">${rdto.rvo.title}</p>`;
                 str += `<p class="content">${content}</p>`;
                 str += `<div class="portfolioInfo">`;
-                str += `<p><span class="span1">주거형태</span><span class="span2">주거형태</span></p>`;
-                str += `<p><span class="span1">주거형태</span><span class="span2">주거형태</span></p>`;
-                str += `<p><span class="span1">주거형태</span><span class="span2">주거형태</span></p></div>`;
+                str += `<p><span class="span1">주거형태</span><span class="span2">${rdto.rvo.form}</span></p>`;
+                str += `<p><span class="span1">주거유형</span><span class="span2">${rdto.rvo.categoryType}</span></p>`;
+                str += `<p><span class="span1">전용면적</span><span class="span2">${rdto.rvo.homeSize}</span></p></div>`;
                 str += ``;
                
                 str += `</div></div></div></a>`;

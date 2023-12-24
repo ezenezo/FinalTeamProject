@@ -46,5 +46,7 @@ public interface ReviewService {
 
 	String selectId(long rno);
 
+	List<ReviewDTO> getRdtoList(String id);
+
 
 }

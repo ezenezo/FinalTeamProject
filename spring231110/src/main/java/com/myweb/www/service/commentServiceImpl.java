@@ -45,7 +45,6 @@ public class commentServiceImpl implements commentService {
 
 		// totalCount
 		int totalCount = cdao.getTotalCount(pno);
-		log.info("totalCount>>>>" + totalCount);
 		// cmtList
 		List<CommentDTO> cdtoList = new ArrayList<CommentDTO>();
 
@@ -115,7 +114,6 @@ public class commentServiceImpl implements commentService {
 
 		// totalCount
 		int totalCount = cdao.getReviewCommentTotalCount(rno);
-		log.info("totalCount>>>>" + totalCount);
 		// cmtList
 		List<CommentDTO> cdtoList = new ArrayList<CommentDTO>();
 

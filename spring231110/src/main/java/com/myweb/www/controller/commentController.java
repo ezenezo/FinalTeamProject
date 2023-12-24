@@ -56,7 +56,6 @@ public class commentController {
 
 		PagingHandler ph = csv.getList(pno, pgvo, authId);
 
-		log.info("댓글ph>>>>>" + ph);
 		return new ResponseEntity<PagingHandler>(ph, HttpStatus.OK);
 	}
 
@@ -64,8 +63,6 @@ public class commentController {
 	@GetMapping(value = "/reviewCommentlist/{rno}/{page}", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<PagingHandler> reviewCommentlist(@PathVariable("rno") long rno, @PathVariable("page") int page,
 			Principal principal) {
-		log.info("rno>>>>>" + rno);
-		log.info("pageNo>>>>>" + page);
 
 		String authId = principal.getName().toString();
 
@@ -73,7 +70,6 @@ public class commentController {
 
 		PagingHandler ph = csv.getReviewCommentList(rno, pgvo, authId);
 
-		log.info("댓글ph>>>>>" + ph);
 		return new ResponseEntity<PagingHandler>(ph, HttpStatus.OK);
 	}
 
@@ -102,8 +98,6 @@ public class commentController {
 	// 댓글 좋아요
 	@PostMapping(value = "/commentLike/{cmtNo}/{id}", produces = MediaType.TEXT_PLAIN_VALUE)
 	public ResponseEntity<String> boardLike(@PathVariable("cmtNo") long cmtNo, @PathVariable("id") String id) {
-		log.info("cmtNo>>>{}", cmtNo);
-		log.info("id>>>{}", id);
 
 		// 체크되어있는지 안되어있는지 확인
 		// 1이면 이미 체크, 0이면 아닌거
@@ -111,7 +105,6 @@ public class commentController {
 
 		if (check > 0) { // 이미 체크가 되어있으면
 			// like취소
-			log.info("취소할 때 여기오는지1");
 			csv.deleteCommentLike(cmtNo, id);
 
 			return new ResponseEntity<String>("0", HttpStatus.OK);
@@ -127,7 +120,6 @@ public class commentController {
 	@GetMapping(value = "/likeCount/{cmtNo}", produces = MediaType.TEXT_PLAIN_VALUE)
 	public ResponseEntity<String> likeQtyAreaInput(@PathVariable("cmtNo") long cmtNo) {
 		int likeQty = csv.likeQtyAreaInput(cmtNo);
-		log.info("likeQty" + likeQty);
 		String likeQtyStr = String.valueOf(likeQty);
 		return new ResponseEntity<String>(likeQtyStr, HttpStatus.OK);
 	}

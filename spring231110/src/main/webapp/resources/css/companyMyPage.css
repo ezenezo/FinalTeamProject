@@ -173,7 +173,7 @@ span {
 }
 
 .boxNum1 {
-   margin-bottom: 50px;
+   margin-bottom: 30px;
    height: 70%;
    display: flex;
     align-items: flex-start;
@@ -181,7 +181,9 @@ span {
 
 .rightSection {
    width: 60%;
-    height: 660px
+    height: 660px;
+    display: flex;
+    flex-direction: column;
 }
 
 .boxNum2 {
@@ -248,7 +250,7 @@ span {
    line-height: 26px;
    text-align: center;
    margin-top: 8px;
-   width: 180px;
+   width: 100%;
    overflow: hidden;
    text-overflow: ellipsis;
    white-space: normal;
@@ -278,4 +280,22 @@ span {
    color: gray;
    font-style: normal;
    font-weight: 220;
+}
+.writePortfolioBtn {
+	width: 300px;
+	height: 44px;
+	padding: 0 20px;
+	cursor: pointer;
+	border-radius: 2px;
+	text-align: center;
+	font-size: 14px;
+	background-color: #ffffff;
+	border: 1px solid #dddddd;
+	color: #1d1d1d;
+	margin: 30px auto;
+	display: block;
+}
+
+.writePortfolioBtn:hover {
+	background-color: rgb(221, 221, 221);
 }

@@ -184,16 +184,11 @@ public class PortfolioServiceImpl implements PortfolioService {
 	@Override
 	public int postModifyPortfolio(PortfolioVO pvo, FileVO portfolioMainImg) {
 		int isOk = pdao.updatePortfolio(pvo); // 내용 업데이트
-		log.info("portfolioMainImg>>" + portfolioMainImg.getFileName());
 
 		portfolioMainImg.setPno(pvo.getPno());
-		log.info("portfolioMainImg>>" + portfolioMainImg.getPno());
 
 		if (isOk > 0) {
-			log.info("isOk>>" + isOk);
-			log.info("파일 테이블 저장 부분 오는지");
 			isOk = fdao.updatePortfolioMainImg(portfolioMainImg);
-			log.info("isOk2>>" + isOk);
 		}
 		return isOk;
 	}
@@ -210,12 +205,10 @@ public class PortfolioServiceImpl implements PortfolioService {
 			pdto.setPvo(pvo);
 			pdtoList.add(pdto);
 		}
-		log.info("portfolioVOList>>서비스임플{}", pvoList);
 		for (PortfolioDTO pdto : pdtoList) {
 			pdto.setMainImg(fdao.selectMainImg(pdto.getPvo().getPno()));
 
 		}
-		log.info("portfolioDTOList>>서비스임플{}", pdtoList);
 		return pdtoList;
 	}
 
