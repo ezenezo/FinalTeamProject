@@ -15,13 +15,10 @@ function starRate() {
 starRate();
 
 
-
-
-
-
 // 평수 버튼 함수
 
 window.onload = function () {
+    resetStart();
     slideOne();
     slideTwo();
 };
@@ -71,7 +68,7 @@ function slideOne() {
         </button>`;
         }
         reset();
-        filterList(idVal);
+        filterList(comId);
 
     }
     
@@ -109,7 +106,7 @@ function slideTwo() {
         </button>`;
         }
         reset();
-        filterList(idVal);
+        filterList(comId);
 
     }
    
@@ -175,7 +172,7 @@ async function filterListToServer(filterData) {
     }
 }
 
-function filterList(idVal){
+function filterList(comId){
     selectLi3 = selectLi3.replace('개','');
     let filterData={
         order:selectLi0,
@@ -185,7 +182,7 @@ function filterList(idVal){
         homeStyleSh:selectLi5,
         sliderOneVal:sliderOne.value,
         sliderTwoVal:sliderTwo.value,
-        id:idVal
+        id:comId
     }
     filterListToServer(filterData).then(result=>{
         let str='';
@@ -273,7 +270,7 @@ document.addEventListener('DOMContentLoaded', function () {
             </button>`;
             }
             reset();
-            filterList(idVal);
+            filterList(comId);
 
             // 여기서 가져온 텍스트를 다른 곳에 활용할 수 있습니다.
             // 예를 들어, 선택된 스타일을 서버로 전송하거나 다른 동작을 수행할 수 있습니다.
@@ -310,7 +307,7 @@ document.addEventListener('DOMContentLoaded', function () {
           </button>`;
             }
             reset();
-            filterList(idVal);
+            filterList(comId);
         });
     });
 
@@ -344,7 +341,7 @@ document.addEventListener('DOMContentLoaded', function () {
           </button>`;
             }
             reset();
-            filterList(idVal);
+            filterList(comId);
 
             // 여기서 가져온 텍스트를 다른 곳에 활용할 수 있습니다.
             // 예를 들어, 선택된 스타일을 서버로 전송하거나 다른 동작을 수행할 수 있습니다.
@@ -381,7 +378,7 @@ document.addEventListener('DOMContentLoaded', function () {
           </button>`;
             }
             reset();
-            filterList(idVal);
+            filterList(comId);
 
             // 여기서 가져온 텍스트를 다른 곳에 활용할 수 있습니다.
             // 예를 들어, 선택된 스타일을 서버로 전송하거나 다른 동작을 수행할 수 있습니다.
@@ -418,7 +415,7 @@ document.addEventListener('DOMContentLoaded', function () {
           </button>`;
             }
             reset();
-            filterList(idVal);
+            filterList(comId);
 
         });
     });
@@ -467,7 +464,7 @@ document.addEventListener("click", (e) => {
             // 부모 요소와 그 자식 요소를 모두 삭제
             parent.remove();
              // 삭제 후 초기화 텍스트 업데이트
-             filterList(idVal);
+             filterList(comId);
              reset();
         }
     }else if(e.target.classList.contains('selectLiDel2')){
@@ -475,7 +472,7 @@ document.addEventListener("click", (e) => {
         let parent = e.target.closest('.selectFilterDiv');
         if (parent) {
             parent.remove();
-            filterList(idVal);
+            filterList(comId);
             reset();
         }
     }else if(e.target.classList.contains('selectLiDel3')){
@@ -483,7 +480,7 @@ document.addEventListener("click", (e) => {
         let parent = e.target.closest('.selectFilterDiv');
         if (parent) {
             parent.remove();
-            filterList(idVal);
+            filterList(comId);
             reset();
         }
     }else if(e.target.classList.contains('selectLiDel4')){
@@ -491,7 +488,7 @@ document.addEventListener("click", (e) => {
         let parent = e.target.closest('.selectFilterDiv');
         if (parent) {
             parent.remove();
-            filterList(idVal);
+            filterList(comId);
             reset();
         }
     }else if(e.target.classList.contains('selectLiDel5')){
@@ -499,7 +496,7 @@ document.addEventListener("click", (e) => {
         let parent = e.target.closest('.selectFilterDiv');
         if (parent) {
             parent.remove();
-            filterList(idVal);
+            filterList(comId);
             reset();
         }
     }else if(e.target.classList.contains('selectLiDelRange')){
@@ -513,23 +510,30 @@ document.addEventListener("click", (e) => {
         let parent = e.target.closest('.selectFilterDiv');
         if (parent) {
             parent.remove();
-            filterList(idVal);
+            filterList(comId);
             reset();
         }
     }else if(e.target.classList.contains('reset')){
-        selectLi0='';
-        selectLi2='';
-        selectLi3='';
-        selectLi4='';
-        selectLi5='';
-        sliderOne.value=1;
-        sliderTwo.value=232;
-        
-        document.getElementById('selectFilter').innerHTML='';
-        filterList(idVal);
+        location.reload();
+        resetStart();
+        fillColor();
+        updateButtonColors();
         
     }
 });
+
+function resetStart(){
+    selectLi0='';
+    selectLi2='';
+    selectLi3='';
+    selectLi4='';
+    selectLi5='';
+    sliderOne.value=1;
+    sliderTwo.value=232;
+    
+    document.getElementById('selectFilter').innerHTML='';
+    filterList(comId);
+}
 // ------
 function updateButtonColors() {
 
@@ -562,6 +566,4 @@ function updateButtonColors() {
         };
     });
 };
-
-
 

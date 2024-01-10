@@ -5,29 +5,21 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.myweb.www.repository.QuotationDAO">
 
-	<!-- <insert id="submit"> -->
-
-
-	<!-- insert into quotation (request_id, form, category_type, rang, status, 
-		address, zone_code, detail_address,extra_address, aquare_footage, square_meter, 
-		request_op,keynum_com) values (#{requestId}, #{categoryType}, #{rang}, #{status}, 
-		#{address}, #{zoneCode}, #{detailAddress}, #{extraAddress}, #{aquareFootage}, 
-		#{squareMeter}, #{requestOp},#{keynumCom});</insert> -->
 
 	<select id=""></select>
 
 	<insert id="quatation_submit">
 		insert into quotation (request_id, form,
-		category_type, rang, status,
+		category_type, extent, status,
 		address, zone_code,
-		detail_address,extra_address, aquare_footage,
+		detail_address,extra_address, square_footage,
 		square_meter,budget
 
 		,request_op,keynum,approve_ok,request_nm,pno)
 		values
-		(#{requestId},#{form}, #{categoryType}, #{rang}, #{status},
+		(#{requestId},#{form}, #{categoryType}, #{extent}, #{status},
 		#{address}, #{zoneCode}, #{detailAddress}, #{extraAddress},
-		#{aquareFootage}, #{squareMeter},#{budget}
+		#{squareFootage}, #{squareMeter},#{budget}
 		,#{requestOp},#{keynum},1,#{requestNm},#{pno});
 
 	</insert>
@@ -37,11 +29,13 @@
 
 		SELECT m.user_nm, q.*
 		FROM quotation q
-		JOIN company c ON q.keynum = c.key_num
+		JOIN company c ON
+		q.keynum = c.key_num
 		JOIN member m ON c.id = m.id
-		WHERE request_id = #{id}
+		WHERE request_id =
+		#{id}
 
-		ORDER BY q.quotation_nm DESC, q.checked DESC
+		ORDER BY q.checked ,q.quotation_nm DESC
 
 
 	</select>
@@ -74,8 +68,13 @@
 		quotation_nm DESC
 	</select>
 	<select id="setQutation_user" parameterType="long"
-		resultType="com.myweb.www.domain.QuotationVO">
-		select * from quotation where quotation_nm=#{quoNm}
+		resultType="com.myweb.www.domain.QuotationStatusDTO">
+		
+				SELECT *
+		FROM quotation q
+		JOIN status s ON q.request_nm =s.request_nm_status 
+
+		where q.quotation_nm=#{quoNm}
 	</select>
 	<select id="getCompany_name" parameterType="long"
 		resultType="com.myweb.www.security.MemberVO">
@@ -95,13 +94,15 @@
 	</select>
 
 	<update id="cancle_ok">
-		update quotation set ok_type_no=1 where quotation_nm =
+		update quotation set ok_type_no=1 where quotation_nm
+		=
 		#{quotation_nm}
 	</update>
 
 	<select id="getQuotationNm" parameterType="int"
 		resultType="long">
-		select max(quotation_nm) from quotation where keynum=#{keynum}
+		select max(quotation_nm) from quotation where
+		keynum=#{keynum}
 
 	</select>
 
@@ -110,7 +111,8 @@
 
 		SELECT *
 		FROM quotation q
-		JOIN request r ON q.request_nm = r.request_nm
+		JOIN request r ON q.request_nm =
+		r.request_nm
 
 		WHERE r.request_nm = #{request_nm} limit 1
 
@@ -120,25 +122,35 @@
 		UPDATE quotation
 		SET
 		form = #{form},
-		category_type = #{categoryType},
-		rang = #{rang},
+		category_type =
+		#{categoryType},
+		extent = #{extent},
 		status = #{status},
-		address = #{address},
+		address =
+		#{address},
 		zone_code = #{zoneCode},
 		detail_address = #{detailAddress},
 		extra_address = #{extraAddress},
-		aquare_footage = #{aquareFootage},
+		square_footage = #{squareFootage},
 		square_meter = #{squareMeter},
 		budget = #{budget},
-		request_op = #{requestOp}
-		
-	
-		
+		request_op =
+		#{requestOp}
+
+
+
 		WHERE request_nm = #{requestNm};
 
 	</update>
-	
-	<select id="selectQuotation" parameterType="long" resultType="com.myweb.www.domain.QuotationVO">
-	select * from quotation where quotation_nm = #{quoNm}
+
+	<select id="selectQuotation" parameterType="long"
+		resultType="com.myweb.www.domain.QuotationVO">
+		select * from quotation where quotation_nm = #{quoNm}
 	</select>
+
+	<select id="payment">
+		select payment_ok from quotation where quotationNm =
+		#{quoNm}
+	</select>
+
 </mapper>

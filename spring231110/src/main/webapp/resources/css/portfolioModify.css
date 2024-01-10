@@ -134,9 +134,15 @@ body {
 	justify-content: center;
 }
 
-#regBtn {
+#modBtn {
 	background-color: #5b975b;
-	border-color: #5b975b;
+	color: #fff;
+	text-align: center;
+	padding: 10px 0;
+	width: 100px;
+	border: none;
+	border-radius: 6px;
+	cursor: pointer;
 }
 
 ---------------파일
@@ -312,6 +318,7 @@ body {
 	margin-left: 12px;
 	font-size: 15px;
 	line-height: 26px;
+	margin-top:0px;
 }
 
 .essential1Right>p>span {

@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.myweb.www.repository.RequestDAO">
+
+	<select id="list"
+		resultType="com.myweb.www.domain.RequestQuestionVO">
+		select * from request_question where question_type=
+		'main_category';
+
+	</select>
+
+	<select id="list2"
+		resultType="com.myweb.www.domain.RequestQuestionVO">
+		select * from request_question where question_type=
+		'주거공간_secound';
+
+	</select>
+
+	<select id="list3"
+		resultType="com.myweb.www.domain.RequestQuestionVO">
+		select * from request_question where question_type= '공사범위';
+
+	</select>
+
+
+
+	<select id="list3_2"
+		resultType="com.myweb.www.domain.RequestQuestionVO">
+		select * from request_question where question_type= '공사상태';
+
+	</select>
+
+	<insert id="insert">
+		insert into request (request_id, form, category_type,
+		extent, status, address,
+		zone_code,
+		detail_address,extra_address,square_footage, square_meter,
+		wish_budget, request_op,keynum_com,pno)
+		values (#{requestId}, #{form},
+		#{categoryType}, #{extent}, #{status},
+		#{address}, #{zoneCode},
+		#{detailAddress}, #{extraAddress},
+		#{squareFootage}, #{squareMeter},
+		#{wishBudget},
+		#{requestOp},#{keynumCom},#{pno});
+	</insert>
+	<update id="req_cancel">
+		update request set ok_type_no=1 where request_nm =
+		#{reqNm}
+
+	</update>
+
+	<select id="selectID">
+		select from request where
+	</select>
+
+
+
+
+	<select id="list2_1"
+		resultType="com.myweb.www.domain.RequestQuestionVO">
+		select * from request_question where question_type=
+		'상업공간_secound';
+
+	</select>
+
+
+
+	<select id="selectNm" resultType="long">
+		select max(request_nm) from
+		request;
+
+	</select>
+	
+
+	<select id="getList_status"  parameterType="String" resultType="long">
+		select max(request_nm) from
+		request where request_id=#{requestId};
+
+	</select>
+	
+		<select id="selectNm_status" resultType="long">
+		select max(request_nm) from
+		request;
+
+	</select>
+
+	<select id="selectrequset" parameterType="int"
+		resultType="com.myweb.www.domain.RequestVO">
+		SELECT * FROM request WHERE keynum_com = #{keynum} and checked
+		= 0 ORDER BY
+		request_nm DESC
+	</select>
+
+
+
+
+	<select id="selectrequset_read" parameterType="int"
+		resultType="com.myweb.www.domain.RequestVO">
+		SELECT * FROM request WHERE keynum_com = #{keynum} and checked
+		= 1 ORDER BY
+		request_nm DESC
+	</select>
+
+	<select id="request_alarm" parameterType="int"
+		resultType="int">
+		select count(*) from request where checked=0 and
+		keynum_com=#{keynum};
+	</select>
+
+
+	<select id="selectOneRVO" parameterType="String"
+		resultType="com.myweb.www.domain.RequestVO">
+		select * from request where request_id=#{requestId} order
+		by request_nm desc
+		limit 1;
+	</select>
+
+	<select id="getRequest_list" parameterType="long"
+		resultType="com.myweb.www.domain.RequestVO">
+		select * from request where request_nm = #{requestNm} ;
+	</select>
+
+	<update id="checked">
+		update request set checked = 1 where request_nm =
+		#{requestNm};
+	</update>
+
+	<select id="req_check" resultType="boolean">
+		select checked from request
+		where request_nm = #{requestNm};
+	</select>
+
+	<select id="getPorImg" parameterType="long"
+		resultType="com.myweb.www.domain.FileVO">
+		SELECT f.*
+		FROM request r
+		JOIN file f ON r.request_id = f.id
+		WHERE r.request_nm = #{requestNm};
+	</select>
+
+	<select id="memberSelect" parameterType="long"
+		resultType="com.myweb.www.security.MemberVO">
+		SELECT m.*
+		FROM request r
+		JOIN member m ON r.request_id =
+		m.id
+		WHERE r.request_nm = #{requestNm};
+	</select>
+
+
+	<select id="setQutation" parameterType="long"
+		resultType="com.myweb.www.domain.RequestVO">
+		select * from request where request_nm = #{reNm}
+	</select>
+	<update id="okTypeYes_ok">
+	
+	update request set ok_type_yes =1 where request_nm = #{requestNm};
+	</update>
+	
+	<select id="req_list" parameterType="String" resultType="com.myweb.www.domain.RequestVO">
+	
+	select * from request where request_id =#{id}
+	</select>
+
+
+<select id="req_detile" parameterType="String" resultType="com.myweb.www.domain.RequestVO">
+
+	select * from request where request_nm =#{reqNm}</select>
+	
+<select id="company_name" parameterType="long" resultType="String">
+
+SELECT user_nm 
+FROM portfolio p 
+where pno=#{pno}</select>
+
+<select id="company_keynum" parameterType="long" resultType="int">
+SELECT c.key_num  from company c
+JOIN portfolio p ON c.id =p.id
+where pno=#{pno};
+
+</select>
+
+<select id="getCompanyNum" parameterType="String" resultType="int">
+select key_num
+from company
+where id=#{id}
+</select>
+
+<select id="getCompany_name_req" parameterType="long" resultType="String">
+select user_nm from member m 
+	JOIN company c ON c.id = m.id
+	join request r on r.keynum_com = c.key_num
+	where r.request_nm = #{requestNm}
+</select>
+
+
+<update id="cancel_user">
+
+update request set ok_type_no=1 where request_nm =#{reqNm)}
+</update>
+
+<update id="cancel_r">
+update request set cancellation_reason=#{cancellationReason} where request_nm =#{requestNm}
+</update>
+</mapper>

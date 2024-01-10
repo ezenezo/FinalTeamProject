@@ -34,33 +34,56 @@ import lombok.extern.slf4j.Slf4j;
 @RequestMapping("/status/**")
 @Controller
 public class StatusController {
-	@Inject
-	private StatusService ssv;
-	
-	@Inject
-	private RequestService rsv;
+   @Inject
+   private StatusService ssv;
+   
+   @Inject
+   private RequestService rsv;
 
-	// 고객진행상황
-	@GetMapping(value = "/sts", produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<List<StatusDTO>> status(@RequestParam String id) {
-	
-	//	String auth = ssv.get
-		log.info("회사 svo들어옴ㅋㅋ");
-//if
-		List<StatusDTO> svo = ssv.getStatus(id);
-log.info("svo들어오심"+svo);
-		return new ResponseEntity<List<StatusDTO>>(svo, HttpStatus.OK);
-	}
+   // 고객진행상황
+   @GetMapping(value = "/sts", produces = MediaType.APPLICATION_JSON_VALUE)
+   public ResponseEntity<List<StatusDTO>> status(@RequestParam String id) {
 
-	// 업체진행상황
+      List<StatusDTO> svo = ssv.getStatus(id);
+      return new ResponseEntity<List<StatusDTO>>(svo, HttpStatus.OK);
+   }
 
-	@GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<List<StatusDTO>> status_com(@PathVariable("id") String id) {
-		log.info("회사 svo들어옴"+id);
-		int keynum = rsv.getKeyNum(id);
-		List<StatusDTO> svo = ssv.getStatus_com(keynum);
-		log.info("회사 svo들어옴"+svo);
+   // 업체진행상황
 
-		return new ResponseEntity<List<StatusDTO>>(svo, HttpStatus.OK);
-	}
+   @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+   public ResponseEntity<List<StatusDTO>> status_com(@PathVariable("id") String id) {
+      int keynum = rsv.getKeyNum(id);
+      List<StatusDTO> svo = ssv.getStatus_com(keynum);
+      
+      return new ResponseEntity<List<StatusDTO>>(svo, HttpStatus.OK);
+   }
+   
+   
+
+   
+   @GetMapping(value = "/cancel_get_user", produces = MediaType.APPLICATION_JSON_VALUE)
+   public ResponseEntity<Boolean> status_cancel_req(@RequestParam long requestNm ) {
+
+      boolean cancel_req= ssv.getStatus_cancel(requestNm);
+
+         return new ResponseEntity<Boolean>(cancel_req, HttpStatus.OK);
+      }
+
+
+   @GetMapping(value = "/payment/{requestNm}", produces = MediaType.APPLICATION_JSON_VALUE)
+   public ResponseEntity<Boolean> GetPayment(@PathVariable long requestNm ) {
+
+      boolean payement= ssv.getPayment(requestNm);
+
+         return new ResponseEntity<Boolean>(payement, HttpStatus.OK);
+      }
+   
+   @GetMapping(value = "/completed_req/{requestNm}", produces = MediaType.APPLICATION_JSON_VALUE)
+   public ResponseEntity<Boolean>completed_req(@PathVariable long requestNm ) {
+
+      boolean completed= ssv.completed_list(requestNm);
+
+         return new ResponseEntity<Boolean>(completed, HttpStatus.OK);
+      }
+
 }

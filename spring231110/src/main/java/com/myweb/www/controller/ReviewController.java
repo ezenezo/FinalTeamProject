@@ -61,8 +61,10 @@ public class ReviewController {
 	public String register(@RequestParam("quotationNm") long quoNm, Model model) {
 //		
 		QuotationVO qvo = qsv.selectQuotation(quoNm);
+		String comId=rsv.getCompanyId(qvo.getKeynum());
 
 		model.addAttribute("qvo", qvo);
+		model.addAttribute("comId", comId);
 		return "/review/register";
 	}
 
@@ -173,8 +175,12 @@ public class ReviewController {
 	// 하나의 업체 리뷰 리스트(페이징x)
 	@GetMapping(value = "/getReviewList/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<List<ReviewDTO>> getReviewList(@PathVariable("id") String id) {
+		
+		log.info("id 잘 오는지>>{}"+id);
 
 		List<ReviewDTO> rdtoList = rsv.getRdtoList(id);
+		
+		log.info("rdtoList 잘 오는지>>{}"+rdtoList);
 
 		return new ResponseEntity<List<ReviewDTO>>(rdtoList, HttpStatus.OK);
 	}
@@ -205,12 +211,14 @@ public class ReviewController {
 			rsv.updateReadCount(rno);
 		}
 
+		FileVO fvo = rsv.getProfileImg(writer);
 		ReviewDTO rdto = rsv.getDetail(rno, id);
 		String comId = rdto.getRvo().getComId();
 		MemberDTO2 mdto = rsv.getMdto(comId);
 
 		model.addAttribute("rdto", rdto);
 		model.addAttribute("mdto", mdto);
+		model.addAttribute("fvo", fvo);
 		return "/review/reviewDetail";
 	}
 

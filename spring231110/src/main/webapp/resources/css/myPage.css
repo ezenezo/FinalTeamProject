@@ -339,6 +339,7 @@ td {
 .reviewMainImg{
 	width: 100px;
 	height: 80px;
+	border-radius: 20px;
 }
 .portfolioInfo2 {
 	width: 80%;

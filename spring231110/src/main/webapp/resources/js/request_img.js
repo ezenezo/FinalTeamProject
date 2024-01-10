@@ -1,10 +1,7 @@
-
-
 document.getElementById('trigger1').addEventListener('click', () => {
     document.getElementById('files1').click();
 });
-
-//이미지 제약조건
+let fileZone = document.getElementById('fileZone');
 const regExp = new RegExp("\.(exe|sh|bat|js|msi|dll)$");
 const regExpImg = new RegExp("\.(jpg|jpeg|png|gif)$");
 const maxSize = 1024 * 1024 * 20;
@@ -20,71 +17,75 @@ function fileValidation(fileName, fileSize) {
         return 1;
     }
 }
-//이미지 비동기 관련
+
 let selectedFiles = [];
-let selectedFiles2 = [];
-// 파일 미리보기 생성 함수
+
 function createFilePreview() {
-    console.log(selectedFiles);
-    alert("아무거나");
+
     let div = document.getElementById('fileZone');
+
     div.innerHTML = "";
+  
     let isOk = 1;
-    let ul = `<ul class="list-group list-group-flush">`;
+    let ul = ``;
 
     selectedFiles.forEach((file, i) => {
         let validResult = fileValidation(file.name, file.size);
         isOk *= validResult;
-
-        ul += `<li class="list-group-item d-flex justify-content-between align-items-start" class="img_file_${i}">`;
-        ul += `<div class="ms-2 me-auto">`;
-        ul += `<div class="upload_img_${i}" style="width: 500px; height: 500px; background-size: cover"></div><br>`;
-        ul += `<div id="ok_no_${i}">${validResult ? '<div class="fw-bold">업로드 가능</div>' : '<div class="fw-bold text-danger">업로드 불가능</div>'}</div>`;
-        ul += `<div>${file.name}</div>`;
-        ul += `<span class="badge rounded-pill text-bg-${validResult ? 'success' : 'danger'}">${file.size}Bytes</span>`;
-        ul += `<button type="button"  id="img_delete_${i}">삭제하기</button></li>`;
+        let btn_div = document.getElementById('btn_div');
+        btn_div.innerHTML='';
+        ul.innerHTML='';
+        ul += `<div class="upload_img_${i}" style="width: 500px; height: 500px; background-size: cover" id="img_div_id" style="text-align: center;"></div><br>`;
+       // explain.innerHTML += `<div id="ok_no_${i}" style="text-align: center;>${validResult ? '<div class="fw-bold">업로드 가능</div>' : '<div class="fw-bold text-danger">업로드 불가능</div>'}</div>`;
+        btn_div.innerHTML += `	<button type="button" id="trigger${i}" class="modify_btn">수정하기</button>`;
     });
 
     ul += `</ul>`;
     div.innerHTML = ul;
-    for (let i = 0; i < selectedFiles.length; i++) {
-        document.getElementById(`img_delete_${i}`).addEventListener('click', () => {
-            console.log(selectedFiles);
-            document.querySelector(`.upload_img_${i}`).remove();
-            selectedFiles.splice(i, 1);
-            console.log(selectedFiles);
-            let ok_no = document.getElementById(`ok_no_${i}`);
-            ok_no.innerHTML = '<div class="fw-bold text-danger">삭제된 파일</div>';
 
-            // 파일 선택 필드의 값 초기화
-            document.getElementById('files').value = '';
-            alert('파일이 제거되었습니다. 필요한 경우 다시 파일을 선택해 주세요.');
+    selectedFiles.forEach((file, i) => {
+        document.getElementById(`trigger${i}`).addEventListener('click', () => {
+            document.getElementById('files1').click();
+         
         });
-    }
-
+    });
+    
     if (isOk == 0) {
         document.getElementById('regBtn').disabled = true;
+        document.getElementById('regBtn').style.backgroundColor='gray';
+        Swal.fire({
+            title: '잘못된 형식의 파일입니다.',
+          
+                text:`다른 이미지 파일 부탁드립니다.`,
+            icon: 'warning',
+          
+     
+        });
+    }else{
+        document.getElementById('regBtn').style.backgroundColor='';
     }
 }
 
-//파일 체인지(추가)
+let fileInput = document.getElementById('files1');
 
 document.getElementById('files1').addEventListener('change', (e) => {
+    if (e.target.files.length === 0) { 
+        return;
+    }
     Array.from(e.target.files).forEach(file => {
         selectedFiles.splice(-1);
-
-
         selectedFiles.push(file);
+        fileInput.addEventListener('change', function(e) {
+            if (this.files.length == 0) {
+                e.preventDefault();
+            }
+        });
     });
 
-
     document.getElementById('regBtn').disabled = false;
-
     createFilePreview();
 });
 
-
-// 이미지 미리보기
 function setThumbnail(event) {
     const fileObj = document.getElementById('files1').files;
     for (let i = 0; i < fileObj.length; i++) {
@@ -94,7 +95,6 @@ function setThumbnail(event) {
             var img = document.createElement("img");
             img.setAttribute("src", event.target.result);
             document.querySelector(`.upload_img_${i}`).appendChild(img);
-
         };
 
         console.log(fileObj[i]);
@@ -103,7 +103,7 @@ function setThumbnail(event) {
     }
 }
 
-        document.querySelector('form').addEventListener('submit', img_submit);
+document.querySelector('form').addEventListener('submit', img_submit);
 function img_submit(e) {
 
     e.preventDefault();
@@ -117,7 +117,7 @@ function img_submit(e) {
         if (result.isConfirmed) {
             Swal.fire({
                 title: '요청서를 업체에 보냈습니다.<br>감사합니다.',
-                html: '이제, 고객님이 원하시는 스타일을 말씀해주세요!',
+               
                 icon: 'success',
                 timer: 2000,
                 showConfirmButton: false,
@@ -128,6 +128,25 @@ function img_submit(e) {
             }, 2100);
         }
     });
+}
 
+
+
+
+
+function back(){
+    Swal.fire({
+        title: '요청서를 업체에 <br>이미지를 안 보내시나요?',
+        icon: 'question',
+        showCancelButton: true,
+        confirmButtonText: '네, 나가겠습니다',
+        cancelButtonText: '아니오, 첨부하겠습니다.',
+    }).then((result) => {
+        if (result.isConfirmed) {
+            var url = "/common/main";
+  
+            window.location.replace(url);
+        }
+    });
 }
 

@@ -1,2 +1,58 @@
 @charset "UTF-8";
 
+
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.content{
+  animation-name: fade-in;
+  animation-duration: 1s;
+  animation-timing-function: ease-in-out;
+  animation-fill-mode: forwards;
+}
+
+
+.content{
+	
+width: 60%;
+    margin: 0 auto;
+    /* border: 1px solid; */
+    box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+
+    display: flex;
+    margin-bottom: 40px;
+
+#nav_ul{
+	
+display: flex;
+    justify-content: space-around;
+    align-items: center;
+    border-bottom: 1px solid gray;
+    height: 50px;
+    margin-bottom: 20px;
+	
+}
+
+.nav_li{
+	
+	display: flex;
+}
+
+
+a {
+    text-decoration: none;
+    color: #57523E;
+    display: flex;
+}
+
+a:hover {
+	color: #408080;
+}

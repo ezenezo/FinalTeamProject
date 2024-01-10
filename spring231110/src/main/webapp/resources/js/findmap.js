@@ -392,7 +392,7 @@ data.forEach(function (location) {
                 (location.address || "주소 정보 없음") +
                 "<br />",
             '       <img src="http://localhost:8088/upload/' + //로컬용
-                //'       <img src="http://aj2002.cafe24.com/_javaweb/_java/fileUpload/' + //카페24배포용webapps
+            //'       <img src="http://aj2002.cafe24.com/_javaweb/_java/fileUpload/' + //카페24배포용webapps
                 location.saveDir +
                 "/" +
                 location.uuid +

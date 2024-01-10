@@ -41,19 +41,18 @@ quotationNms.forEach(quotationInput => {
   let checked = document.getElementById(`checked_ok_${quotationNm}`).value;
   console.log(checked);
 
-  // Find the element with the ID #checked_div_${quotationNm}
-  let checkedDiv = document.querySelector(`#checked_div_${quotationNm}`);
+ 
+let checkedDiv = document.querySelector(`.checked_div_${quotationNm}`);
+console.log(checkedDiv);
 
-  // Check if the element exists before setting its innerHTML
-  if (checkedDiv) {
-    if (checked) {
-      console.log("여기들어옴");
-      checkedDiv.innerHTML = "확인한 견적서";
-    } else {
-      checkedDiv.innerHTML = "미확인 견적서";
-    }
+if (checkedDiv) {
+  if (checked=='true') {
+    console.log("여기들어옴");
+    checkedDiv.innerHTML = `<div style="color:green">확인한 견적<div>`;
   } else {
-    console.error(`Element with ID #checked_div_${quotationNm} not found`);
+    checkedDiv.innerHTML = `<div style="color:orange">미확인 견적<div>`;
   }
-});
-
+} else {
+  console.error(`ID가 checked_div_${quotationNm}인 요소를 찾을 수 없습니다.`);
+}
+})

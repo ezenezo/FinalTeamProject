@@ -8,10 +8,12 @@ import javax.inject.Inject;
 import org.springframework.stereotype.Service;
 
 import com.myweb.www.domain.QuotationDTO;
+import com.myweb.www.domain.QuotationStatusDTO;
 import com.myweb.www.domain.QuotationVO;
 
 import com.myweb.www.domain.RequestDTO;
 import com.myweb.www.domain.RequestVO;
+import com.myweb.www.domain.StatusDTO;
 import com.myweb.www.repository.QuotationDAO;
 import com.myweb.www.repository.ReqFileDAO;
 import com.myweb.www.repository.RequestDAO;
@@ -61,7 +63,9 @@ public class QuotationServiceImpl implements QuotationService {
 
 		RequestDTO dto = new RequestDTO();
 		dto.setRvo(rdao.getRequest_list(requestNm));
+		log.info("flist"+fdao.req_file(requestNm));
 		dto.setFlist(fdao.req_file(requestNm));
+		log.info("test3 requestNm는 "+requestNm);
 		dto.setFile_img(rdao.getPorImg(requestNm));
 		dto.setMvo(rdao.memberSelect(requestNm));
 		rdao.checked(requestNm);
@@ -74,21 +78,17 @@ public class QuotationServiceImpl implements QuotationService {
 		qdao.quatation_submit(qvo);
 		RequestVO rvo = new RequestVO();
 		long requstNm =qvo.getRequestNm();
-
-		log.info("quatation_submit reqNm"+ requstNm);
 		rdao.okTypeYes_ok(requstNm);
 	}
 
 	@Override
 	public int request_cancel(long reqNm) {
-		// TODO Auto-generated method stub
 		return rdao.req_cancel(reqNm);
 	}
 
 	@Override
 	public List<QuotationDTO> getList_user(String id) {
-	   // List<QuotationDTO> list = new ArrayList<>();
-	    
+	
 	 
 	    List<QuotationDTO> qdto = qdao.getList_user(id);
 	
@@ -124,7 +124,7 @@ public class QuotationServiceImpl implements QuotationService {
 	}
 
 	@Override
-	public List<QuotationVO> setQutation_user(long quoNm) {
+	public List<QuotationStatusDTO> setQutation_user(long quoNm) {
 	
 		qdao.checked(quoNm);
 		return qdao.setQutation_user(quoNm);
@@ -163,7 +163,7 @@ public class QuotationServiceImpl implements QuotationService {
 
 	@Override
 	public void quatation_modify(QuotationVO qvo) {
-		// TODO Auto-generated method stub
+
 		qdao.quatation_modify(qvo);
 	}
 
@@ -179,7 +179,7 @@ public class QuotationServiceImpl implements QuotationService {
 
 	@Override
 	public QuotationVO selectQuotation(long quoNm) {
-		// TODO Auto-generated method stub
+	
 		return qdao.selectQuotation(quoNm);
 	}
 

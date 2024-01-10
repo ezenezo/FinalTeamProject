@@ -1,4 +1,3 @@
-console.log("chat2.js진입");
 let lastMessagechatID = null; // 마지막 메시지의 chatID를 저장할 변수
 let lastMessagechatRead = null; // 마지막 메시지의 chatRead를 저장할 변수
 
@@ -17,7 +16,6 @@ let chatData = {
 };
 //호출해서 등록
 document.getElementById("chatSubmitBtn").addEventListener("click", () => {
-    console.log("chatSubmitBtn 리스너 진입");
     const chatContent = document.getElementById("chatContent").value;
     chatData = {
         fromID: chatName, //여기 왼쪽 단어가 중요함 디비 컬럼이랑 맞춰야함 //위의 내용 사라지고 다시 덮어쓰는듯
@@ -25,9 +23,7 @@ document.getElementById("chatSubmitBtn").addEventListener("click", () => {
         chatContent: chatContent,
     };
 
-    console.log("3 ", chatData);
     postComment(chatData).then((result) => {
-        console.log("8 ", result);
         if (result > 0) {
             //alert("채팅글 insert 완료");
         } else {
@@ -45,7 +41,6 @@ document.getElementById("chatSubmitBtn").addEventListener("click", () => {
 // 보내는 함수
 async function postComment(chatData) {
     try {
-        console.log("4는 ", chatData);
         const url = "/chaturl/chat2";
         const config = {
             method: "post",
@@ -54,7 +49,6 @@ async function postComment(chatData) {
             },
             body: JSON.stringify(chatData),
         };
-        console.log("5는 ", config);
         const resp = await fetch(url, config);
         const result = await resp.json();
         // const result = await resp.text(); //isOk
@@ -67,7 +61,6 @@ async function postComment(chatData) {
 //채팅글 요청 함수
 async function spreadChatListFromServer(chatData) {
     try {
-        console.log("spreadChatListFromServer의 chatData는 ", chatData);
         const url = "/chaturl/list2/";
         const config = {
             method: "post",
@@ -79,10 +72,8 @@ async function spreadChatListFromServer(chatData) {
         const resp = await fetch(url, config);
         const result = await resp.json(); //리스트 받음
         // const result = await resp.text(); //리스트 받음
-        console.log("spreadChatListFromServer의 result는 ", result);
         return result;
     } catch (error) {
-        console.log("에러진입");
         console.log(error);
     }
 }
@@ -90,8 +81,6 @@ async function spreadChatListFromServer(chatData) {
 // 읽지 않은 메시지 관련 함수
 async function getUnread(currentUserID) {
     try {
-        console.log("비동기 getUnread 함수 진입");
-        console.log("230줄의 currentUserID는", currentUserID);
         const url = "/chaturl/chatUnread";
         const chatData = { toID: currentUserID }; //이렇게 해야 컨트롤러가 인식하기 시작함 //ChatDTO형식의 변수(db컬럼명)개념으로 인식하기 시작
         const config = {
@@ -101,27 +90,22 @@ async function getUnread(currentUserID) {
             },
             body: JSON.stringify(chatData),
         };
-        console.log("5는 ", config);
         const resp = await fetch(url, config);
         const result = await resp.text(); //isOk
         // return result;
-        console.log("안읽은 글 개수는 " + result);
         if (result >= 1) {
             showUnread(result);
         } else {
             showUnread("");
         }
-        console.log(" getUnread(currentUserID) 정상동작완료");
     } catch (error) {
         console.log(error);
     }
 }
 
 function showUnread(result) {
-    console.log("showUnread(result)함수 진입 " + result);
     // $("#unread").html(result);
     document.getElementById("unread").innerHTML = result;
-    console.log("showUnread(result)함수 탈출 " + result);
 }
 
 function getInfiniteChat() {
@@ -133,11 +117,11 @@ function getInfiniteChat() {
 
 document.addEventListener("DOMContentLoaded", (event) => {
     const currentPage = window.location.href;
-    console.log("currentPage는", currentPage);
     // 특정 페이지인 경우 100분 지연 실행
     if (
-        currentPage.includes("localhost:8088/member/login") ||
-        currentPage.includes("aj2002.cafe24.com/member/login")
+        currentPage.includes('localhost:8088/member/login') || currentPage.includes('aj2002.cafe24.com/member/login') 
+        || currentPage.includes('localhost:8088/member/companyRegister') || currentPage.includes('aj2002.cafe24.com/member/companyRegister')
+        || currentPage.includes('localhost:8088/member/register)') || currentPage.includes('aj2002.cafe24.com/member/register')
     ) {
         setTimeout(function () {
             printChatList(chatData);
@@ -182,9 +166,7 @@ function isNewMessage(newMessages) {
 }
 
 function printChatList(chatData) {
-    console.log("printChatList 출력함수 진입");
     spreadChatListFromServer(chatData).then((result) => {
-        console.log("수시로 받아오는 결과값 ", result);
         if (isNewMessage(result)) {
             // 새 메시지가 있을 경우에만 DOM 업데이트
             updateChatListDOM(result);
@@ -193,15 +175,11 @@ function printChatList(chatData) {
 }
 
 function updateChatListDOM(result) {
-    console.log("updateChatListDOM 함수 진입");
 
     const ul = document.getElementById("chatList2");
-    console.log("updateChatListDOM의 result는 ", result);
 
     // 이전 채팅의 날짜를 저장하는 변수
     let prevDate = null;
-    //console.log("result.chatList는 " , result.chatList);
-    //console.log("result.chatList.length는 " , result.chatList.length);
     if (result.length > 0) {
         //대소문자 꼭 맞춰야함 위 아래
 
@@ -235,9 +213,6 @@ function updateChatListDOM(result) {
             } else {
                 profileImageUrl = defaultImageUrl;
             }
-
-            console.log("profileImageUrl는" + profileImageUrl);
-            console.log("defaultImageUrl는" + defaultImageUrl);
 
             let str = `<div class="row">`;
 

@@ -1,0 +1,108 @@
+@charset "UTF-8";
+
+img {
+	height: 500px;
+	width: 500px;
+}
+.total {
+    margin: 0 auto;
+    position: relative;
+  width: 60.625rem;
+    padding-top: 98px !important;
+    display: flex;
+
+    font-family: NotoSansKR;
+    flex-direction: column;
+    min-height: 80vh;
+}
+.image-preview, #img_div_id {
+	width: 500px;
+	border: 2px dashed #bebeb5;
+	height: 500px;
+	border-radius: 10px;
+	/* background-color: #bebeb5; */
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin: 0 auto;
+}
+
+form {
+	flex-direction: column;
+}
+
+#trigger1 {
+	background-color: transparent;
+	border: none;
+}
+
+#regBtn {
+	width: 200px;
+
+	height: 40px;
+	border: none;
+	background-color: #4CAF50;
+	font-size: 16px;
+	border-radius: 20px;
+	color: white;
+}
+
+#explain {
+	height: 200px;
+}
+
+/* #trigger1{
+	
+	    width: 200px;
+    height: 40px;
+    border: 10px;
+    border-radius: 20px;
+    background-color: #8080803d;
+	
+} */
+#fileZone {
+	display: flex;
+	justify-content: center;
+}
+
+.total_btn{
+    display: flex;
+    margin: 10%;
+    justify-content: center;
+}
+
+.modify_btn{
+	width: 200px;
+	margin-right: 30px;
+	height: 40px;
+	border: none;
+	background-color:#eeb300;
+	font-size: 16px;
+	border-radius: 20px;
+	color: white;
+}
+
+.modify_btn:hover,#regBtn:hover{
+		background-color:#5e8657;
+	
+}
+
+textarea {
+	    width: 500px;
+    height: 100px;
+    font-size: 18px;
+        margin-top: 40px
+}
+
+.content{
+display: flex; 
+    border: 1px solid #8080806b;
+    padding: 40px;
+    border-radius: 15px;
+
+}
+
+#counter{
+	
+	display: flex;
+}

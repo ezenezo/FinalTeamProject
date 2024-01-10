@@ -1,3 +1,5 @@
+console.log("idVal>>{}",id);
+
 //리뷰 리스트 가져오기
 async function getReviewList(id) {
     try {
@@ -50,7 +52,7 @@ function spreadReviewList(id) {
     </svg>`;
                 }
                 str+=`</div>`;
-                str+=`<p style="margin-left: 20px;">업체 : ${rdto.rvo.comId}<span style="margin:0px 5px;color: rgb(234, 237, 239);">|</span> ${rdto.rvo.regDate}</p></div>`;
+                str+=`<p style="margin-left: 40px;">업체 : ${rdto.rvo.comId}<span style="margin:0px 5px;color: rgb(234, 237, 239);">|</span> ${rdto.rvo.regDate}</p></div>`;
                 str+=`<a href="/review/reviewDetail?rno=${rdto.rvo.rno}" style="width:100%;"><div class="review2col">`;
                 str+=`<img class="reviewMainImg" src="/upload/${rdto.reviewMainImg.saveDir}/${rdto.reviewMainImg.saveDir.replace(/\\/g, '-')}_${rdto.reviewMainImg.uuid}_${rdto.reviewMainImg.fileName}">`;
                 str+=`<div class="reviewTitleBox">`;
@@ -88,6 +90,7 @@ async function getHeartList(id) {
     }
 }
 
+
 //좋아요 뿌리기
 function spreadHeartList(id) {
     getHeartList(id).then(result => {
@@ -97,7 +100,7 @@ function spreadHeartList(id) {
         if (result.length > 0) {
             for (let list of result) {
                 let str = ``;
-                str += `<div class="likeDiv"><div class="flex"><img alt="" src="/upload/${list.mainImg.saveDir}/${list.mainImg.uuid}_${list.mainImg.fileName}">`;
+                str += `<div class="likeDiv"><div class="flex"><img alt="" src="/upload/${list.mainImg.saveDir}/${list.mainImg.uuid}_th_${list.mainImg.fileName}">`;
                 str += `<div class="portfolioInfo"><div class="mainInfo"><h3>${list.pvo.title}</h3><span>${list.pvo.userNm} 업체</span></div>`;
                 str += `<p>${list.pvo.homeStyle} / ${list.pvo.familyType}</p></div></div><i class="bi bi-heart-fill" data-id="${id}" data-pno="${list.pvo.pno}"></i></div>`;
                 html.innerHTML += str;

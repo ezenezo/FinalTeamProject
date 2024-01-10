@@ -129,7 +129,7 @@ async function savePost() {
 
   const formData = new FormData();
   formData.append('id',authId);
-  formData.append('comId',"1");
+  formData.append('comId',comId);
   formData.append('title',titleVal);
   formData.append('content',introduction);
   formData.append('rate',rate);

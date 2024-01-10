@@ -203,7 +203,7 @@ public class PortfolioController {
 		int sliderTwo = (int)Math.round(filterData.getSliderTwoVal()*0.3025);
 		filterData.setSliderOneVal(sliderOne);
 		filterData.setSliderTwoVal(sliderTwo);
-		
+		log.info("filterData>>{}",filterData);
 		List<PortfolioDTO> portfolioDTOList = psv.getListFilter(filterData);
 		log.info("portfolioDTOList컨트롤러>>{}", portfolioDTOList);
 

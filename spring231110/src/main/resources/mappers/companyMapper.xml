@@ -43,5 +43,8 @@
 	<update id="updateRateAverage">
 		update company set rate_average=(select AVG(rate) as average_rate from review where com_id=company.id)
 	</update>
+	<select id="getCompanyId" resultType="String">
+	select id from company where key_num=#{keyNum}
+	</select>
 
 </mapper>

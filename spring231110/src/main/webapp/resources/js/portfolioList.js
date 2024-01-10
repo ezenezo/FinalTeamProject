@@ -2,9 +2,10 @@
 // 평수 버튼 함수
 
 window.onload = function () {
+    resetStart();
     slideOne();
     slideTwo();
-};
+};  
 
 let sliderOne = document.getElementById("sliderOneVal").value;
 let sliderTwo = document.getElementById("sliderTwoVal").value;
@@ -18,7 +19,7 @@ let minGap = 1;
 let sliderTrack = document.querySelector(".slider-track");
 let sliderMaxValue = document.getElementById("slider-1").max;
 
-
+document.getElementById('selectFilter').innerHTML=``;
 function slideOne() {
     if (parseInt(sliderTwo.value) - parseInt(sliderOne.value) <= minGap) {
         sliderOne.value = parseInt(sliderTwo.value) - minGap;
@@ -148,7 +149,7 @@ async function filterListToServer(filterData) {
 
         const resp = await fetch(url, config);
         const result = await resp.json();
-        console.log("result>>", result);
+        console.log("포폴리스트result>>{}", result);
         return result;
     } catch (error) {
         console.log(error)
@@ -172,10 +173,11 @@ function filterList(){
         console.log('result'+result);
         for(let pdto of result){
             str+=`<div class="pdtoBox">`;
-            str+=`<a class="a1" href="/portfolio/portfolioDetail?pno=${pdto.pvo.pno}"><div class="overHiddenBox">`;
+            str+=`<a class="a1" href="/portfolio/portfolioDetail?pno=${pdto.pvo.pno}&homeStyle=${selectLi5}"><div class="overHiddenBox">`;
 
             if (pdto.mainImg) {
-                str += `<img class="portfolioMainImg" src="/upload/${pdto.mainImg.saveDir}/${pdto.mainImg.saveDir.replace(/\\/g, '-')}_${pdto.mainImg.uuid}_${pdto.mainImg.fileName}">`;
+                str += `<img class="portfolioMainImg" src="/upload/${pdto.mainImg.saveDir}/${pdto.mainImg.saveDir.replace(/\\/g,'-')}_${pdto.mainImg.uuid}_${pdto.mainImg.fileName}">`;
+        
             } else {
                 // mainImg가 null인 경우에 대한 처리
                 // 예를 들어, 대체 이미지를 표시하거나 다른 처리를 수행할 수 있습니다.
@@ -497,19 +499,26 @@ document.addEventListener("click", (e) => {
             reset();
         }
     }else if(e.target.classList.contains('reset')){
-        selectLi0='';
-        selectLi2='';
-        selectLi3='';
-        selectLi4='';
-        selectLi5='';
-        sliderOne.value=1;
-        sliderTwo.value=232;
-        
-        document.getElementById('selectFilter').innerHTML='';
-        filterList();
-        
+      
+        location.reload();
+        resetStart();
+        fillColor();
+        updateButtonColors();
     }
 });
+
+function resetStart(){
+    selectLi0='';
+    selectLi2='';
+    selectLi3='';
+    selectLi4='';
+    selectLi5='';
+    sliderOne.value=1;
+    sliderTwo.value=232;
+    
+    document.getElementById('selectFilter').innerHTML='';
+    filterList();
+}
 // ------
 function updateButtonColors() {
 
@@ -542,6 +551,5 @@ function updateButtonColors() {
         };
     });
 };
-
 
 

@@ -48,5 +48,9 @@ public interface ReviewService {
 
 	List<ReviewDTO> getRdtoList(String id);
 
+	String getCompanyId(int keynum);
+
+	FileVO getProfileImg(String writer);
+
 
 }

@@ -224,10 +224,12 @@ function reviewPrint() {
             str += `<a href="/review/reviewDetail?rno=${rdto.rvo.rno}"><div class="reviewItem">`;
             str += `<img class="portfolioMainImg22" src="/upload/${rdto.reviewMainImg.saveDir}/${rdto.reviewMainImg.saveDir.replace(/\\/g, '-')}_${rdto.reviewMainImg.uuid}_${rdto.reviewMainImg.fileName}">`;
             str += `<p style="font-size: 20px;
-            line-height: 28px;
-            max-height: 56px;
-            text-overflow: inherit;
-            white-space: normal;font-weight: 500;margin-bottom: 10px;">${rdto.rvo.title}</p>`;
+            line-height:28px;overflow: hidden;padding-bottom: 3px;text-overflow: ellipsis;white-space: normal;
+            word-wrap: break-word;
+            display: -webkit-box;
+            -webkit-line-clamp:1;
+            -webkit-box-orient: vertical;
+            height:25px;font-weight: 500;margin-bottom: 10px;">${rdto.rvo.title}</p>`;
             str += `<p style="width: 100%; height: 115px; overflow: hidden;padding-bottom: 3px;text-overflow: ellipsis;white-space: normal;
             word-wrap: break-word;
             display: -webkit-box;

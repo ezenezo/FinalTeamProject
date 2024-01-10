@@ -111,7 +111,7 @@
 								<span class="span1">주거유형</span><span class="span2">${qvo.categoryType}</span>
 							</p>
 							<p>
-								<span class="span1">전용면적</span><span class="span2">${qvo.aquareFootage}평</span>
+								<span class="span1">전용면적</span><span class="span2">${qvo.squareFootage}평</span>
 							</p>
 
 						</div>
@@ -124,12 +124,15 @@
 			</div>
 		</div>
 	</div>
-	<input type="hidden" id="homeSizeVal" value="${qvo.aquareFootage}">
+	<input type="hidden" id="homeSizeVal" value="${qvo.squareFootage}">
 	<input type="hidden" id="formVal" value="${qvo.form}">
 	<input type="hidden" id="categoryTypeVal" value="${qvo.categoryType}">
 	<!-- TOAST UI Editor CDN URL(JS) -->
 	<script
 		src="https://uicdn.toast.com/editor/latest/toastui-editor-all.min.js"></script>
+	<script type="text/javascript">
+	let comId =`<c:out value="${comId}"/>`; 
+	</script>
 
 	<script src="/resources/js/reviewRegister.js"></script>
 

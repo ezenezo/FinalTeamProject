@@ -49,12 +49,6 @@ public class ChatServiceImpl implements ChatService {
 	
 	@Override
 	public int submit(ChatDTO chatDTO) {
-		// TODO Auto-generated method stub
-
-		log.info("ChatServiceImpl의 chatDTO>>> " + chatDTO);
-
-		log.info("ChatServiceImpl의 submit() chatDTO>>> " + chatDTO);
-
 		int isUp = chatdao.submit(chatDTO);
 		return isUp;
 	}
@@ -62,7 +56,6 @@ public class ChatServiceImpl implements ChatService {
 
 	@Override
 	public List<ChatDTO> getList() {
-		// TODO Auto-generated method stub
 		return chatdao.selectAll();
 	}
 
@@ -70,14 +63,12 @@ public class ChatServiceImpl implements ChatService {
 
 	@Override
 	public List<MemberVO> list(ChatDTO chatdto) {
-		// TODO Auto-generated method stub
 		return chatdao.selectEmpId(chatdto);
 	}
 
 
 	@Override
 	public List<MemberVO> list2(ChatDTO chatdto) {
-		// TODO Auto-generated method stub
 		return chatdao.selectEmp2(chatdto);
 	}
 
@@ -85,7 +76,6 @@ public class ChatServiceImpl implements ChatService {
 	@Override
 	public int submitEmp2(ChatDTO chatDTO) {
 		// TODO Auto-generated method stub
-		log.info("ChatServiceImpl의 submitEmp2() chatDTO>>> " + chatDTO);
 		int isUp = chatdao.submitEmp2(chatDTO);
 		return isUp;
 	}
@@ -109,22 +99,17 @@ public class ChatServiceImpl implements ChatService {
 
 	@Override
 	public int getAllUnreadChat(ChatDTO chatdto) {
-		// TODO Auto-generated method stub
-		log.info("쳇서비스임플의 chatdto는"+ chatdto);
 		return chatdao.getAllUnreadChat(chatdto);
 	}
 	
 	@Override
 	public int getAllUnreadChatID(String chatid) {
-		log.info("쳇서비스임플의 getAllUnreadChatID의 chatid값은 "+ chatid);
 		return chatdao.getAllUnreadChatID(chatid);
 	}
 
 
 	@Override
 	public List<ChatDTO> getBox(ChatDTO chatdto) {
-		// TODO Auto-generated method stub
-		log.info("포스트형getBox관련 쳇서비스임플의 getBox의 chatdto는"+ chatdto);
 		//231220 다수의 사진을 위해 추가 전경환
 		FileVO fvo = fdao.getFile(chatdto.getToID());
 		log.info("fvo는 "+ fvo);

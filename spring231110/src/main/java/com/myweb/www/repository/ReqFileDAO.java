@@ -14,5 +14,4 @@ public interface ReqFileDAO {
 	ReqFileVO req_file(long requestNm);
 
 
-
 }

@@ -29,7 +29,7 @@
 	<header>
 		<div class="headerContainer" id="headerContainer">
 			<div>
-				<span class="ezenDesign1">EZEN</span><span class="ezenDesign2">DESIGN</span>
+				<span class="ezenDesign1">STYLE</span><span class="ezenDesign2">MATE</span>
 			</div>
 			<ul class="boxContainer">
 				<a href="/member/login">
@@ -78,10 +78,10 @@
 				<span>실현하기 위해 </span> <strong>열정</strong> <span>을 다합니다.</span>
 			</p>
 			<p>
-				이젠디자인은 고객의 꿈을 이루어 드릴 수 있는<br> 준비된 공간전문가 집단입니다.
+				스타일메이트는 고객의 꿈을 이루어 드릴 수 있는<br> 준비된 공간전문가 집단입니다.
 			</p>
 
-			<a href="/common/main"><span>EZEN DESIGN</span><img
+			<a href="/common/main"><span>STYLE MATE</span><img
 				src="/resources/img/arrow.png">
 			</a>
 		</div>

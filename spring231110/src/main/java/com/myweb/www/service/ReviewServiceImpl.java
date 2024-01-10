@@ -17,7 +17,6 @@ import com.myweb.www.domain.ReviewDTO;
 import com.myweb.www.domain.ReviewVO;
 
 import com.myweb.www.handler.PagingHandler;
-
 import com.myweb.www.repository.CompanyDAO;
 import com.myweb.www.repository.FileDAO;
 import com.myweb.www.repository.HeartDAO;
@@ -229,15 +228,29 @@ public class ReviewServiceImpl implements ReviewService {
 	@Override
 	public List<ReviewDTO> getRdtoList(String id) {
 		List<ReviewDTO> rdtoList = new ArrayList<ReviewDTO>();
+		long rno=0;
 		
 		List <ReviewVO> rvoList = rdao.getMyReviewList(id);
 		for(ReviewVO rvo : rvoList) {
 		ReviewDTO rdto = new ReviewDTO();
 		rdto.setRvo(rvo);
-		rdto.setReviewMainImg(fdao.getFile(id));
+		rno=rvo.getRno();
+		
+		rdto.setReviewMainImg(fdao.getReviewMainImg(rno));
 		rdtoList.add(rdto);
 		}
 		return rdtoList;
+	}
+
+	@Override
+	public String getCompanyId(int keynum) {
+		return codao.getCompanyId(keynum);
+	}
+
+	@Override
+	public FileVO getProfileImg(String writer) {
+		String id=writer;
+		return fdao.getFile(id);
 	}
 
 }

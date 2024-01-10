@@ -117,10 +117,11 @@ a {
 	align-items: center;
 	position: relative;
 	text-align: center;
-	line-height: 40px;
+	line-height: 31px;
 	height: 40px;
 	margin: 20px 1px 15px 5px;
 }
+
 
 .main_m li:first-child>a, .main1 li>a, .main_m li:nth-child(2)>a,
 	.main_m li:last-child>a {

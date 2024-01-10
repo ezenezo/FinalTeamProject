@@ -52,8 +52,9 @@
 		pno=#{pno}
 	</select>
 	<select id="heartCount" resultType="int">
-		select sum(like_qty) from
-		portfolio where id=#{id}
+		SELECT COALESCE(SUM(like_qty), 0)
+      FROM portfolio
+      WHERE id = #{id};
 	</select>
 	<delete id="deletePortfolio">
 		delete from portfolio where pno=#{pno}
@@ -96,7 +97,7 @@
 			<if test="homeStyleSh != null and homeStyleSh !=''">
 				home_style=#{homeStyleSh} and
 			</if>
-			<if test="sliderOneVal !=1 or sliderTwoVal !=232">
+			<if test="sliderOneVal !=0 or sliderTwoVal !=70">
 				home_size between #{sliderOneVal} and #{sliderTwoVal} and
 			</if>
 		</trim>

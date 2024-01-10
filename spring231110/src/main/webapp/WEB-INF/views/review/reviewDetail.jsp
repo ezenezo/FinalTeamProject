@@ -54,7 +54,7 @@
 					<div class="leftBox">
 						<div class="left1">
 							<img
-								src="/upload/${mdto.fvo.saveDir}/${mdto.fvo.uuid}_${mdto.fvo.fileName}"
+								src="/upload/${fvo.saveDir}/${fvo.uuid}_${fvo.fileName}"
 								class="profileImg">
 						</div>
 						<div class="left2">

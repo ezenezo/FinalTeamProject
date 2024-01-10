@@ -223,9 +223,13 @@ span {
    height: 125px;
    border-radius: 6px;
 }
-
+/* 여기 */
+/* .boxNum * {
+   display: block;
+} */
 .boxNum2>div>a {
-   width: 106px;
+   display:block;
+   width: 100%;
 }
 
 .boxNum2 div:not(:last-child) {
@@ -233,8 +237,11 @@ span {
    margin-right: 10px;
 }
 
-.boxNum2, .boxNum2>div, .boxNum2>div>a {
+.boxNum2{
    width: 100%;
+}
+.wid22{
+   width: 22%;
 }
 
 .miniTitle {
@@ -282,20 +289,20 @@ span {
    font-weight: 220;
 }
 .writePortfolioBtn {
-	width: 300px;
-	height: 44px;
-	padding: 0 20px;
-	cursor: pointer;
-	border-radius: 2px;
-	text-align: center;
-	font-size: 14px;
-	background-color: #ffffff;
-	border: 1px solid #dddddd;
-	color: #1d1d1d;
-	margin: 30px auto;
-	display: block;
+   width: 300px;
+   height: 44px;
+   padding: 0 20px;
+   cursor: pointer;
+   border-radius: 2px;
+   text-align: center;
+   font-size: 14px;
+   background-color: #ffffff;
+   border: 1px solid #dddddd;
+   color: #1d1d1d;
+   margin: 30px auto;
+   display: block;
 }
 
 .writePortfolioBtn:hover {
-	background-color: rgb(221, 221, 221);
+   background-color: rgb(221, 221, 221);
 }

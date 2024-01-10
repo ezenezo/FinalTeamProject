@@ -13,21 +13,21 @@
 	href="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.css">
 <link href="<c:url value='/resources/css/index_all.css'/>"
 	rel="stylesheet" type="text/css">
-<link href="<c:url value='/resources/css/quo_user.css'/>"
-	rel="stylesheet" type="text/css">
+<link href="<c:url value='/resources/css/quo.css'/>" rel="stylesheet"
+	type="text/css">
 <title>견적확인하기</title>
 </head>
 <body>
 	<jsp:include page="../common/nav.jsp" />
 
 	<sec:authentication property="principal.mvo.id" var="authEmail" />
-	<form action="/quotation/modify_submit" method="post">
-	
+<form action="/quotation/modify_submit" method="post" class="form">
 		<div class="total">
-
-			<div class="content">
-				<ul class="quo_div">
 			
+			<div class="content">
+				<img alt="" src="../../../resources/img/quotation_img.png">
+				<ul class="quo_div">
+					
 						<input type="hidden" value="${qvo.requestId}" id="reqID"
 							name="requestId">
 						<input type="hidden" value="${qvo.pno}" id="pno" name="pno">
@@ -46,8 +46,8 @@
 									value="${qvo.categoryType}">
 							</div>
 							<div class="quo_user_div">
-								<span class="span_teg">범위:</span> <input name="rang"
-									value="${qvo.rang}">
+								<span class="span_teg">범위:</span> <input name="extent"
+									value="${qvo.extent}">
 							</div>
 							<div class="quo_user_div">
 								<span class="span_teg">상태:</span> <input name="status"
@@ -76,23 +76,27 @@
 
 							<div class="quo_user_total_3">
 								<div class="quo_user_div">
-									<span class="span_teg">평수:</span> <input name="aquareFootage"
-										value="${qvo.aquareFootage}">평
+									<span class="span_teg">평수</span> <input name="squareFootage"
+										value="${qvo.squareFootage}" type="number" maxlength="12"
+										oninput='handleOnInput(this, 11)'>
 								</div>
 								<div class="quo_user_div">
-									<span class="span_teg">제곱미터:</span> <input name="squareMeter"
-										value="${qvo.squareMeter}">m²
+									<span class="span_teg">제곱미터(m²):</span> <input
+										name="squareMeter" value="${qvo.squareMeter}" maxlength="12"
+										type="number" oninput='handleOnInput(this, 11)'>
 								</div>
 
 								<div class="quo_user_div">
 									<span class="span_teg">총액:</span> <input
-										style="width: 250px; margin-bottom: 0px !important;" id="bud"
-										name="budget" maxlength="12" type="text"
-										onkeypress='return checkNumber(event)'value="${qvo.budget}">
-									<div color="#ff7631" class="sc-7683fa06-0 eAkweW"
-										id="result_budget">
-									
-										<div class="unit" id="unitId" ></div>
+										style="margin-bottom: 0px !important;" id="bud" name="budget"
+										maxlength="12" type="number"
+										onkeypress='return checkNumber(event)'
+										oninput='handleOnInput(this, 11)' value="${qvo.budget}">
+									<div color="#ff7631"
+										style="display: flex; flex-direction: row-reverse; width: 500px; margin-bottom: 20px; color: #ff7631"
+										class="sc-7683fa06-0 eAkweW" id="result_budget">
+										영
+										<div class="unit" id="unitId"></div>
 									</div>
 								</div>
 
@@ -100,28 +104,38 @@
 								<div class="quo_user_div">
 									<span class="span_teg"> <textarea maxlength="200"
 											placeholder="고객님께 추가로 요청한 코멘트를 작성해주세요" name="requestOp"
-											id="comment" value="${qvo.requestOp}">${qvo.requestOp}</textarea>
+											id="comment" >${qvo.requestOp}</textarea>
 									</span>
 									<div class="sc-ef390a2d-0 donOnO">
 										<div color="#ff7631" class="sc-7683fa06-0 eAkweW">&nbsp;</div>
-										<div color="#7a7a7c" class="sc-7683fa06-0 kTtyyx" id="counter"  style="visibility: hidden;">/
+										<div color="#7a7a7c" class="sc-7683fa06-0 kTtyyx" id="counter">/
 											200자</div>
+									</div>
+
+									<div class="button-group"
+										style="margin: 0 auto; margin-top: 40px;">
+										<button type="submit">수정하기</button>
+									
 									</div>
 								</div>
 							</div>
 						</div>
-			
+					
 				</ul>
+
+
+
 			</div>
-
-			<button type="submit" onclick="">견적서보내기</button>
-			<button type="button" onclick="cancel_btn()">거래취소</button>
-
 		</div>
 	</form>
 	<script type="text/javascript">
-		
+		function handleOnInput(el, maxlength) {
+			if (el.value.length > maxlength) {
+				el.value = el.value.substr(0, maxlength);
+			}
+		}
 	</script>
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 	<script
 		src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<script

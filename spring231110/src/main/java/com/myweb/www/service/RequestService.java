@@ -50,6 +50,13 @@ public interface RequestService {
 
 	int getKeyNum(String id);
 
+	String getCompany_name_req(long requestNm);
+
+	void cancel_user(long reqNm);
+
+	void cancel_r(RequestVO rvo);
+
+
 
 
 

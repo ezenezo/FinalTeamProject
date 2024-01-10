@@ -154,7 +154,7 @@
 					<div class="thema-2 themaImg2">
 						<img src="/resources/img/thema2.png">
 						<p class="absolText">
-							<span>사진 찍고 싶은</span><span>카페 인테리어</span>
+							<span>사진 찍고 싶은</span><span>카페&식당 인테리어</span>
 						</p>
 					</div>
 				</a>
@@ -174,7 +174,7 @@
 					<div class="thema-2 themaImg4">
 						<img src="/resources/img/thema4-2.jpg">
 						<p class="absolText">
-							<span>유럽 감성을 더한</span><span>쓰리룸 하우스</span>
+							<span>유럽 감성을 더한</span><span>유러피언 하우스</span>
 						</p>
 					</div>
 				</a>

@@ -68,7 +68,6 @@ public class ChatController {
 	
 	@Autowired
 	public ChatController(ChatService chatsv) {
-		log.info("ChatController입니당");
 		this.chatsv = chatsv;
 //		this.fh = fh;
 	}
@@ -76,7 +75,6 @@ public class ChatController {
 	// 익명 채팅글쓰기 jsp로 이동
 	@GetMapping("/chat")
 	public String register(Model model, Principal principal) {// jsp에서 온 매핑이랑 뷰로 들어가는 매핑이 같아서(이름이 같아서) void로 하면 왔던 곳으로 가라고 할 수 있음
-		log.info("겟 /chat 진입");
 		 // principal 객체에서 사용자 이름(ID)을 가져옴
 	    String username = principal.getName();
 	    // Model 객체에 사용자 이름(ID) 추가
@@ -93,7 +91,6 @@ public class ChatController {
 	@ResponseBody
 	public ResponseEntity<String> write(@RequestBody ChatDTO chatdto) 
 	{
-		log.info(">>>>>>chatdto>> "+chatdto.toString());
 		int isOk = -888;	
 		int isOk2 = -999;
 		if(chatdto.getFromID() == null || chatdto.getFromID().equals("") 
@@ -104,7 +101,6 @@ public class ChatController {
 			isOk = chatsv.submit(chatdto);
 		}
 
-		log.info(">>컨트롤러 chatsv submit >>" + (isOk>0? "OK":"FAIL"));
 		return isOk > 0 ? new ResponseEntity<String>("1", HttpStatus.OK)
 						: new ResponseEntity<String>("0", HttpStatus.INTERNAL_SERVER_ERROR);
 	}
@@ -130,9 +126,7 @@ public class ChatController {
 	@ResponseBody
 	public ResponseEntity<List<ChatDTO>> list() { // Model 파라미터 제거, @ResponseBody 사용시 필요 없음
 		
-		log.info(">>>> GetMapping >>> /chat/list 진입 >>> ");
 		List<ChatDTO> chatList = chatsv.getList(); // List<ChatDTO> 반환하는지 확인
-	    log.info("chatList의 값 " + chatList);
 	    
 	    return new ResponseEntity<>(chatList, HttpStatus.OK); // 제네릭 파라미터 간소화
 	}
@@ -163,9 +157,7 @@ public class ChatController {
 	// 채팅글쓰기 jsp로 이동
 	@GetMapping("/find")
 	public String finduser(Model model, Principal principal) {// jsp에서 온 매핑이랑 뷰로 들어가는 매핑이 같아서(이름이 같아서) void로 하면 왔던 곳으로 가라고 할 수 있음
-		log.info("get매핑 /find 진입");
 		 // principal 객체에서 사용자 이름(ID)을 가져옴
-	    log.info("principal은 {}", principal.toString());
 		String username = principal.getName();
 		
 		
@@ -178,23 +170,17 @@ public class ChatController {
 		        AuthMember authMember = (AuthMember) principalObj;
 		        //empNm = authMember.getMvo().getEmpNm(); // AuthMember 클래스와 MemberVO 클래스에 적절한 getter 메서드가 정의되어 있어야 함
 
-		        log.info("EmpNm은 {}", empNm);
 		        // 이제 empNm 변수를 사용할 수 있습니다.
 		    } else {
-		        log.info("Principal 객체가 AuthMember 타입이 아닙니다.");
 		    }
 		} else {
-		    log.info("Principal 객체가 UsernamePasswordAuthenticationToken 타입이 아닙니다.");
 		}
 		
 
 	    
-	    log.info("username는 "+username);
 	    // Model 객체에 사용자 이름(ID) 추가
 	    model.addAttribute("username", username);
 	    model.addAttribute("empNm", empNm);
-	    log.info("model은 "+ model);
-	    log.info("/chatfolder/find 진입 직전");
 	    
 		return "/chatfolder/find"; // 이렇게 해도 됨(뷰로 들어가는 매핑)
 	}
@@ -205,29 +191,19 @@ public class ChatController {
 	@ResponseBody
 	public ResponseEntity<List<MemberVO>> find(@RequestBody ChatDTO chatdto) 
 	{
-		log.info("포스트 find 진입");
-		log.info(">>>>>>chatdto>> "+chatdto.toString());
 		int isOk = -888;	
 		int isOk2 = -999;
-		log.info("findList 초기화 직전");
 		List<MemberVO> findList;
-		log.info("if문 직전");
 		if(chatdto.getToID() == null || chatdto.getToID().equals("") )
 		{
-			log.info("chatdto가 이상함");
 			isOk = 0;
 			findList = chatsv.list(chatdto); // 뭐 에러 날것 같기 한데 일단 진행...
 		}else {
-			log.info("chatdto가 멀쩡함");
 			isOk = 1;
 			
 			findList = chatsv.list(chatdto);
-			log.info("findList는^^ "+ findList);
 		}
 
-		log.info("어쩄든 findList는 "+ findList);
-		log.info(">>컨트롤러 chatsv.list(chatdto) >>>" + (isOk>0? "OK":"FAIL"));
-		log.info("isOk는" + isOk);
 		return isOk > 0 ? new ResponseEntity<>(findList, HttpStatus.OK)
 						: new ResponseEntity<>(findList, HttpStatus.INTERNAL_SERVER_ERROR);
 	}
@@ -245,13 +221,10 @@ public class ChatController {
 	// 서로 2명만 채팅글쓰기 jsp로 이동
 	@GetMapping("/chat2")
 	public String register2(Model model, Principal principal) {// jsp에서 온 매핑이랑 뷰로 들어가는 매핑이 같아서(이름이 같아서) void로 하면 왔던 곳으로 가라고 할 수 있음
-		log.info("겟 /chat2 진입");
 		 // principal 객체에서 사용자 이름(ID)을 가져옴
 	    String username = principal.getName();
 	    // Model 객체에 사용자 이름(ID) 추가
 	    model.addAttribute("username", username);
-	    log.info("겟chat2의 model값: "+ model);
-	    log.info("/chatfolder/chat2로 넘겨주기 직전");
 		return "/chatfolder/chat2"; // 이렇게 해도 됨(뷰로 들어가는 매핑)
 	}
 	
@@ -261,20 +234,17 @@ public class ChatController {
 	@ResponseBody
 	public ResponseEntity<String> write2(@RequestBody ChatDTO chatdto) 
 	{
-		log.info(">>>>>포스트/chat2   chatdto>> "+chatdto.toString());
 		int isOk = -777;	
 		int isOk2 = -666;
 		if(chatdto.getFromID() == null || chatdto.getFromID().equals("") 
 //				|| chatdto.getToID() == null ||	chatdto.getToID().equals("")
 				||chatdto.getChatContent().equals("")){
-			log.info("1:1채팅 실행중 뭔가 이상해서 0 리턴");
 			
 			isOk = 0;
 		}else {
 			isOk = chatsv.submitEmp2(chatdto);
 		}
 
-		log.info(">>컨트롤러 chatsv submit >>" + (isOk>0? "OK":"FAIL"));
 		return isOk > 0 ? new ResponseEntity<String>("1", HttpStatus.OK)
 						: new ResponseEntity<String>("0", HttpStatus.INTERNAL_SERVER_ERROR);
 	}
@@ -305,34 +275,22 @@ public class ChatController {
 	@ResponseBody
 	public ResponseEntity<List<ChatDTO>> list2_test1(@RequestBody ChatDTO chatdto) 
 	{
-		log.info("포스트 list2 진입");
-		log.info(">>>>>>chatdto>> "+chatdto.toString());
 		int isOk = -777;	
 		int isOk2 = -555;
-		log.info("list2 초기화 직전");
 		List<ChatDTO> list2;
-		log.info("if문 직전");
 		if(chatdto.getToID() == null || chatdto.getToID().equals("") )
 		{
-			log.info("chatdto가 이상함");
 			isOk = 0;
 			list2 = chatsv.getList2(chatdto); // 뭐 에러 날것 같기 한데 일단 진행...
 		}else {
-			log.info("chatdto가 멀쩡함");
 			isOk = 1;
-			log.info("PostMapping의 chatdto는 "+chatdto);
 			list2 = chatsv.getList2(chatdto);
 			FileVO filevo = chatsv.getFile1(chatdto);
-			log.info("PostMapping의 filevo는 "+filevo);
 		    for (ChatDTO chat : list2) {
 		        chat.setFilevo(filevo); // 각 ChatDTO에 FileVO 설정
 		    }
-			log.info("list2는^^ "+ list2);
 		}
 
-		log.info("어쩄든 findList는 "+ list2);
-		log.info(">>컨트롤러 chatsv.list(chatdto) >>>" + (isOk>0? "OK":"FAIL"));
-		log.info("isOk는" + isOk);
 		return isOk > 0 ? new ResponseEntity<>(list2, HttpStatus.OK)
 						: new ResponseEntity<>(list2, HttpStatus.INTERNAL_SERVER_ERROR);
 	}
@@ -387,32 +345,21 @@ public class ChatController {
 	@ResponseBody
 	public ResponseEntity<Integer> chatUnread(@RequestBody ChatDTO chatdto) 
 	{
-		log.info("포스트 chatUnread 진입");
-		log.info(">>>>>>chatdto>> "+chatdto.toString());
 
 		int unreadCount = -99999;
 		int isOk = -7777;	
-		log.info("list2 초기화 직전");
 		
-		log.info("if문 직전");
 		if(chatdto.getToID() == null || chatdto.getToID().equals("") )
 		{
-			log.info("chatdto가 이상함");
 			isOk = 0;
 			unreadCount = chatsv.getAllUnreadChat(chatdto); // 뭐 에러 날것 같기 한데 일단 진행...
 
 		}else {
-			log.info("chatdto가 멀쩡함");
 			isOk = 1;
-			log.info("컨트롤러의 chatdto는 "+ chatdto);
 			unreadCount = chatsv.getAllUnreadChat(chatdto);
-			log.info("unreadCount는^^ "+ unreadCount);
 
 		}
 
-		log.info("어쩄든 unreadCount는 "+ unreadCount);
-		log.info(">>컨트롤러 chatsv.getAllUnreadChat(chatdto) >>>" + (isOk>0? "OK":"FAIL"));
-		log.info("isOk는" + isOk);
 
 		return isOk > 0 ? new ResponseEntity<>(unreadCount, HttpStatus.OK)
 						: new ResponseEntity<>(unreadCount, HttpStatus.INTERNAL_SERVER_ERROR);
@@ -423,32 +370,21 @@ public class ChatController {
 	@ResponseBody
 	public ResponseEntity<List<ChatDTO2>> chatUnread2(@RequestBody ChatDTO chatdto) 
 	{
-		log.info("포스트 chatUnread2 진입");
-		log.info(">>>>>>chatdto>> "+chatdto.toString());
 
 		List<ChatDTO2> unreadCount2; //각각의 읽지 않은 글 확인용
 		int isOk = -7777;	
-		log.info("list2 초기화 직전");
 		
-		log.info("if문 직전");
 		if(chatdto.getToID() == null || chatdto.getToID().equals("") )
 		{
-			log.info("chatdto가 이상함");
 			isOk = 0;
 			unreadCount2 = chatsv.getUnreadChat2(chatdto); // 뭐 에러 날것 같기 한데 일단 진행...
 
 		}else {
-			log.info("chatdto가 멀쩡함");
 			isOk = 1;
-			log.info("컨트롤러의 chatdto는 "+ chatdto);
 			unreadCount2 = chatsv.getUnreadChat2(chatdto);
-			log.info("unreadCount는^^ "+ unreadCount2);
 
 		}
 
-		log.info("어쩄든 unreadCount는 "+ unreadCount2);
-		log.info(">>컨트롤러 chatsv.getAllUnreadChat(chatdto) >>>" + (isOk>0? "OK":"FAIL"));
-		log.info("isOk는" + isOk);
 
 		return isOk > 0 ? new ResponseEntity<>(unreadCount2, HttpStatus.OK)
 						: new ResponseEntity<>(unreadCount2, HttpStatus.INTERNAL_SERVER_ERROR);
@@ -463,37 +399,25 @@ public class ChatController {
 	@ResponseBody
 	public ResponseEntity<List<ChatDTO>> getBox(@RequestBody ChatDTO chatdto) 
 	{
-		log.info("포스트/getBox포스트 getBox 진입");
-		log.info("포스트/getBox>>>>>>chatdto>> "+chatdto.toString());
 
 		List<ChatDTO> relistchatdto = null;
 		int isOk = -7777;	
-		log.info("포스트/getBoxlistgetBox 초기화 직전");
 		
-		log.info("포스트/getBoxif문 직전");
 		if(chatdto.getToID() == null || chatdto.getToID().equals("") )
 		{
-			log.info("포스트/getBox  chatdto가 이상함");
 			isOk = 0;
 //			listgetBox.add(chatsv.getBox(chatdto)); // 뭐 에러 날것 같기 한데 일단 진행...
 //			listgetBox = chatsv.getBox(chatdto); // 뭐 에러 날것 같기 한데 일단 진행...
 			List<ChatDTO> rechatdto = chatsv.getBox(chatdto);// 뭐 에러 날것 같기 한데 일단 진행...
 		}else {
-			log.info("포스트/getBox  chatdto가 멀쩡함");
 			isOk = 1;
-			log.info("포스트/getBox  컨트롤러의 chatdto는 "+ chatdto);
 //			listgetBox = chatsv.getBox(chatdto);
 			relistchatdto = chatsv.getBox(chatdto);
-			log.info("포스트/getBox chatsv.getBox(chatdto)에서 리턴된 값!231223! " + relistchatdto);
 //			listgetBox.add(rechatdto);
 //			log.info("포스트/getBox  listgetBox는^^ "+ listgetBox);
 
 		}
 
-		log.info("포스트/getBox  eles문 탈출후 어쩄든 listgetBoxt는 "+ relistchatdto);
-		log.info("포스트/getBox  >>컨트롤러 chatsv.getAllUnreadChat(chatdto) >>>" + (isOk>0? "OK":"FAIL"));
-		log.info("포스트/getBox  relistchatdto의 개수는 " + relistchatdto.size());
-		log.info("포스트/getBox  isOk는" + isOk);
 
 		return isOk > 0 ? new ResponseEntity<>(relistchatdto, HttpStatus.OK)
 						: new ResponseEntity<>(relistchatdto, HttpStatus.INTERNAL_SERVER_ERROR);
@@ -507,7 +431,6 @@ public class ChatController {
 	//다른페이지에서 a태그로 box.jsp로 이동 할떄 동작하는 부분
 	@GetMapping("/box")
 	public String box(Model model, Principal principal) {// jsp에서 온 매핑이랑 뷰로 들어가는 매핑이 같아서(이름이 같아서) void로 하면 왔던 곳으로 가라고 할 수 있음
-		log.info("겟 /box 진입");
 		 // principal 객체에서 사용자 이름(ID)을 가져옴
 	    String username = principal.getName();
 	    // Model 객체에 사용자 이름(ID) 추가
@@ -524,9 +447,7 @@ public class ChatController {
 	@ResponseBody
 	public ResponseEntity<List<MemberVO>> selectAllMemberforChat() { // Model 파라미터 제거, @ResponseBody 사용시 필요 없음
 		
-		log.info(">>>> GetMapping >>> /chat/list 진입 >>> ");
 		List<MemberVO> empList = chatsv.selectAllMemberforChat(); // List<ChatDTO> 반환하는지 확인
-	    log.info("empList의 값 " + empList);
 	    
 	    return new ResponseEntity<>(empList, HttpStatus.OK); // 제네릭 파라미터 간소화
 	}
@@ -544,14 +465,11 @@ public class ChatController {
 	//get방식
 	@GetMapping("/updateUnreadCount")
 	public ResponseEntity<?> updateUnreadCount(HttpSession session, @RequestParam("userId") String userId) {
-		log.info("겟방식으로 /updateUnreadCount 진입1");
 	    // userId 값을 사용하여 안 읽은 메시지 수를 계산하는 로직 필요
 	    int unreadCount = chatsv.getAllUnreadChatID(userId);
 	    HttpHeaders headers = new HttpHeaders();
 	    headers.setContentType(MediaType.TEXT_PLAIN);
-	    log.info("겟방식으로 /updateUnreadCount 진입2");
 	    session.setAttribute("AllUnreadChat", unreadCount);
-	    log.info("unreadCount는" + unreadCount);
 	    return new ResponseEntity<>(String.valueOf(unreadCount), headers, HttpStatus.OK);
 	}
 	
@@ -575,20 +493,14 @@ public class ChatController {
 	@PostMapping(value = "/getProfileImagepost", consumes = "application/json", produces = "text/plain")
 	@ResponseBody
 	public ResponseEntity<String> getProfileImagepost(@RequestBody ChatDTO chatdto) {
-	    log.info("포스트/getProfileImage 진입");
 
 	    // 프로필 이미지 URL을 가져오는 로직 (예시)
 	    String imageUrl;
 	    try {
-	        log.info("포스트/getProfileImage 진입1");
 	        FileVO filevo = chatsv.getFile1(chatdto);
-	        log.info("filevo는 " + filevo); 
-	        log.info("포스트/getProfileImage 진입2");
 	        imageUrl = filevo.getSaveDir() + "/" + filevo.getUuid() + "_" + filevo.getFileName();
-	        log.info("/getProfileImagepost의 imageUrl는 " + imageUrl); 
 	        return ResponseEntity.ok(imageUrl); // 단순 문자열 반환
 	    } catch (Exception e) {
-	        log.error("프로필 이미지 가져오기 실패", e);
 	        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("../resources/img/profile_none.png");
 	    }
 	}
