@@ -9,15 +9,15 @@
 }
 
 .box {
-	height: 100%;
 	padding: 10px;
 	display: flex;
 	justify-content: center;
 	align-content: center;
+	min-height: 100vh;
 }
 
 .box2 {
-	width: 1100px;
+	width: 970px;
 }
 
 .box2 a {
@@ -41,23 +41,24 @@
 	width: 100%;
 	display: flex;
 	flex-wrap: wrap;
-	justify-content: center; /* 가로 여백을 균등하게 나누기 위한 설정 */
+/* 	justify-content: space-between; */
+	justify-content: space-around
 }
 
 .a1 {
 	display: block; /* a 태그를 block으로 설정 */
 	width: 100%;
-	margin: 5px;
 }
+
 .a2 {
-	   display: block; /* a 태그를 block으로 설정 */
+	display: block; /* a 태그를 block으로 설정 */
 	width: 30%;
-		margin-top: 6px;
-		cursor: pointer;
+	margin-top: 6px;
+	cursor: pointer;
 }
+
 .pdtoBox {
 	width: 30%; /* 이미지의 크기 설정. 여백 등의 고려를 하여 조절하세요. */
-	margin: 10px; /* 이미지 사이 여백 설정 */
 }
 
 .portfolioMainImg {
@@ -65,6 +66,7 @@
 	height: 200px;
 	border-radius: 7px;
 }
+
 .pdtoBoxTitle {
 	font-family: NotoSansKRSemiBold;
 	font-size: 17px;
@@ -72,7 +74,7 @@
 	text-align: center;
 	margin-top: 18px;
 	left: 0;
-	width: 330px;
+	width: 100%;
 	overflow: hidden;
 	text-overflow: ellipsis;
 	white-space: normal;
@@ -86,13 +88,10 @@
 	width: 100%;
 	display: flex;
 	justify-content: flex-start;
+		margin-top: 20px;
+	margin-left: 15px;
 }
 
-/* .filter {
-	display: flex;
-	flex-direction: column;
-}
- */
 .filterBtn {
 	font-size: 15px;
 	line-height: 19px;
@@ -176,8 +175,8 @@
 	padding: 10px;
 	padding-bottom: 20px;
 	padding-top: 20px;
- 	display: none; 
-/*  display : block;  */
+	display: none;
+	/*  display : block;  */
 	flex-direction: column;
 	top: 79%;
 	left: -100%;
@@ -339,7 +338,6 @@ input[type="range"]:active::-webkit-slider-thumb {
 	font-size: 13px;
 	line-height: 16px;
 	margin-bottom: 0px;
-
 }
 
 .selectFilterBtn {
@@ -368,18 +366,22 @@ input[type="range"]:active::-webkit-slider-thumb {
 	margin-left: 5px;
 	line-height: 25px;
 }
-#selectFilter{
+
+#selectFilter {
 	display: flex;
+	margin-bottom: 10px;
+		margin-left: 15px;
 }
-.reset{
+
+.reset {
 	margin: 0;
-    font-family: inherit;
-    font-size: 15px;
-    font-weight: 700;
-    line-height: 18px;
-    text-align: center;
-    color: rgb(110, 191, 171);
-    cursor: pointer;
-    line-height: 25px;
-    margin-left: 10px;
+	font-family: inherit;
+	font-size: 15px;
+	font-weight: 700;
+	line-height: 18px;
+	text-align: center;
+	color: rgb(110, 191, 171);
+	cursor: pointer;
+	line-height: 25px;
+	margin-left: 10px;
 }

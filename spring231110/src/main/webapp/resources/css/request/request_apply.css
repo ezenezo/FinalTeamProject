@@ -113,6 +113,32 @@ body {
 	background-image: url(../../img/request/1-4.jpg);
 }
 
+.card__image--카페{
+	background-image: url(../../img/request/2-1.jpg);
+}
+.card__image--사무실{
+	background-image: url(../../img/request/2-2.jpg);
+}
+.card__image--뷰티 {
+	background-image: url(../../img/request/2-3.jpg);
+}
+.card__image--식당 {
+	background-image: url(../../img/request/2-4.jpg);
+}
+.card__image--주점 {
+	background-image: url(../../img/request/2-5.jpg);
+}
+.card__image--패션 {
+	background-image: url(../../img/request/2-6.jpg);
+}
+.card__image--헬스{
+	background-image: url(../../img/request/2-7.jpg);
+}
+.card__image--기타 {
+	background-image: url(../../img/request/2-8.jpg);
+}
+
+
 img {
 	height: auto;
 	max-width: 100%;

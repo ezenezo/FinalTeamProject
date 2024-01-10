@@ -21,7 +21,9 @@ import net.coobird.thumbnailator.Thumbnails;
 @Slf4j
 @Component
 public class FileHandler_img {
-	private final String UP_DIR ="D:\\_myweb\\_java\\fileUpload\\";
+	private final String UP_DIR ="C:\\_myweb\\_java\\fileUpload\\";  //로컬용
+//	private final String UP_DIR = "/aj2002/tomcat/webapps/_javaweb/_java/fileUpload/";//카페24용 webapps; 231227전경환
+	
 	
 	public ReqFileVO uploadFiles(MultipartFile file1){
 		List<ReqFileVO> flist = new ArrayList<>();

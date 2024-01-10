@@ -90,12 +90,13 @@ h1 {
 }
 
 .portfolioInfo p {
-	width: 50%;
+	width: 100%;
 	margin-top: 0px;
 	margin-bottom: 0px;
 	margin-left: 5px;
 	font-size: 14px;
 	line-height: 30px;
+	text-align: center;
 }
 
 #hrId {
@@ -289,4 +290,111 @@ h1 {
 
 .infoMore button:hover {
 	background-color: rgb(221, 221, 221);
+}
+.postCntBox {
+	display: flex;
+	justify-content: space-between;
+	margin-bottom: 20px;
+}
+.cmtContainer {
+	display: flex;
+	border: 1px solid rgba(0, 0, 0, 0.125);
+	border-radius: 8px;
+	width: 100%;
+	justify-content: center
+}
+
+.cmtContainer textarea:focus {
+	border: none;
+	outline: none;
+}
+
+#cmtText {
+	height: 63px;
+	overflow: hidden;
+	width: 90%;
+	padding-top: 17px;
+	border: none;
+}
+.cmtBtnContainer {
+	display: flex;
+	align-items: center
+}
+#cmtPostBtn {
+	color: green;
+	display: none; 
+	 cursor: pointer;
+}
+.list-group-item{
+	border: none;
+}
+.cmtRow1 {
+	display: flex;
+	justify-content: space-between;
+}
+.cmtRow2 {
+	display: flex;
+	justify-content: space-between;
+}
+
+.cmtRow3 {
+	display: flex;
+	justify-content: flex-end;
+}
+.trigger {
+	border: none;
+	background-color: white;
+}
+
+.modPostBtn {
+	width: 50px;
+	height: 25px;
+	font-size: 10px;
+	padding: 0px;
+}
+
+.modinput {
+	background-color: white;
+	border: none;
+	width: 90%;
+	margin-right: 5px;
+}
+
+.btn-group:hover .dropdown-menu {
+    display: block;
+}
+.dropdown-menu{
+	cursor: pointer;
+}
+	.dateText{
+	margin-left: 10px;
+}
+#modPose{
+	background-color: green;
+}
+.circleIcon{
+	display: block;
+}
+.list-group-item{
+	margin-bottom: 30px;
+}
+.morePortofolioBtn {
+	height: 44px;
+	padding: 0 20px;
+	cursor: pointer;
+	border-radius: 2px;
+	text-align: center;
+	font-size: 14px;
+	background-color: #ffffff;
+	border: 1px solid #dddddd;
+	color: #1d1d1d;
+	margin: 30px auto;
+	display: block;
+}
+
+.morePortofolioBtn:hover {
+	background-color: rgb(221, 221, 221);
+}
+.ulTag>li{
+	border-bottom: 1px solid;
 }

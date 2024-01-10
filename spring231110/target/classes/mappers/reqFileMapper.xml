@@ -10,7 +10,7 @@
   	</insert>
   	
   	<select id="req_file" parameterType="long" resultType="com.myweb.www.domain.ReqFileVO">
-  	  select * from req_file where request_nm = #{requestNm}
+  	  select * from req_file where request_nm = #{requestNm} order by reg_at DESC limit 1
   	</select>
   	
 </mapper>

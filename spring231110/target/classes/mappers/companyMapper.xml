@@ -5,6 +5,7 @@
 <mapper namespace="com.myweb.www.repository.CompanyDAO">
 
 
+	<!-- 231219 전경환 uuid추가 -->
 	<select id="selectdetailAll"
 		resultType="com.myweb.www.domain.CompanyDTO">
 		select c.id as id,
@@ -15,7 +16,8 @@
 		c.phone as phone ,
 		c.profile_quotepage,
 		f.save_dir as save_dir,
-		f.file_name as file_name
+		f.file_name as file_name,
+		f.uuid
 		from member m,
 		company c ,
 		file f
@@ -41,5 +43,8 @@
 	<update id="updateRateAverage">
 		update company set rate_average=(select AVG(rate) as average_rate from review where com_id=company.id)
 	</update>
+	<select id="getCompanyId" resultType="String">
+	select id from company where key_num=#{keyNum}
+	</select>
 
 </mapper>

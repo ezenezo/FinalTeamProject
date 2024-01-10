@@ -19,7 +19,7 @@ import com.myweb.www.domain.FileVO;
 import com.myweb.www.domain.FilterdataVO;
 import com.myweb.www.domain.PortfolioDTO;
 import com.myweb.www.domain.ReviewDTO;
-import com.myweb.www.security.CommonService;
+import com.myweb.www.service.CommonService;
 import com.myweb.www.service.PortfolioService;
 
 import lombok.extern.slf4j.Slf4j;
@@ -39,13 +39,15 @@ public class CommonController {
 	@GetMapping("/main")
 	public void main(Model model) {
 		
-		List<FileVO> portfolioMainImgList=comsv.portfolioMainImgList();
 		FilterdataVO filter = new FilterdataVO();
-		
-		log.info("portfolioMainImgList"+portfolioMainImgList);
-		model.addAttribute("portfolioMainImgList",portfolioMainImgList);
 		model.addAttribute("filter",filter);
 		
+	}
+	@GetMapping(value = "/slideImg",produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<List<FileVO>> slideImg(){
+		List<FileVO> portfolioMainImgList=comsv.portfolioMainImgList();
+		
+		return new ResponseEntity<List<FileVO>>(portfolioMainImgList,HttpStatus.OK);
 	}
 	@GetMapping(value = "/postList/{sizeNum}",produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<List<PortfolioDTO>> mainPostPdtoList(@PathVariable("sizeNum") int sizeNum){
@@ -53,7 +55,6 @@ public class CommonController {
 		int sliderTwo=sliderOne+9;
 		
 		List<PortfolioDTO> portfolioDTOList = comsv.mainPostPdtoList(sliderOne,sliderTwo);
-		log.info("portfolioDTOList common컨트롤러?>>>{}",portfolioDTOList);
 		return new ResponseEntity<List<PortfolioDTO>>(portfolioDTOList,HttpStatus.OK);
 		
 	}

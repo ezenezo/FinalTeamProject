@@ -22,54 +22,47 @@ console.log("들어옴");
     
     function convertBudget() {
 
-    let result_budget = document.getElementById('result_budget');
-
-
-    const bud = document.getElementById('bud');
-
-    var digits = ['영', '일', '이', '삼', '사', '오', '육', '칠', '팔', '구'];
-    var units = ['', '십', '백', '천', '만', '십만', '백만', '천만', '억', '십억', '백억', '천억', '조', '십조', '백조', '천조'];
-    console.log("bud는" + bud);
-    if (bud != null) {
-
-        bud.addEventListener('input', (event) => {
-            console.log("여기에 들어오니");
-
-            console.log("  convertBudget if문 진입 ");
-            if (bud.value)
-                var numStr = "" + bud.value;
-            var numLen = numStr.length;
-
-            result_budget.innerHTML = '';
-
-            for (var i = 0; i < numLen; i++) {
-
-                var digit = parseInt(numStr.charAt(i));
-                console.log("여기는 digit입니다." + digit);
-                var unit = units[numLen - i - 1];
-                console.log("여기는 유닛입니다." + unit);
-                if (i === numLen - 1 && digit === 1 && numLen !== 1) {
-                    console.log("  convertBudget for문 에 if1 문 진입 ");
-                    result_budget.innerHTML += '일';
-                } else if (digit !== 0) {
-                    console.log("  convertBudget for문 에 if2 문 진입 ");
-                    result_budget.innerHTML += digits[digit] + unit;
-                } else if (i === numLen - 5) {
-                    console.log("  convertBudget for문 에 if3 문 진입 ");
-                    result_budget.innerHTML += '만';
+        const result_budget = document.getElementById('result_budget');
+        const bud = document.getElementById('bud');
+    
+        if (bud != null) {
+            bud.addEventListener('input', (event) => {
+                if (bud.value) {
+                    const numberUnits = ["", "일", "이", "삼", "사", "오", "육", "칠", "팔", "구"];
+                    const tenUnits = ["", "십", "백", "천"];
+                    const thousandUnits = ["", "만", "억", "조", "경", "해"];
+    
+        
+                    function chunkAtEnd(value = "", n = 1) {
+                      const result = [];
+    
+                      for (let end = value.length; end > 0; end -= n) {
+                        result.push(value.substring(Math.max(0, end - n), end));
+                      }
+    
+                      return result;
+                    }
+    
+                    let number = bud.value;
+                    let chunks = chunkAtEnd(number, 4);
+                    let answer = '';
+    
+                    chunks.forEach((chunk, chunkIndex) => {
+                      let result = '';
+                      [...chunk].reverse().forEach((digit, index) => {
+                        let numberUnit = numberUnits[digit];
+                        if (digit !== '0') numberUnit += tenUnits[index];
+                        result = numberUnit + result;
+                      });
+                      if (result !== '') answer = result + thousandUnits[chunkIndex] + answer;
+                    });
+    
+                    result_budget.innerHTML = answer + '원';
                 }
-
-
-            }
-
-            if (numLen > 0) {
-                result_budget.innerHTML += '원';
-
-            }
-        });
+            });
+        }
     }
-}
-
+    
 
 window.onload = function () {
     convertBudget();

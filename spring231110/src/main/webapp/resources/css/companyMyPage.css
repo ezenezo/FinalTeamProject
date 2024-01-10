@@ -181,7 +181,7 @@ span {
 
 .rightSection {
    width: 60%;
-  /*   height: 660px; */
+    height: 660px;
     display: flex;
     flex-direction: column;
 }
@@ -223,9 +223,13 @@ span {
    height: 125px;
    border-radius: 6px;
 }
-
+/* 여기 */
+/* .boxNum * {
+   display: block;
+} */
 .boxNum2>div>a {
-   width: 106px;
+   display:block;
+   width: 100%;
 }
 
 .boxNum2 div:not(:last-child) {
@@ -233,8 +237,11 @@ span {
    margin-right: 10px;
 }
 
-.boxNum2, .boxNum2>div, .boxNum2>div>a {
+.boxNum2{
    width: 100%;
+}
+.wid22{
+   width: 22%;
 }
 
 .miniTitle {

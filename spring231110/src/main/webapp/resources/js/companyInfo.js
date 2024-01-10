@@ -78,7 +78,7 @@ function reviewPrint(id,page = 1) {
 
             console.log(content);
 
-            str+=`<div style="margin-bottom:10px;"class="review">`;
+            str+=`<div style="margin-bottom:30px;"class="review">`;
             str+=`<div class="rateStar">`;
             str+=`<div class="starmini" style="width:270px;">`;
             for (let j = 0; j < rdto.rvo.rate; j++) {
@@ -93,7 +93,7 @@ function reviewPrint(id,page = 1) {
             }
             str+=`</div>`;
             str+=`<p style="padding-left:40px;">${rdto.rvo.id}<span style="margin:0px 5px;color: rgb(234, 237, 239);">|</span> ${rdto.rvo.regDate}</p></div>`;
-            str+=`<div class="review2col">`;
+            str+=`<a href="/review/reviewDetail?rno=${rdto.rvo.rno}" style="width:100%;"><div class="review2col">`;
             str+=`<img class="reviewMainImg" style="width: 270px;
             height: 106px;
             border-radius: 15px;" src="/upload/${rdto.reviewMainImg.saveDir}/${rdto.reviewMainImg.saveDir.replace(/\\/g, '-')}_${rdto.reviewMainImg.uuid}_${rdto.reviewMainImg.fileName}">`;
@@ -109,7 +109,7 @@ function reviewPrint(id,page = 1) {
             str+=`<p><span class="span1">주거형태</span><span class="span2">주거형태</span></p>`;
             str+=`<p><span class="span1">주거형태</span><span class="span2">주거형태</span></p>`;
             str+=`<p><span class="span1">주거형태</span><span class="span2">주거형태</span></p></div>`;
-            str+=`</div></div></div>`;
+            str+=`</div></div></div></a>`;
         
         }
         reviewContainer.innerHTML += str;

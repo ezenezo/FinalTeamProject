@@ -183,13 +183,13 @@ img {
 }
 
 button.chat_url {
-	border: none;
-	background-color: #d5c9c0;
-	border-radius: 15px;
-	padding: 10px;
-	color: white;
-	margin-left: 370px;
-	font-size: 16px;
+border: none;
+    background-color: #d5c9c0;
+    border-radius: 15px;
+    padding: 10px;
+    color: white;
+    margin-top: 10px;
+    font-size: 16px;
 }
 
 .p_img {

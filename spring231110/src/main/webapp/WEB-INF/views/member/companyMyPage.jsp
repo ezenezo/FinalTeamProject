@@ -12,14 +12,7 @@
 <link rel="stylesheet"
    href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
 <link href="../resources/css/status.css" rel="stylesheet">
-<style type="text/css">
-<!--황지영 추가  -->
-<style type="text/css">
-table {
-  border-collapse: separate;
-  border-spacing: 0 10px;
-}
-</style>
+
 </head>
 <body>
    <jsp:include page="../common/nav.jsp" />
@@ -59,8 +52,9 @@ table {
                </div>
             </div>
 
-            <a href="/portf   olio/register"><button id="moreBtn" class="writePortfolioBtn moreBtn" type="button">포트폴리오 작성하기</button></a>
-
+            <a href="/portfolio/register"><button id="moreBtn" class="writePortfolioBtn moreBtn" type="button">포트폴리오 작성하기</button></a>
+            <a href="/member/companyInfo?id=${user.id}"><button id="moreBtn" class="writePortfolioBtn moreBtn" type="button">기업정보 더보기</button></a>
+            
          </div>
 
          <section class="rightSection">
@@ -71,7 +65,7 @@ table {
                </div>
             </div>
 
-            <script type="text/javascript">spreadStatusList(${user.id});</script>
+            <script type="text/javascript">spreadStatusList('${user.id}');</script>
             <div class="rightBoxbox boxNum1"></div>
 
             <div class="menu">
@@ -84,7 +78,7 @@ table {
             </div>
             <div class="rightBoxbox boxNum2">
                <c:forEach items="${mdto.pdtoList}" var="pdto" begin="0" end="3">
-                  <div>
+                  <div class="wid22">
                      <a href="/portfolio/portfolioDetail?pno=${pdto.pvo.pno}">
                            <img class="portfolioMainImg"
                               src="/upload/${pdto.mainImg.saveDir}/${fn:replace(pdto.mainImg.saveDir,'\\','-')}_${pdto.mainImg.uuid}_${pdto.mainImg.fileName}">

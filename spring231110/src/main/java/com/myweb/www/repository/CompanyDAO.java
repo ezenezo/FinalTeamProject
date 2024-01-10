@@ -20,6 +20,8 @@ public interface CompanyDAO {
 
 	int updateRateAverage(String comId);
 
+	String getCompanyId(int keynum);
+
 
 
 }

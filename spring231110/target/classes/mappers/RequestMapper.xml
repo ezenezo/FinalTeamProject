@@ -138,7 +138,7 @@
 		SELECT f.*
 		FROM request r
 		JOIN file f ON r.request_id = f.id
-		WHERE r.request_nm = #{requestNm};
+		WHERE r.request_nm = #{requestNm} order by req_at DESC limit 1;		
 	</select>
 
 	<select id="memberSelect" parameterType="long"

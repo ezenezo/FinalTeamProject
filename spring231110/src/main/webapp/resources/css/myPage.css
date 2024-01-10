@@ -183,17 +183,6 @@ body {
 	align-items: center;
 }
 
-/* footer 변경 */
-.footerContainer {
-	padding-top: 30px;
-	padding-bottom: 30px;
-	padding-left: 24%;
-	padding-right: 24%;
-	display: flex;
-	justify-content: space-between;
-	box-sizing: content-box;
-	    height: 660px
-}
 
 footer {
 	background-color: #202020;
@@ -314,4 +303,59 @@ td {
 
 .tr:hover{
 	background-color: #e3e3e3;
+}
+.review {
+	width:100%;
+	border-bottom:1px solid rgb(221,221,221);
+	display: flex;
+	box-sizing: border-box;
+	padding: 9px 40px;
+	flex-direction: column;
+}
+.starmini {
+	width:100px;;
+	display: flex;
+}
+
+.starmini p {
+	
+}
+.reviewTitleBox {
+	width: 735px;
+	display: flex;
+	flex-direction: column;
+	padding: 5px 0px 0px 30px;
+}
+.span2{
+	margin-left: 8px;
+}
+.rateStar{
+	display: flex;
+	align-items: center;
+}
+.review2col{
+	display: flex;
+}
+.reviewMainImg{
+	width: 100px;
+	height: 80px;
+	border-radius: 20px;
+}
+.portfolioInfo2 {
+	width: 80%;
+	margin-top: 5px;
+	display: flex;
+	justify-content: space-between;
+	padding: 0px 30px;
+	border: 1px solid #eaebef;
+	border-radius: 15px;
+}
+
+.portfolioInfo2 p {
+	margin: 3px;
+	font-size: 13px;
+}
+
+.noClick{
+	pointer-events: none;
 }

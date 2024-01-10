@@ -1,0 +1,514 @@
+@font-face {
+	font-family: NotoSansKR;
+	src: url(../font/NotoSansKR-VariableFont_wght.ttf);
+}
+
+@font-face {
+	font-family: NotoSansKRSemiBold;
+	src: url(../font/NotoSansKR-SemiBold.ttf);
+}
+
+.box {
+	height: 100%;
+	padding: 10px;
+	display: flex;
+	justify-content: center;
+	align-content: center;
+}
+
+.box2 {
+	width: 970px;
+}
+
+.box2 a {
+	color: black;
+}
+
+.box2 a:hover {
+	color: black;
+	text-decoration: none;
+}
+
+.bodyContainer {
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	flex-direction: column;
+}
+
+.bodyContainer2 {
+	width: 100%;
+	display: flex;
+	flex-wrap: wrap;
+	/* justify-content: space-between */
+	justify-content: space-around;
+	min-height: 700px;
+}
+
+.a1 {
+	display: block; /* a 태그를 block으로 설정 */
+	width: 100%;
+}
+
+.a2 {
+	display: block; /* a 태그를 block으로 설정 */
+	width: 30%;
+	margin-top: 6px;
+	cursor: pointer;
+}
+
+.pdtoBox {
+	width: 30%; /* 이미지의 크기 설정. 여백 등의 고려를 하여 조절하세요. */
+}
+
+.portfolioMainImg {
+	width: 100%;
+	height: 200px;
+	border-radius: 7px;
+}
+
+.pdtoBoxTitle {
+	font-family: NotoSansKRSemiBold;
+	font-size: 17px;
+	line-height: 26px;
+	text-align: center;
+	margin-top: 18px;
+	left: 0;
+	width: 100%;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: normal;
+	word-wrap: break-word;
+	display: -webkit-box;
+	-webkit-line-clamp: 1;
+	-webkit-box-orient: vertical;
+}
+
+.filterBox {
+	width: 100%;
+	display: flex;
+	justify-content: flex-start;
+	margin-top: 20px;
+	margin-left: 15px;
+}
+
+.filterBtn {
+	font-size: 15px;
+	line-height: 19px;
+	padding: 7px 8px 6px;
+	border-radius: 4px;
+	background-color: #f5f5f5;
+	border: none;
+	color: #757575;
+	width: 86px;
+	height: 33px;
+	font-family: NotoSansKRSemiBold;
+	margin-right: 10px;
+	margin-top: 5px;
+}
+
+.filterBtn {
+	display: flex;
+	justify-content: center
+}
+
+.widthUp {
+	width: 100px;
+}
+
+.filterBtn:hover {
+	background-color: rgba(240, 240, 240);
+	outline-style: none;
+}
+
+.filterBtn:focus {
+	outline-style: none;
+}
+
+.filter {
+	display: flex;
+	flex-direction: column;
+	position: relative; /* 상대 위치로 설정 */
+	height: 50px;
+}
+
+.ulTag {
+	margin-top: 4px;
+	padding: 0px;
+	font-size: 15px;
+	line-height: 19px;
+	border-radius: 7px;
+	border: 1px solid #eaebef;
+	box-shadow: 1px 1px 4px 0px rgba(0, 0, 0, 0.5);
+	display: none;
+	position: absolute; /* 절대 위치로 설정 */
+	top: 79%; /* 상위 컨테이너의 하단에 위치하도록 설정 */
+	left: 0; /* 좌측 정렬, 필요에 따라 수정 가능 */
+	background-color: white;
+	white-space: nowrap; /* 줄 바꿈 방지 설정 */
+	z-index: 9999;
+}
+
+.ulTag li {
+	font-family: NotoSansKR;
+	width: 100%;
+	font-size: 15px;
+	width: 200px;
+	padding: 10px;
+	cursor: pointer;
+}
+
+.ulTag li:hover {
+	background-color: rgba(239, 251, 255);
+}
+
+.filter:hover .ulTag {
+	display: block;
+}
+
+.ulTag:hover {
+	display: block;
+}
+
+.rangeBox {
+	width: 400px;
+	padding: 10px;
+	padding-bottom: 20px;
+	padding-top: 20px;
+	display: none;
+	/*  display : block;  */
+	flex-direction: column;
+	top: 79%;
+	left: -100%;
+	z-index: 9999;
+	flex-direction: column;
+}
+
+.rangeBox p {
+	margin-top: 20px;
+	font-family: NotoSansKRSemiBold;
+	font-size: 18px;
+}
+
+.rangeFilter {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+}
+
+/*--------------------------  */
+.container {
+	width: 100%;
+	position: relative;
+	margin-top: 50px;
+	margin-bottom: 10px;
+}
+
+.rangeText {
+	display: flex;
+	justify-content: space-between;
+	line-height: 5px;
+}
+
+.rangeText p {
+	font-size: 12px;
+}
+
+input[type="range"] {
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	width: 100%;
+	outline: none;
+	position: absolute;
+	margin: auto;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	background-color: transparent;
+	pointer-events: none;
+}
+
+.slider-track {
+	width: 100%;
+	height: 5px;
+	position: absolute;
+	margin: auto;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	border-radius: 5x;
+	background-color: rgb(197, 245, 255);
+}
+
+input[type="range"]::-webkit-slider-runnable-track {
+	-webkit-appearance: none;
+	height: 5px;
+}
+
+input[type="range"]::-moz-range-track {
+	-moz-appearance: none;
+	height: 5px;
+}
+
+input[type="range"]::-ms-track {
+	appearance: none;
+	height: 5px;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+	-webkit-appearance: none;
+	height: 1.7em;
+	width: 1.7em;
+	background-color: rgb(53, 197, 240);
+	cursor: pointer;
+	border-radius: 10px;
+	pointer-events: auto;
+	margin-top: -9px;
+}
+
+input[type="range"]::-moz-range-thumb {
+	-webkit-appearance: none;
+	height: 0.5em;
+	width: 0.5em;
+	cursor: pointer;
+	border-radius: 50%;
+	background-color: #3264fe;
+	pointer-events: auto;
+}
+
+input[type="range"]::-ms-thumb {
+	appearance: none;
+	height: 0.5em;
+	width: 0.5em;
+	cursor: pointer;
+	border-radius: 50%;
+	background-color: #3264fe;
+	pointer-events: auto;
+}
+
+input[type="range"]:active::-webkit-slider-thumb {
+	background-color: #ffffff;
+	border: 3px solid #3264fe;
+}
+
+.values {
+	width: 32%;
+	float: left;
+	position: relative;
+	margin: auto;
+	font-family: NotoSansKRSemiBold;
+	margin-left: 10px;
+	font-size: 20px;
+}
+
+.values:before {content ="";
+	position: absolute;
+	height: 0;
+	width: 0;
+	border-top: 15px solid;
+	border-left: 15px solid;
+	border-right: 15px solid;
+	margin: auto;
+	bottom: -14px;
+	left: 0;
+	right: 0;
+}
+
+.overHiddenBox {
+	width: 100%;
+	overflow: hidden;
+}
+
+.portfolioMainImg {
+	transition: transform 0.3s ease; /* 변환 효과를 부드럽게 적용 */
+}
+
+.portfolioMainImg:hover {
+	transform: scale(1.1); /* 확대되는 비율. 1보다 큰 값으로 조절하면 됩니다. */
+}
+
+.pdtoTitle3th {
+	color: rgb(130, 140, 148);
+	font-size: 13px;
+	line-height: 16px;
+	margin-top: 10px;
+}
+
+.pdtoTitle2th {
+	font-size: 13px;
+	line-height: 16px;
+	margin-bottom: 0px;
+}
+
+.selectFilterBtn {
+	display: flex;
+	padding: 1px 8px 3px;
+	font-size: 15px;
+	border-radius: 26px;
+	font-weight: 900;
+	background-color: rgb(110, 191, 171);
+	color: #fff;
+	margin: 0 2px;
+	padding: 2px 0;
+	padding-top: 0px;
+	padding-bottom: 0px;
+	line-height: 25px;
+	box-shadow: none;
+	border-radius: 26px;
+	padding-left: 5px;
+	padding-right: 5px;
+	border: 1px solid transparent;
+	font-family: inherit;
+}
+
+.selectFilterBtn span {
+	font-size: 15px;
+	margin-left: 5px;
+	line-height: 25px;
+}
+
+#selectFilter {
+	display: flex;
+	margin-bottom: 10px;
+	margin-left: 15px;
+}
+.small{
+	font-size: 15px;
+}
+.reset {
+	margin: 0;
+	font-family: inherit;
+	font-size: 15px;
+	font-weight: 700;
+	line-height: 18px;
+	text-align: center;
+	color: rgb(110, 191, 171);
+	cursor: pointer;
+	line-height: 25px;
+	margin-left: 10px;
+}
+
+.portfolioInfo {
+	width: 100%;
+	display: flex;
+	flex-wrap: nowrap;
+	border: 1px solid #eaebef;
+	padding: 10px 30px;
+	box-sizing: border-box;
+	border-radius: 4px;
+	margin-top: 40px auto;
+	justify-content: center;
+	flex-wrap: wrap;
+}
+
+.portfolioInfo p {
+	margin-top: 0px;
+	margin-bottom: 0px;
+	margin-right: 10px;
+	margin-left: 10px;
+}
+
+.leftBox {
+	display: flex;
+	width: 50%;
+}
+
+.rightBox {
+	width: 50%;
+	display: flex;
+}
+
+.rightBoxPtag {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+/* 	justify-content: center; */
+	width: 99%;
+	justify-content: space-evenly
+}
+
+.rightBoxPtag span {
+	font-weight: bold;
+}
+
+.starBox {
+	width: 150px;
+	height:30px;
+	position: relative;
+	margin: 0px auto;
+}
+
+.Star1 {
+	width: 150px;
+	height: 50px;
+	top: 0px;
+	left: 0px;
+	left: 0px;
+	display: flex;
+	position: absolute;
+	color: rgb(221, 221, 221);
+}
+
+.Star2 {
+	overflow: hidden;
+	height: 50px;
+	display: flex;
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	z-index: 99;
+	color: #f7f77e;
+}
+
+.st1 {
+	width: 30px;
+	height: 30px;
+}
+
+.st2 {
+	width: 30px;
+	height: 30px;
+	flex: 0 0 auto;
+}
+.left2th{
+	display: flex;
+}
+.font16{
+	color: green;	
+	font-weight: bold;
+	display: flex;
+	align-items: center;
+	
+}
+
+.profileImg {
+	width: 100px;
+	height: 100px;
+	border-radius: 25px;
+}
+
+.comInfo {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	margin-left: 20px;
+}
+
+.comInfo p {
+	margin: 3px 0px;
+}
+
+.userNm {
+	font-weight: 600;
+	font-size: 19px;
+}
+
+.center {
+	width: 1%;
+	height: 100%;
+	border: none;
+	border-left: 1px solid #eaebef;
+}
+.material-symbols-outlined{
+	color: white;
+}

@@ -230,7 +230,7 @@ function getReqList_4(authId){
       }else{
           let li = `<li>거래 취소된 요청서가 없습니다.</li>`;
           ul.innerHTML = li;
-  ss    }       
+      }       
   })
 
 }
@@ -278,7 +278,7 @@ function getReqList_5(authId){
       }else{
           let li = `<li>미승인된 요청서가 없습니다.</li>`;
           ul.innerHTML = li;
-  ss    }       
+      }       
   })
 
 }

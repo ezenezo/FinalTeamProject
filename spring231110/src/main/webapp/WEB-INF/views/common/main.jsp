@@ -154,7 +154,7 @@
 					<div class="thema-2 themaImg2">
 						<img src="/resources/img/thema2.png">
 						<p class="absolText">
-							<span>사진 찍고 싶은</span><span>카페 인테리어</span>
+							<span>사진 찍고 싶은</span><span>카페&식당 인테리어</span>
 						</p>
 					</div>
 				</a>
@@ -174,7 +174,7 @@
 					<div class="thema-2 themaImg4">
 						<img src="/resources/img/thema4-2.jpg">
 						<p class="absolText">
-							<span>유럽 감성을 더한</span><span>쓰리룸 하우스</span>
+							<span>유럽 감성을 더한</span><span>유러피언 하우스</span>
 						</p>
 					</div>
 				</a>
@@ -184,7 +184,7 @@
 		<!-- 리뷰란 시작 -->
 		<div class="promotion reviewBox">
 			<div class="leftText centerText">
-				<a href="#"><p class="miniTitle margin30">따끈따끈한 고객 후기 ></p></a>
+				<a href="/review/allReviewList"><p class="miniTitle margin30">따끈따끈한 고객 후기 ></p></a>
 			</div>
 			<div class="promotionBoxContainer reviewContainer"></div>
 		</div>
@@ -196,17 +196,36 @@
 					<p class="secTitle">믿을 수 있는 업체를 스타일메이트 단 한 곳에서 찾으세요</p>
 				</div>
 				<div class="rightText atag">
-					<div class="divAtag1">
-						<a class="atag" href="#">서울</a> <a href="#">인천</a> <a href="#">세종</a>
-						<a href="#">강원</a> <a href="#">경기</a> <a href="#">충북</a> <a
-							href="#">충남</a> <a href="#">경북</a> <a href="#">대전</a>
-
-					</div>
-					<div class="divAtag divAtag2">
-						<a href="#">대구</a> <a href="#">전북</a> <a href="#">경남</a> <a
-							href="#">울산</a> <a href="#">광주</a> <a href="#">부산</a> <a href="#">전남</a>
-						<a href="#">제주</a>
-					</div>
+								<div class="divAtag1">
+								<!-- 카페24배포용webapps 전경환231223-->
+<!-- 									<a class="atag" href="http://aj2002.cafe24.com/findmap/findmap#%EC%84%9C%EC%9A%B8%20%EC%A0%84%EC%B2%B4">서울</a>  -->
+<!-- 									<a href="http://aj2002.cafe24.com/findmap/findmap#%EC%9D%B8%EC%B2%9C%20%EC%A0%84%EC%B2%B4">인천</a>  -->
+									<!-- 로컬용 -->
+									<a class="atag" href="http://localhost:8088/findmap/findmap#%EC%84%9C%EC%9A%B8%20%EC%A0%84%EC%B2%B4">서울</a> 
+									<a href="http://localhost:8088/findmap/findmap#%EC%9D%B8%EC%B2%9C%20%EC%A0%84%EC%B2%B4">인천</a> 
+									
+									<a href="#">세종</a>
+									<a href="#">강원</a> 
+									<a href="#">경기</a> 
+									<a href="#">충북</a> 
+									<a href="#">충남</a> 
+									<a href="#">경북</a> 
+									<a href="#">대전</a>
+								</div>
+								<div class="divAtag divAtag2">
+									<a href="#">대구</a> 
+									<a href="#">전북</a> 
+									<a href="#">경남</a> 
+									<a href="#">울산</a> 
+									<a href="#">광주</a> 
+									<!-- 카페24배포용webapps 전경환231223-->
+<!-- 									<a href="http://aj2002.cafe24.com/findmap/findmap#%EB%B6%80%EC%82%B0%20%EC%A0%84%EC%B2%B4">부산</a> -->
+									<!-- 로컬용 -->
+									<a href="http://localhost:8088/findmap/findmap#%EB%B6%80%EC%82%B0%20%EC%A0%84%EC%B2%B4">부산</a>  
+									
+									<a href="#">전남</a> 
+									<a href="#">제주</a>
+								</div>			
 				</div>
 			</div>
 		</div>

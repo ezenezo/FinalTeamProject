@@ -20,11 +20,10 @@
 	<a name="basic"></a>
 	<div class="box">
 		<div class="box2">
-			<div class="mainImgBox">
-				<img class="portfolioMainImg"
-					src="/upload/${fn:replace(profileImg.saveDir,'\\','/')}/${profileImg.uuid}_${profileImg.fileName}">
-
-			</div>
+<!-- 			<div class="mainImgBox"> -->
+<!-- 				<img class="portfolioMainImg" -->
+<%-- 					src="/upload/${fn:replace(profileImg.saveDir,'\\','/')}/${profileImg.uuid}_${profileImg.fileName}"> --%>
+<!-- 			</div> -->
 			<div class="btnBox">
 				<a class="topBtnA" href="#basic"><button
 						class="topBtn topBtn1 clicked" type="button">업체정보</button></a> <a
@@ -68,7 +67,7 @@
 
 				</c:forEach>
 			</div>
-			<a name="review"></a> <a class="moreA" href="#"><button
+			<a name="review"></a> <a class="moreA" href="/portfolio/mylist?id=${cdto.mvo.id}"><button
 					class="morePortofolioBtn" type="button">시공사례 더보기</button></a>
 
 

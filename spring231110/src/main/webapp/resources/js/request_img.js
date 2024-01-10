@@ -46,6 +46,7 @@ function createFilePreview() {
     selectedFiles.forEach((file, i) => {
         document.getElementById(`trigger${i}`).addEventListener('click', () => {
             document.getElementById('files1').click();
+         
         });
     });
     
@@ -60,13 +61,25 @@ function createFilePreview() {
           
      
         });
+    }else{
+        document.getElementById('regBtn').style.backgroundColor='';
     }
 }
 
+let fileInput = document.getElementById('files1');
+
 document.getElementById('files1').addEventListener('change', (e) => {
+    if (e.target.files.length === 0) { 
+        return;
+    }
     Array.from(e.target.files).forEach(file => {
         selectedFiles.splice(-1);
         selectedFiles.push(file);
+        fileInput.addEventListener('change', function(e) {
+            if (this.files.length == 0) {
+                e.preventDefault();
+            }
+        });
     });
 
     document.getElementById('regBtn').disabled = false;
@@ -81,7 +94,7 @@ function setThumbnail(event) {
         reader.onload = function (event) {
             var img = document.createElement("img");
             img.setAttribute("src", event.target.result);
-            document.querySelector(`.upload_img_${i}`).appendChild(SSimg);
+            document.querySelector(`.upload_img_${i}`).appendChild(img);
         };
 
         console.log(fileObj[i]);

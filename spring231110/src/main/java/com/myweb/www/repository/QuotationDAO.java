@@ -4,9 +4,10 @@ import java.util.List;
 
 import com.myweb.www.domain.CompanyVO;
 import com.myweb.www.domain.QuotationDTO;
+import com.myweb.www.domain.QuotationStatusDTO;
 import com.myweb.www.domain.QuotationVO;
 import com.myweb.www.domain.RequestVO;
-
+import com.myweb.www.domain.StatusDTO;
 import com.myweb.www.security.MemberVO;
 
 public interface QuotationDAO {
@@ -25,7 +26,7 @@ public interface QuotationDAO {
 
 	List<QuotationVO> getList_read_user(String id);
 
-	List<QuotationVO> setQutation_user(long quoNm);
+	List<QuotationStatusDTO> setQutation_user(long quoNm);
 
 	MemberVO getCompany_name(long quoNm);
 

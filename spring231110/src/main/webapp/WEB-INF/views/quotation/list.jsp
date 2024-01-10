@@ -73,7 +73,9 @@
                         let read_after= document.getElementById('read_after_${qvo.requestNm}');
                         read_after.innerText=`승인취소`;
                         read_after.style.color='gray';
-                    }else{
+                    }
+                    
+                    else{
                     	  let read_after= document.getElementById('read_after_${qvo.requestNm}');
                           read_after.innerText=`미승인`;
                           read_after.style.color='red';

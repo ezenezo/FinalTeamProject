@@ -100,6 +100,7 @@
   border-radius: 10px;
   color: white;
   font-size: 15px;
+  cursor: pointer;
 }
 
 .list_btn a {
@@ -118,7 +119,9 @@
  
 }
 
-
+.li_6,.li_5,.li_4,.li_3,.li_2,.li_1{
+	cursor: pointer;
+}
 
 
 .btn_box{

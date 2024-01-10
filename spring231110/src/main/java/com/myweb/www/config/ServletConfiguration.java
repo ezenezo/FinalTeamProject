@@ -21,7 +21,7 @@ public class ServletConfiguration implements WebMvcConfigurer {
 		registry.addResourceHandler("/resources/**").addResourceLocations("/resources/");
 
 		// 파일 업로드 경로 //장원희대문자바꿔라
-		registry.addResourceHandler("/upload/**").addResourceLocations("file:///D:\\_myweb\\_java\\fileUpload\\"); //맨뒤에 구분자 \\ 넣어주기//231120전경환
+		registry.addResourceHandler("/upload/**").addResourceLocations("file:///C:\\_myweb\\_java\\fileUpload\\"); //맨뒤에 구분자 \\ 넣어주기//231120전경환
 //		registry.addResourceHandler("/upload/**").addResourceLocations("/aj2002/tomcat/webapps/_javaweb/_java/fileUpload/"); //맨뒤에 구분자 \\ 넣어주기
 
 

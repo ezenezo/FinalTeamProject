@@ -24,10 +24,13 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.google.gson.Gson;
 import com.mysql.cj.x.protobuf.MysqlxDatatypes.Array;
+import com.myweb.www.domain.ChatDTO;
+import com.myweb.www.domain.ChatDTO2;
 import com.myweb.www.domain.CompanyDTO;
 import com.myweb.www.domain.Coordinates;
 import com.myweb.www.security.AuthMember;
 import com.myweb.www.security.MemberVO;
+import com.myweb.www.service.ChatService;
 import com.myweb.www.service.FindMapService;
 import com.myweb.www.service.GeocodingService;
 
@@ -96,14 +99,12 @@ public class FindMapController {
 		}
 
 		
-
-
 		    @Autowired
 		    private GeocodingService geocodingService;
-
+		    //http://localhost:8088/findmap/get-coordinates?address=인천광역시 연수구 원인재로 88
 		    @GetMapping("/get-coordinates")
 		    public ResponseEntity<?> getCoordinates(@RequestParam String address) {
-		    	log.info("/get-coordinates쪽 진입");
+		    	log.info("컨트롤러의 /get-coordinates쪽 진입");
 		        Coordinates coordinates = geocodingService.getCoordinate(address);
 		        // 위도와 경도 정보를 반환하거나 `company` 테이블에 저장하는 로직
 		        log.info("coordinates는 " +coordinates);

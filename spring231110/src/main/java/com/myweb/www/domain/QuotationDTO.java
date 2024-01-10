@@ -46,4 +46,6 @@ public class QuotationDTO {
 	private boolean okTypeYes;// 승인함
 	
 	private String userNm; //회원명
+	
+	
 }

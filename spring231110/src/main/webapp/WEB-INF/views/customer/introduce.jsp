@@ -15,7 +15,7 @@
 			<h1>
 				인테리어를 계획한 당신, <br> 믿을 수 있는 서비스를 만나셨나요?
 			</h1>
-			<button type="button">스타일 메이트와 함께 인테리어 하기</button>
+			<a href="/portfolio/list"><button type="button">스타일 메이트와 함께 인테리어 하기</button></a>
 		</div>
 	</div>
 	<div class="sofaImg">

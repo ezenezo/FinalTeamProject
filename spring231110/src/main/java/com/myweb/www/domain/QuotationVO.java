@@ -37,7 +37,6 @@ private String requestId;//요청자 아이디
 private Date regAt;//견적서 둥록날짜
 private boolean checked;
 private boolean okTypeNo;//취소
-
 private boolean okTypeYes;// 승인함
 private long pno;
 }

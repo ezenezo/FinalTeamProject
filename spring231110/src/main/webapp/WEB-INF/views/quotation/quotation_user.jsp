@@ -24,7 +24,7 @@
 	<jsp:include page="../common/nav.jsp" />
 
 	<sec:authentication property="principal.mvo.id" var="authEmail" />
-	<%-- <input type="text" value="${authEmail}" id="user_id" name="requestId"> --%>
+	<%-- <input type="text" value="${authEmail}" id="user_id" name="uestId"> --%>
 
 	<div class="total">
 
@@ -47,10 +47,16 @@
 					</nav>
 
 					<input type="hidden" value="${qvo.quotationNm}" id="quotationNm">
-
+					<input type="hidden" value="${qvo.requestNm}" id="requestNm">
+					<input type="hidden" value="${qvo.requestId}" id="requestId">
 					<input type="hidden" value="${qvo.pno}" id="pno">
+					<input type="hidden" value="${qvo.refund}" id="refund">
+					<input type="hidden" value="${completed}" id="completed">
+					<input type="hidden" value="${authEmail}" id="authEmail">
+					<input type="hidden" value="${qvo.paymentOk}" id="payment">
 					<input type="hidden" value="${qvo.okTypeNo}" id="ok_type_no">
-
+					<input type="hidden" value="${qvo.quotationCancel}" id="quotationCancel">
+					<input type="hidden" value="${qvo.requestCancel}" id="requestCancel">
 					<div class="total_div" style="line-height: 60px; font-size: 16px;">
 						<div class="quo_user_total_1">
 
@@ -91,51 +97,24 @@
 
 							<div class="quo_user_div">
 								<span class="span_teg">총액:</span>${qvo.budget}원</div>
-						<div class="quo_user_div">
-							<span class="span_teg">메이트 요청사항:</span>${qvo.requestOp}</div>
-					</div>
+							<div class="quo_user_div">
+								<span class="span_teg">메이트 요청사항:</span>${qvo.requestOp}</div>
 						</div>
+					</div>
+
+
+
+					<script type="text/javascript">
 						
-						
-						
-		<script type="text/javascript">
-			let nav = document.querySelector('.nav');
+					</script>
 
-			let no_value = document.getElementById('ok_type_no').value;
+				</c:forEach>
 
-			if (no_value == 'false') {
-
-				nav.innerHTML = '';
-				nav.innerHTML += `<li class="nav_li"  id="icon_id" style="display: flex;"><a href="/req/request_detil?requestNm=${qvo.requestNm}"><span class="material-symbols-outlined" id="icon_id" style="margin-right: 10px;">request_page</span>나의 요청서보기</a></li>`
-				if(${pay}=='false'){
-				nav.innerHTML += `<li class="nav_li"  id="icon_id"><a href="/payment/checkPay?pno=${qvo.pno}&qno=${qvo.quotationNm}&id=${authEmail}"><span class="material-symbols-outlined"  style="margin-right: 10px;">credit_card</span>결제하기</a></li>`;
-				
-				}else{
-					nav.innerHTML += `<li class="nav_li" id="icon_id"><a href="javascript:void(0);" onclick="cancelPay(${authEmail}, ${qvo.quotationNm})"><span class="material-symbols-outlined" id="icon_id" style="margin-right: 10px;" id="icon_id">cancel</span>환불받기</a></li>`
-
-					
-				}
-				nav.innerHTML += `<li class="nav_li"  id="icon_id"><a href="/quotation/list_user?id=${qvo.requestId}"><span class="material-symbols-outlined"  style="margin-right: 10px;"> restore_page </span>나의 요청함보기</a></li>`;
-				nav.innerHTML += `<li class="nav_li" id="icon_id"><a href="javascript:void(0);" onclick="cancel_btn()"><span class="material-symbols-outlined" id="icon_id" style="margin-right: 10px;" id="icon_id">cancel</span>거래 거절하기</a></li>`
-
-			}else{
-				nav.innerHTML = '';
-				nav.innerHTML += `<li class="nav_li"  id="icon_id" style="display: flex; color:orange">거래가 취소된 견적서입니다.</li>`
-				nav.innerHTML += `<li class="nav_li"  id="icon_id" style="display: flex;"><a href="/req/request_detil?requestNm=${qvo.requestNm}"><span class="material-symbols-outlined" id="icon_id" style="margin-right: 10px;">request_page</span>나의 요청서보기</a></li>`
-
-				nav.innerHTML += `<li class="nav_li"  id="icon_id"><a href="/quotation/list_user?id=${qvo.requestId}"><span class="material-symbols-outlined"  style="margin-right: 10px;"> restore_page </span>나의 요청함보기</a></li>`;
-			
-
-			}
-		</script>
-						
-			</c:forEach>
-
-		</ul>				
+			</ul>
 		</div>
 
 
-	
+
 
 
 	</div>
@@ -143,12 +122,15 @@
 
 
 
-
+	<script type="text/javascript">
+		
+	</script>
 	<script
 		src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.js"></script>
-		
-		<script type="text/javascript" src="../resources/js/payment.js"></script>
 
+	<script type="text/javascript" src="../resources/js/payment.js"></script>
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
 	<script src="/resources/js/quotation_user.js"></script>
 </body>

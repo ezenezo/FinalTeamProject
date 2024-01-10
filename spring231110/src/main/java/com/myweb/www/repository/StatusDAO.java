@@ -11,17 +11,17 @@ import com.myweb.www.security.MemberVO;
 
 public interface StatusDAO {
 
-	void insert(StatusVO svo);
+   void insert(StatusVO svo);
 
-	void request_status_cancel(long reqNm);
+   void request_status_cancel(long reqNm);
 
-	void quotation_status_cancel(long quotationNm);
+   void quotation_status_cancel(long quotationNm);
 
-	void quotation_status(QuotationVO qvo);
+   void quotation_status(QuotationVO qvo);
 
-	void quotation_status_ok(QuotationVO qvo);
+   void quotation_status_ok(QuotationVO qvo);
 
-	List<StatusDTO> status(String id);
+   List<StatusDTO> status(String id);
 
 
 
@@ -52,5 +52,16 @@ List<QuotationDTO> completed_review(String id);
 boolean payment(long quoNm);
 
 void completed(long requestNm);
+
+int payStatus(int quotationNm);
+
+void refundStatus(int quotationNm);
+
+boolean completed_user(long quoNm);
+
+
+boolean getPayment(long requestNm);
+
+boolean completed_list(long requestNm);
 
 }

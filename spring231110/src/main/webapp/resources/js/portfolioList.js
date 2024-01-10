@@ -2,9 +2,10 @@
 // 평수 버튼 함수
 
 window.onload = function () {
+    resetStart();
     slideOne();
     slideTwo();
-};
+};  
 
 let sliderOne = document.getElementById("sliderOneVal").value;
 let sliderTwo = document.getElementById("sliderTwoVal").value;
@@ -18,7 +19,7 @@ let minGap = 1;
 let sliderTrack = document.querySelector(".slider-track");
 let sliderMaxValue = document.getElementById("slider-1").max;
 
-
+document.getElementById('selectFilter').innerHTML=``;
 function slideOne() {
     if (parseInt(sliderTwo.value) - parseInt(sliderOne.value) <= minGap) {
         sliderOne.value = parseInt(sliderTwo.value) - minGap;
@@ -37,7 +38,7 @@ function slideOne() {
                     <button class="selectFilterBtn" type="button">
                         ${sliderOne.value}㎡-${sliderTwo.value}㎡
                         <div class="essential1Left" id="essential1Left">
-                            <span class="material-symbols-outlined selectLiDelRange"> cancel </span>
+                            <span style="color:white;" class="material-symbols-outlined selectLiDelRange"> cancel </span>
                         </div>
                     </button>
                 </div>`;
@@ -46,7 +47,7 @@ function slideOne() {
             existingrangeTag.innerHTML = `<button class="selectFilterBtn" type="button">
             ${sliderOne.value}㎡-${sliderTwo.value}㎡
             <div class="essential1Left" id="essential1Left">
-                <span class="material-symbols-outlined selectLiDelRange"> cancel </span>
+                <span style="color:white;" class="material-symbols-outlined selectLiDelRange"> cancel </span>
             </div>
         </button>`;
         }
@@ -75,7 +76,7 @@ function slideTwo() {
                     <button class="selectFilterBtn" type="button">
                         ${sliderOne.value}㎡-${sliderTwo.value}㎡
                         <div class="essential1Left" id="essential1Left">
-                            <span class="material-symbols-outlined selectLiDelRange"> cancel </span>
+                            <span style="color:white;" class="material-symbols-outlined selectLiDelRange"> cancel </span>
                         </div>
                     </button>
                 </div>`;
@@ -84,7 +85,7 @@ function slideTwo() {
             existingrangeTag.innerHTML = `<button class="selectFilterBtn" type="button">
             ${sliderOne.value}㎡-${sliderTwo.value}㎡
             <div class="essential1Left" id="essential1Left">
-                <span class="material-symbols-outlined selectLiDelRange"> cancel </span>
+                <span style="color:white;" class="material-symbols-outlined selectLiDelRange"> cancel </span>
             </div>
         </button>`;
         }
@@ -148,7 +149,7 @@ async function filterListToServer(filterData) {
 
         const resp = await fetch(url, config);
         const result = await resp.json();
-        console.log("result>>", result);
+        console.log("포폴리스트result>>{}", result);
         return result;
     } catch (error) {
         console.log(error)
@@ -164,17 +165,19 @@ function filterList(){
         familyTypeSh:selectLi4,
         homeStyleSh:selectLi5,
         sliderOneVal:sliderOne.value,
-        sliderTwoVal:sliderTwo.value 
+        sliderTwoVal:sliderTwo.value,
+       
     }
     filterListToServer(filterData).then(result=>{
         let str='';
         console.log('result'+result);
         for(let pdto of result){
             str+=`<div class="pdtoBox">`;
-            str+=`<a class="a1" href="/portfolio/portfolioDetail?pno=${pdto.pvo.pno}"><div class="overHiddenBox">`;
+            str+=`<a class="a1" href="/portfolio/portfolioDetail?pno=${pdto.pvo.pno}&homeStyle=${selectLi5}"><div class="overHiddenBox">`;
 
             if (pdto.mainImg) {
-                str += `<img class="portfolioMainImg" src="/upload/${pdto.mainImg.saveDir}/${pdto.mainImg.saveDir.replace(/\\/g, '-')}_${pdto.mainImg.uuid}_${pdto.mainImg.fileName}">`;
+                str += `<img class="portfolioMainImg" src="/upload/${pdto.mainImg.saveDir}/${pdto.mainImg.saveDir.replace(/\\/g,'-')}_${pdto.mainImg.uuid}_${pdto.mainImg.fileName}">`;
+        
             } else {
                 // mainImg가 null인 경우에 대한 처리
                 // 예를 들어, 대체 이미지를 표시하거나 다른 처리를 수행할 수 있습니다.
@@ -200,7 +203,7 @@ function boxadd(filterName,delNum){
                         <button class="selectFilterBtn" type="button">
                             ${filterName}
                             <div class="essential1Left" id="essential1Left">
-                                <span class="material-symbols-outlined selectLiDel${delNum}"> cancel </span>
+                                <span style="color:white;" class="material-symbols-outlined selectLiDel${delNum}"> cancel </span>
                             </div>
                         </button>
                     </div>`;
@@ -238,7 +241,7 @@ document.addEventListener('DOMContentLoaded', function () {
                         <button class="selectFilterBtn" type="button">
                             ${selectLi0}
                             <div class="essential1Left" id="essential1Left">
-                                <span class="material-symbols-outlined selectLiDel0"> cancel </span>
+                                <span style="color:white;" class="material-symbols-outlined selectLiDel0"> cancel </span>
                             </div>
                         </button>
                     </div>`;
@@ -247,7 +250,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 existingLiTags0.innerHTML = `<button class="selectFilterBtn" type="button">
                 ${selectLi0}
                 <div class="essential1Left" id="essential1Left">
-                    <span class="material-symbols-outlined selectLiDel0"> cancel </span>
+                    <span style="color:white;" class="material-symbols-outlined selectLiDel0"> cancel </span>
                 </div>
             </button>`;
             }
@@ -275,7 +278,7 @@ document.addEventListener('DOMContentLoaded', function () {
                       <button class="selectFilterBtn" type="button">
                           ${selectLi2}
                           <div class="essential1Left" id="essential1Left">
-                              <span class="material-symbols-outlined selectLiDel2"> cancel </span>
+                              <span style="color:white;" class="material-symbols-outlined selectLiDel2"> cancel </span>
                           </div>
                       </button>
                   </div>`;
@@ -284,7 +287,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 existingLiTags2.innerHTML = `<button class="selectFilterBtn" type="button">
               ${selectLi2}
               <div class="essential1Left" id="essential1Left">
-                  <span class="material-symbols-outlined selectLiDel2"> cancel </span>
+                  <span style="color:white;" class="material-symbols-outlined selectLiDel2"> cancel </span>
               </div>
           </button>`;
             }
@@ -309,7 +312,7 @@ document.addEventListener('DOMContentLoaded', function () {
                       <button class="selectFilterBtn" type="button">
                           ${selectLi3}
                           <div class="essential1Left" id="essential1Left">
-                              <span class="material-symbols-outlined selectLiDel3"> cancel </span>
+                              <span style="color:white;" class="material-symbols-outlined selectLiDel3"> cancel </span>
                           </div>
                       </button>
                   </div>`;
@@ -318,7 +321,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 existingLiTags3.innerHTML = `<button class="selectFilterBtn" type="button">
               ${selectLi3}
               <div class="essential1Left" id="essential1Left">
-                  <span class="material-symbols-outlined selectLiDel3"> cancel </span>
+                  <span style="color:white;" class="material-symbols-outlined selectLiDel3"> cancel </span>
               </div>
           </button>`;
             }
@@ -346,7 +349,7 @@ document.addEventListener('DOMContentLoaded', function () {
                       <button class="selectFilterBtn" type="button">
                           ${selectLi4}
                           <div class="essential1Left" id="essential1Left">
-                              <span class="material-symbols-outlined selectLiDel4"> cancel </span>
+                              <span style="color:white;" class="material-symbols-outlined selectLiDel4"> cancel </span>
                           </div>
                       </button>
                   </div>`;
@@ -355,7 +358,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 existingLiTags4.innerHTML = `<button class="selectFilterBtn" type="button">
               ${selectLi4}
               <div class="essential1Left" id="essential1Left">
-                  <span class="material-symbols-outlined selectLiDel4"> cancel </span>
+                  <span style="color:white;" class="material-symbols-outlined selectLiDel4"> cancel </span>
               </div>
           </button>`;
             }
@@ -383,7 +386,7 @@ document.addEventListener('DOMContentLoaded', function () {
                       <button class="selectFilterBtn" type="button">
                           ${selectLi5}
                           <div class="essential1Left" id="essential1Left">
-                              <span class="material-symbols-outlined selectLiDel5"> cancel </span>
+                              <span style="color:white;" class="material-symbols-outlined selectLiDel5"> cancel </span>
                           </div>
                       </button>
                   </div>`;
@@ -392,7 +395,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 existingLiTags5.innerHTML = `<button class="selectFilterBtn" type="button">
               ${selectLi5}
               <div class="essential1Left" id="essential1Left">
-                  <span class="material-symbols-outlined selectLiDel5"> cancel </span>
+                  <span style="color:white;" class="material-symbols-outlined selectLiDel5"> cancel </span>
               </div>
           </button>`;
             }
@@ -496,19 +499,26 @@ document.addEventListener("click", (e) => {
             reset();
         }
     }else if(e.target.classList.contains('reset')){
-        selectLi0='';
-        selectLi2='';
-        selectLi3='';
-        selectLi4='';
-        selectLi5='';
-        sliderOne.value=1;
-        sliderTwo.value=232;
-        
-        document.getElementById('selectFilter').innerHTML='';
-        filterList();
-        
+      
+        location.reload();
+        resetStart();
+        fillColor();
+        updateButtonColors();
     }
 });
+
+function resetStart(){
+    selectLi0='';
+    selectLi2='';
+    selectLi3='';
+    selectLi4='';
+    selectLi5='';
+    sliderOne.value=1;
+    sliderTwo.value=232;
+    
+    document.getElementById('selectFilter').innerHTML='';
+    filterList();
+}
 // ------
 function updateButtonColors() {
 
@@ -541,6 +551,5 @@ function updateButtonColors() {
         };
     });
 };
-
 
 

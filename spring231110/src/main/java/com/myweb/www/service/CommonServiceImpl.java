@@ -14,7 +14,6 @@ import com.myweb.www.domain.ReviewVO;
 import com.myweb.www.repository.FileDAO;
 import com.myweb.www.repository.PortfolioDAO;
 import com.myweb.www.repository.ReviewDAO;
-import com.myweb.www.security.CommonService;
 
 import lombok.extern.slf4j.Slf4j;
 

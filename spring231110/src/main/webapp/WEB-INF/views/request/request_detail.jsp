@@ -75,7 +75,7 @@
 							<span class="value" style="font-weight: 700;">${qvo.rvo.requestOp}</span><br>
 							<input value="${ qvo.rvo.cancellationReason}" id="cancellation" type="hidden" >
 							<div id="cancellation_div">
-							</div>
+							</div><br>
 								<div class="img_div">
 							<span class="label" style="font-weight: 700;">고객님께서 원하는
 								스타일이 있으신가요?(이미지)</span><br>
